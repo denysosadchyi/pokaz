@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Показ — ресерч</title>
+  <link rel="stylesheet" href="../_nav/nav.css">
+  <script src="../_nav/tree.js"></script>
+  <script src="../_nav/nav.js" defer></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111214;
+      --surface: #191a1d;
+      --surface-2: #202125;
+      --line: #2c2d32;
+      --fg: #e6e4df;
+      --muted: #9a9890;
+      --accent: #d9c7a3;
+      --warn: #e2b46a;
+      --ok: #9cc4a0;
+    }
+    /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
+    .repo-nav {
+      --nav-bg: #161719; --nav-fg: #ccc; --nav-muted: #777; --nav-line: #2a2b2f;
+      --nav-hover: #222327; --nav-current-bg: #2e2f34; --nav-current-fg: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1120px; padding: 40px 32px 96px; }
+    h1 { margin: 0 0 4px; font-size: 32px; letter-spacing: -0.01em; }
+    h2 {
+      margin: 64px 0 8px; padding-top: 16px; border-top: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
+    h3 { margin: 32px 0 8px; font-size: 18px; }
+    p, ul, ol { max-width: 72ch; }
+    a { color: var(--accent); }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+    .toc a {
+      display: inline-block; padding: 6px 12px; border: 1px solid var(--line);
+      border-radius: 999px; color: var(--fg); text-decoration: none; font-size: 14px;
+    }
+    .toc a:hover { background: var(--surface-2); }
+
+    .table-wrap { overflow-x: auto; margin: 12px 0 24px; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    thead th { background: var(--surface-2); font-weight: 600; white-space: nowrap; }
+    tbody tr:last-child > * { border-bottom: 0; }
+    tbody th { font-weight: 600; background: var(--surface); }
+    table.matrix { min-width: 1100px; }
+    table.matrix tbody th { width: 160px; }
+    td.url { word-break: break-all; color: var(--muted); }
+
+    .ref {
+      display: inline-block; padding: 0 5px; margin: 0 1px; border-radius: 4px;
+      background: var(--surface-2); border: 1px solid var(--line);
+      color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-decoration: none; vertical-align: 1px;
+    }
+    .ref:hover { color: var(--fg); }
+    .nc { color: var(--warn); font-weight: 600; }
+    .na { color: var(--muted); font-style: italic; }
+
+    .tag {
+      display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px;
+      border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
+    }
+    .tag.public { color: var(--ok); border-color: #3b5240; }
+    .tag.own { color: var(--muted); }
+    .tag.brief { color: var(--accent); border-color: #4e4636; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
+    .card { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .card h4 { margin: 0 0 6px; font-size: 16px; }
+    .card p { margin: 0 0 8px; font-size: 15px; }
+    .card .label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin: 10px 0 2px; }
+    .card.dont { border-color: #5a4a2c; }
+
+    .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 12px 0 24px; }
+    figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    figure a { display: block; }
+    figure img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: #000; }
+    figcaption { padding: 8px 12px; font-size: 13px; color: var(--muted); }
+    figcaption b { color: var(--fg); font-weight: 600; }
+
+    .note { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; max-width: 72ch; }
+    footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 720px) {
+      main { padding: 24px 16px 64px; }
+      h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Показ — ресерч</h1>
+  <p class="lead">Зведення кроків 03–06. Дані зібрано 2026-10-22. Джерело тексту —
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/research.md">research/research.md</a>,
+    бриф — <a href="https://github.com/denysosadchyi/pokaz/blob/main/CLAUDE.md">CLAUDE.md</a>.</p>
+
+  <ul class="toc">
+    <li><a href="#sources">Звідки дані</a></li>
+    <li><a href="#competitors">1 · Конкуренти</a></li>
+    <li><a href="#benchmark">2 · Бенчмарк</a></li>
+    <li><a href="#patterns">3 · Патерни</a></li>
+    <li><a href="#conclusions">4 · Висновки</a></li>
+    <li><a href="#refs">Джерела</a></li>
+  </ul>
+
+  <h2 id="sources">Звідки дані</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Позначка</th><th>Джерело</th><th>Що з нього взято</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag public">публічне</span></td><td>Публічні сторінки без логіну: тексти сторінок і скріни Playwright у <code>research/screens/</code></td><td><strong>Усі факти на цій сторінці</strong></td></tr>
+      <tr><td><span class="tag own">власний акаунт</span></td><td>Скріни в <code>research/screens/own/</code></td><td><strong>Нічого.</strong> Теки <code>own/</code> немає, тож скрінів власного акаунта тут немає і перевіряти на особисті дані нічого</td></tr>
+      <tr><td><span class="tag brief">бриф</span></td><td>CLAUDE.md</td><td>Цілі, аудиторія, рішення. Це основа для оцінок і висновків, а не факти про ринок</td></tr>
+    </tbody>
+  </table></div>
+  <p>Код у квадратних дужках, наприклад <span class="ref">y2</span>, веде до таблиці <a href="#refs">джерел</a>.
+    «<span class="na">Доступ обмежений</span>» — екран за логіном, без входу його не видно.
+    «<span class="nc">Дані не підтверджені</span>» — твердження без зібраного джерела.</p>
+
+  <!-- ─────────────── 1 ─────────────── -->
+  <h2 id="competitors"><span class="num">1</span>Конкуренти</h2>
+  <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/04-matrix.md">notes/04-matrix.md</a>.</p>
+
+  <h3>Кого порівнювали</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Код</th><th>Компанія</th><th>Група</th><th>Чому</th></tr></thead>
+    <tbody>
+      <tr><td>H1</td><td>YASNO</td><td>ХАРД</td><td>Постачальник світла для побутових клієнтів в Україні; є публічні форми показу й оплати без входу [y2][y3]</td></tr>
+      <tr><td>H2</td><td>ДТЕК Київські електромережі (ОСР)</td><td>ХАРД</td><td>Графіки відключень і другий «вхід» для показів [d2][d4]</td></tr>
+      <tr><td>S1</td><td>monobank</td><td>СОФТ</td><td>Тут аудиторія платить комуналку — <span class="nc">дані не підтверджені</span> (функцію комуналки без входу не видно [m1])</td></tr>
+      <tr><td>S3</td><td>Нафтогаз / Куб</td><td>СОФТ</td><td>Та сама задача для газу: показ з фото, рахунки рідних [n2]</td></tr>
+      <tr><td>A1</td><td>Octopus Energy</td><td>АСПІРАЦІЙНІ</td><td>Еталон тону й довідки про покази [o1][o2]</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Матриця <span class="tag public">публічне</span></h3>
+  <div class="table-wrap"><table class="matrix">
+    <thead><tr><th>Вісь</th><th>H1 · YASNO</th><th>H2 · ДТЕК КЕМ</th><th>S1 · monobank</th><th>S3 · Нафтогаз / Куб</th><th>A1 · Octopus</th></tr></thead>
+    <tbody>
+      <tr><th>Перший екран</th>
+        <td>Маркетинговий хедер «світла <b>і газу</b>», банер розіграшу iPhone; дії «підключити / передати показання / оплатити» вбудовані в речення, над ними «Графік відключень» [y1]</td>
+        <td>Модальне вікно про стабілізаційні відключення перекриває сторінку; під ним плитка «Передати покази лічильника» [d1]</td>
+        <td>Банк загалом («Раз-два, і банк у телефоні»), про комуналку нічого [m1]</td>
+        <td>«Газові справи — зручно в Кубі», телефон з балансом; cookie-банер на пів екрана [n1]</td>
+        <td>Help-центр починається з «⚠️ In an emergency», далі категорії «Meters», «Bills And Payments» [o1]</td></tr>
+      <tr><th>Ключова задача: внести показ і знати суму</th>
+        <td>Без входу: адреса <b>або</b> особовий рахунок → блок «Показання лічильника». Сума — <b>окремою</b> сторінкою «Оплата» з тією самою адресною формою → «Баланс» → «Оплатити карткою». Показ і сума розірвані [y2][y3]</td>
+        <td>«Передати покази» веде в чат-бот; поряд інструкції для «День–Ніч», індукційного лічильника, позначки Т4. Суми немає. Кабінет — <span class="na">доступ обмежений</span> [d2][d3]</td>
+        <td><span class="na">Доступ обмежений</span> [m1]</td>
+        <td>Заявлено: «з фото, скануйте або вводьте вручну. Помилилися? Просто виправте». Потік — <span class="na">доступ обмежений</span>; публічна форма gas.ua закрита Cloudflare [n2][n3]</td>
+        <td>Подача — <span class="na">доступ обмежений</span>. Публічно — довідка, як знімати покази, окремо для двозонного Economy 7 [o2]</td></tr>
+      <tr><th>Ясність і спокій</th>
+        <td>Частково: є підказка про строк подачі, але немає ні статусу «прийнято», ні суми поруч з показом; промо відволікає [y1][y2]</td>
+        <td>Ні: першим бачиш тривожне модальне вікно, тон канцелярський («Шановні клієнти!», «За наказом НЕК Укренерго») [d1][d4]</td>
+        <td><span class="na">Доступ обмежений</span> [m1]</td>
+        <td>Так, у текстах: «шухляду зі старими рахунками залиште для сімейних альбомів», пояснює, навіщо подавати показ [n2]</td>
+        <td>Так, у довідці: «I accidentally sent an incorrect reading, what should I do?» [o2]</td></tr>
+      <tr><th>Завершення задачі</th>
+        <td>Кнопка «Надіслати»; екран підтвердження — <span class="na">доступ обмежений</span> [y2]</td>
+        <td>У чат-боті — <span class="na">доступ обмежений</span> [d2]</td>
+        <td><span class="na">Доступ обмежений</span> [m1]</td>
+        <td>Заявлено виправлення після подачі; екран — <span class="na">доступ обмежений</span> [n2]</td>
+        <td>Описано, що робити після помилкового показу; екран — <span class="na">доступ обмежений</span> [o2]</td></tr>
+      <tr><th>Кілька об'єктів і людей</th>
+        <td>Публічна форма — один об'єкт; у кабінеті «Додати рахунок», ролі — <span class="na">доступ обмежений</span> [y1][y2]</td>
+        <td><span class="na">Доступ обмежений</span> [d3]</td>
+        <td><span class="na">Доступ обмежений</span> [m1]</td>
+        <td>«Якщо допомагаєте рідним… додавайте й їхні рахунки»; ролей не згадано [n2]</td>
+        <td>Не видно без входу [o1]</td></tr>
+      <tr><th>Мова інтерфейсу</th>
+        <td>Українська, дружня, маркетингова; «показання» [y1]</td>
+        <td>Українська, офіційна; «покази» [d1][d2]</td>
+        <td>Українська / англійська, розмовна [m1]</td>
+        <td>Українська, тепла, з гумором; «показання» [n2]</td>
+        <td>Англійська, розмовна [o1][o2]</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Скріни публічних сторінок <span class="tag public">публічне</span></h3>
+  <div class="shots">
+    <figure><a href="screens/H1-yasno-home--full.png"><img src="screens/H1-yasno-home.png" alt="YASNO, головна сторінка" loading="lazy"></a><figcaption><b>y1</b> · YASNO, головна</figcaption></figure>
+    <figure><a href="screens/H1-yasno-indicators--full.png"><img src="screens/H1-yasno-indicators.png" alt="YASNO, форма передачі показань" loading="lazy"></a><figcaption><b>y2</b> · YASNO, передача показань</figcaption></figure>
+    <figure><a href="screens/H1-yasno-payment--full.png"><img src="screens/H1-yasno-payment.png" alt="YASNO, сторінка оплати" loading="lazy"></a><figcaption><b>y3</b> · YASNO, оплата</figcaption></figure>
+    <figure><a href="screens/H1-yasno-outages--full.png"><img src="screens/H1-yasno-outages.png" alt="YASNO, графік відключень" loading="lazy"></a><figcaption><b>y4</b> · YASNO, графік відключень</figcaption></figure>
+    <figure><a href="screens/H2-dtek-kem-home--full.png"><img src="screens/H2-dtek-kem-home.png" alt="ДТЕК КЕМ, головна з модальним вікном" loading="lazy"></a><figcaption><b>d1</b> · ДТЕК КЕМ, головна</figcaption></figure>
+    <figure><a href="screens/H2-dtek-kem-meter--full.png"><img src="screens/H2-dtek-kem-meter.png" alt="ДТЕК КЕМ, сторінка передачі показів" loading="lazy"></a><figcaption><b>d2</b> · ДТЕК КЕМ, передати покази</figcaption></figure>
+    <figure><a href="screens/H2-dtek-kem-login--full.png"><img src="screens/H2-dtek-kem-login.png" alt="ДТЕК КЕМ, вхід у кабінет" loading="lazy"></a><figcaption><b>d3</b> · ДТЕК КЕМ, вхід у кабінет</figcaption></figure>
+    <figure><a href="screens/H2-dtek-kem-shutdowns--full.png"><img src="screens/H2-dtek-kem-shutdowns.png" alt="ДТЕК КЕМ, відключення" loading="lazy"></a><figcaption><b>d4</b> · ДТЕК КЕМ, відключення</figcaption></figure>
+    <figure><a href="screens/S1-mono-home--full.png"><img src="screens/S1-mono-home.png" alt="monobank, головна" loading="lazy"></a><figcaption><b>m1</b> · monobank, головна</figcaption></figure>
+    <figure><a href="screens/S3-naftogaz-home--full.png"><img src="screens/S3-naftogaz-home.png" alt="Нафтогаз, gas.ua" loading="lazy"></a><figcaption><b>n1</b> · Нафтогаз, gas.ua</figcaption></figure>
+    <figure><a href="screens/S3-naftogaz-kub--full.png"><img src="screens/S3-naftogaz-kub.png" alt="Куб, сайт застосунку" loading="lazy"></a><figcaption><b>n2</b> · Куб, сайт застосунку</figcaption></figure>
+    <figure><a href="screens/A1-octopus-help--full.png"><img src="screens/A1-octopus-help.png" alt="Octopus, Help and FAQs" loading="lazy"></a><figcaption><b>o1</b> · Octopus, Help &amp; FAQs</figcaption></figure>
+    <figure><a href="screens/A1-octopus-meters--full.png"><img src="screens/A1-octopus-meters.png" alt="Octopus, категорія Meters" loading="lazy"></a><figcaption><b>o2</b> · Octopus, категорія Meters</figcaption></figure>
+  </div>
+  <p>Клік по скріну відкриває повну сторінку.</p>
+
+  <h3>Три спільні патерни ринку</h3>
+  <ol>
+    <li><strong>Ідентифікація за адресою або особовим рахунком замість входу</strong>: показ, оплата і відключення в YASNO, відключення й статус заявки в ДТЕК. [y2][y3][y4][d4]</li>
+    <li><strong>Відключення — окремий продукт із пошуком за адресою</strong>, не прив'язаний до рахунку (у YASNO навіть окремий піддомен static.yasno.ua). [y4][d4]</li>
+    <li><strong>Строк подачі пояснюють загрозою нарахування за середнім</strong>, але ніхто публічно не показує, що саме прийнято і скільки буде. [y2][n2][o1]</li>
+  </ol>
+
+  <h3>Три відмінності</h3>
+  <ol>
+    <li><strong>Фото показу</strong> публічно пропонує лише Куб (газ). В електриці — ручний ввід (YASNO) або чат-бот (ДТЕК). [n2][y2][d2]</li>
+    <li><strong>Рахунки рідних</strong> прямо пропонує Куб, а публічна форма YASNO — це один об'єкт за раз. Ролей і спільного доступу не видно ні в кого без входу. [n2][y2]</li>
+    <li><strong>Тон</strong>: ДТЕК — канцелярський і тривожний, YASNO — маркетинговий з промо, Куб і Octopus — людський. [d1][y1][n2][o2]</li>
+  </ol>
+
+  <!-- ─────────────── 2 ─────────────── -->
+  <h2 id="benchmark"><span class="num">2</span>Бенчмарк</h2>
+  <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/05-benchmark.md">notes/05-benchmark.md</a>.</p>
+
+  <h3>Вимір: «Завершення задачі»</h3>
+  <p class="note">Після «Надіслати» людина не бачить, що її показ прийнято, з якими цифрами, яка з нього вийшла сума і що буде далі.
+    У всіх п'ятьох конкурентів екран завершення захований (<span class="na">доступ обмежений</span> [y2][d2][m1][n2][o2]),
+    а в YASNO показ і сума — дві окремі форми [y2][y3].</p>
+
+  <h3>Еталони: середній бал за 8 критеріями (1–5)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Продукт</th><th>Ніша</th><th>Середнє</th><th>Джерела</th></tr></thead>
+    <tbody>
+      <tr><td>Wise — трекер переказу</td><td>Фінанси</td><td>4,4</td><td>[w1][w2][w3]</td></tr>
+      <tr><td>Нова пошта — відстеження</td><td>Логістика, Україна</td><td>4,0</td><td>[np1]; частина оцінок — <span class="nc">дані не підтверджені</span></td></tr>
+      <tr><td>Куб — передача показань газу</td><td>Комуналка, Україна</td><td>4,0</td><td>[k1]</td></tr>
+      <tr><td>GOV.UK Design System</td><td>Держпослуги</td><td>3,9</td><td>[g1][g2]</td></tr>
+      <tr><td>Octopus — подача показу</td><td>Енергетика</td><td>3,6</td><td>[o1][o3]</td></tr>
+    </tbody>
+  </table></div>
+  <p>Повного ланцюжка «перевір → прийнято → сума → що далі» немає ні в кого.</p>
+
+  <h3>Топ-3 механізми для MVP</h3>
+  <div class="cards">
+    <div class="card">
+      <h4>1. Екран «Показ прийнято» з повтором даних, наслідком і «що далі»</h4>
+      <div class="label">Звідки</div>
+      <p>GOV.UK вимагає на сторінці підтвердження номер, «що станеться далі і коли» і спосіб зберегти запис [g1]. Wise показує наслідок у грошах і часі [w2][w3].</p>
+      <div class="label">Чому для нас</div>
+      <p>Закриває два з трьох питань брифу — «чи прийняли показ» і «скільки платити» <span class="tag brief">бриф, розд. 1</span></p>
+    </div>
+    <div class="card">
+      <h4>2. Статусна шкала місяця як трекер</h4>
+      <div class="label">Звідки</div>
+      <p>Wise має три іменовані статуси й пояснює кожну затримку [w1], чесно розводить «Complete» і «гроші ще не прийшли» [w2]. Нова пошта показує статус без входу і шле миттєві сповіщення [np1].</p>
+      <div class="label">Чому для нас</div>
+      <p>Бриф уже визначає стани «чекає показу → прийнято → нараховано → сплачено»; еталон показує, як їх подати людською мовою і з датою наступного кроку <span class="tag brief">бриф, розд. 9</span></p>
+    </div>
+    <div class="card">
+      <h4>3. Перевірка до відправки і безстрашне виправлення після</h4>
+      <div class="label">Звідки</div>
+      <p>Перегляд відповідей у GOV.UK «підвищує впевненість» і «знижує кількість помилок» [g2]. Octopus: «don't worry. Our verification system should catch it» [o3]. Куб: «Помилилися? Просто виправте» [k1].</p>
+      <div class="label">Чому для нас</div>
+      <p>Бриф уже містить попередження про аномальний стрибок і виправлення до кінця вікна подачі <span class="tag brief">бриф, розд. 4, 9</span></p>
+    </div>
+  </div>
+
+  <h3>Що не спрацює</h3>
+  <div class="card dont">
+    <h4>«Колесо фортуни» за поданий показ (Octopus [o1])</h4>
+    <p>Обов'язкова фінансова дія перетворюється на лотерею, а на екрані, де людина має побачити «прийнято» і суму, з'являється шум. Це суперечить «ясності і спокою» <span class="tag brief">бриф, розд. 1</span></p>
+    <p>Що гра знижує довіру аудиторії 55–65 — <span class="nc">дані не підтверджені</span> (гіпотеза, перевірки на користувачах не було).
+      Що в «Показу» немає призового бюджету — <span class="nc">дані не підтверджені</span> (у брифі цього немає).</p>
+  </div>
+
+  <!-- ─────────────── 3 ─────────────── -->
+  <h2 id="patterns"><span class="num">3</span>Патерни</h2>
+  <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/06-patterns.md">notes/06-patterns.md</a>.</p>
+
+  <h3>Обраний патерн: пряма форма з контекстом, де фото — рівноправне джерело цифр</h3>
+  <p>Один екран: окреме поле для кожного лічильника й зони, поруч попередній показ, дата й автор. Перевірка відбувається під час введення.
+    Після «Надіслати» на тому самому місці з'являються «Показ прийнято» і орієнтовна сума. Фото — не окремий потік:
+    розпізнані цифри потрапляють у ті самі поля, а фото показується поруч.</p>
+
+  <h3>Чому саме він під наш контекст</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Аргумент</th><th>На що спирається</th></tr></thead>
+    <tbody>
+      <tr><td>Ручний ввід і фото сходяться в одному результаті, тож підтвердження, перевірка і «прийнято + сума» робляться один раз.</td><td><span class="tag brief">бриф, рішення 2</span></td></tr>
+      <tr><td>Контекст на тому самому екрані закриває «статус завжди явний» і «цифри з поясненням».</td><td><span class="tag brief">бриф, розд. 9</span> · бенчмарк, механізми 1 і 3</td></tr>
+      <tr><td>На десктопі одна форма — найкоротший шлях до метрики «&lt; 60 с».</td><td><span class="tag brief">бриф, розд. 9, 13</span> · що форма швидша за майстер чи бота — <span class="nc">дані не підтверджені</span></td></tr>
+      <tr><td>Ринок розриває показ і суму на дві форми, і це прогалина.</td><td><span class="tag public">публічне</span> [y2][y3]</td></tr>
+      <tr><td>Фото в електриці публічно не пропонує ніхто.</td><td><span class="tag public">публічне</span> [n2][y2][d2]</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Умова:</strong> на телефоні фото стає головною дією, а ручні поля — запасним шляхом <span class="tag brief">бриф, розд. 2</span>.
+    Частка показів, які вносять з телефона біля лічильника, — <span class="nc">дані не підтверджені</span>.</p>
+  <p><strong>Не підходить: розмовний канал (бот).</strong> Багато об'єктів і зон перетворюються на діалог з уточненнями,
+    а розшифровку суми в повідомленні не розгорнеш <span class="tag brief">бриф, рішення 3, розд. 9</span>.
+    У ДТЕК подача показу веде саме в чат-бот [d2]; як він працює — <span class="nc">дані не підтверджені</span> (<span class="na">доступ обмежений</span>).</p>
+  <p>Приклади застосування п'яти патернів у notes/06-patterns.md подано без джерел — <span class="nc">дані не підтверджені</span>.</p>
+
+  <!-- ─────────────── 4 ─────────────── -->
+  <h2 id="conclusions"><span class="num">4</span>Висновки: прогалини → гіпотези</h2>
+  <p>Формат: <em>Якщо ми зробимо X, то Y, бо Z. Перевіримо: …</em></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Прогалина ринку</th><th>Гіпотеза</th><th>Звідки випливає</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Після подачі показу людина не бачить «прийнято» і суму [y2][d2][n2][o2]</td>
+        <td><b>Якщо</b> одразу після «Надіслати» показати «Показ прийнято» з повтором цифр, автором і орієнтовною сумою, <b>то</b> звернення «чи прийняли мій показ» наблизяться до нуля, <b>бо</b> питання закривається на тому самому екрані. <b>Перевіримо:</b> юзабіліті-тест — після подачі людина без підказки називає статус і суму.</td>
+        <td><a href="#competitors">Конкуренти</a> — патерн 3; <a href="#benchmark">Бенчмарк</a> — вимір і механізм 1</td></tr>
+      <tr><td>2</td><td>Показ і сума — дві окремі форми з повторним введенням адреси [y2][y3]</td>
+        <td><b>Якщо</b> показ і сума живуть в одній формі, <b>то</b> медіана від входу до «прийнято» буде &lt; 60 с, <b>бо</b> зникає другий прохід адресною формою. <b>Перевіримо:</b> засікти час на прототипі проти сценарію YASNO.</td>
+        <td><a href="#competitors">Конкуренти</a> — матриця, «Ключова задача»; <a href="#patterns">Патерни</a></td></tr>
+      <tr><td>3</td><td>Фото показу в електриці публічно не пропонує ніхто [n2][y2][d2]</td>
+        <td><b>Якщо</b> фото заповнює ті самі поля, що й ручний ввід, <b>то</b> на телефоні буде менше помилкових показів, <b>бо</b> людина не переписує 5–6 цифр. <b>Перевіримо:</b> частка виправлених показів для фото і для ручного вводу. Якість розпізнавання на українських лічильниках — <span class="nc">дані не підтверджені</span>.</td>
+        <td><a href="#competitors">Конкуренти</a> — відмінність 1; <a href="#patterns">Патерни</a> — умова «на телефоні»</td></tr>
+      <tr><td>4</td><td>Немає ролей і спільного доступу; рідних видно лише як «ще один рахунок» [n2][y2]</td>
+        <td><b>Якщо</b> показати, хто вніс показ і хто сплатив, і дати ролі (власник / учасник / спостерігач), <b>то</b> родини й пари «орендар — власник» перестануть дублювати подачу, <b>бо</b> авторство видно в інтерфейсі. <b>Перевіримо:</b> інтерв'ю з людьми, які ведуть рахунок батьків або здають житло.</td>
+        <td><a href="#competitors">Конкуренти</a> — відмінність 2, матриця «Кілька об'єктів і людей»</td></tr>
+      <tr><td>5</td><td>Відключення відірвані від «мого об'єкта», шукаються щоразу за адресою [y4][d4]</td>
+        <td><b>Якщо</b> графік черги показувати всередині об'єкта зі сповіщеннями учасникам, <b>то</b> людям не доведеться окремо шукати адресу на сайті мережі, <b>бо</b> адреса вже відома. <b>Перевіримо:</b> скільки людей з кількома об'єктами перевіряють відключення для кожного.</td>
+        <td><a href="#competitors">Конкуренти</a> — патерн 2</td></tr>
+      <tr><td>6</td><td>Тон ринку — тривожний або маркетинговий [d1][y1]</td>
+        <td><b>Якщо</b> писати спокійно і з виходом («не хвилюйтесь, виправити можна до 5 числа»), <b>то</b> довіра до сум зросте, <b>бо</b> помилка перестає бути загрозою. <b>Перевіримо:</b> A/B текстів у юзабіліті-тесті. Вплив тону на довіру саме в цій аудиторії — <span class="nc">дані не підтверджені</span>.</td>
+        <td><a href="#competitors">Конкуренти</a> — відмінність 3; <a href="#benchmark">Бенчмарк</a> — механізм 3</td></tr>
+      <tr><td>7</td><td>Між поданням і оплатою статус місяця невидимий: «нараховано за середнім» з'являється як сюрприз [y2][n2]</td>
+        <td><b>Якщо</b> кожен об'єкт має шкалу «чекає показу → прийнято → нараховано → сплачено» з датою наступного кроку, <b>то</b> більше показів подаватимуть вчасно, <b>бо</b> людина бачить, що станеться, якщо не подати. <b>Перевіримо:</b> частка показів, поданих у вікно <span class="tag brief">бриф, розд. 13</span></td>
+        <td><a href="#benchmark">Бенчмарк</a> — механізм 2; <a href="#competitors">Конкуренти</a> — патерн 3</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Що лишається відкритим</h3>
+  <ul>
+    <li><strong>Швидкий шлях без входу.</strong> Чи потрібен показ і оплата за особовим рахунком, як у YASNO [y2][y3]? Це ринкова норма, але без входу немає статусу й історії.</li>
+    <li><strong>Вікно подачі.</strong> Бриф — 1–5 число <span class="tag brief">бриф, розд. 4</span>. YASNO — «в останні два дні поточного місяця або в перші три наступного» [y2]. Рішення за PM.</li>
+    <li><strong>Відгуки і закриті потоки.</strong> Відгуки зі сторів і демо-відео не зібрано, тож усе за логіном (monobank, Куб, кабінети) — <span class="nc">дані не підтверджені</span>.</li>
+  </ul>
+
+  <!-- ─────────────── Джерела ─────────────── -->
+  <h2 id="refs">Джерела <span class="tag public">публічне</span></h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Код</th><th>Що</th><th>Посилання</th><th>Скрін</th></tr></thead>
+    <tbody>
+      <tr id="s-y1"><td>y1</td><td>YASNO, головна</td><td class="url"><a href="https://yasno.ua/">yasno.ua/</a></td><td><a href="screens/H1-yasno-home.png">H1-yasno-home.png</a></td></tr>
+      <tr id="s-y2"><td>y2</td><td>YASNO, передача показань</td><td class="url"><a href="https://yasno.ua/indicators">yasno.ua/indicators</a></td><td><a href="screens/H1-yasno-indicators.png">H1-yasno-indicators.png</a></td></tr>
+      <tr id="s-y3"><td>y3</td><td>YASNO, оплата</td><td class="url"><a href="https://yasno.ua/payment">yasno.ua/payment</a></td><td><a href="screens/H1-yasno-payment.png">H1-yasno-payment.png</a></td></tr>
+      <tr id="s-y4"><td>y4</td><td>YASNO, графік відключень</td><td class="url"><a href="https://static.yasno.ua/kyiv/outages">static.yasno.ua/kyiv/outages</a></td><td><a href="screens/H1-yasno-outages.png">H1-yasno-outages.png</a></td></tr>
+      <tr id="s-d1"><td>d1</td><td>ДТЕК КЕМ, головна</td><td class="url"><a href="https://www.dtek-kem.com.ua/ua/">dtek-kem.com.ua/ua/</a></td><td><a href="screens/H2-dtek-kem-home.png">H2-dtek-kem-home.png</a></td></tr>
+      <tr id="s-d2"><td>d2</td><td>ДТЕК КЕМ, передати покази</td><td class="url"><a href="https://www.dtek-kem.com.ua/ua/meter">dtek-kem.com.ua/ua/meter</a></td><td><a href="screens/H2-dtek-kem-meter.png">H2-dtek-kem-meter.png</a></td></tr>
+      <tr id="s-d3"><td>d3</td><td>ДТЕК КЕМ, кабінет (вхід)</td><td class="url"><a href="https://my.dtek-kem.com.ua/">my.dtek-kem.com.ua</a></td><td><a href="screens/H2-dtek-kem-login.png">H2-dtek-kem-login.png</a></td></tr>
+      <tr id="s-d4"><td>d4</td><td>ДТЕК КЕМ, відключення</td><td class="url"><a href="https://www.dtek-kem.com.ua/ua/shutdowns">dtek-kem.com.ua/ua/shutdowns</a></td><td><a href="screens/H2-dtek-kem-shutdowns.png">H2-dtek-kem-shutdowns.png</a></td></tr>
+      <tr id="s-m1"><td>m1</td><td>monobank, головна</td><td class="url"><a href="https://monobank.ua/">monobank.ua</a></td><td><a href="screens/S1-mono-home.png">S1-mono-home.png</a></td></tr>
+      <tr id="s-n1"><td>n1</td><td>Нафтогаз, gas.ua</td><td class="url"><a href="https://gas.ua/uk/home">gas.ua/uk/home</a></td><td><a href="screens/S3-naftogaz-home.png">S3-naftogaz-home.png</a></td></tr>
+      <tr id="s-n2"><td>n2</td><td>Куб, сайт застосунку</td><td class="url"><a href="https://kub.energy/">kub.energy</a></td><td><a href="screens/S3-naftogaz-kub.png">S3-naftogaz-kub.png</a></td></tr>
+      <tr id="s-n3"><td>n3</td><td>gas.ua, передати показання — Cloudflare, <span class="na">доступ обмежений</span></td><td class="url"><a href="https://gas.ua/uk/indicators">gas.ua/uk/indicators</a></td><td>—</td></tr>
+      <tr id="s-o1"><td>o1</td><td>Octopus, Help &amp; FAQs і стаття про подачу показу</td><td class="url"><a href="https://octopus.energy/help-and-faqs/">help-and-faqs/</a> · <a href="https://octopus.energy/help-and-faqs/articles/how-do-i-read-my-meter/">how-do-i-read-my-meter/</a></td><td><a href="screens/A1-octopus-help.png">A1-octopus-help.png</a></td></tr>
+      <tr id="s-o2"><td>o2</td><td>Octopus, категорія Meters</td><td class="url"><a href="https://octopus.energy/help-and-faqs/categories/meters/">categories/meters/</a></td><td><a href="screens/A1-octopus-meters.png">A1-octopus-meters.png</a></td></tr>
+      <tr id="s-o3"><td>o3</td><td>Octopus — I accidentally sent an incorrect reading (у notes/05 має код o2)</td><td class="url"><a href="https://octopus.energy/help-and-faqs/articles/i-accidentally-sent-an-incorrect-reading-what-should-i-do/">i-accidentally-sent-an-incorrect-reading…</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-g1"><td>g1</td><td>GOV.UK — Confirmation pages</td><td class="url"><a href="https://design-system.service.gov.uk/patterns/confirmation-pages/">patterns/confirmation-pages/</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-g2"><td>g2</td><td>GOV.UK — Check answers</td><td class="url"><a href="https://design-system.service.gov.uk/patterns/check-answers/">patterns/check-answers/</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-w1"><td>w1</td><td>Wise — How do I check my transfer's status?</td><td class="url"><a href="https://wise.com/help/articles/2452305/how-do-i-check-my-transfers-status">articles/2452305</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-w2"><td>w2</td><td>Wise — Why does it say complete when the money hasn't arrived?</td><td class="url"><a href="https://wise.com/help/articles/2977950/why-does-it-say-my-transfers-complete-when-the-money-hasnt-arrived-yet">articles/2977950</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-w3"><td>w3</td><td>Wise — When will my money arrive?</td><td class="url"><a href="https://wise.com/help/articles/2941900/when-will-my-money-arrive">articles/2941900</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-np1"><td>np1</td><td>Нова пошта — Відстежити посилку</td><td class="url"><a href="https://novaposhta.ua/tracking/">novaposhta.ua/tracking/</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-k1"><td>k1</td><td>Куб — сайт застосунку</td><td class="url"><a href="https://kub.energy/">kub.energy</a></td><td><a href="screens/S3-naftogaz-kub.png">S3-naftogaz-kub.png</a></td></tr>
+    </tbody>
+  </table></div>
+
+  <footer>Скрінів власного акаунта немає: теки <code>research/screens/own/</code> не існує. Усі скріни — публічні сторінки без входу.</footer>
+</main>
+
+<script>
+  // [y2] у тексті → посилання-бейдж на рядок таблиці джерел.
+  (function () {
+    var re = /\[([a-z]{1,2}\d)\]/g;
+    var walker = document.createTreeWalker(document.querySelector("main"), NodeFilter.SHOW_TEXT);
+    var nodes = [];
+    var has = /\[[a-z]{1,2}\d\]/;
+    while (walker.nextNode()) if (has.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      var text = node.nodeValue, last = 0, m;
+      re.lastIndex = 0;
+      while ((m = re.exec(text))) {
+        frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        var a = document.createElement("a");
+        a.className = "ref";
+        a.href = "#s-" + m[1];
+        a.textContent = m[1];
+        frag.appendChild(a);
+        last = re.lastIndex;
+      }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -26,4 +26,6 @@
 | [_nav/tree.js](_nav/tree.js) | Дерево сторінок — реєстр для навігатора |
 | [_nav/nav.js](_nav/nav.js) · [_nav/nav.css](_nav/nav.css) | Скрипт і стилі бокового меню |
 | [research/](research/) | Дослідження; [research/screens/](research/screens/) — скріни референсів |
+| [research/research.md](research/research.md) | Зведення ресерчу: конкуренти, бенчмарк, патерни, висновки-гіпотези |
+| [research/research.html](research/research.html) · [на сайті](https://denysosadchyi.github.io/pokaz/research/research.html) | Те саме зведення односторінковою HTML-сторінкою зі скрінами |
 | [research/notes/06-patterns.md](research/notes/06-patterns.md) | П'ять UX-патернів для внесення показу і вибір під наш контекст |

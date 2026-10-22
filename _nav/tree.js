@@ -11,4 +11,7 @@
 
 window.NAV_TREE = [
   { title: "Старт", href: "index.html" },
+  { branch: "Ресерч", children: [
+    { title: "Ресерч: зведення", href: "research/research.html" },
+  ] },
 ];
