@@ -1,0 +1,83 @@
+/* Навігатор репо — службовий інструмент, не частина продукту.
+   Нейтральний стиль; усі класи з префіксом repo-nav / nav-, щоб не перетинатися зі сторінками. */
+.repo-nav {
+  --nav-w: 240px;
+  --nav-bg: #f6f6f6;
+  --nav-fg: #333;
+  --nav-muted: #888;
+  --nav-line: #e2e2e2;
+  --nav-hover: #ebebeb;
+  --nav-current-bg: #e0e0e0;
+  --nav-current-fg: #000;
+
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--nav-w);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 12px 8px 24px;
+  background: var(--nav-bg);
+  color: var(--nav-fg);
+  border-right: 1px solid var(--nav-line);
+  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  z-index: 1000;
+}
+
+@media (prefers-color-scheme: dark) {
+  .repo-nav {
+    --nav-bg: #1c1c1c;
+    --nav-fg: #ccc;
+    --nav-muted: #777;
+    --nav-line: #2e2e2e;
+    --nav-hover: #262626;
+    --nav-current-bg: #333;
+    --nav-current-fg: #fff;
+  }
+}
+
+body.has-repo-nav { margin-left: 240px; }
+
+.repo-nav-head {
+  display: block;
+  padding: 6px 8px 10px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--nav-line);
+  color: var(--nav-muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.repo-nav .nav-list { list-style: none; margin: 0; padding: 0; }
+
+.repo-nav .nav-branch { margin-top: 10px; }
+
+.repo-nav .nav-branch-label {
+  padding: 4px 8px;
+  color: var(--nav-muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.repo-nav .nav-link {
+  display: block;
+  padding: 4px 8px 4px calc(8px + var(--depth, 0) * 14px);
+  border-radius: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+.repo-nav .nav-link:hover { background: var(--nav-hover); }
+.repo-nav .nav-link:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.repo-nav .nav-link[aria-current="page"] {
+  background: var(--nav-current-bg);
+  color: var(--nav-current-fg);
+  font-weight: 600;
+}
+
+/* Вузький екран: меню над сторінкою, а не збоку. */
+@media (max-width: 720px) {
+  .repo-nav { position: static; width: auto; max-height: 40vh; border-right: 0; border-bottom: 1px solid var(--nav-line); }
+  body.has-repo-nav { margin-left: 0; }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="uk" data-root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Показ — репо продукту</title>
+  <link rel="stylesheet" href="_nav/nav.css">
+  <script src="_nav/tree.js"></script>
+  <script src="_nav/nav.js" defer></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #222;
+      background: #fff;
+    }
+    @media (prefers-color-scheme: dark) { body { color: #ddd; background: #121212; } }
+    main { max-width: 680px; padding: 32px 24px 64px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .lead { margin: 0 0 24px; font-size: 18px; }
+    ul { padding-left: 20px; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Показ</h1>
+    <p class="lead">Особистий кабінет побутового споживача електроенергії: внести показ
+      лічильника, знати суму й сплатити, розуміти своє споживання, знати про відключення.</p>
+
+    <p><strong>Мета:</strong> щомісячна рутина зі світлом займає хвилину і не лишає питань
+      «Чи прийняли мій показ?», «Скільки платити?», «Чому стільки?»</p>
+
+    <ul>
+      <li><strong>Для кого:</strong> власники й орендарі квартир і приватних будинків, 25–65 років;
+        частина веде ще й рахунок батьків чи дачі.</li>
+      <li><strong>Ключова задача:</strong> внести показ — вручну або за фото — і одразу знати суму.</li>
+      <li><strong>Модель:</strong> кабінет одного постачальника; багато об'єктів і багато людей
+        з ролями (власник рахунку, учасник, спостерігач).</li>
+      <li><strong>Платформа:</strong> desktop-first, далі адаптив до телефона (360 px+).</li>
+      <li><strong>Стек прототипу:</strong> React + Vite + TypeScript, дані на моках.</li>
+    </ul>
+
+    <p>Повний бриф — <a href="https://github.com/denysosadchyi/pokaz/blob/main/CLAUDE.md">CLAUDE.md</a>, індекс артефактів — <a href="https://github.com/denysosadchyi/pokaz/blob/main/README.md">README.md</a>.</p>
+  </main>
+</body>
+</html>
