@@ -26,3 +26,4 @@
 | [_nav/tree.js](_nav/tree.js) | Дерево сторінок — реєстр для навігатора |
 | [_nav/nav.js](_nav/nav.js) · [_nav/nav.css](_nav/nav.css) | Скрипт і стилі бокового меню |
 | [research/](research/) | Дослідження; [research/screens/](research/screens/) — скріни референсів |
+| [research/notes/06-patterns.md](research/notes/06-patterns.md) | П'ять UX-патернів для внесення показу і вибір під наш контекст |
