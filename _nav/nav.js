@@ -44,9 +44,8 @@
     var nav = document.createElement("nav");
     nav.className = "repo-nav";
     nav.setAttribute("aria-label", "Сторінки репо");
-    var head = document.createElement("a");
+    var head = document.createElement("div");
     head.className = "repo-nav-head";
-    head.href = root + "index.html";
     head.textContent = "Показ · репо";
     nav.appendChild(head);
     nav.appendChild(renderList(tree, 0));
