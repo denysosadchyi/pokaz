@@ -56,12 +56,12 @@
 | o1 | Octopus, Help & FAQs | https://octopus.energy/help-and-faqs/ | `A1-octopus-help.png` |
 | o2 | Octopus, категорія Meters | https://octopus.energy/help-and-faqs/categories/meters/ | `A1-octopus-meters.png` |
 | y6 | YASNO Mobile, App Store (опис, 4,86★ з 24 949 оцінок) + відгуки | https://apps.apple.com/ua/app/yasno-mobile/id6446357858 · відгуки: https://itunes.apple.com/ua/rss/customerreviews/page=1/id=6446357858/sortby=mostrecent/json | `H1-yasno-appstore.png` |
-| y7 | YASNO, Google Play (4,8★, 36,9 тис. відгуків) | https://play.google.com/store/apps/details?id=com.dsolutions.yasnomobile&hl=uk&gl=UA | `H1-yasno-play.png` |
+| y7 | YASNO, Google Play (4,8★, 37,3 тис. відгуків) | https://play.google.com/store/apps/details?id=com.dsolutions.yasnomobile&hl=uk&gl=UA | `H1-yasno-play.png` |
 | y8 | YASNO, відео «Передача показань двозонного лічильника» (2023-12-05) | https://www.youtube.com/watch?v=w0ID5K6Ok78 | — |
 | m2 | monobank, App Store (4,88★ з 971 351 оцінки) | https://apps.apple.com/ua/app/monobank-digital-mobile-bank/id1287005205 | `S1-mono-appstore.png` |
 | m3 | monobank, Google Play (4,9★, 1,16 млн відгуків) | https://play.google.com/store/apps/details?id=com.ftband.mono&hl=uk&gl=UA | `S1-mono-play.png` |
 | m4 | MoneyBoy, відео «Як оплатити комунальні послуги в monobank» (2020-08-25; без субтитрів, лише назва) | https://www.youtube.com/watch?v=Azv4BxSOqa4 | — |
-| n4 | КУБ, App Store (3,82★ з 369 оцінок) + відгуки | https://apps.apple.com/ua/app/%D0%BA%D1%83%D0%B1/id6746857315 · відгуки: https://itunes.apple.com/ua/rss/customerreviews/page=1/id=6746857315/sortby=mostrecent/json | `S3-kub-appstore.png` |
+| n4 | КУБ, App Store (3,8★ з 370 оцінок) + відгуки | https://apps.apple.com/ua/app/%D0%BA%D1%83%D0%B1/id6746857315 · відгуки: https://itunes.apple.com/ua/rss/customerreviews/page=1/id=6746857315/sortby=mostrecent/json | `S3-kub-appstore.png` |
 | n5 | КУБ, Google Play (4,0★, 7,65 тис. відгуків, 1 млн+ завантажень) | https://play.google.com/store/apps/details?id=ua.gas.app&hl=uk&gl=UA | `S3-kub-play.png` |
 | n6 | «Смартфон T», відео «Як змінити показник газового лічильника в Куб?» (субтитри uk) | https://www.youtube.com/watch?v=KWja4Uawhqc | — |
 | n7 | «Смартфон T», відео «КУБ від Нафтогазу: Встанови та передавай показники за 2 хвилини» (субтитри uk) | https://www.youtube.com/watch?v=M3Vf4XLcvB4 | — |
@@ -126,7 +126,7 @@
 
 ### Що це додає до матриці
 
-1. **«Чи прийняли мій показ?» — найчастіша скарга на ключову задачу**, і в Кубі, і в YASNO: незрозумілий статус, немає історії поданого, хибне «передано», показ не зберігся [n4][y6]. Це пряме підтвердження вибору виміру «Завершення задачі» для бенчмарку.
+1. **«Чи прийняли мій показ?» — найчастіша скарга на ключову задачу**, і в Кубі, і в YASNO: незрозумілий статус, немає історії поданого, хибне «передано», показ не зберігся [n4][y6]. Це пряме підтвердження вибору виміру «Завершення задачі» для бенчмарку. **Вісь бенчмарку** — «Завершення задачі» як частина осі брифу **«ясність і спокій»** (§1: «Чи прийняли мій показ?»; §9: «статус завжди явний»): саме тут ясність або виникає, або ні. Обґрунтування — у [05-benchmark.md](05-benchmark.md).
 2. **Виправлення показу — друга за частотою.** Ні YASNO, ні Куб (за відгуками) не дають швидко виправити помилкову цифру; у Кубі на відео — лише «завтра» [y6][n4][n6].
 3. **Сервер у вікні подачі.** Усі подають у ті самі 3–5 днів, і саме тоді YASNO недоступний [y6]. Для нас це вимога: подача мусить витримувати пік і чесно показувати збій, а не мовчати.
 4. **Навіть еталон Octopus ховає показ** глибоко в застосунку — люди просять його на перший екран [o4]. Це підтримує принцип брифу «одна головна дія на екрані».
