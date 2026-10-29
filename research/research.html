@@ -104,7 +104,7 @@
 <body>
 <main>
   <h1>Показ — ресерч</h1>
-  <p class="lead">Зведення кроків 03–06. Дані зібрано 2026-10-22. Джерело тексту —
+  <p class="lead">Зведення кроків 03–06. Дані зібрано 2026-10-22, доповнено 2026-10-29 (стори, відгуки, демо-відео). Джерело тексту —
     <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/research.md">research/research.md</a>,
     бриф — <a href="https://github.com/denysosadchyi/pokaz/blob/main/CLAUDE.md">CLAUDE.md</a>.</p>
 
@@ -121,7 +121,7 @@
   <div class="table-wrap"><table>
     <thead><tr><th>Позначка</th><th>Джерело</th><th>Що з нього взято</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag public">публічне</span></td><td>Публічні сторінки без логіну: тексти сторінок і скріни Playwright у <code>research/screens/</code></td><td><strong>Усі факти на цій сторінці</strong></td></tr>
+      <tr><td><span class="tag public">публічне</span></td><td>Публічні сторінки без логіну: тексти сторінок, сторінки застосунків в App Store і Google Play, відгуки App Store, демо-відео YouTube (субтитри), скріни Playwright у <code>research/screens/</code> (індекс джерел — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/screens/README.md">screens/README.md</a>)</td><td><strong>Усі факти на цій сторінці</strong></td></tr>
       <tr><td><span class="tag own">власний акаунт</span></td><td>Скріни в <code>research/screens/own/</code></td><td><strong>Нічого.</strong> Теки <code>own/</code> немає, тож скрінів власного акаунта тут немає і перевіряти на особисті дані нічого</td></tr>
       <tr><td><span class="tag brief">бриф</span></td><td>CLAUDE.md</td><td>Цілі, аудиторія, рішення. Це основа для оцінок і висновків, а не факти про ринок</td></tr>
     </tbody>
@@ -140,7 +140,7 @@
     <tbody>
       <tr><td>H1</td><td>YASNO</td><td>ХАРД</td><td>Постачальник світла для побутових клієнтів в Україні; є публічні форми показу й оплати без входу [y2][y3]</td></tr>
       <tr><td>H2</td><td>ДТЕК Київські електромережі (ОСР)</td><td>ХАРД</td><td>Графіки відключень і другий «вхід» для показів [d2][d4]</td></tr>
-      <tr><td>S1</td><td>monobank</td><td>СОФТ</td><td>Тут аудиторія платить комуналку — <span class="nc">дані не підтверджені</span> (функцію комуналки без входу не видно [m1])</td></tr>
+      <tr><td>S1</td><td>monobank</td><td>СОФТ</td><td>Тут аудиторія платить комуналку: стор обіцяє «Pay bills in a few taps: electricity, gas, water…» [m2][m3]. Подачі показу в описі немає, тож це конкурент за оплату</td></tr>
       <tr><td>S3</td><td>Нафтогаз / Куб</td><td>СОФТ</td><td>Та сама задача для газу: показ з фото, рахунки рідних [n2]</td></tr>
       <tr><td>A1</td><td>Octopus Energy</td><td>АСПІРАЦІЙНІ</td><td>Еталон тону й довідки про покази [o1][o2]</td></tr>
     </tbody>
@@ -157,10 +157,10 @@
         <td>«Газові справи — зручно в Кубі», телефон з балансом; cookie-банер на пів екрана [n1]</td>
         <td>Help-центр починається з «⚠️ In an emergency», далі категорії «Meters», «Bills And Payments» [o1]</td></tr>
       <tr><th>Ключова задача: внести показ і знати суму</th>
-        <td>Без входу: адреса <b>або</b> особовий рахунок → блок «Показання лічильника». Сума — <b>окремою</b> сторінкою «Оплата» з тією самою адресною формою → «Баланс» → «Оплатити карткою». Показ і сума розірвані [y2][y3]</td>
+        <td>Без входу: адреса <b>або</b> особовий рахунок → блок «Показання лічильника». Сума — <b>окремою</b> сторінкою «Оплата» з тією самою адресною формою → «Баланс» → «Оплатити карткою». Показ і сума розірвані [y2][y3]. Застосунок: сума, показ, нагадування; фото не згадано [y6]</td>
         <td>«Передати покази» веде в чат-бот; поряд інструкції для «День–Ніч», індукційного лічильника, позначки Т4. Суми немає. Кабінет — <span class="na">доступ обмежений</span> [d2][d3]</td>
-        <td><span class="na">Доступ обмежений</span> [m1]</td>
-        <td>Заявлено: «з фото, скануйте або вводьте вручну. Помилилися? Просто виправте». Потік — <span class="na">доступ обмежений</span>; публічна форма gas.ua закрита Cloudflare [n2][n3]</td>
+        <td>Без входу не видно [m1]; стор обіцяє оплату комуналки «в кілька тапів», не подачу показу [m2]</td>
+        <td>Заявлено: «з фото, скануйте або вводьте вручну. Помилилися? Просто виправте» [n2]. Демо-відео: адреса → попередній показ зверху → ввід → одразу «розраховано 48 кубів»; сканування камерою дало хибні цифри [n6]</td>
         <td>Подача — <span class="na">доступ обмежений</span>. Публічно — довідка, як знімати покази, окремо для двозонного Economy 7 [o2]</td></tr>
       <tr><th>Ясність і спокій</th>
         <td>Частково: є підказка про строк подачі, але немає ні статусу «прийнято», ні суми поруч з показом; промо відволікає [y1][y2]</td>
@@ -172,10 +172,10 @@
         <td>Кнопка «Надіслати»; екран підтвердження — <span class="na">доступ обмежений</span> [y2]</td>
         <td>У чат-боті — <span class="na">доступ обмежений</span> [d2]</td>
         <td><span class="na">Доступ обмежений</span> [m1]</td>
-        <td>Заявлено виправлення після подачі; екран — <span class="na">доступ обмежений</span> [n2]</td>
+        <td>Відео: «Показник передано. Вже працюємо над їхньою обробкою. За потреби зможете оновити їх завтра» [n6] — «передано», не «прийнято», без суми</td>
         <td>Описано, що робити після помилкового показу; екран — <span class="na">доступ обмежений</span> [o2]</td></tr>
       <tr><th>Кілька об'єктів і людей</th>
-        <td>Публічна форма — один об'єкт; у кабінеті «Додати рахунок», ролі — <span class="na">доступ обмежений</span> [y1][y2]</td>
+        <td>Публічна форма — один об'єкт; застосунок — «рахунки для декількох об'єктів… одним клацом» [y6]; ролі — <span class="na">доступ обмежений</span> [y1][y2]</td>
         <td><span class="na">Доступ обмежений</span> [d3]</td>
         <td><span class="na">Доступ обмежений</span> [m1]</td>
         <td>«Якщо допомагаєте рідним… додавайте й їхні рахунки»; ролей не згадано [n2]</td>
@@ -204,8 +204,30 @@
     <figure><a href="screens/S3-naftogaz-kub--full.png"><img src="screens/S3-naftogaz-kub.png" alt="Куб, сайт застосунку" loading="lazy"></a><figcaption><b>n2</b> · Куб, сайт застосунку</figcaption></figure>
     <figure><a href="screens/A1-octopus-help--full.png"><img src="screens/A1-octopus-help.png" alt="Octopus, Help and FAQs" loading="lazy"></a><figcaption><b>o1</b> · Octopus, Help &amp; FAQs</figcaption></figure>
     <figure><a href="screens/A1-octopus-meters--full.png"><img src="screens/A1-octopus-meters.png" alt="Octopus, категорія Meters" loading="lazy"></a><figcaption><b>o2</b> · Octopus, категорія Meters</figcaption></figure>
+    <figure><a href="screens/H1-yasno-appstore--full.png"><img src="screens/H1-yasno-appstore.png" alt="YASNO Mobile в App Store" loading="lazy"></a><figcaption><b>y6</b> · YASNO Mobile, App Store</figcaption></figure>
+    <figure><a href="screens/H1-yasno-play--full.png"><img src="screens/H1-yasno-play.png" alt="YASNO в Google Play" loading="lazy"></a><figcaption><b>y7</b> · YASNO, Google Play</figcaption></figure>
+    <figure><a href="screens/S1-mono-appstore--full.png"><img src="screens/S1-mono-appstore.png" alt="monobank в App Store" loading="lazy"></a><figcaption><b>m2</b> · monobank, App Store</figcaption></figure>
+    <figure><a href="screens/S1-mono-play--full.png"><img src="screens/S1-mono-play.png" alt="monobank в Google Play" loading="lazy"></a><figcaption><b>m3</b> · monobank, Google Play</figcaption></figure>
+    <figure><a href="screens/S3-kub-appstore--full.png"><img src="screens/S3-kub-appstore.png" alt="КУБ в App Store" loading="lazy"></a><figcaption><b>n4</b> · КУБ, App Store</figcaption></figure>
+    <figure><a href="screens/S3-kub-play--full.png"><img src="screens/S3-kub-play.png" alt="КУБ в Google Play" loading="lazy"></a><figcaption><b>n5</b> · КУБ, Google Play</figcaption></figure>
+    <figure><a href="screens/A1-octopus-appstore--full.png"><img src="screens/A1-octopus-appstore.png" alt="Octopus Energy в App Store" loading="lazy"></a><figcaption><b>o4</b> · Octopus Energy, App Store UK</figcaption></figure>
   </div>
-  <p>Клік по скріну відкриває повну сторінку.</p>
+  <p>Клік по скріну відкриває повну сторінку. На скрінах сторів — демо-дані з промо-картинок самих застосунків, а не реальні люди.</p>
+
+  <h3>Що кажуть користувачі: стори, відгуки, демо-відео <span class="tag public">публічне</span></h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Тема</th><th>Що видно</th><th>Джерело</th></tr></thead>
+    <tbody>
+      <tr><td><b>«Чи прийняли мій показ?»</b></td><td>Куб: «Незрозуміло, чи факт внесення відбувся чи тебе проігнорували»; немає історії поданих показів (три відгуки за 2026-03-03); хибне «ваші показники передані»</td><td>[n4]</td></tr>
+      <tr><td><b>Помилкова цифра</b></td><td>YASNO: «видно лише 3 цифри… квест із листами на коригування»; «додалась ще одна цифра… нереально великі показники і сума». Куб: «Не можливо виправити помилки в показниках!»</td><td>[y6][n4]</td></tr>
+      <tr><td><b>Збій у вікні подачі</b></td><td>YASNO: «доступ до сервера відсутній, проводяться регламентні роботи… в той період коли самі просять надавати показники» — три відгуки</td><td>[y6]</td></tr>
+      <tr><td><b>Не та адреса</b></td><td>Куб: «не знаю на якій я адресі і не бачу попереднього показника»; автор відео теж спершу відкрив не ту адресу</td><td>[n4][n6]</td></tr>
+      <tr><td><b>Фото</b></td><td>Сканування в Кубі на відео: «неправильні якісь цифри показував» → ввів вручну</td><td>[n6]</td></tr>
+      <tr><td><b>Сума без пояснення</b></td><td>YASNO: «сума співпала з моїм розрахунком, але не має попередніх даних»</td><td>[y6]</td></tr>
+      <tr><td><b>Показ сховано</b></td><td>Octopus: «submitting a meter reading should be right at the top on the first page»; «hard to find»</td><td>[o4]</td></tr>
+    </tbody>
+  </table></div>
+  <p>Рейтинги на 2026-10-29: YASNO 4,86★ (App Store, 24 949 оцінок) / 4,8★ (Google Play); Куб 3,82★ (App Store, 369) / 4,0★ (Google Play); monobank 4,88★ / 4,9★; Octopus 4,83★ (App Store UK, 267 372) [y6][y7][n4][n5][m2][m3][o4]. Повні таблиці з ID відгуків — у <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/04-matrix.md">notes/04-matrix.md</a>.</p>
 
   <h3>Три спільні патерни ринку</h3>
   <ol>
@@ -216,7 +238,7 @@
 
   <h3>Три відмінності</h3>
   <ol>
-    <li><strong>Фото показу</strong> публічно пропонує лише Куб (газ). В електриці — ручний ввід (YASNO) або чат-бот (ДТЕК). [n2][y2][d2]</li>
+    <li><strong>Фото показу</strong> публічно пропонує лише Куб (газ), але сканування на відео помиляється. В електриці — ручний ввід (YASNO, і в застосунку теж) або чат-бот (ДТЕК). [n2][n6][y2][y6][d2]</li>
     <li><strong>Рахунки рідних</strong> прямо пропонує Куб, а публічна форма YASNO — це один об'єкт за раз. Ролей і спільного доступу не видно ні в кого без входу. [n2][y2]</li>
     <li><strong>Тон</strong>: ДТЕК — канцелярський і тривожний, YASNO — маркетинговий з промо, Куб і Octopus — людський. [d1][y1][n2][o2]</li>
   </ol>
@@ -235,10 +257,10 @@
     <thead><tr><th>Продукт</th><th>Ніша</th><th>Середнє</th><th>Джерела</th></tr></thead>
     <tbody>
       <tr><td>Wise — трекер переказу</td><td>Фінанси</td><td>4,4</td><td>[w1][w2][w3]</td></tr>
-      <tr><td>Нова пошта — відстеження</td><td>Логістика, Україна</td><td>4,0</td><td>[np1]; частина оцінок — <span class="nc">дані не підтверджені</span></td></tr>
-      <tr><td>Куб — передача показань газу</td><td>Комуналка, Україна</td><td>4,0</td><td>[k1]</td></tr>
+      <tr><td>Нова пошта — відстеження</td><td>Логістика, Україна</td><td>4,0</td><td>[np1][np2]; «ехо даних» і «наслідок» — <span class="nc">дані не підтверджені</span></td></tr>
       <tr><td>GOV.UK Design System</td><td>Держпослуги</td><td>3,9</td><td>[g1][g2]</td></tr>
       <tr><td>Octopus — подача показу</td><td>Енергетика</td><td>3,6</td><td>[o1][o3]</td></tr>
+      <tr><td>Куб — передача показань газу</td><td>Комуналка, Україна</td><td>3,3</td><td>[k1][n6][n4] — було 4,0 за обіцянками сайту; відео й відгуки: «передано» замість «прийнято», без історії, виправлення лише наступного дня</td></tr>
     </tbody>
   </table></div>
   <p>Повного ланцюжка «перевір → прийнято → сума → що далі» немає ні в кого.</p>
@@ -262,7 +284,7 @@
     <div class="card">
       <h4>3. Перевірка до відправки і безстрашне виправлення після</h4>
       <div class="label">Звідки</div>
-      <p>Перегляд відповідей у GOV.UK «підвищує впевненість» і «знижує кількість помилок» [g2]. Octopus: «don't worry. Our verification system should catch it» [o3]. Куб: «Помилилися? Просто виправте» [k1].</p>
+      <p>Перегляд відповідей у GOV.UK «підвищує впевненість» і «знижує кількість помилок» [g2]. Octopus: «don't worry. Our verification system should catch it» [o3]. Куб обіцяє «Помилилися? Просто виправте» [k1], але у відгуках — «неможливо виправити» [n4]: обіцянку треба виконати, а не лише написати.</p>
       <div class="label">Чому для нас</div>
       <p>Бриф уже містить попередження про аномальний стрибок і виправлення до кінця вікна подачі <span class="tag brief">бриф, розд. 4, 9</span></p>
     </div>
@@ -274,6 +296,7 @@
     <p>Обов'язкова фінансова дія перетворюється на лотерею, а на екрані, де людина має побачити «прийнято» і суму, з'являється шум. Це суперечить «ясності і спокою» <span class="tag brief">бриф, розд. 1</span></p>
     <p>Що гра знижує довіру аудиторії 55–65 — <span class="nc">дані не підтверджені</span> (гіпотеза, перевірки на користувачах не було).
       Що в «Показу» немає призового бюджету — <span class="nc">дані не підтверджені</span> (у брифі цього немає).</p>
+    <p><b>Контраргумент:</b> частині клієнтів Octopus колесо подобається — «bit of fun added with "spin the wheel"» (★5, 2026-10-23) [o4]. Рішення не змінюємо: на екрані «прийнято + сума» гра — шум; заохочення, якщо знадобиться, має жити окремо від підтвердження.</p>
   </div>
 
   <!-- ─────────────── 3 ─────────────── -->
@@ -309,13 +332,13 @@
   <div class="table-wrap"><table>
     <thead><tr><th>#</th><th>Прогалина ринку</th><th>Гіпотеза</th><th>Звідки випливає</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td>Після подачі показу людина не бачить «прийнято» і суму [y2][d2][n2][o2]</td>
+      <tr><td>1</td><td>Після подачі показу людина не бачить «прийнято» і суму [y2][d2][n2][o2]; це найчастіша скарга у відгуках Куба [n4]</td>
         <td><b>Якщо</b> одразу після «Надіслати» показати «Показ прийнято» з повтором цифр, автором і орієнтовною сумою, <b>то</b> звернення «чи прийняли мій показ» наблизяться до нуля, <b>бо</b> питання закривається на тому самому екрані. <b>Перевіримо:</b> юзабіліті-тест — після подачі людина без підказки називає статус і суму.</td>
         <td><a href="#competitors">Конкуренти</a> — патерн 3; <a href="#benchmark">Бенчмарк</a> — вимір і механізм 1</td></tr>
       <tr><td>2</td><td>Показ і сума — дві окремі форми з повторним введенням адреси [y2][y3]</td>
         <td><b>Якщо</b> показ і сума живуть в одній формі, <b>то</b> медіана від входу до «прийнято» буде &lt; 60 с, <b>бо</b> зникає другий прохід адресною формою. <b>Перевіримо:</b> засікти час на прототипі проти сценарію YASNO.</td>
         <td><a href="#competitors">Конкуренти</a> — матриця, «Ключова задача»; <a href="#patterns">Патерни</a></td></tr>
-      <tr><td>3</td><td>Фото показу в електриці публічно не пропонує ніхто [n2][y2][d2]</td>
+      <tr><td>3</td><td>Фото показу в електриці публічно не пропонує ніхто [n2][y2][d2][y6]; у Кубі сканування помиляється [n6]</td>
         <td><b>Якщо</b> фото заповнює ті самі поля, що й ручний ввід, <b>то</b> на телефоні буде менше помилкових показів, <b>бо</b> людина не переписує 5–6 цифр. <b>Перевіримо:</b> частка виправлених показів для фото і для ручного вводу. Якість розпізнавання на українських лічильниках — <span class="nc">дані не підтверджені</span>.</td>
         <td><a href="#competitors">Конкуренти</a> — відмінність 1; <a href="#patterns">Патерни</a> — умова «на телефоні»</td></tr>
       <tr><td>4</td><td>Немає ролей і спільного доступу; рідних видно лише як «ще один рахунок» [n2][y2]</td>
@@ -330,6 +353,9 @@
       <tr><td>7</td><td>Між поданням і оплатою статус місяця невидимий: «нараховано за середнім» з'являється як сюрприз [y2][n2]</td>
         <td><b>Якщо</b> кожен об'єкт має шкалу «чекає показу → прийнято → нараховано → сплачено» з датою наступного кроку, <b>то</b> більше показів подаватимуть вчасно, <b>бо</b> людина бачить, що станеться, якщо не подати. <b>Перевіримо:</b> частка показів, поданих у вікно <span class="tag brief">бриф, розд. 13</span></td>
         <td><a href="#benchmark">Бенчмарк</a> — механізм 2; <a href="#competitors">Конкуренти</a> — патерн 3</td></tr>
+      <tr><td>8</td><td>Сервіс падає саме у вікно подачі, і людина лишається без показу й без пояснення [y6]</td>
+        <td><b>Якщо</b> подача в пікові дні працює надійно, а при збої показ зберігається чернеткою зі статусом «ще не надіслано — надішлемо, щойно сервіс оживе», <b>то</b> не буде показів, втрачених через збій, <b>бо</b> людина не мусить повертатися й вгадувати, чи пройшло. <b>Перевіримо:</b> навантажувальний тест на пік 1–5 числа; у прототипі — сценарій «сервер недоступний».</td>
+        <td><a href="#competitors">Конкуренти</a> — «Що кажуть користувачі»</td></tr>
     </tbody>
   </table></div>
 
@@ -337,7 +363,7 @@
   <ul>
     <li><strong>Швидкий шлях без входу.</strong> Чи потрібен показ і оплата за особовим рахунком, як у YASNO [y2][y3]? Це ринкова норма, але без входу немає статусу й історії.</li>
     <li><strong>Вікно подачі.</strong> Бриф — 1–5 число <span class="tag brief">бриф, розд. 4</span>. YASNO — «в останні два дні поточного місяця або в перші три наступного» [y2]. Рішення за PM.</li>
-    <li><strong>Відгуки і закриті потоки.</strong> Відгуки зі сторів і демо-відео не зібрано, тож усе за логіном (monobank, Куб, кабінети) — <span class="nc">дані не підтверджені</span>.</li>
+    <li><strong>Закриті потоки.</strong> Відгуки App Store і демо-відео зібрано (2026-10-29) [y6][n4][n6][o4]. Невидимими лишаються потік «Комуналка» в monobank (відео без субтитрів) і кабінети ДТЕК та Octopus — там <span class="nc">дані не підтверджені</span>.</li>
   </ul>
 
   <!-- ─────────────── Джерела ─────────────── -->
@@ -360,6 +386,18 @@
       <tr id="s-o1"><td>o1</td><td>Octopus, Help &amp; FAQs і стаття про подачу показу</td><td class="url"><a href="https://octopus.energy/help-and-faqs/">help-and-faqs/</a> · <a href="https://octopus.energy/help-and-faqs/articles/how-do-i-read-my-meter/">how-do-i-read-my-meter/</a></td><td><a href="screens/A1-octopus-help.png">A1-octopus-help.png</a></td></tr>
       <tr id="s-o2"><td>o2</td><td>Octopus, категорія Meters</td><td class="url"><a href="https://octopus.energy/help-and-faqs/categories/meters/">categories/meters/</a></td><td><a href="screens/A1-octopus-meters.png">A1-octopus-meters.png</a></td></tr>
       <tr id="s-o3"><td>o3</td><td>Octopus — I accidentally sent an incorrect reading (у notes/05 має код o2)</td><td class="url"><a href="https://octopus.energy/help-and-faqs/articles/i-accidentally-sent-an-incorrect-reading-what-should-i-do/">i-accidentally-sent-an-incorrect-reading…</a></td><td>— (текст сторінки)</td></tr>
+      <tr id="s-y6"><td>y6</td><td>YASNO Mobile, App Store (опис + відгуки)</td><td class="url"><a href="https://apps.apple.com/ua/app/yasno-mobile/id6446357858">apps.apple.com/…/id6446357858</a></td><td><a href="screens/H1-yasno-appstore.png">H1-yasno-appstore.png</a></td></tr>
+      <tr id="s-y7"><td>y7</td><td>YASNO, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.dsolutions.yasnomobile&amp;hl=uk&amp;gl=UA">play.google.com/…yasnomobile</a></td><td><a href="screens/H1-yasno-play.png">H1-yasno-play.png</a></td></tr>
+      <tr id="s-y8"><td>y8</td><td>YASNO, відео «Передача показань двозонного лічильника»</td><td class="url"><a href="https://www.youtube.com/watch?v=w0ID5K6Ok78">youtube.com/watch?v=w0ID5K6Ok78</a></td><td>—</td></tr>
+      <tr id="s-m2"><td>m2</td><td>monobank, App Store</td><td class="url"><a href="https://apps.apple.com/ua/app/monobank-digital-mobile-bank/id1287005205">apps.apple.com/…/id1287005205</a></td><td><a href="screens/S1-mono-appstore.png">S1-mono-appstore.png</a></td></tr>
+      <tr id="s-m3"><td>m3</td><td>monobank, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.ftband.mono&amp;hl=uk&amp;gl=UA">play.google.com/…ftband.mono</a></td><td><a href="screens/S1-mono-play.png">S1-mono-play.png</a></td></tr>
+      <tr id="s-n4"><td>n4</td><td>КУБ, App Store (опис + відгуки)</td><td class="url"><a href="https://apps.apple.com/ua/app/%D0%BA%D1%83%D0%B1/id6746857315">apps.apple.com/…/id6746857315</a></td><td><a href="screens/S3-kub-appstore.png">S3-kub-appstore.png</a></td></tr>
+      <tr id="s-n5"><td>n5</td><td>КУБ, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=ua.gas.app&amp;hl=uk&amp;gl=UA">play.google.com/…ua.gas.app</a></td><td><a href="screens/S3-kub-play.png">S3-kub-play.png</a></td></tr>
+      <tr id="s-n6"><td>n6</td><td>Відео «Як змінити показник газового лічильника в Куб?»</td><td class="url"><a href="https://www.youtube.com/watch?v=KWja4Uawhqc">youtube.com/watch?v=KWja4Uawhqc</a></td><td>—</td></tr>
+      <tr id="s-n7"><td>n7</td><td>Відео «КУБ від Нафтогазу: Встанови та передавай показники за 2 хвилини»</td><td class="url"><a href="https://www.youtube.com/watch?v=M3Vf4XLcvB4">youtube.com/watch?v=M3Vf4XLcvB4</a></td><td>—</td></tr>
+      <tr id="s-n8"><td>n8</td><td>Відео «Новий додаток "Куб" від Нафтогаз Україна…»</td><td class="url"><a href="https://www.youtube.com/watch?v=30QeI4CCZOw">youtube.com/watch?v=30QeI4CCZOw</a></td><td>—</td></tr>
+      <tr id="s-o4"><td>o4</td><td>Octopus Energy, App Store UK (опис + відгуки)</td><td class="url"><a href="https://apps.apple.com/gb/app/octopus-energy/id1093452209">apps.apple.com/gb/…/id1093452209</a></td><td><a href="screens/A1-octopus-appstore.png">A1-octopus-appstore.png</a></td></tr>
+      <tr id="s-np2"><td>np2</td><td>Nova Post, App Store (опис)</td><td class="url"><a href="https://apps.apple.com/ua/app/nova-post/id1644647080">apps.apple.com/…/id1644647080</a></td><td>—</td></tr>
       <tr id="s-g1"><td>g1</td><td>GOV.UK — Confirmation pages</td><td class="url"><a href="https://design-system.service.gov.uk/patterns/confirmation-pages/">patterns/confirmation-pages/</a></td><td>— (текст сторінки)</td></tr>
       <tr id="s-g2"><td>g2</td><td>GOV.UK — Check answers</td><td class="url"><a href="https://design-system.service.gov.uk/patterns/check-answers/">patterns/check-answers/</a></td><td>— (текст сторінки)</td></tr>
       <tr id="s-w1"><td>w1</td><td>Wise — How do I check my transfer's status?</td><td class="url"><a href="https://wise.com/help/articles/2452305/how-do-i-check-my-transfers-status">articles/2452305</a></td><td>— (текст сторінки)</td></tr>
