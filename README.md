@@ -2,6 +2,8 @@
 
 **Ресерч:** [research.md](research/research.md) · [research.html на сайті](https://denysosadchyi.github.io/pokaz/research/research.html) · деталі — у розділі [«Ресерч»](#ресерч).
 
+**Персони і jobs:** [personas.md](personas.md) · [jtbd.md](jtbd.md) · [personas.html](personas.html) · [на сайті](https://denysosadchyi.github.io/pokaz/personas.html)
+
 Особистий кабінет побутового споживача електроенергії. Користувач вносить
 показ лічильника, бачить суму і сплачує, розуміє своє споживання й дізнається
 про відключення.
@@ -35,3 +37,6 @@
 | [_nav/tree.js](_nav/tree.js) | Дерево сторінок — реєстр для навігатора |
 | [_nav/nav.js](_nav/nav.js) · [_nav/nav.css](_nav/nav.css) | Скрипт і стилі бокового меню |
 | [research/](research/) | Дослідження (див. розділ «Ресерч» вище) |
+| [personas.md](personas.md) | Реєстр персон: primary Наталя і її сценарії |
+| [jtbd.md](jtbd.md) | Jobs to be done: main job, ієрархія, JTBD-матриця, гіпотези |
+| [personas.html](personas.html) · [на сайті](https://denysosadchyi.github.io/pokaz/personas.html) | Персони і jobs однією HTML-сторінкою |

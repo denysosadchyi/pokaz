@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="uk" data-root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Показ — персони і jobs</title>
+  <link rel="stylesheet" href="_nav/nav.css">
+  <script src="_nav/tree.js"></script>
+  <script src="_nav/nav.js" defer></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111214;
+      --surface: #191a1d;
+      --surface-2: #202125;
+      --line: #2c2d32;
+      --fg: #e6e4df;
+      --muted: #9a9890;
+      --accent: #d9c7a3;
+      --warn: #e2b46a;
+      --ok: #9cc4a0;
+    }
+    /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
+    .repo-nav {
+      --nav-bg: #161719; --nav-fg: #ccc; --nav-muted: #777; --nav-line: #2a2b2f;
+      --nav-hover: #222327; --nav-current-bg: #2e2f34; --nav-current-fg: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1120px; padding: 40px 32px 96px; }
+    h1 { margin: 0 0 4px; font-size: 32px; letter-spacing: -0.01em; }
+    h2 {
+      margin: 64px 0 8px; padding-top: 16px; border-top: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
+    h3 { margin: 32px 0 8px; font-size: 18px; }
+    p, ul, ol { max-width: 72ch; }
+    a { color: var(--accent); }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+    .toc a {
+      display: inline-block; padding: 6px 12px; border: 1px solid var(--line);
+      border-radius: 999px; color: var(--fg); text-decoration: none; font-size: 14px;
+    }
+    .toc a:hover { background: var(--surface-2); }
+
+    .table-wrap { overflow-x: auto; margin: 12px 0 24px; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    thead th { background: var(--surface-2); font-weight: 600; white-space: nowrap; }
+    tbody tr:last-child > * { border-bottom: 0; }
+    tbody th { font-weight: 600; background: var(--surface); }
+    table.matrix { min-width: 1100px; }
+    table.matrix tbody th { width: 190px; }
+    table.matrix td.score { white-space: nowrap; }
+    table.matrix tr.hyp-row > * { background: #16171a; }
+    .score b { display: inline-block; min-width: 1.6em; font-size: 16px; font-variant-numeric: tabular-nums; }
+
+    .ref {
+      display: inline-block; padding: 0 5px; margin: 0 1px; border-radius: 4px;
+      background: var(--surface-2); border: 1px solid var(--line);
+      color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-decoration: none; vertical-align: 1px;
+    }
+    .ref:hover { color: var(--fg); }
+
+    /* [?] — даних немає; «гіпотеза» — job/блок без голосу людей. Обидві позначки з текстом, не лише кольором. */
+    .q {
+      display: inline-block; padding: 0 6px; border-radius: 4px;
+      border: 1px solid #6b5530; background: #2a2318; color: var(--warn);
+      font: 600 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; vertical-align: 1px;
+    }
+    .tag {
+      display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px;
+      border: 1px solid var(--line); color: var(--muted); white-space: nowrap; vertical-align: 2px;
+    }
+    .tag.primary { color: var(--bg); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+    .tag.hyp { color: var(--warn); border: 1px dashed #8a6d3b; }
+    .tag.key { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
+    .card { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .card h4 { margin: 0 0 6px; font-size: 16px; }
+    .card p, .card li { font-size: 15px; }
+    .card p { margin: 0 0 8px; }
+    .card ul { margin: 0 0 8px; padding-left: 20px; }
+    .card .label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin: 12px 0 2px; }
+
+    .persona { border-color: #4e4636; padding: 24px 26px; margin: 12px 0 16px; }
+    .persona h3 { margin: 0 0 4px; font-size: 22px; }
+    .persona .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+    .persona .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+    blockquote {
+      margin: 16px 0 0; padding: 10px 16px; border-left: 3px solid var(--accent);
+      background: var(--surface-2); border-radius: 0 8px 8px 0; font-size: 17px; max-width: 72ch;
+    }
+    blockquote cite { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; font-style: normal; }
+
+    /* Ієрархія jobs: main зверху, під ним три гілки. */
+    .tree { margin: 16px 0 24px; }
+    .tree .main-job {
+      padding: 18px 22px; background: var(--surface); border: 1px solid var(--accent); border-radius: 10px;
+      max-width: 760px; margin: 0 auto; position: relative;
+    }
+    .tree .main-job .label { color: var(--accent); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tree .main-job p { margin: 4px 0 0; font-size: 17px; }
+    .tree .main-job .meta { margin-top: 6px; font-size: 13px; color: var(--muted); }
+    .tree .stem { width: 1px; height: 24px; background: var(--line); margin: 0 auto; }
+    .tree .branches {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      border-top: 1px solid var(--line); padding-top: 24px; position: relative;
+    }
+    .tree .group h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .job { padding: 10px 14px; margin: 0 0 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
+    .job b { display: block; font-size: 15px; }
+    .job .when { color: var(--muted); }
+    .job.hyp { border-style: dashed; border-color: #6b5530; background: transparent; }
+    .job .meta { margin-top: 4px; font-size: 13px; color: var(--muted); }
+    .group .empty { padding: 10px 14px; border: 1px dashed var(--line); border-radius: 8px; font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+
+    .note { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; max-width: 72ch; }
+    footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 860px) {
+      .tree .branches { grid-template-columns: 1fr; }
+      .persona .cols { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      main { padding: 24px 16px 64px; }
+      h1 { font-size: 26px; }
+      .persona { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Показ — персони і jobs</h1>
+  <p class="lead">Персона, її сценарії і jobs to be done. Зібрано зі спостережень ресерчу 2026-10-29. Джерело тексту —
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/personas.md">personas.md</a> і
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>; спостереження —
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/people.md">research/notes/people.md</a>.</p>
+
+  <ul class="toc">
+    <li><a href="#legend">Як читати</a></li>
+    <li><a href="#personas">1 · Персона</a></li>
+    <li><a href="#scenarios">2 · Сценарії</a></li>
+    <li><a href="#hierarchy">3 · Ієрархія jobs</a></li>
+    <li><a href="#matrix">4 · JTBD-матриця</a></li>
+    <li><a href="#conclusion">5 · Висновок</a></li>
+  </ul>
+
+  <h2 id="legend">Як читати</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Позначка</th><th>Що означає</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag primary">primary</span></td><td>Персона, під яку проєктуємо в першу чергу. Зараз вона єдина</td></tr>
+      <tr><td><span class="q">[?]</span></td><td>Даних у ресерчі немає. Середнє не ставимо</td></tr>
+      <tr><td><span class="tag hyp">гіпотеза</span></td><td>Немає голосу людей: блок спирається лише на слова компаній або бриф. Перш ніж на нього спиратися, треба перевірити</td></tr>
+      <tr><td><span class="ref">n4</span></td><td>Код джерела — веде до таблиці джерел у <a href="research/research.html#refs">research.html</a>. «Сп. N» — спостереження в people.md</td></tr>
+    </tbody>
+  </table></div>
+  <p>Людей поділено <b>за поведінкою</b>: що людина робить зі своїм місяцем, а не скільки їй років.
+    Голос людей — відгуки App Store і демо-відео. Слова компаній (описи, сайти) — не факт про людей.</p>
+
+  <!-- ─────────────── 1 ─────────────── -->
+  <h2 id="personas"><span class="num">1</span>Персона</h2>
+
+  <div class="card persona">
+    <h3>Наталя, перевіряє все сама</h3>
+    <div class="tags"><span class="tag primary">primary</span><span class="tag key">checker</span><span class="tag">єдина персона</span></div>
+    <p>Людина, яка подає показ сама і <b>не вірить, поки не побачить результат</b>. Сама перераховує суму і
+      зіставляє її з попередніми даними. Приходить у вікно подачі, бо інакше нарахують «за середнім», і йде
+      з питанням «а воно точно пройшло?».</p>
+    <p>Тип житла, вік і з якого пристрою подає — <span class="q">[?]</span></p>
+    <div class="cols">
+      <div>
+        <div class="label">Jobs</div>
+        <ul>
+          <li>Подати показ і <b>знати, що його прийнято</b>, — з тими цифрами, які вона ввела. [n4][n6]</li>
+          <li>Побачити суму поруч з показом і зрозуміти, з чого вона складається. [y6]</li>
+          <li>Виправити помилку, якщо ввела зайву цифру, — не листуванням. [y6][n4]</li>
+          <li>Мати історію поданих показів як доказ. [n4]</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">Заспокоює</div>
+        <ul>
+          <li>«Прийнято» замість «передано» і повтор зафіксованих цифр [n4][n6][g1]</li>
+          <li>Попередній показ поруч з полем вводу [n6][y6]</li>
+          <li>Сума одразу і з розшифровкою [y6][w2]</li>
+          <li>Спокійне «помилилися — виправте» і реальна можливість [o3][n2]</li>
+        </ul>
+        <div class="label">Насторожує</div>
+        <ul>
+          <li>Успіх, який виявився неправдою [n4]</li>
+          <li>Збій саме у вікно подачі, без пояснення [y6]</li>
+          <li>Тривожне модальне вікно й канцелярський тон [d1]</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote>«Незрозуміло, чи факт внесення відбувся чи тебе проігнорували»<cite>— відгук про Куб, App Store [n4]</cite></blockquote>
+  </div>
+
+  <h3>Болі в теперішніх способах</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Біль</th><th>Спосіб / канал</th><th>Джерело</th></tr></thead>
+    <tbody>
+      <tr><td>Після подачі — «показник <b>передано</b>», а не «прийнято», і без суми; виправити — лише «завтра»</td><td>Застосунок Куб</td><td>[n6]</td></tr>
+      <tr><td>Застосунок пише «ваші показники передані», хоча це неправда; історії поданих показів немає</td><td>Застосунок Куб</td><td>[n4]</td></tr>
+      <tr><td>Показ і сума — дві окремі форми, адресу треба вводити двічі</td><td>Сайт YASNO: «Показання» → окремо «Оплата»</td><td>[y2][y3]</td></tr>
+      <tr><td>Сума є, а попередніх даних, щоб звірити, — немає</td><td>Застосунок YASNO</td><td>[y6]</td></tr>
+      <tr><td>Зайву цифру не виправити: «квест із листами на коригування»; «не можливо виправити»</td><td>Застосунок YASNO; застосунок Куб</td><td>[y6][n4]</td></tr>
+      <tr><td>У вікно подачі сервер «на регламентних роботах» (три відгуки)</td><td>Застосунок YASNO</td><td>[y6]</td></tr>
+      <tr><td>Подача — через чат-бот, без суми</td><td>Сайт ДТЕК КЕМ</td><td>[d2]</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Чому одна персона, а не три</h3>
+  <p>Спершу персон було три: Наталя, Андрій (кілька адрес) і Софія (подає мимохідь). Андрія і Софію прибрано,
+    а їхні дані перенесено в сценарії Наталі:</p>
+  <ul>
+    <li><b>Дані не розділяють людей.</b> На демо-відео Куба одна людина відкриває не ту адресу, отримує хибне сканування і бачить «передано» [n6].</li>
+    <li><b>У Андрія і Софії не було власних jobs</b> — у матриці лише оцінки з тих jobs, з яких їх зібрано, а в решті <span class="q">[?]</span>.</li>
+    <li><b>Сценарій точніше описує дані.</b> «Кілька адрес» і «швидко з телефона» змінюють функції, а не мету.</li>
+  </ul>
+  <p>Окремих персон варто повернути, лише якщо інтерв'ю покажуть людей з <b>іншою</b> метою — наприклад, хто веде рахунки рідних
+    або лише дивиться, чи сплачено. Зараз це <span class="q">[?]</span></p>
+
+  <h3>Чому primary — Наталя</h3>
+  <ol>
+    <li><b>Найбільше доказів.</b> На цю поведінку спирається більшість голосу людей у ресерчі (Сп. 1, 2, 5, 6) [y6][n4][n6].</li>
+    <li><b>Це прямо обіцянка брифу.</b> «Чи прийняли мій показ?», «Скільки платити?», «Чому стільки?» — дослівно її jobs.</li>
+    <li><b>Її біль — найбільша прогалина ринку.</b> Гіпотези 1, 2, 7 і 8 у research.md закривають саме її.</li>
+  </ol>
+
+  <!-- ─────────────── 2 ─────────────── -->
+  <h2 id="scenarios"><span class="num">2</span>Сценарії Наталі</h2>
+  <p>Не окремі люди, а умови, в яких Наталя виконує ті самі jobs.</p>
+  <div class="cards">
+    <div class="card">
+      <h4>Кілька адрес <span class="tag key">multi-address</span></h4>
+      <p>Веде кілька адрес і перемикається між ними; легко плутає, на якій зараз і який там попередній показ. [n4][n6][n7]</p>
+      <p>Чиї це адреси (свої, батьків, дача) — лише слова компаній [n2][y6]. Скільки людей у сценарії — <span class="q">[?]</span></p>
+      <div class="label">Додається до jobs</div>
+      <ul>
+        <li>Завжди бачити, на якій адресі зараз і який там попередній показ [n4][n6]</li>
+        <li>Бачити борг окремо по кожній адресі [n7]</li>
+        <li>Закрити місяць по всіх адресах за раз <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+        <li>Знати, хто ще вніс показ або сплатив <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+      </ul>
+      <div class="label">Довіра</div>
+      <ul>
+        <li>Заспокоює: адреса крупно на кожному кроці [n4][n6]; борг по кожній адресі [n7]</li>
+        <li>Заспокоює: видно, хто вніс і хто сплатив <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+        <li>Насторожує: показ не на ту адресу без сигналу [n4][n6]</li>
+        <li>Насторожує: повторне введення адреси <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+      </ul>
+      <blockquote>«Не знаю на якій я адресі і не бачу попереднього показника»<cite>— відгук про Куб, App Store [n4]</cite></blockquote>
+    </div>
+    <div class="card">
+      <h4>Швидко, з телефона <span class="tag key">at-meter</span></h4>
+      <p>Показ — дрібна справа між іншими: відкрити й одразу подати. Сердиться, коли подачу сховано, і пробує камеру. [o4][n6]</p>
+      <p>Головні цитати — з Octopus (UK); чи так само в Україні — <span class="q">[?]</span>. Частка подач біля лічильника — <span class="q">[?]</span></p>
+      <div class="label">Додається до jobs</div>
+      <ul>
+        <li>Подати показ першою дією, без пошуку в меню [o4]</li>
+        <li>Не переписувати цифри вручну <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+        <li>Не тримати строк подачі в голові <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+      </ul>
+      <div class="label">Довіра</div>
+      <ul>
+        <li>Заспокоює: розпізнані цифри поруч із фото, з правкою [n6]; подача — головна дія [o4]</li>
+        <li>Заспокоює: легкість і трохи гри — «bit of fun» [o4]</li>
+        <li>Насторожує: фото «вгадало» цифри непомітно <span class="q">[?]</span> <span class="tag hyp">гіпотеза</span></li>
+        <li>Насторожує: шум на першому екрані [y1][n1]</li>
+      </ul>
+      <blockquote>«Submitting a meter reading should be right at the top on the first page»<cite>— відгук про Octopus Energy, App Store UK [o4]</cite></blockquote>
+    </div>
+  </div>
+
+  <!-- ─────────────── 3 ─────────────── -->
+  <h2 id="hierarchy"><span class="num">3</span>Ієрархія jobs</h2>
+  <p>Формат: <b>Коли</b> [ситуація], <b>я хочу</b> [мотивація], <b>щоб</b> [результат]. У формулюваннях немає назв функцій.
+    Related jobs — кроки до main job: немає певності хоча б на одному — місяць не закрито.</p>
+
+  <div class="tree">
+    <div class="main-job">
+      <div class="label">Main job · M</div>
+      <p><b>Коли</b> настає час розрахуватися за світло, <b>я хочу</b> закрити місяць без жодного сумніву,
+        <b>щоб</b> знати: мої цифри зараховано, сума правильна і я нікому нічого не винна.</p>
+      <div class="meta">[n4][n6][y6] · Сп. 1, 5</div>
+    </div>
+    <div class="stem"></div>
+    <div class="branches">
+      <div class="group">
+        <h4>Related</h4>
+        <div class="job"><b>R1 · Цифри, як на лічильнику</b><span class="when">Коли передаю цифри — бути певною, що записано саме те, щоб не платити за зайву цифру.</span><div class="meta">[y6][n6] · Сп. 2, 4</div></div>
+        <div class="job"><b>R2 · Виправити помилку без мороки</b><span class="when">Коли помилилася — виправити сама й одразу, щоб не було переплати чи листування.</span><div class="meta">[y6][n4][n6] · Сп. 2</div></div>
+        <div class="job"><b>R3 · Розуміти суму</b><span class="when">Коли бачу суму — розуміти, з чого вона, і звірити, щоб платити, бо згодна.</span><div class="meta">[y6][y2][y3] · Сп. 5</div></div>
+        <div class="job"><b>R4 · Не переплутати адресу</b><span class="when">Коли веду кілька адрес — розуміти, з якою маю справу, щоб не передати цифри не туди.</span><div class="meta">[n4][n6][n7] · Сп. 3</div></div>
+        <div class="job"><b>R5 · Встигнути з першого разу</b><span class="when">Коли час передати показ — зробити одразу, щоб не отримати «за середнім».</span><div class="meta">[o4][y6][y2] · Сп. 6, 7</div></div>
+      </div>
+      <div class="group">
+        <h4>Emotional</h4>
+        <div class="job"><b>E1 · Не почуватися проігнорованою</b><span class="when">Коли передала показ — відчувати, що мене почули, щоб не перевіряти ще раз.</span><div class="meta">[n4] · Сп. 1</div></div>
+        <div class="job"><b>E2 · Помилка — не загроза</b><span class="when">Коли помилилася — не нервувати й не почуватися винною, щоб спокійно поправити.</span><div class="meta">[y6][n4] · Сп. 2</div></div>
+        <div class="job"><b>E3 · Почуватися в контролі</b><span class="when">Коли плачу — розуміти й контролювати витрати, а не просто отримати рахунок.</span><div class="meta">[y6] · Сп. 5</div></div>
+        <div class="job"><b>E4 · Без тягаря</b><span class="when">Коли передаю показ — щоб було легко і трохи приємно.</span><div class="meta">[o4] · Сп. 8 · одне джерело, UK</div></div>
+      </div>
+      <div class="group">
+        <h4>Social і гіпотези</h4>
+        <div class="empty">Social jobs без джерела: про рідних говорять лише компанії [n2][y6]. Тому всі — у гіпотезах.</div>
+        <div class="job hyp"><b>H1 · social · Бути надійною для рідних <span class="tag hyp">гіпотеза</span></b><span class="when">Коли веду рахунки рідних — щоб вони були певні, що все сплачено.</span><div class="meta"><span class="q">[?]</span> лише слова компанії [n2]</div></div>
+        <div class="job hyp"><b>H2 · social · Бачити, хто що зробив <span class="tag hyp">гіпотеза</span></b><span class="when">Коли за адресою діє ще хтось — бачити, хто що вже зробив.</span><div class="meta"><span class="q">[?]</span> бриф, р. 5</div></div>
+        <div class="job hyp"><b>H3 · Не тримати строк у голові <span class="tag hyp">гіпотеза</span></b><span class="when">Коли кілька справ на місяць — не пропустити строк подачі.</span><div class="meta"><span class="q">[?]</span> лише слова компанії [y6]</div></div>
+        <div class="job hyp"><b>H4 · Не переписувати цифри <span class="tag hyp">гіпотеза</span></b><span class="when">Коли стою біля лічильника — не переписувати цифри вручну.</span><div class="meta"><span class="q">[?]</span> обіцянка Куба [n2], спроба на відео [n6]</div></div>
+        <div class="job hyp"><b>H5 · Знати, коли не буде світла <span class="tag hyp">гіпотеза</span></b><span class="when">Коли кілька адрес — знати відключення на кожній, щоб спланувати день.</span><div class="meta"><span class="q">[?]</span> лише ринок [y4][d4]</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Як гіпотези перевірити</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>На що спирається</th><th>Як перевірити</th></tr></thead>
+    <tbody>
+      <tr><td>H1 <span class="tag hyp">гіпотеза</span></td><td>Лише слова компанії [n2]; <span class="q">[?]</span> чи ведуть люди рахунки рідних насправді</td><td>Інтерв'ю з людьми, які ведуть рахунок батьків (гіпотеза 4 у research.md)</td></tr>
+      <tr><td>H2 <span class="tag hyp">гіпотеза</span></td><td>Бриф, розділ 5; ролей ні в кого не видно [n2][y2] — це факт про ринок, а не про людей</td><td>Інтерв'ю з родинами та парами «орендар — власник»</td></tr>
+      <tr><td>H3 <span class="tag hyp">гіпотеза</span></td><td>Застосунок YASNO заявляє нагадування [y6]. Як часто люди пропускають вікно — <span class="q">[?]</span></td><td>Частка показів, поданих у вікно (метрика брифу, розділ 13)</td></tr>
+      <tr><td>H4 <span class="tag hyp">гіпотеза</span></td><td>Обіцянка Куба [n2]; на відео сканування помиляється [n6]. Що людина хоче саме цього — <span class="q">[?]</span></td><td>Гіпотеза 3 у research.md: частка виправлених показів з камери і вручну</td></tr>
+      <tr><td>H5 <span class="tag hyp">гіпотеза</span></td><td>Відключення — окремий пошук за адресою [y4][d4]. Відгуків людей немає</td><td>Гіпотеза 5 у research.md</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- ─────────────── 4 ─────────────── -->
+  <h2 id="matrix"><span class="num">4</span>JTBD-матриця</h2>
+  <p><b>Важливість (1–3)</b> — сила сигналу з голосу людей: <b>3</b> — два і більше незалежних джерела; <b>2</b> — одне;
+    <b>1</b> — job другорядний; <span class="q">[?]</span> — даних немає. Слова компаній важливість не підвищують.
+    <b>Конкуренти:</b> так · частково · ні · н/д (за логіном, не видно).</p>
+  <div class="table-wrap"><table class="matrix">
+    <thead><tr><th>Job</th><th>Наталя <span class="tag primary">primary</span></th><th>Сценарій</th><th>Функція</th><th>Конкуренти</th></tr></thead>
+    <tbody>
+      <tr><th>M · Закрити місяць без сумніву</th><td class="score"><b>3</b> [n4][n6][y6]</td><td>усі</td><td>Шкала місяця «чекає показу → прийнято → нараховано → сплачено»; «Показ прийнято» + орієнтовна сума (екран 3); одна наступна дія на Головній (екран 1); оплата (екран 4)</td><td><b>ні</b>. Повного ланцюжка немає ні в кого. Куб — «передано», без суми [n6]; YASNO — показ і сума окремо [y2][y3]; ДТЕК, monobank, Octopus — н/д</td></tr>
+      <tr><th>R1 · Цифри, як на лічильнику</th><td class="score"><b>3</b> [y6][n4][n6]</td><td>усі, особливо «з телефона»</td><td>Валідація: не менше за попередній, попередження про стрибок &gt;3×; попередній показ поруч із полем</td><td><b>частково</b>. Куб показує попередній показ, але сканування бреше [n6]; YASNO — «видно лише 3 цифри» [y6]; Octopus заявляє перевірку [o3]</td></tr>
+      <tr><th>R2 · Виправити помилку без мороки</th><td class="score"><b>3</b> [y6][n4][n6]</td><td>усі</td><td>Виправлення показу до кінця вікна подачі</td><td><b>ні / частково</b>. YASNO — листи [y6]; Куб обіцяє [n2], на ділі — «неможливо» [n4] і «завтра» [n6]; Octopus — довідка [o2][o3]</td></tr>
+      <tr><th>R3 · Розуміти суму</th><td class="score"><b>2</b> [y6]</td><td>усі</td><td>Розшифровка суми (екран 4); «Чому стільки» (екран 5)</td><td><b>ні</b>. YASNO — без попередніх даних [y6], окремою формою [y3]; Куб — «48 кубів», без гривень [n6]; ДТЕК — суми немає [d2]</td></tr>
+      <tr><th>R4 · Не переплутати адресу</th><td class="score"><b>3</b> [n4][n6][n7]</td><td>кілька адрес</td><td>Навігація від об'єктів, адреса на кожному статусі й дії (екрани 1, 2)</td><td><b>частково</b>. Куб — перемикач адрес [n7], але люди плутають [n4][n6]; YASNO — один об'єкт за раз [y2]</td></tr>
+      <tr><th>R5 · Встигнути з першого разу</th><td class="score"><b>3</b> [y6][o4]</td><td>усі, особливо «з телефона»</td><td>Внесення показу — головна дія Головної (екрани 1, 3); чернетка при збої (research.md, гіпотеза 8)</td><td><b>ні</b>. YASNO падає у вікно подачі [y6]; Octopus — «hard to find» [o4]; Куб поза вікном — «зараз не час» [n8]</td></tr>
+      <tr><th>E1 · Не почуватися проігнорованою</th><td class="score"><b>3</b> [n4]</td><td>усі</td><td>«Показ прийнято» з повтором цифр, автором і часом (екран 3)</td><td><b>ні</b>. Куб — «передано» [n6] і хибне «передані» [n4]; інші — н/д</td></tr>
+      <tr><th>E2 · Помилка — не загроза</th><td class="score"><b>3</b> [y6][n4]</td><td>усі</td><td>Спокійний тон і «виправити можна до 5 числа» + виправлення (як R2)</td><td><b>частково</b>. Тон людський у Кубі [n2] й Octopus [o3], але виправлення в Кубі не працює [n4]; ДТЕК — тривожний тон [d1]</td></tr>
+      <tr><th>E3 · Почуватися в контролі</th><td class="score"><b>2</b> [y6]</td><td>усі</td><td>Розшифровка (екран 4); «Чому стільки» (екран 5); Історія (екран 7)</td><td><b>ні</b>. Попередніх даних немає [y6]; у Кубі немає історії показів [n4]</td></tr>
+      <tr><th>E4 · Без тягаря</th><td class="score"><b>2</b> [o4]</td><td>з телефона</td><td>Функції немає. «Колесо фортуни» відкинуто як шум на екрані «прийнято + сума»</td><td><b>так</b> — Octopus, «колесо» [o5][o4]</td></tr>
+      <tr class="hyp-row"><th>H1 · social · бути надійною для рідних <span class="tag hyp">гіпотеза</span></th><td class="score"><span class="q">[?]</span></td><td>кілька адрес</td><td>Доступ: ролі, запрошення (екран 8); «Сплатити все»</td><td><b>частково</b>. Куб — рахунки рідних, ролей немає [n2]</td></tr>
+      <tr class="hyp-row"><th>H2 · social · бачити, хто що зробив <span class="tag hyp">гіпотеза</span></th><td class="score"><span class="q">[?]</span></td><td>кілька адрес</td><td>Підпис «Внесла Марта, 3 жовтня, за фото» і конфлікт двох показів</td><td><b>ні</b>. Ролей і авторства не видно без входу [n2][y2]</td></tr>
+      <tr class="hyp-row"><th>H3 · не тримати строк у голові <span class="tag hyp">гіпотеза</span></th><td class="score"><span class="q">[?]</span></td><td>з телефона</td><td>Налаштування сповіщень по об'єктах (екран 9)</td><td><b>так (заявлено)</b>. YASNO — нагадування [y6]</td></tr>
+      <tr class="hyp-row"><th>H4 · не переписувати цифри <span class="tag hyp">гіпотеза</span></th><td class="score"><span class="q">[?]</span></td><td>з телефона</td><td>Фото з розпізнаванням і підтвердженням цифр</td><td><b>частково</b>. Лише Куб (газ), і помиляється [n2][n6]; в електриці — ні [y2][y6][d2]</td></tr>
+      <tr class="hyp-row"><th>H5 · знати, коли не буде світла <span class="tag hyp">гіпотеза</span></th><td class="score"><span class="q">[?]</span></td><td>кілька адрес</td><td>Відключення: черга, графік, планові роботи (екран 6)</td><td><b>частково</b>. YASNO, ДТЕК — пошук за адресою, не прив'язаний до об'єкта [y4][d4]</td></tr>
+    </tbody>
+  </table></div>
+  <p><span class="q">[?]</span> лишився тільки в гіпотезах: для них немає голосу людей.</p>
+
+  <!-- ─────────────── 5 ─────────────── -->
+  <h2 id="conclusion"><span class="num">5</span>Висновок</h2>
+  <h3>Ядро MVP — 3 jobs</h3>
+  <p>Критерій: важливість <b>3</b> для Наталі, а конкуренти job <b>не виконують</b>.</p>
+  <div class="cards">
+    <div class="card"><h4>M + E1 · Закрити місяць без сумніву</h4><p>«Показ прийнято» з повтором цифр, автором і орієнтовною сумою плюс шкала місяця. Повного ланцюжка немає ні в кого [n6][n4].</p></div>
+    <div class="card"><h4>R2 · Виправити помилку без мороки</h4><p>Виправлення показу до кінця вікна. У YASNO — листи [y6], у Кубі обіцянка не виконується [n4][n6].</p></div>
+    <div class="card"><h4>R5 · Встигнути з першого разу</h4><p>Внесення показу — головна дія Головної, при збої — чернетка «ще не надіслано». В прототипі — сценарій «сервер недоступний» [y6][o4][n8].</p></div>
+  </div>
+  <p>Наступні в черзі — важливість 3, але конкуренти виконують частково: <b>R1</b> цифри, як на лічильнику [o3][y6][n6] і <b>R4</b> не переплутати адресу [n7][n4][n6].</p>
+
+  <h3>Функції-кандидати на видалення</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Функція</th><th>Де в брифі</th><th>Чому кандидат</th></tr></thead>
+    <tbody>
+      <tr><td>Автоплатіж з лімітом суми</td><td>р. 7</td><td>Немає job про оплату без участі людини. H3 — про строк подачі показу, а не оплати</td></tr>
+      <tr><td>Часткова оплата / оплата наперед</td><td>р. 7</td><td>Немає job; у ресерчі про це нічого</td></tr>
+      <tr><td>Експорт історії платежів у PDF</td><td>р. 7</td><td>Немає job; доказ, якого шукає Наталя, — про показ, а не про платіж (E1)</td></tr>
+      <tr><td>Сесії на кількох пристроях, «вийти з усіх»</td><td>р. 6</td><td>Немає job; у ресерчі про це нічого</td></tr>
+      <tr><td>Додавання об'єкта через BankID</td><td>р. 6</td><td>Немає job; особового рахунку з підтвердженням достатньо</td></tr>
+      <tr><td>Роль «Спостерігач»</td><td>р. 5</td><td>Людей, які лише дивляться, у ресерчі немає</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Функції, що тримаються лише на гіпотезах H1–H5 — Доступ і ролі, «Сплатити все», підпис автора, Сповіщення, Фото, Відключення, —
+    видаляти не треба, але й до ядра брати рано. Фото і багато людей — зафіксовані рішення брифу (рішення 2 і 3): тут бриф і ресерч розходяться, рішення за PM.</p>
+
+  <footer>Повні тексти з усіма джерелами й скрінами —
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/personas.md">personas.md</a> і
+    <a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>. Коди джерел ведуть у
+    <a href="research/research.html#refs">research.html</a>.</footer>
+</main>
+<script>
+  // [y2] у тексті → посилання-бейдж на рядок таблиці джерел у research.html.
+  (function () {
+    var re = /\[([a-z]{1,2}\d)\]/g;
+    var walker = document.createTreeWalker(document.querySelector("main"), NodeFilter.SHOW_TEXT);
+    var nodes = [];
+    var has = /\[[a-z]{1,2}\d\]/;
+    while (walker.nextNode()) if (has.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      var text = node.nodeValue, last = 0, m;
+      re.lastIndex = 0;
+      while ((m = re.exec(text))) {
+        frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        var a = document.createElement("a");
+        a.className = "ref";
+        a.href = "research/research.html#s-" + m[1];
+        a.textContent = m[1];
+        frag.appendChild(a);
+        last = re.lastIndex;
+      }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  })();
+</script>
+</body>
+</html>

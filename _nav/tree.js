@@ -14,4 +14,7 @@ window.NAV_TREE = [
   { branch: "Ресерч", children: [
     { title: "Ресерч: зведення", href: "research/research.html" },
   ] },
+  { branch: "Персони", children: [
+    { title: "Персони і jobs", href: "personas.html" },
+  ] },
 ];
