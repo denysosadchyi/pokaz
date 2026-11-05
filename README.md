@@ -37,7 +37,7 @@
 | [_nav/tree.js](_nav/tree.js) | Дерево сторінок — реєстр для навігатора |
 | [_nav/nav.js](_nav/nav.js) · [_nav/nav.css](_nav/nav.css) | Скрипт і стилі бокового меню |
 | [research/](research/) | Дослідження (див. розділ «Ресерч» вище) |
-| [personas.md](personas.md) | Реєстр персон: primary Наталя і її сценарії |
+| [personas.md](personas.md) | Реєстр персон: primary Наталя, secondary Андрій, сценарій «з телефона» |
 | [jtbd.md](jtbd.md) | Jobs to be done: main job, ієрархія, JTBD-матриця, гіпотези |
 | [research/notes/personas-review.md](research/notes/personas-review.md) | Сувора критика персон і jobs: статус кожного твердження, ризики, 3 питання |
 | [research/notes/personas-doresearch.md](research/notes/personas-doresearch.md) | Докази доресерчу: відгуки Google Play про показ в електриці |
