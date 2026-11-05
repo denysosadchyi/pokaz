@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="uk" data-root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Показ — структура (IA)</title>
+  <link rel="stylesheet" href="_nav/nav.css">
+  <script src="_nav/tree.js"></script>
+  <script src="_nav/nav.js" defer></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111214;
+      --surface: #191a1d;
+      --surface-2: #202125;
+      --line: #2c2d32;
+      --fg: #e6e4df;
+      --muted: #9a9890;
+      --accent: #d9c7a3;
+      --warn: #e2b46a;
+      --ok: #9cc4a0;
+    }
+    .repo-nav {
+      --nav-bg: #161719; --nav-fg: #ccc; --nav-muted: #777; --nav-line: #2a2b2f;
+      --nav-hover: #222327; --nav-current-bg: #2e2f34; --nav-current-fg: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { max-width: 1120px; padding: 40px 32px 96px; }
+    h1 { margin: 0 0 4px; font-size: 32px; letter-spacing: -0.01em; }
+    h2 { margin: 64px 0 8px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 24px; }
+    h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
+    h3 { margin: 40px 0 8px; font-size: 18px; }
+    h4 { margin: 24px 0 8px; font-size: 16px; }
+    p, ul, ol { max-width: 72ch; }
+    a { color: var(--accent); }
+    code { font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); overflow-wrap: anywhere; }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; max-width: none; }
+    .toc a { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--fg); text-decoration: none; font-size: 14px; }
+    .toc a:hover { background: var(--surface-2); }
+    .table-wrap { overflow-x: auto; margin: 12px 0 24px; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    thead th { background: var(--surface-2); font-weight: 600; }
+    tbody tr:last-child > * { border-bottom: 0; }
+    .ref { display: inline-block; padding: 0 5px; margin: 0 1px; border-radius: 4px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-decoration: none; vertical-align: 1px; }
+    .ref:hover { color: var(--fg); }
+    .q { display: inline-block; padding: 0 6px; border-radius: 4px; border: 1px solid #6b5530; background: #2a2318; color: var(--warn); font: 600 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; vertical-align: 1px; }
+    .tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; vertical-align: 2px; }
+    .tag.primary { color: var(--bg); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+    .tag.orphan { display: block; width: fit-content; margin-top: 4px; color: #ffd9dd; border-color: #b06a70; background: #3a2326; font-weight: 600; }
+    .note { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; max-width: 72ch; }
+    footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
+
+    /* Дерево sitemap */
+    .ia-tree, .ia-tree ul { list-style: none; margin: 0; padding: 0; max-width: none; }
+    .ia-tree { margin: 20px 0 24px; }
+    .ia-tree ul { margin-left: 11px; padding-left: 20px; border-left: 1px solid var(--line); }
+    .ia-tree li { position: relative; }
+    .ia-tree ul > li::before { content: ""; position: absolute; left: -20px; top: 20px; width: 16px; border-top: 1px solid var(--line); }
+    .ia-tree ul > li:last-child::after { content: ""; position: absolute; left: -21px; top: 21px; bottom: 0; width: 1px; background: var(--bg); }
+    .node-root { display: inline-block; padding: 4px 14px; border: 1px solid var(--accent); border-radius: 8px; font-weight: 600; }
+    .node-group { display: block; padding: 8px 0 4px; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .ia-group { padding-top: 10px; }
+    .ia-screen { padding: 4px 0; }
+    .screen-card { padding: 10px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+    .screen-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+    .screen-head .file { margin-left: auto; }
+    .jobs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 6px; }
+    .jobs-label { color: var(--muted); font-size: 12px; margin-right: 4px; }
+    .job-chip { display: inline-flex; align-items: center; min-width: 28px; justify-content: center; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface-2); color: var(--fg); font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; text-decoration: none; }
+    .job-chip:hover { border-color: var(--accent); }
+    .job-chip.hyp { border: 1px dashed #8a6d3b; color: var(--warn); }
+
+    /* Діаграми: у фолбеку без CDN лишається текст Mermaid */
+    .diagram-bar { display: flex; justify-content: flex-end; margin: 16px 0 -8px; }
+    .diagram-bar button { min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); color: var(--fg); font: inherit; font-size: 14px; cursor: pointer; }
+    .diagram-bar button:hover { border-color: var(--accent); }
+    .diagram.fit { max-height: none; }
+    .diagram.fit svg { width: 100%; height: auto; }
+    .diagram { overflow: auto; max-height: 80vh; margin: 16px 0; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .diagram:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .mermaid { margin: 0; width: fit-content; min-width: 100%; }
+    .diagram.fit .mermaid { width: 100%; }
+    .mermaid svg { display: block; margin: 0 auto; }
+    .mermaid:not([data-processed]) { max-height: 240px; overflow: auto; color: var(--muted); font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .flow-notes { margin-bottom: 40px; }
+    .flow-notes p { margin: 16px 0 4px; }
+    .flow-notes ul, .flow-notes ol { margin: 4px 0; padding-left: 24px; }
+    .mermaid-error { color: var(--warn); }
+
+    /* Матриця */
+    table.trace { min-width: 940px; }
+    table.trace th:first-child { min-width: 230px; position: sticky; left: 0; z-index: 1; background: var(--surface); }
+    table.trace thead th { font-size: 13px; vertical-align: bottom; line-height: 1.3; min-width: 84px; }
+    table.trace thead th:first-child { background: var(--surface-2); }
+    table.trace tbody th { font-weight: 400; }
+    table.trace td { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+    table.trace td, table.trace thead th:not(:first-child) { border-left: 1px solid var(--line); }
+    table.trace .orphan-col { background: #3a2326; }
+    table.trace thead th.orphan-col { background: #3a2326; }
+    table.trace .orphan-row > td { background: #3a2326; }
+    table.trace tr.orphan-row > th:first-child { background: #3a2326; }
+    table.trace td.bound { background: #1e3024; color: var(--ok); box-shadow: inset 0 0 0 1px #6fa37a; }
+
+    @media (max-width: 720px) {
+      main { padding: 24px 16px 64px; }
+      h1 { font-size: 26px; }
+      .ia-tree ul { margin-left: 6px; padding-left: 12px; }
+      .ia-tree ul > li::before { left: -12px; width: 9px; }
+      .ia-tree ul > li:last-child::after { left: -13px; }
+      .screen-head .file { margin-left: 0; width: 100%; }
+      table.trace th:first-child { min-width: 150px; max-width: 150px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Структура продукту</h1>
+  <p class="lead">Знімок IA для перегляду: 9 екранів, 4 flows, 17 jobs. Джерела: <a href="https://github.com/denysosadchyi/pokaz/blob/main/sitemap.md">sitemap.md</a> і <a href="https://github.com/denysosadchyi/pokaz/blob/main/flows.md">flows.md</a>. Якщо щось розходиться, правильні саме вони.</p>
+  <ul class="toc">
+    <li><a href="#map">Sitemap</a></li>
+    <li><a href="#flows">Flows</a></li>
+    <li><a href="#flow-m">M</a></li>
+    <li><a href="#flow-r6">R6</a></li>
+    <li><a href="#flow-r2">R2</a></li>
+    <li><a href="#flow-r7">R7</a></li>
+    <li><a href="#trace">Трасування</a></li>
+  </ul>
+
+  <h2 id="map"><span class="num">1</span>Sitemap</h2>
+  <p>Біля кожного екрана — файл і jobs, у закритті яких він бере участь. Назву job показує підказка, а всі назви є в <a href="#trace">матриці</a>. Пунктирна рамка — job-гіпотеза.</p>
+  <ul class="ia-tree"><li class="root"><span class="node-root">Показ</span><ul><li class="ia-group"><span class="node-group">Місяць</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Мій місяць</b><span class="tag primary">головний</span><span class="tag">глобальний</span><code class="file">month.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#main-job" title="Закрити місяць без сумніву">M</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r2-виправити-помилку-без-мороки" title="Виправити помилку без мороки">R2</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r4-не-переплутати-адресу" title="Не переплутати адресу">R4</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r5-встигнути-з-першого-разу" title="Встигнути з першого разу">R5</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e1-не-почуватися-проігнорованою" title="Не почуватися проігнорованою">E1</a><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="social: бути надійним для рідних">H1</a><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="Не тримати строк у голові">H3</a></div></div></li><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Історія</b><span class="tag">глобальний</span><code class="file">history.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#main-job" title="Закрити місяць без сумніву">M</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r2-виправити-помилку-без-мороки" title="Виправити помилку без мороки">R2</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r4-не-переплутати-адресу" title="Не переплутати адресу">R4</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r6-знати-звідки-взялися-цифри" title="Знати, звідки взялися цифри">R6</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e1-не-почуватися-проігнорованою" title="Не почуватися проігнорованою">E1</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e3-почуватися-в-контролі" title="Почуватися в контролі">E3</a><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="social: бачити, хто що зробив">H2</a></div></div></li></ul></li><li class="ia-group"><span class="node-group">Показ</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Подати показ</b><span class="tag">контекстний</span><code class="file">reading.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#main-job" title="Закрити місяць без сумніву">M</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r1-цифри-як-на-лічильнику" title="Цифри, як на лічильнику">R1</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r2-виправити-помилку-без-мороки" title="Виправити помилку без мороки">R2</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r4-не-переплутати-адресу" title="Не переплутати адресу">R4</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r5-встигнути-з-першого-разу" title="Встигнути з першого разу">R5</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r6-знати-звідки-взялися-цифри" title="Знати, звідки взялися цифри">R6</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e1-не-почуватися-проігнорованою" title="Не почуватися проігнорованою">E1</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e2-помилка--не-загроза" title="Помилка — не загроза">E2</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e4-без-тягаря" title="Без тягаря">E4</a><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="Не переписувати цифри">H4</a></div></div></li></ul></li><li class="ia-group"><span class="node-group">Сума</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Сума й оплата</b><span class="tag">глобальний</span><code class="file">bill.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#main-job" title="Закрити місяць без сумніву">M</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r3-розуміти-суму" title="Розуміти суму">R3</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r4-не-переплутати-адресу" title="Не переплутати адресу">R4</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r6-знати-звідки-взялися-цифри" title="Знати, звідки взялися цифри">R6</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#e3-почуватися-в-контролі" title="Почуватися в контролі">E3</a></div></div></li></ul></li><li class="ia-group"><span class="node-group">Рахунки</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Особовий рахунок</b><span class="tag">контекстний</span><code class="file">account.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r4-не-переплутати-адресу" title="Не переплутати адресу">R4</a><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a></div></div></li><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Додати рахунок</b><span class="tag">глибокий</span><code class="file">add-account.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a></div></div></li><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Учасники</b><span class="q">[?]</span><span class="tag">глибокий</span><code class="file">people.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="social: бути надійним для рідних">H1</a><a class="job-chip hyp" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#гіпотези" title="social: бачити, хто що зробив">H2</a></div></div></li></ul></li><li class="ia-group"><span class="node-group">Відключення</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Коли не буде світла</b><span class="tag">глобальний</span><code class="file">outages.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r8-знати-коли-не-буде-світла" title="Знати, коли не буде світла">R8</a></div></div></li></ul></li><li class="ia-group"><span class="node-group">Службове</span><ul><li class="ia-screen"><div class="screen-card"><div class="screen-head"><b>Вхід</b><span class="tag">контекстний</span><code class="file">login.html</code></div><div class="jobs"><span class="jobs-label">job</span><a class="job-chip" href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок" title="Вести чужий рахунок">R7</a></div></div></li></ul></li></ul></li></ul>
+
+  <h2 id="flows"><span class="num">2</span>Flows</h2>
+  <p>Екрани — з реєстру <a href="https://github.com/denysosadchyi/pokaz/blob/main/sitemap.md">sitemap.md</a>, статуси — з його розділу «Сутності», jobs — з <a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>. Персони й обставини — з <a href="personas.html">personas.md</a>. Коди джерел (<code>[t1]</code>) — з <a href="research/research.html">research/research.md</a>.</p>
+  <h3>Як читати</h3>
+  <div class="table-wrap"><table><thead><tr><th>Вузол</th><th>Форма</th><th>Що це</th></tr></thead><tbody><tr><td>Екран</td><td><code>[Назва]</code>, прямокутник</td><td>Назва дослівно з реєстру екранів. Той самий екран може стояти кілька разів, якщо людина туди повертається</td></tr><tr><td>Розвилка</td><td><code>{питання?}</code>, ромб</td><td>Дані можуть не прийти, введення може бути хибним або дія може не пройти</td></tr><tr><td>Стан</td><td><code>("...")</code>, заокруглений</td><td>Стан екрана, що стоїть перед ним. Підпис починається з типу: <code>empty</code>, <code>error</code>, <code>loading</code>, <code>стан</code>, <code>успіх кроку</code></td></tr><tr><td>Перехід</td><td><code>("перехід: ...")</code>, заокруглений</td><td>Далі читати інший flow</td></tr><tr><td>Кінець</td><td><code>(["..."])</code>, овал</td><td><code>успіх</code> або <code>тупик</code>: людина застрягла і продукт зараз не дає їй виходу</td></tr></tbody></table></div>
+<p>Тип кінця й стану написано словом, тож колір лише допомагає. <span class="q">[?]</span> означає те саме, що в <a href="https://github.com/denysosadchyi/pokaz/blob/main/sitemap.md">sitemap.md</a>: це припущення.</p>
+  <h3>Чому ці jobs</h3>
+  <p><b>Main job M</b> — обов'язковий. До нього обрано три related jobs:</p>
+<div class="table-wrap"><table><thead><tr><th>Job</th><th>Чому</th><th>Сигнал</th></tr></thead><tbody><tr><td><b>R6</b> Знати, звідки взялися цифри</td><td><b>Найризикованіший для довіри.</b> Людина платить за те, чого не споживала, і не може це змінити. Належить до ядра MVP разом із M</td><td>32 відгуки в доресерчі; важливість 3; конкуренти не виконують</td></tr><tr><td><b>R2</b> Виправити помилку без мороки</td><td><b>Найчастіша помилка на шляху M.</b> Зайву цифру людина робить сама. Теж у ядрі MVP</td><td>Важливість 3, <a class="ref" href="research/research.html#s-y6">y6</a><a class="ref" href="research/research.html#s-n4">n4</a><a class="ref" href="research/research.html#s-n6">n6</a>; конкуренти не виконують</td></tr><tr><td><b>R7</b> Вести чужий рахунок</td><td><b>Найризикованіший для Андрія.</b> Якщо він не дістався до рахунку, місяць не почнеться взагалі</td><td>Важливість 3 для secondary, <a class="ref" href="research/research.html#s-e1">e1</a><a class="ref" href="research/research.html#s-e2">e2</a><a class="ref" href="research/research.html#s-t1">t1</a></td></tr></tbody></table></div>
+<p>Частота тут лише орієнтовна: лічильники відгуків — нижня межа без знаменника (<a href="research/research.html">research.md</a>, «Межі»).</p>
+<p><b>Чому немає окремого flow для R5 і R1.</b> Вони вже всередині M: відмова, збій сервісу, стрибок і нечітке фото є його розвилками. <b>R3</b> теж там: звірка суми на «Сума й оплата». <b>R4</b> і <b>R8</b> важливі, але помилка в них не блокує місяць: R4 уже закрито правилами перемикача, а R8 — це перегляд без дій.</p>
+  <h3 id="flow-m">M. Закрити місяць без сумніву</h3>
+<p><a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#main-job">Main job</a>. <b>Персона:</b> Наталя (<code>checker</code>, primary). <b>Обставини:</b> сценарій <code>at-meter</code>: телефон, вікно подачі, показ — дрібна справа між іншими; наступного дня перевіряє, чи показ на місці. Сесія активна. Flow охоплює два заходи: подачу й оплату.</p>
+<div class="diagram" tabindex="0" role="region" aria-label="Діаграма: M. Закрити місяць без сумніву. Словесний опис — нижче."><pre class="mermaid">flowchart TD
+    home[Мій місяць] --&gt; loadHome(&quot;loading: завантажуємо місяць&quot;)
+    loadHome --&gt; dData{&quot;Дані місяця прийшли?&quot;}
+    dData --&gt;|ні| errHome(&quot;error: не вдалося завантажити, є кнопка «Повторити»&quot;)
+    errHome --&gt; dRetry{&quot;Повтор вдався?&quot;}
+    dRetry --&gt;|ні| deadService([&quot;тупик: сервіс недоступний, лишається прийти пізніше&quot;])
+    dRetry --&gt;|так| dAccount
+    dData --&gt;|так| dAccount{&quot;Особовий рахунок уже є?&quot;}
+    dAccount --&gt;|ні| emptyHome(&quot;empty: рахунків ще немає&quot;)
+    emptyHome --&gt; add[Додати рахунок]
+    add --&gt; dAdded{&quot;Рахунок підключено?&quot;}
+    dAdded --&gt;|ні| linkR7(&quot;перехід: flow R7&quot;)
+    dAdded --&gt;|так| dDone
+    dAccount --&gt;|так| dDone{&quot;Показ цього місяця вже прийнято?&quot;}
+    dDone --&gt;|так| wait
+    dDone --&gt;|ні| dWindow{&quot;Вікно подачі відкрите?&quot;}
+    dWindow --&gt;|ні| dMissed{&quot;Вікно вже минуло?&quot;}
+    dMissed --&gt;|ні| deadEarly([&quot;тупик: подати ще не можна, показуємо дату відкриття&quot;])
+    dMissed --&gt;|так| avg(&quot;стан: «нараховано за середнім», показу не було&quot;)
+    avg --&gt; loadBill
+
+    dWindow --&gt;|так| reading[Подати показ]
+    reading --&gt; dPrev{&quot;Попередній показ є?&quot;}
+    dPrev --&gt;|ні| emptyPrev(&quot;empty: попереднього показу ще немає, звірити ні з чим&quot;)
+    dPrev --&gt;|так| fields(&quot;стан: порожні поля, поруч попередній показ&quot;)
+    emptyPrev --&gt; dMethod
+    fields --&gt; dMethod{&quot;Подає за фото? [?]&quot;}
+    dMethod --&gt;|так| loadPhoto(&quot;loading: розпізнаємо цифри&quot;)
+    loadPhoto --&gt; dPhoto{&quot;Цифри розпізнано чітко?&quot;}
+    dPhoto --&gt;|ні| errPhoto(&quot;error: нечітке фото, переходимо до ручних полів&quot;)
+    errPhoto --&gt; manual
+    dPhoto --&gt;|так| photoOk(&quot;стан: цифри з фото в полях, поруч фото, можна поправити&quot;)
+    photoOk --&gt; dLow
+    dMethod --&gt;|ні| manual(&quot;стан: вводить цифри вручну&quot;)
+    manual --&gt; dLow{&quot;Цифри не менші за попередній показ?&quot;}
+    dLow --&gt;|ні| errLow(&quot;error: менше за попередній показ&quot;)
+    errLow --&gt; dOwn{&quot;Помилилася у своїх цифрах?&quot;}
+    dOwn --&gt;|так| manual
+    dOwn --&gt;|ні| deadLow([&quot;тупик: попередній показ хибний, свої цифри форма не приймає, далі flow R6&quot;])
+    dLow --&gt;|так| dJump{&quot;Стрибок понад 3× від середнього?&quot;}
+    dJump --&gt;|так| warn(&quot;стан: схоже на зайву цифру, перевірте&quot;)
+    warn --&gt; dSure{&quot;Цифри правильні?&quot;}
+    dSure --&gt;|ні| manual
+    dSure --&gt;|так| send
+    dJump --&gt;|ні| send(&quot;loading: надсилаємо показ&quot;)
+    send --&gt; dServer{&quot;Сервіс відповів?&quot;}
+    dServer --&gt;|ні| draft(&quot;error: сервіс недоступний, чернетка «ще не надіслано» [?]&quot;)
+    draft --&gt; dBack{&quot;Сервіс ожив до кінця вікна?&quot;}
+    dBack --&gt;|так| send
+    dBack --&gt;|ні| avg
+    dServer --&gt;|так| dAccepted{&quot;Показ прийнято?&quot;}
+    dAccepted --&gt;|ні| rejected(&quot;error: «відхилено», причина людською мовою&quot;)
+    rejected --&gt; manual
+    dAccepted --&gt;|так| accepted(&quot;успіх кроку: «прийнято», цифри, час, орієнтовна сума&quot;)
+
+    accepted --&gt; dMistake{&quot;Помітила помилку в цифрах?&quot;}
+    dMistake --&gt;|так| linkR2(&quot;перехід: flow R2&quot;)
+    dMistake --&gt;|ні| history[Історія]
+    history --&gt; dKept{&quot;Наступного дня показ на місці?&quot;}
+    dKept --&gt;|ні| errGone(&quot;error: показу немає, пояснюємо причину&quot;)
+    errGone --&gt; reading
+    dKept --&gt;|так| wait(&quot;loading: чекаємо нарахування, показуємо дату&quot;)
+    wait --&gt; dCalc{&quot;Нарахування прийшло в обіцяну дату?&quot;}
+    dCalc --&gt;|ні| errLate(&quot;error: затримка, показуємо нову дату&quot;)
+    errLate --&gt; wait
+    dCalc --&gt;|так| homeBill[Мій місяць]
+    homeBill --&gt; dBalance{&quot;Є сума до сплати?&quot;}
+    dBalance --&gt;|ні| okNoPay([&quot;успіх: місяць закрито без оплати, «без боргу» або «переплата»&quot;])
+    dBalance --&gt;|так| bill[Сума й оплата]
+    bill --&gt; loadBill(&quot;loading: завантажуємо розшифровку&quot;)
+    loadBill --&gt; dBreak{&quot;Розшифровка прийшла?&quot;}
+    dBreak --&gt;|ні| errBill(&quot;error: не вдалося завантажити суму, є кнопка «Повторити»&quot;)
+    errBill --&gt; loadBill
+    dBreak --&gt;|так| dBasis{&quot;Пораховано за моїм показом?&quot;}
+    dBasis --&gt;|ні| linkR6(&quot;перехід: flow R6&quot;)
+    dBasis --&gt;|так| dAgree{&quot;Сума збігається з моїм розрахунком?&quot;}
+    dAgree --&gt;|ні| deadDisagree([&quot;тупик: не згодна з сумою, у V1 немає кому написати&quot;])
+    dAgree --&gt;|так| pay(&quot;loading: проводимо платіж&quot;)
+    pay --&gt; dBank{&quot;Банк відповів одразу?&quot;}
+    dBank --&gt;|ні| processing(&quot;loading: «в обробці» [?]&quot;)
+    processing --&gt; dPaid
+    dBank --&gt;|так| dPaid{&quot;Платіж пройшов?&quot;}
+    dPaid --&gt;|ні| errPay(&quot;error: «не пройшов» [?], гроші не списано&quot;)
+    errPay --&gt; dRetryPay{&quot;Спробує ще раз?&quot;}
+    dRetryPay --&gt;|так| pay
+    dRetryPay --&gt;|ні| deadPay([&quot;тупик: борг лишається, далі «прострочено»&quot;])
+    dPaid --&gt;|так| paid(&quot;успіх кроку: «сплачено», квитанція&quot;)
+    paid --&gt; homeDone[Мій місяць]
+    homeDone --&gt; okClosed([&quot;успіх: місяць закрито, цифри зараховано, сума звірена, нічого не винна&quot;])
+
+    classDef screen fill:#202125,stroke:#d9c7a3,stroke-width:2px,color:#e6e4df
+    classDef decision fill:#2a2318,stroke:#8a6d3b,color:#e6e4df
+    classDef state fill:#26272b,stroke:#5c5d64,color:#e6e4df
+    classDef bad fill:#3a2326,stroke:#b06a70,color:#e6e4df
+    classDef good fill:#1e3024,stroke:#6fa37a,stroke-width:2px,color:#e6e4df
+    classDef dead fill:#4a1f27,stroke:#e07a85,stroke-width:3px,color:#fff
+    class home,add,reading,history,homeBill,bill,homeDone screen
+    class dData,dRetry,dAccount,dAdded,dDone,dWindow,dMissed,dPrev,dMethod,dPhoto,dLow,dOwn,dJump,dSure,dServer,dBack,dAccepted,dMistake,dKept,dCalc,dBalance,dBreak,dBasis,dAgree,dBank,dPaid,dRetryPay decision
+    class loadHome,emptyHome,avg,emptyPrev,fields,loadPhoto,photoOk,manual,warn,send,wait,loadBill,pay,processing,linkR2,linkR6,linkR7 state
+    class errHome,errPhoto,errLow,draft,rejected,errGone,errLate,errBill,errPay bad
+    class accepted,paid,okNoPay,okClosed good
+    class deadService,deadEarly,deadLow,deadDisagree,deadPay dead
+</pre></div>
+<div class="flow-notes"><p><b>Розвилки</b></p>
+<ol><li><b>Дані місяця прийшли?</b> Збій зовнішнього сервісу; повтор або тупик.</li><li><b>Особовий рахунок уже є?</b> Перший захід веде на «Додати рахунок».</li><li><b>Показ цього місяця вже прийнято?</b> Якщо так, людина вже на другому заході, одразу до нарахування.</li><li><b>Вікно подачі відкрите? Вікно вже минуло?</b> Рано — тупик із датою. Пізно — «нараховано за середнім».</li><li><b>Попередній показ є?</b> Для нового рахунку звірити нема з чим.</li><li><b>Подає за фото?</b> <span class="q">[?]</span> (H4). <b>Цифри розпізнано чітко?</b> Якщо ні, ручні поля.</li><li><b>Цифри не менші за попередній? Помилилася у своїх?</b> Правило брифу. Якщо помилка не її, це тупик.</li><li><b>Стрибок понад 3×? Цифри правильні?</b> Попередження, не блокування.</li><li><b>Сервіс відповів? Сервіс ожив до кінця вікна?</b> Збій саме у вікно подачі <a class="ref" href="research/research.html#s-y6">y6</a>.</li><li><b>Показ прийнято?</b> Відмова завжди з причиною <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Помітила помилку?</b> Веде у flow R2.</li><li><b>Наступного дня показ на місці?</b> Її звичка перевіряти <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Нарахування прийшло в обіцяну дату?</b> Затримка не лишає людину без дати.</li><li><b>Є сума до сплати?</b> Без боргу чи з переплатою місяць закривається без платежу (питання 4 у sitemap).</li><li><b>Розшифровка прийшла? Пораховано за моїм показом? Сума збігається?</b> Три сумніви R3 і R6 перед оплатою.</li><li><b>Банк відповів одразу? Платіж пройшов? Спробує ще раз?</b> Збій зовнішнього сервісу.</li></ol>
+<p><b>Стани</b></p>
+<ul><li><b>empty:</b> рахунків ще немає · попереднього показу ще немає.</li><li><b>error:</b> не завантажено місяць · нечітке фото · менше за попередній показ · сервіс недоступний, чернетка <span class="q">[?]</span> · «відхилено» з причиною · показу немає наступного дня · затримка нарахування · не завантажено суму · «не пройшов» <span class="q">[?]</span>.</li><li><b>loading:</b> завантаження місяця · розпізнавання цифр · надсилання показу · очікування нарахування · завантаження розшифровки · проведення платежу · «в обробці» <span class="q">[?]</span>.</li><li><b>Інші:</b> порожні поля · цифри з фото · ручне введення · попередження про стрибок · «нараховано за середнім» · успіхи кроків «прийнято» і «сплачено».</li></ul>
+<p><b>Кінці</b></p>
+<ul><li><b>Успіх:</b> місяць закрито після оплати · місяць закрито без оплати.</li><li><b>Тупики:</b><ul><li>сервіс недоступний: лишається прийти пізніше;</li><li>вікно ще не відкрите: подати не можна (питання 3 у sitemap);</li><li>попередній показ хибний: свої цифри форма не приймає (питання до PM у jtbd.md);</li><li>не згодна із сумою: чату з підтримкою немає у V1 (бриф, р. 8);</li><li>платіж не пройшов і людина не повторює: борг лишається.</li></ul></li></ul></div><h3 id="flow-r6">R6. Знати, звідки взялися цифри</h3>
+<p><a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r6-знати-звідки-взялися-цифри">Job R6</a>. <b>Персона:</b> Наталя, обставини ті самі. <b>Початок:</b> настало нарахування, і вона бачить не те, що чекала.</p>
+<div class="diagram" tabindex="0" role="region" aria-label="Діаграма: R6. Знати, звідки взялися цифри. Словесний опис — нижче."><pre class="mermaid">flowchart TD
+    home[Мій місяць] --&gt; bill[Сума й оплата]
+    bill --&gt; load(&quot;loading: завантажуємо розшифровку&quot;)
+    load --&gt; dLoaded{&quot;Розшифровка прийшла?&quot;}
+    dLoaded --&gt;|ні| errLoad(&quot;error: не вдалося завантажити, є кнопка «Повторити»&quot;)
+    errLoad --&gt; load
+    dLoaded --&gt;|так| dExists{&quot;Нарахування цього місяця вже є?&quot;}
+    dExists --&gt;|ні| emptyBill(&quot;empty: нарахування ще немає, показуємо дату&quot;)
+    emptyBill --&gt; deadWait([&quot;тупик: відповідь буде лише в дату нарахування&quot;])
+    dExists --&gt;|так| dMine{&quot;Основа: мій показ?&quot;}
+    dMine --&gt;|так| dSame{&quot;Це ті цифри, які я подала?&quot;}
+    dSame --&gt;|так| okClear([&quot;успіх: цифри свої, зрозуміло, з чого сума, далі оплата у flow M&quot;])
+    dSame --&gt;|ні| errSame(&quot;error: у рахунку не мої цифри&quot;)
+    errSame --&gt; history[Історія]
+    history --&gt; loadHist(&quot;loading: завантажуємо записи&quot;)
+    loadHist --&gt; dRecord{&quot;Мій показ є в історії?&quot;}
+    dRecord --&gt;|ні| emptyHist(&quot;empty: показу за цей місяць немає&quot;)
+    emptyHist --&gt; dWindow
+    dRecord --&gt;|так| deadSystem([&quot;тупик: показ є, а пораховано інакше, у V1 немає кому написати&quot;])
+    dMine --&gt;|ні| dAvg{&quot;Нараховано за середнім?&quot;}
+    dAvg --&gt;|так| stateAvg(&quot;стан: основа — середнє, пояснюємо чому&quot;)
+    dAvg --&gt;|ні| stateCtrl(&quot;стан: основа — показ контролера, дата&quot;)
+    stateAvg --&gt; dWindow
+    stateCtrl --&gt; dWindow{&quot;Вікно подачі ще відкрите?&quot;}
+    dWindow --&gt;|ні| stateNext(&quot;стан: виправити можна наступним показом&quot;)
+    stateNext --&gt; deadNext([&quot;тупик: цей місяць платить за чужими цифрами (питання 5 у sitemap)&quot;])
+    dWindow --&gt;|так| reading[Подати показ]
+    reading --&gt; dLow{&quot;Цифри не менші за попередній показ?&quot;}
+    dLow --&gt;|ні| errLow(&quot;error: менше за попередній показ&quot;)
+    errLow --&gt; dLowOwn{&quot;Помилилася у своїх цифрах?&quot;}
+    dLowOwn --&gt;|так| reading
+    dLowOwn --&gt;|ні| deadLow([&quot;тупик: чужі цифри завищені, свої форма не приймає&quot;])
+    dLow --&gt;|так| send(&quot;loading: надсилаємо показ&quot;)
+    send --&gt; dAccepted{&quot;Показ прийнято?&quot;}
+    dAccepted --&gt;|ні| rejected(&quot;error: «відхилено», причина людською мовою або збій сервісу&quot;)
+    rejected --&gt; reading
+    dAccepted --&gt;|так| recalc(&quot;loading: перераховуємо суму&quot;)
+    recalc --&gt; dRecalc{&quot;Перерахунок вдався?&quot;}
+    dRecalc --&gt;|ні| errRecalc(&quot;error: показ прийнято, суму ще не перераховано, показуємо дату&quot;)
+    errRecalc --&gt; recalc
+    dRecalc --&gt;|так| adjusted(&quot;успіх кроку: «скориговано» [?], рахунок називає мій показ&quot;)
+    adjusted --&gt; billDone[Сума й оплата]
+    billDone --&gt; okReturned([&quot;успіх: повернула свої цифри, далі оплата у flow M&quot;])
+
+    classDef screen fill:#202125,stroke:#d9c7a3,stroke-width:2px,color:#e6e4df
+    classDef decision fill:#2a2318,stroke:#8a6d3b,color:#e6e4df
+    classDef state fill:#26272b,stroke:#5c5d64,color:#e6e4df
+    classDef bad fill:#3a2326,stroke:#b06a70,color:#e6e4df
+    classDef good fill:#1e3024,stroke:#6fa37a,stroke-width:2px,color:#e6e4df
+    classDef dead fill:#4a1f27,stroke:#e07a85,stroke-width:3px,color:#fff
+    class home,bill,history,reading,billDone screen
+    class dLoaded,dExists,dMine,dSame,dRecord,dAvg,dWindow,dLow,dLowOwn,dAccepted,dRecalc decision
+    class load,emptyBill,loadHist,emptyHist,stateAvg,stateCtrl,stateNext,send,recalc state
+    class errLoad,errSame,errLow,rejected,errRecalc bad
+    class adjusted,okClear,okReturned good
+    class deadWait,deadSystem,deadNext,deadLow dead
+</pre></div>
+<div class="flow-notes"><p><b>Розвилки</b></p>
+<ol><li><b>Розшифровка прийшла?</b> Збій завантаження.</li><li><b>Нарахування цього місяця вже є?</b> Якщо ні, поки лише дата.</li><li><b>Основа: мій показ? Це ті цифри, які я подала?</b> Головне питання job: рахунок називає свій показ <a class="ref" href="research/research.html#s-y7">y7</a><a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Мій показ є в історії?</b> Відрізняє «показу не було» від збою: «пише що показання прийняті. але через добу вони не зафіксовані» <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Нараховано за середнім?</b> Інакше — показ контролера.</li><li><b>Вікно подачі ще відкрите?</b> Визначає, чи можна повернути свої цифри зараз.</li><li><b>Цифри не менші за попередній показ? Помилилася у своїх?</b> Правило заганяє в глухий кут, якщо чужі цифри завищені <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Показ прийнято? Перерахунок вдався?</b> Показ і сума можуть розійтися в часі.</li></ol>
+<p><b>Стани</b></p>
+<ul><li><b>empty:</b> нарахування ще немає · показу за цей місяць в історії немає.</li><li><b>error:</b> не завантажено розшифровку · у рахунку не мої цифри · менше за попередній · «відхилено» чи збій · суму ще не перераховано.</li><li><b>loading:</b> завантаження розшифровки · завантаження записів історії · надсилання показу · перерахунок суми.</li><li><b>Інші:</b> основа — середнє · основа — контролер · «виправити наступним показом» · «скориговано» <span class="q">[?]</span>.</li></ul>
+<p><b>Кінці</b></p>
+<ul><li><b>Успіх:</b> цифри свої і зрозумілі · свої цифри повернуто.</li><li><b>Тупики:</b><ul><li>нарахування ще немає: відповідь буде лише в дату нарахування;</li><li>показ є, а пораховано інакше: немає кому написати. За рішенням брифу 1 такого статися не має, але якщо станеться, виходу немає;</li><li>вікно закрито: місяць оплачується за чужими цифрами (питання 5 у sitemap);</li><li>чужі цифри завищені: свої не внести (питання до PM у jtbd.md).</li></ul></li></ul></div><h3 id="flow-r2">R2. Виправити помилку без мороки</h3>
+<p><a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r2-виправити-помилку-без-мороки">Job R2</a>. <b>Персона:</b> Наталя, обставини ті самі. <b>Початок:</b> вона зрозуміла, що ввела не ті цифри. Часто це зайва цифра <a class="ref" href="research/research.html#s-y6">y6</a>.</p>
+<div class="diagram" tabindex="0" role="region" aria-label="Діаграма: R2. Виправити помилку без мороки. Словесний опис — нижче."><pre class="mermaid">flowchart TD
+    home[Мій місяць] --&gt; load(&quot;loading: завантажуємо місяць&quot;)
+    load --&gt; dLoaded{&quot;Дані місяця прийшли?&quot;}
+    dLoaded --&gt;|ні| errLoad(&quot;error: не вдалося завантажити, є кнопка «Повторити»&quot;)
+    errLoad --&gt; load
+    dLoaded --&gt;|так| dExists{&quot;Показ цього місяця є?&quot;}
+    dExists --&gt;|ні| emptyHome(&quot;empty: виправляти ще нічого, показу немає&quot;)
+    emptyHome --&gt; readingNew[Подати показ]
+    readingNew --&gt; okNew([&quot;успіх: подала вперше, далі flow M&quot;])
+    dExists --&gt;|так| dWindow{&quot;Вікно подачі ще відкрите?&quot;}
+    dWindow --&gt;|ні| stateClosed(&quot;стан: вікно закрито, виправити можна наступним показом&quot;)
+    stateClosed --&gt; deadClosed([&quot;тупик: зайва цифра вже в сумі цього місяця&quot;])
+    dWindow --&gt;|так| reading[Подати показ]
+    reading --&gt; filled(&quot;стан: у полях подані цифри, поруч попередній показ&quot;)
+    filled --&gt; dLow{&quot;Нові цифри не менші за попередній показ?&quot;}
+    dLow --&gt;|ні| errLow(&quot;error: менше за попередній показ&quot;)
+    errLow --&gt; dOwn{&quot;Помилилася знову?&quot;}
+    dOwn --&gt;|так| filled
+    dOwn --&gt;|ні| deadLow([&quot;тупик: попередній показ хибний, форма не приймає справжні цифри&quot;])
+    dLow --&gt;|так| dJump{&quot;Стрибок понад 3× від середнього?&quot;}
+    dJump --&gt;|так| warn(&quot;стан: схоже на зайву цифру, перевірте&quot;)
+    warn --&gt; dSure{&quot;Цифри правильні?&quot;}
+    dSure --&gt;|ні| filled
+    dSure --&gt;|так| send
+    dJump --&gt;|ні| send(&quot;loading: надсилаємо виправлення&quot;)
+    send --&gt; dServer{&quot;Сервіс відповів?&quot;}
+    dServer --&gt;|ні| errServer(&quot;error: сервіс недоступний, чинним лишається старий показ&quot;)
+    errServer --&gt; dBack{&quot;Сервіс ожив до кінця вікна?&quot;}
+    dBack --&gt;|так| send
+    dBack --&gt;|ні| deadOld([&quot;тупик: виправлення не дійшло, рахують за старим показом&quot;])
+    dServer --&gt;|так| dAccepted{&quot;Виправлення прийнято?&quot;}
+    dAccepted --&gt;|ні| rejected(&quot;error: «відхилено», причина; чинним лишається старий показ&quot;)
+    rejected --&gt; filled
+    dAccepted --&gt;|так| accepted(&quot;успіх кроку: новий показ «прийнято», старий «замінено», нова орієнтовна сума&quot;)
+    accepted --&gt; history[Історія]
+    history --&gt; dBoth{&quot;Видно обидва записи?&quot;}
+    dBoth --&gt;|ні| errHist(&quot;error: запис ще не з&#x27;явився, є кнопка «Оновити»&quot;)
+    errHist --&gt; history
+    dBoth --&gt;|так| okFixed([&quot;успіх: помилку виправлено самостійно, без листування&quot;])
+
+    classDef screen fill:#202125,stroke:#d9c7a3,stroke-width:2px,color:#e6e4df
+    classDef decision fill:#2a2318,stroke:#8a6d3b,color:#e6e4df
+    classDef state fill:#26272b,stroke:#5c5d64,color:#e6e4df
+    classDef bad fill:#3a2326,stroke:#b06a70,color:#e6e4df
+    classDef good fill:#1e3024,stroke:#6fa37a,stroke-width:2px,color:#e6e4df
+    classDef dead fill:#4a1f27,stroke:#e07a85,stroke-width:3px,color:#fff
+    class home,readingNew,reading,history screen
+    class dLoaded,dExists,dWindow,dLow,dOwn,dJump,dSure,dServer,dBack,dAccepted,dBoth decision
+    class load,emptyHome,stateClosed,filled,warn,send state
+    class errLoad,errLow,errServer,rejected,errHist bad
+    class accepted,okNew,okFixed good
+    class deadClosed,deadLow,deadOld dead
+</pre></div>
+<div class="flow-notes"><p><b>Розвилки</b></p>
+<ol><li><b>Дані місяця прийшли?</b> Збій завантаження.</li><li><b>Показ цього місяця є?</b> Якщо ні, виправляти нічого, це звичайна подача.</li><li><b>Вікно подачі ще відкрите?</b> Правило брифу: виправлення до кінця вікна.</li><li><b>Нові цифри не менші за попередній показ? Помилилася знову?</b> Та сама перевірка, що в подачі.</li><li><b>Стрибок понад 3×? Цифри правильні?</b> Попередження ловить ту саму зайву цифру.</li><li><b>Сервіс відповів? Сервіс ожив до кінця вікна?</b> Старий показ лишається чинним, тож людина не втрачає нічого.</li><li><b>Виправлення прийнято?</b> Відмова не скасовує старий показ.</li><li><b>Видно обидва записи?</b> Доказ для Наталі: старий показ не зник, а став «замінено».</li></ol>
+<p><b>Стани</b></p>
+<ul><li><b>empty:</b> виправляти ще нічого, показу немає.</li><li><b>error:</b> не завантажено місяць · менше за попередній · сервіс недоступний · «відхилено» · запис в історії ще не з'явився.</li><li><b>loading:</b> завантаження місяця · надсилання виправлення.</li><li><b>Інші:</b> вікно закрито · подані цифри в полях · попередження про стрибок · «прийнято» + «замінено».</li></ul>
+<p><b>Кінці</b></p>
+<ul><li><b>Успіх:</b> помилку виправлено самостійно · показу не було, подала вперше.</li><li><b>Тупики:</b><ul><li>вікно закрито: зайва цифра вже в сумі цього місяця, вихід лише наступним показом. Це той самий біль, що й «квест із листами» <a class="ref" href="research/research.html#s-y6">y6</a>, тільки без листів;</li><li>попередній показ хибний: форма не приймає справжні цифри;</li><li>збій тривав до кінця вікна: рахують за старим показом.</li></ul></li></ul></div><h3 id="flow-r7">R7. Вести чужий рахунок</h3>
+<p><a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md#r7-вести-чужий-рахунок">Job R7</a>. <b>Персона:</b> Андрій (<code>multi-address</code>, secondary). <b>Обставини:</b> рахунок літньої людини, вона сама цифр не передасть, поїхати до лічильника він не може <a class="ref" href="research/research.html#s-t1">t1</a>. Способу підтвердження поки не обрано: його спершу треба перевірити на безпеку (<a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>, «Висновок»).</p>
+<div class="diagram" tabindex="0" role="region" aria-label="Діаграма: R7. Вести чужий рахунок. Словесний опис — нижче."><pre class="mermaid">flowchart TD
+    home[Мій місяць] --&gt; add[Додати рахунок]
+    add --&gt; emptyAdd(&quot;empty: поля порожні, пояснюємо, що знадобиться&quot;)
+    emptyAdd --&gt; dNumber{&quot;Номер рахунку або адреса є під рукою?&quot;}
+    dNumber --&gt;|ні| deadNumber([&quot;тупик: немає даних, щоб знайти рахунок&quot;])
+    dNumber --&gt;|так| search(&quot;loading: шукаємо рахунок&quot;)
+    search --&gt; dService{&quot;Сервіс відповів?&quot;}
+    dService --&gt;|ні| errService(&quot;error: сервіс недоступний, є кнопка «Повторити»&quot;)
+    errService --&gt; search
+    dService --&gt;|так| dFound{&quot;Рахунок знайдено?&quot;}
+    dFound --&gt;|ні| errFound(&quot;error: не знайшли, перевірте номер&quot;)
+    errFound --&gt; emptyAdd
+    dFound --&gt;|так| dAddress{&quot;Це та адреса?&quot;}
+    dAddress --&gt;|ні| errFound
+    dAddress --&gt;|так| dHas{&quot;Рахунок уже підключено?&quot;}
+    dHas --&gt;|так| account[Особовий рахунок]
+    dHas --&gt;|ні| dProof{&quot;Є чим підтвердити без тієї людини?&quot;}
+    dProof --&gt;|ні| deadProof([&quot;тупик: «не підтверджено», дані лише в тієї людини, треба їхати&quot;])
+    dProof --&gt;|так| check(&quot;loading: перевіряємо підтвердження&quot;)
+    check --&gt; dChecked{&quot;Підтвердження пройшло?&quot;}
+    dChecked --&gt;|ні| errProof(&quot;error: «не підтверджено», сказано, що саме не збіглося&quot;)
+    errProof --&gt; dAttempts{&quot;Спроби ще є? [?]&quot;}
+    dAttempts --&gt;|так| dProof
+    dAttempts --&gt;|ні| deadBlocked([&quot;тупик: спроби вичерпано, у V1 немає кому написати&quot;])
+    dChecked --&gt;|так| connected(&quot;успіх кроку: «підключено»&quot;)
+    connected --&gt; account
+    account --&gt; loadAcc(&quot;loading: завантажуємо місяць цієї адреси&quot;)
+    loadAcc --&gt; dAccess{&quot;Доступ досі є?&quot;}
+    dAccess --&gt;|ні| errAccess(&quot;error: «доступ втрачено», пояснюємо чому&quot;)
+    errAccess --&gt; add
+    dAccess --&gt;|так| dPrevious{&quot;Є дані про цю адресу?&quot;}
+    dPrevious --&gt;|ні| emptyAcc(&quot;empty: історії цієї адреси ще немає&quot;)
+    emptyAcc --&gt; dDigits
+    dPrevious --&gt;|так| dDigits{&quot;Цифри з лічильника можна отримати?&quot;}
+    dDigits --&gt;|ні| deadDigits([&quot;тупик: цифр немає, далі «нараховано за середнім»&quot;])
+    dDigits --&gt;|так| reading[Подати показ]
+    reading --&gt; sent(&quot;успіх кроку: «прийнято», видно адресу й цифри&quot;)
+    sent --&gt; homeDone[Мій місяць]
+    homeDone --&gt; okAccount([&quot;успіх: чужий рахунок поруч зі своїм, зі статусом і боргом, далі flow M&quot;])
+
+    classDef screen fill:#202125,stroke:#d9c7a3,stroke-width:2px,color:#e6e4df
+    classDef decision fill:#2a2318,stroke:#8a6d3b,color:#e6e4df
+    classDef state fill:#26272b,stroke:#5c5d64,color:#e6e4df
+    classDef bad fill:#3a2326,stroke:#b06a70,color:#e6e4df
+    classDef good fill:#1e3024,stroke:#6fa37a,stroke-width:2px,color:#e6e4df
+    classDef dead fill:#4a1f27,stroke:#e07a85,stroke-width:3px,color:#fff
+    class home,add,account,reading,homeDone screen
+    class dNumber,dService,dFound,dAddress,dHas,dProof,dChecked,dAttempts,dAccess,dPrevious,dDigits decision
+    class emptyAdd,search,check,loadAcc,emptyAcc state
+    class errService,errFound,errProof,errAccess bad
+    class connected,sent,okAccount good
+    class deadNumber,deadProof,deadBlocked,deadDigits dead
+</pre></div>
+<div class="flow-notes"><p><b>Розвилки</b></p>
+<ol><li><b>Номер рахунку або адреса є під рукою?</b> Може не бути.</li><li><b>Сервіс відповів? Рахунок знайдено?</b> Збій і хибне введення показано окремо.</li><li><b>Це та адреса?</b> Щоб не підключити чужий рахунок (R4) <a class="ref" href="research/research.html#s-n4">n4</a><a class="ref" href="research/research.html#s-n6">n6</a>.</li><li><b>Рахунок уже підключено?</b> Веде на нього, а не в помилку.</li><li><b>Є чим підтвердити без тієї людини?</b> Головна перешкода job: «Старенька бабуся їх не знайде!» <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Підтвердження пройшло? Спроби ще є?</b> «вказала, пише не вірна» <a class="ref" href="research/research.html#s-e1">e1</a>. Ліміт спроб — <span class="q">[?]</span>, припущення з міркувань безпеки.</li><li><b>Доступ досі є?</b> «можу відправити цифри тільки з одного лічильника» <a class="ref" href="research/research.html#s-t1">t1</a>.</li><li><b>Є дані про цю адресу?</b> Нового рахунку може ще не бути в історії.</li><li><b>Цифри з лічильника можна отримати?</b> Частина job «без поїздки до лічильника».</li></ol>
+<p><b>Стани</b></p>
+<ul><li><b>empty:</b> поля порожні · історії цієї адреси ще немає.</li><li><b>error:</b> сервіс недоступний · не знайдено · «не підтверджено» з причиною · «доступ втрачено».</li><li><b>loading:</b> пошук рахунку · перевірка підтвердження · завантаження місяця адреси.</li><li><b>Інші:</b> «підключено» · «прийнято» з адресою й цифрами.</li></ul>
+<p><b>Кінці</b></p>
+<ul><li><b>Успіх:</b> чужий рахунок поруч зі своїм, зі статусом і боргом.</li><li><b>Тупики:</b><ul><li>немає даних, щоб знайти рахунок;</li><li>немає чим підтвердити: дані лише в тієї людини, це головний біль Андрія;</li><li>спроби вичерпано: немає кому написати;</li><li>цифр немає: продукт доступ дав, але до лічильника ніхто не дійшов, далі нарахування за середнім.</li></ul></li></ul></div>
+  <h3>Що показали тупики</h3>
+  <p>Жоден тупик не вимагає нового екрана. Вони зводяться до чотирьох рішень:</p>
+<div class="table-wrap"><table><thead><tr><th>Причина</th><th>Де трапляється</th><th>Що вирішити</th></tr></thead><tbody><tr><td><b>Правило «не менше за попередній»</b></td><td>M, R6, R2</td><td>Питання до PM у jtbd.md: порівнювати з останнім реальним показом. Найчастіший тупик у flows</td></tr><tr><td><b>Вікно закрито, а цифри хибні</b></td><td>R6, R2</td><td>Питання 5 у sitemap: лише наступний показ чи ще «скориговано»</td></tr><tr><td><b>Немає кому написати</b></td><td>M, R6, R7</td><td>Чат поза V1 (бриф, р. 8), але три тупики ведуть саме сюди. Чи потрібен хоч якийсь контакт?</td></tr><tr><td><b>Немає чим підтвердити чужий рахунок</b></td><td>R7</td><td>Спосіб підтвердження, який можна пройти без тієї людини і який безпечний</td></tr></tbody></table></div>
+
+  <h2 id="trace"><span class="num">3</span>Трасування</h2>
+  <p><b>Перевірка реєстру екранів проти <a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>.</b> Рядки — усі jobs: main, related, emotional, social і решта гіпотез. Social jobs є лише в «Гіпотезах» (H1, H2), тому H3 і H4 теж тут: на них спираються рішення реєстру. Колонки — екрани з <a href="#map">«Екранів»</a>.</p>
+<p><b>Коли стоїть <code>x</code>:</b> без цього екрана job не закривається, або людина отримує на ньому частину результату. Не рахуються:</p>
+<ul><li>вхідні умови. Рахунок і сесія потрібні майже всім jobs, але не закривають їх, тому «Додати рахунок» стоїть лише в R7;</li><li>прохід через екран. «Мій місяць» є на початку кожного flow у <a href="https://github.com/denysosadchyi/pokaz/blob/main/flows.md">flows.md</a>, але в R6 людина лише йде з нього далі.</li></ul>
+  <h3>Матриця: стан до рішень</h3>
+  <p>Сироти підсвічені й підписані: <span class="tag orphan" style="display:inline-block;margin:0">сирота</span> — порожня колонка або рядок.</p>
+  <div class="table-wrap"><table class="trace"><thead><tr><th scope="col">Job</th><th scope="col">Мій місяць</th><th scope="col">Історія</th><th scope="col">Подати показ</th><th scope="col">Сума й оплата</th><th scope="col">Особовий рахунок</th><th scope="col">Додати рахунок</th><th scope="col">Учасники <span class="q">[?]</span></th><th scope="col">Коли не буде світла</th><th scope="col" class="orphan-col">Вхід<span class="tag orphan">сирота</span></th><th scope="col" class="orphan-col">Налаштування сповіщень<span class="tag orphan">сирота</span></th></tr></thead><tbody><tr><th scope="row"><b>M</b> Закрити місяць без сумніву</th><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R1</b> Цифри, як на лічильнику</th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R2</b> Виправити помилку без мороки</th><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R3</b> Розуміти суму</th><td></td><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R4</b> Не переплутати адресу</th><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R5</b> Встигнути з першого разу</th><td>x</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R6</b> Знати, звідки взялися цифри</th><td></td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R7</b> Вести чужий рахунок</th><td>x</td><td></td><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>R8</b> Знати, коли не буде світла</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>x</td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>E1</b> Не почуватися проігнорованою</th><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>E2</b> Помилка — не загроза</th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>E3</b> Почуватися в контролі</th><td></td><td>x</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr class=orphan-row><th scope="row"><b>E4</b> Без тягаря<span class="tag orphan">сирота</span></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>H1</b> · social · бути надійним для рідних <span class="q">[?]</span></th><td>x</td><td></td><td></td><td></td><td></td><td></td><td>x</td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>H2</b> · social · бачити, хто що зробив <span class="q">[?]</span></th><td></td><td>x</td><td></td><td></td><td></td><td></td><td>x</td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr class=orphan-row><th scope="row"><b>H3</b> Не тримати строк у голові <span class="q">[?]</span><span class="tag orphan">сирота</span></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr><tr><th scope="row"><b>H4</b> Не переписувати цифри <span class="q">[?]</span></th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td class="orphan-col"></td><td class="orphan-col"></td></tr></tbody></table></div>
+  <p>Колонка Job у реєстрі була вужчою за цю матрицю, бо в ній стояли лише головні jobs екрана. Там бракувало, зокрема, R6 на «Подати показ» («повернути свої») і R4 на «Сума й оплата» («не знаю по які адресі ви хочете від мене оплату» <a class="ref" href="research/research.html#s-e1">e1</a>). Реєстр уже звірено.</p>
+  <h3>Екрани-сироти</h3>
+  <p>Колонки без жодної позначки: <b>2</b>.</p>
+<div class="table-wrap"><table><thead><tr><th>Екран</th><th>Навіщо він існує</th><th>Дія</th><th>Обґрунтування</th></tr></thead><tbody><tr><td>Вхід <code>login.html</code></td><td>Без нього немає доступу до рахунку</td><td><b>Прив'язати</b> до R7. Екран лишається</td><td>Реєстрація реально заважає вести чужі рахунки: «передаю показники багатьом літнім людям, навіщо ввели таку реєстрацію… пів дня витратила» <a class="ref" href="research/research.html#s-e2">e2</a>; «мушу підтвердити номер телефону… можу відправити цифри тільки з одного лічильника» <a class="ref" href="research/research.html#s-t1">t1</a>. <b>Умова для екрана:</b> один вхід за номером людини дає всі її рахунки і не просить даних договору</td></tr><tr><td>Налаштування сповіщень <code>notifications.html</code></td><td>Лише бриф (р. 5, р. 8)</td><td><b>Видалити екран</b></td><td>R8 просить знати про кожну адресу, H3 — не тримати строк у голові. Обидва закриваються сповіщеннями, увімкненими за замовчуванням, про кожну адресу. Налаштувань не просить ніхто</td></tr></tbody></table></div>
+<p><b>Ризик видалення.</b> Сповіщень про кілька адрес може виявитися забагато, а вимкнути їх лишається тільки в системі телефона. Якщо тестування це покаже, екран повернеться з конкретним job.</p>
+  <h3>Jobs-сироти</h3>
+  <p>Рядки без жодної позначки: <b>2</b>.</p>
+<div class="table-wrap"><table><thead><tr><th>Job</th><th>Де людина мала це робити</th><th>Дія</th><th>Обґрунтування</th></tr></thead><tbody><tr><td><b>E4</b> Без тягаря</td><td>Ніде: функції немає, «колесо» відкинуто (research.md, р. 2)</td><td><b>Прив'язати</b> до «Подати показ»</td><td>«Легко» вже закривають 2 кліки й метрика менше 60 с. «Трохи приємно» лишається незакритим: це спокійний текст стану <code>прийнято</code>, а не окрема функція. Сигнал слабкий: одне джерело, британський ринок <a class="ref" href="research/research.html#s-o4">o4</a></td></tr><tr><td><b>H3</b> Не тримати строк у голові <span class="q">[?]</span></td><td>Нагадування приходить поза екранами</td><td><b>Прив'язати</b> до «Мій місяць»</td><td>Там видно дату наступного кроку, і туди веде нагадування з головною дією «Подати показ». Нагадування увімкнене за замовчуванням. Job лишається гіпотезою</td></tr></tbody></table></div>
+<p>Відкладати в backlog не довелося: кожна сирота має наявне місце, а backlog лишив би рядок порожнім.</p>
+  <h3>Матриця: після рішень</h3>
+  <p>Порожніх рядків і колонок немає: <b>17 jobs, 9 екранів</b>. Реєстр, навігація і меню перемикача вже оновлені.</p>
+  <p>Зеленим виділено <code>x</code>, поставлені рішеннями про сиріт: Вхід → R7, E4 → «Подати показ», H3 → «Мій місяць». Екран «Налаштування сповіщень» видалено.</p>
+  <div class="table-wrap"><table class="trace"><thead><tr><th scope="col">Job</th><th scope="col">Мій місяць</th><th scope="col">Історія</th><th scope="col">Подати показ</th><th scope="col">Сума й оплата</th><th scope="col">Особовий рахунок</th><th scope="col">Додати рахунок</th><th scope="col">Учасники <span class="q">[?]</span></th><th scope="col">Коли не буде світла</th><th scope="col">Вхід</th></tr></thead><tbody><tr><th scope="row"><b>M</b> Закрити місяць без сумніву</th><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R1</b> Цифри, як на лічильнику</th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R2</b> Виправити помилку без мороки</th><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R3</b> Розуміти суму</th><td></td><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R4</b> Не переплутати адресу</th><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R5</b> Встигнути з першого разу</th><td>x</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R6</b> Знати, звідки взялися цифри</th><td></td><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>R7</b> Вести чужий рахунок</th><td>x</td><td></td><td>x</td><td>x</td><td>x</td><td>x</td><td></td><td></td><td class="bound">x</td></tr><tr><th scope="row"><b>R8</b> Знати, коли не буде світла</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>x</td><td></td></tr><tr><th scope="row"><b>E1</b> Не почуватися проігнорованою</th><td>x</td><td>x</td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>E2</b> Помилка — не загроза</th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>E3</b> Почуватися в контролі</th><td></td><td>x</td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>E4</b> Без тягаря</th><td></td><td></td><td class="bound">x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>H1</b> · social · бути надійним для рідних <span class="q">[?]</span></th><td>x</td><td></td><td></td><td></td><td></td><td></td><td>x</td><td></td><td></td></tr><tr><th scope="row"><b>H2</b> · social · бачити, хто що зробив <span class="q">[?]</span></th><td></td><td>x</td><td></td><td></td><td></td><td></td><td>x</td><td></td><td></td></tr><tr><th scope="row"><b>H3</b> Не тримати строк у голові <span class="q">[?]</span></th><td class="bound">x</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th scope="row"><b>H4</b> Не переписувати цифри <span class="q">[?]</span></th><td></td><td></td><td>x</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+  <h3>Що матриця ще показує</h3>
+  <p>Це не сироти, але формальна позначка тут не означає, що все гаразд:</p>
+<div class="table-wrap"><table><thead><tr><th>Де</th><th>Що не так</th><th>Що зробити</th></tr></thead><tbody><tr><td><b>Учасники <span class="q">[?]</span></b></td><td>Колонка тримається лише на гіпотезах H1 і H2. Запрошень у відгуках ніхто не просить</td><td>Перевірити в інтерв'ю. Якщо H1 і H2 не підтвердяться, екран стане сиротою, і дія буде «видалити»</td></tr><tr><td><b>Подати показ</b></td><td>11 jobs із 17 на одному екрані, серед них усе ядро MVP (M, E1, R6, R2, R5)</td><td>Вайрфрейм має розвести їх на стани (див. <a href="https://github.com/denysosadchyi/pokaz/blob/main/sitemap.md#стани-а-не-екрани">«Стани, а не екрани»</a>), інакше екран перевантажиться</td></tr><tr><td><b>E4 і H3</b></td><td>Позначки слабкі: E4 закрито лише наполовину, H3 — гіпотеза</td><td>Не брати їх за підставу для окремих функцій</td></tr><tr><td><b>Вхід</b></td><td>Позначка R7 чинна лише за умови з таблиці сиріт</td><td>Перевірити вайрфреймом: вхід не просить даних договору</td></tr></tbody></table></div>
+
+  <footer>Діаграми рендерить Mermaid із CDN. Без доступу до нього на сторінці лишається їхній текст і словесний опис під кожною.</footer>
+</main>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "dark",
+    securityLevel: "strict",
+    flowchart: { useMaxWidth: false },
+    themeVariables: { fontFamily: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" },
+  });
+  await mermaid.run({ querySelector: "pre.mermaid" });
+  // На широкому екрані діаграма спершу вміщується цілком; кнопка дає читабельний 100 %.
+  const wide = matchMedia("(min-width: 721px)").matches;
+  document.querySelectorAll(".diagram").forEach((box) => {
+    const bar = document.createElement("div");
+    bar.className = "diagram-bar";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    const paint = () => { btn.textContent = box.classList.contains("fit") ? "Показати у 100 %" : "Вмістити в ширину"; };
+    box.classList.toggle("fit", wide);
+    paint();
+    btn.addEventListener("click", () => { box.classList.toggle("fit"); paint(); });
+    bar.append(btn);
+    box.before(bar);
+  });
+</script>
+</body>
+</html>

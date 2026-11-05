@@ -4,6 +4,8 @@
 
 **Персони і jobs:** [personas.md](personas.md) · [jtbd.md](jtbd.md) · [personas.html](personas.html) · [на сайті](https://denysosadchyi.github.io/pokaz/personas.html)
 
+**Структура (IA):** [sitemap.md](sitemap.md) · [flows.md](flows.md) · [ia.html](ia.html) · [на сайті](https://denysosadchyi.github.io/pokaz/ia.html)
+
 Особистий кабінет побутового споживача електроенергії. Користувач вносить
 показ лічильника, бачить суму і сплачує, розуміє своє споживання й дізнається
 про відключення.
@@ -39,6 +41,9 @@
 | [research/](research/) | Дослідження (див. розділ «Ресерч» вище) |
 | [personas.md](personas.md) | Реєстр персон: primary Наталя, secondary Андрій, сценарій «з телефона» |
 | [jtbd.md](jtbd.md) | Jobs to be done: main job, ієрархія, JTBD-матриця, гіпотези |
+| [sitemap.md](sitemap.md) | Реєстр продукту: чернетка сутностей зі статусами, реєстр екранів, навігаційна модель і матриця трасування |
+| [flows.md](flows.md) | User flows у Mermaid: main job M і related jobs R6, R2, R7, зі станами й тупиками |
+| [ia.html](ia.html) · [на сайті](https://denysosadchyi.github.io/pokaz/ia.html) | Знімок IA однією HTML-сторінкою: sitemap деревом, flows і матриця трасування |
 | [research/notes/personas-review.md](research/notes/personas-review.md) | Сувора критика персон і jobs: статус кожного твердження, ризики, 3 питання |
 | [research/notes/personas-doresearch.md](research/notes/personas-doresearch.md) | Докази доресерчу: відгуки Google Play про показ в електриці |
 | [personas.html](personas.html) · [на сайті](https://denysosadchyi.github.io/pokaz/personas.html) | Персони і jobs однією HTML-сторінкою |
