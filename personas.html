@@ -86,7 +86,7 @@
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
     .card { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
-    .card h4 { margin: 0 0 6px; font-size: 16px; }
+    .card h4, .card > h3 { margin: 0 0 6px; font-size: 16px; }
     .card p, .card li { font-size: 15px; }
     .card p { margin: 0 0 8px; }
     .card ul { margin: 0 0 8px; padding-left: 20px; }
@@ -116,7 +116,7 @@
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
       border-top: 1px solid var(--line); padding-top: 24px; position: relative;
     }
-    .tree .group h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .tree .group h3 { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
     .job { padding: 10px 14px; margin: 0 0 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
     .job b { display: block; font-size: 15px; }
     .job .when { color: var(--muted); }
@@ -335,7 +335,7 @@
   <p>Не окрема людина, а умова, в якій Наталя виконує ті самі jobs.</p>
   <div class="cards">
     <div class="card">
-      <h4>Швидко, з телефона <span class="tag key">at-meter</span></h4>
+      <h3>Швидко, з телефона <span class="tag key">at-meter</span></h3>
       <p>Показ — дрібна справа між іншими: відкрити й одразу подати. Сердиться, коли подачу сховано, і пробує камеру. [o4][n6]</p>
       <p>Головні цитати — з Octopus (UK); чи так само в Україні — <span class="q">[?]</span>. Частка подач біля лічильника — <span class="q">[?]</span></p>
       <div class="label">Додається до jobs</div>
@@ -370,7 +370,7 @@
     <div class="stem"></div>
     <div class="branches">
       <div class="group">
-        <h4>Related</h4>
+        <h3>Related</h3>
         <div class="job"><b>R1 · Цифри, як на лічильнику</b><span class="when">Коли передаю цифри — бути певною, що записано саме те, щоб не платити за зайву цифру.</span><div class="meta">[y6][n6] · Сп. 2, 4</div></div>
         <div class="job"><b>R2 · Виправити помилку без мороки</b><span class="when">Коли помилилася — виправити сама й одразу, щоб не було переплати чи листування.</span><div class="meta">[y6][n4][n6] · Сп. 2</div></div>
         <div class="job"><b>R3 · Розуміти суму</b><span class="when">Коли бачу суму — розуміти, з чого вона, і звірити, щоб платити, бо згодна.</span><div class="meta">[y6][y2][y3] · Сп. 5</div></div>
@@ -381,14 +381,14 @@
         <div class="job"><b>R8 · Знати, коли не буде світла</b><span class="when">Коли кілька адрес — знати відключення на кожній, щоб спланувати день, не шукаючи щоразу.</span><div class="meta">Андрій · [y7] · доресерч, раніше H5</div></div>
       </div>
       <div class="group">
-        <h4>Emotional</h4>
+        <h3>Emotional</h3>
         <div class="job"><b>E1 · Не почуватися проігнорованою</b><span class="when">Коли передала показ — відчувати, що мене почули, щоб не перевіряти ще раз.</span><div class="meta">[n4][y7][e4][t1][t2] · Сп. 1</div></div>
         <div class="job"><b>E2 · Помилка — не загроза</b><span class="when">Коли помилилася — не нервувати й не почуватися винною, щоб спокійно поправити.</span><div class="meta">[y6][n4] · Сп. 2</div></div>
         <div class="job"><b>E3 · Почуватися в контролі</b><span class="when">Коли плачу — розуміти й контролювати витрати, а не просто отримати рахунок.</span><div class="meta">[y6] · Сп. 5</div></div>
         <div class="job"><b>E4 · Без тягаря</b><span class="when">Коли передаю показ — щоб було легко і трохи приємно.</span><div class="meta">[o4] · Сп. 8 · одне джерело, UK</div></div>
       </div>
       <div class="group">
-        <h4>Social і гіпотези</h4>
+        <h3>Social і гіпотези</h3>
         <div class="empty">Надійного джерела немає. Доресерч показав поведінку: люди ведуть чужі рахунки [e1][e2][t1], це job R7. Але про те, що вони хочуть бути надійними, ніхто не каже. Тому social — у гіпотезах.</div>
         <div class="job hyp"><b>H1 · social · Бути надійним для рідних <span class="tag hyp">гіпотеза</span></b><span class="when">Коли веду рахунки рідних — щоб вони були певні, що все сплачено.</span><div class="meta"><span class="q">[?]</span> лише слова компанії [n2]</div></div>
         <div class="job hyp"><b>H2 · social · Бачити, хто що зробив <span class="tag hyp">гіпотеза</span></b><span class="when">Коли за адресою діє ще хтось — бачити, хто що вже зробив.</span><div class="meta"><span class="q">[?]</span> бриф, р. 5</div></div>
