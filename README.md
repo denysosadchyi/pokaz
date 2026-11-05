@@ -39,4 +39,6 @@
 | [research/](research/) | Дослідження (див. розділ «Ресерч» вище) |
 | [personas.md](personas.md) | Реєстр персон: primary Наталя і її сценарії |
 | [jtbd.md](jtbd.md) | Jobs to be done: main job, ієрархія, JTBD-матриця, гіпотези |
+| [research/notes/personas-review.md](research/notes/personas-review.md) | Сувора критика персон і jobs: статус кожного твердження, ризики, 3 питання |
+| [research/notes/personas-doresearch.md](research/notes/personas-doresearch.md) | Докази доресерчу: відгуки Google Play про показ в електриці |
 | [personas.html](personas.html) · [на сайті](https://denysosadchyi.github.io/pokaz/personas.html) | Персони і jobs однією HTML-сторінкою |

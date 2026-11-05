@@ -350,7 +350,7 @@
     <thead><tr><th>#</th><th>Прогалина ринку</th><th>Гіпотеза</th><th>Звідки випливає</th></tr></thead>
     <tbody>
       <tr><td>1</td><td>Після подачі показу людина не бачить «прийнято» і суму: у Кубі — «передано» без суми [n6], і це найчастіша скарга у відгуках [n4]; у YASNO сума — окремою формою [y2][y3]. В інших — доступ обмежений, <span class="nc">дані не підтверджені</span></td>
-        <td><b>Якщо</b> одразу після «Надіслати» показати «Показ прийнято» з повтором цифр, автором і орієнтовною сумою, <b>то</b> звернення «чи прийняли мій показ» наблизяться до нуля, <b>бо</b> питання закривається на тому самому екрані. <b>Перевіримо:</b> юзабіліті-тест — після подачі людина без підказки називає статус і суму.</td>
+        <td><b>Якщо</b> одразу після «Надіслати» показати «Показ прийнято» з повтором цифр, автором і орієнтовною сумою, а показ уже видно в історії, <b>то</b> звернення «чи прийняли мій показ» наблизяться до нуля, <b>бо</b> питання закривається на тому самому екрані. <b>Перевіримо:</b> юзабіліті-тест — після подачі людина без підказки називає статус і суму.</td>
         <td><a href="#competitors">Конкуренти</a> — патерн 3; <a href="#benchmark">Бенчмарк</a> — вимір і механізм 1</td></tr>
       <tr><td>2</td><td>Показ і сума — дві окремі форми з повторним введенням адреси [y2][y3]</td>
         <td><b>Якщо</b> показ і сума живуть в одній формі, <b>то</b> медіана від входу до «прийнято» буде &lt; 60 с, <b>бо</b> зникає другий прохід адресною формою. <b>Перевіримо:</b> засікти час на прототипі проти сценарію YASNO.</td>
@@ -381,7 +381,29 @@
     <li><strong>Швидкий шлях без входу.</strong> Чи потрібен показ і оплата за особовим рахунком, як у YASNO [y2][y3]? Це ринкова норма, але без входу немає статусу й історії.</li>
     <li><strong>Вікно подачі.</strong> Бриф — 1–5 число <span class="tag brief">бриф, розд. 4</span>. YASNO — «в останні два дні поточного місяця або в перші три наступного» [y2]. Рішення за PM.</li>
     <li><strong>Закриті потоки.</strong> Відгуки App Store і демо-відео зібрано (2026-10-29) [y6][n4][n6][o4]. Невидимими лишаються потік «Комуналка» в monobank (відео без субтитрів) і кабінети ДТЕК та Octopus — там <span class="nc">дані не підтверджені</span>.</li>
+    <li><strong>Перевірка показу проти чужих цифр.</strong> Бриф: показ «не менше за попередній» <span class="tag brief">бриф, розд. 4</span>. Якщо попередній — за середнім, від контролера або хибний, людина не може внести справжні цифри: «самовольно с потолка завысили мне показания счётчика» [t1]. Варіант: порівнювати з останнім реальним показом і давати вихід. Рішення за PM; бриф не змінено.</li>
   </ul>
+
+  <h3 id="doresearch">Доресерч після персон</h3>
+  <p>Зібрано 2026-11-05. Питання №1 із <a href="notes/personas-review.md">personas-review.md</a>: чи справді «чи прийняли мій показ?» — біль клієнтів електрики, а не лише газу? Докази — у <a href="notes/personas-doresearch.md">personas-doresearch.md</a>.</p>
+  <p><b>Відповідь: підтверджено, з уточненням.</b> Біль є в електриці, зокрема в офіційних застосунках. Але проблема не лише в слові «передано» замість «прийнято».</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Що чути</th><th>Цитата</th><th>Скільки (нижня межа, вручну)</th></tr></thead>
+    <tbody>
+      <tr><td><b>A.</b> Написано «прийнято», а показу немає</td><td>«пише що показання прийняті. але через добу вони не зафіксовані» [t1]; «В застосунку пише що показники прийняті до опрацювання. А в історії показників тільки кілька місячної давності.» [e4]; «Не відображаються нові показання лічильника, які були додані 1 грудня.» [y7]</td><td>35: YASNO 4, КомКом 1, сторонні 30</td></tr>
+      <tr><td><b>B.</b> Рахують за іншими цифрами: середнє, контролер, «зі стелі»</td><td>«Система нараховує цифри зі стелі і не сприймає фактичні покази.» [y7]; «хтось без мене вносить показники які не відповідають дійсності а я не можу їх виправити» [t1]</td><td>32: YASNO 3, ЗЕП 1, сторонні 28</td></tr>
+      <tr><td><b>C.</b> Прямо відмовляє, часто без причини</td><td>«Помилка має казати, що саме неправильно» [t1]; «той самий показник (минулого місяця) застосунок не приймає» [y7]</td><td>103 за регулярним виразом, шумно</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Що нового.</b> Газ дав «передано, а не прийнято» [n6]. Електрика дає наступний крок: людина бачить успіх, а показ зникає або не доходить. Вона перевіряє наступного дня, вносить знову, а дізнається з рахунку: «Один місяць не перевірила, то вони так і не збереглися» [t1]. Отже, недостатньо сказати «прийнято». Цифри мають одразу з'явитися в історії, лишитися там наступного дня, а рахунок має називати показ, за яким його пораховано.</p>
+  <p><b>Що це змінює.</b> <a href="../personas.html">Персона</a>: змінено тригер довіри, додано два болі, замінено цитату. Jobs: новий R6 (звідки взялися цифри, важливість 3), уточнено M, E1, R5, перший пункт ядра MVP. Гіпотеза 1: показ уже видно в історії. Рішення брифу 1 (постачальник — джерело правди) саме тут дає перевагу: у нас «прийнято» не залежить від чужої стиковки.</p>
+  <p><b>Межі.</b></p>
+  <ul>
+    <li><b>Сторонні застосунки.</b> 58 із 67 закодованих відгуків A і B — про Харенерго і Хмельницький Енерго, сторонні застосунки TARIFF MAX. Частина хибних успіхів може бути їхнім дефектом. В офіційних застосунках таких відгуків 9: цього досить, щоб сказати «є», але не «часто».</li>
+    <li><b>Один тип джерела.</b> Відповідь стоїть на Google Play. App Store дав порожню стрічку для YASNO і Куба; Reddit (403), форуми, Facebook, Instagram і коментарі Telegram отримати не вдалося. Споживчого застосунку ДТЕК не знайдено.</li>
+    <li><b>Частота невідома.</b> У сторах пишуть переважно незадоволені, і знаменника немає. Порівняти частоту з газом не можна.</li>
+  </ul>
+  <p>Побічні сигнали про кілька адрес, рідних і фото записано в notes, але статуси H1, H2 і H4 не змінено: питання №2 і №3 ще не досліджено.</p>
 
   <!-- ─────────────── Джерела ─────────────── -->
   <h2 id="refs">Джерела <span class="tag public">публічне</span></h2>
@@ -405,6 +427,12 @@
       <tr id="s-o3"><td>o3</td><td>Octopus — I accidentally sent an incorrect reading</td><td class="url"><a href="https://octopus.energy/help-and-faqs/articles/i-accidentally-sent-an-incorrect-reading-what-should-i-do/">i-accidentally-sent-an-incorrect-reading…</a></td><td>— (текст сторінки)</td></tr>
       <tr id="s-y6"><td>y6</td><td>YASNO Mobile, App Store (опис + відгуки)</td><td class="url"><a href="https://apps.apple.com/ua/app/yasno-mobile/id6446357858">apps.apple.com/…/id6446357858</a> · <a href="https://itunes.apple.com/ua/rss/customerreviews/page=1/id=6446357858/sortby=mostrecent/json">відгуки (RSS)</a></td><td><a href="screens/H1-yasno-appstore.png">H1-yasno-appstore.png</a></td></tr>
       <tr id="s-y7"><td>y7</td><td>YASNO, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.dsolutions.yasnomobile&amp;hl=uk&amp;gl=UA">play.google.com/…yasnomobile</a></td><td><a href="screens/H1-yasno-play.png">H1-yasno-play.png</a></td></tr>
+      <tr id="s-e1"><td>e1</td><td>ЛЕЗ (Львівенергозбут), Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.utilsuite.lez.prod&amp;hl=uk&amp;gl=UA">play.google.com/…com.utilsuite.lez.prod</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
+      <tr id="s-e2"><td>e2</td><td>Харківенергозбут, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.utilsuite.hez.prod&amp;hl=uk&amp;gl=UA">play.google.com/…com.utilsuite.hez.prod</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
+      <tr id="s-e3"><td>e3</td><td>ЗЕП (Запоріжжяелектропостачання), Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.zep.stage&amp;hl=uk&amp;gl=UA">play.google.com/…com.zep.stage</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
+      <tr id="s-e4"><td>e4</td><td>КомКом (Львівобленерго), Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.oe.svitlo&amp;hl=uk&amp;gl=UA">play.google.com/…com.oe.svitlo</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
+      <tr id="s-t1"><td>t1</td><td>Харенерго, сторонній застосунок, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=kharkiv.kharenergo2&amp;hl=uk&amp;gl=UA">play.google.com/…kharkiv.kharenergo2</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
+      <tr id="s-t2"><td>t2</td><td>Хмельницький Енерго, сторонній застосунок, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=khmelnytskyi.energo&amp;hl=uk&amp;gl=UA">play.google.com/…khmelnytskyi.energo</a></td><td>— (текст: <a href="notes/personas-doresearch.md">доресерч</a>)</td></tr>
       <tr id="s-y8"><td>y8</td><td>YASNO, відео «Передача показань двозонного лічильника»</td><td class="url"><a href="https://www.youtube.com/watch?v=w0ID5K6Ok78">youtube.com/watch?v=w0ID5K6Ok78</a></td><td>—</td></tr>
       <tr id="s-m2"><td>m2</td><td>monobank, App Store</td><td class="url"><a href="https://apps.apple.com/ua/app/monobank-digital-mobile-bank/id1287005205">apps.apple.com/…/id1287005205</a></td><td><a href="screens/S1-mono-appstore.png">S1-mono-appstore.png</a></td></tr>
       <tr id="s-m3"><td>m3</td><td>monobank, Google Play</td><td class="url"><a href="https://play.google.com/store/apps/details?id=com.ftband.mono&amp;hl=uk&amp;gl=UA">play.google.com/…ftband.mono</a></td><td><a href="screens/S1-mono-play.png">S1-mono-play.png</a></td></tr>
