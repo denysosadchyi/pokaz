@@ -1,0 +1,8 @@
+#!/bin/sh
+# STE-UA: staged .md і .html мусять пройти лінтер (tools/ste/RULES.md).
+files=$(git diff --cached --name-only --diff-filter=ACMR -- '*.md' '*.html')
+[ -z "$files" ] && exit 0
+python3 tools/ste/check.py $files || {
+  echo "Коміт зупинено: виправте текст за STE-UA (tools/ste/RULES.md)." >&2
+  exit 1
+}
