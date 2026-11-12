@@ -77,7 +77,7 @@ function classify(n) {
 }
 
 // ---------- текст ----------
-const FS = 13, LH = 17, TAG_FS = 10;
+const FS = 11, LH = 14, TAG_FS = 11;
 const cw = (s, size = FS, k = 0.6) => s.length * size * k;
 function wrap(text, maxChars) {
   const words = text.split(/\s+/);
@@ -101,17 +101,17 @@ function measure(n) {
     const tw = Math.max(...n.lines.map((l) => cw(l))) + 8;
     const th = n.lines.length * LH + 4;
     // вписаний прямокутник: tw/W + th/H <= 1
-    n.w = Math.ceil((tw * 1.55) / 4) * 4;
-    n.h = Math.ceil((th * 2.9) / 4) * 4;
+    n.w = Math.ceil((tw * 1.45) / 4) * 4;
+    n.h = Math.ceil((th * 2.5) / 4) * 4;
     return;
   }
   const max = c.kind === "screen" ? 22 : 26;
   n.lines = wrap(c.text, max);
-  const tagW = c.tag ? cw(c.tag.toUpperCase(), TAG_FS, 0.62) + 12 : 0;
+  const tagW = 0;
   const textW = Math.max(...n.lines.map((l) => cw(l, FS, c.kind === "screen" ? 0.64 : 0.6)), tagW);
-  const padX = c.kind === "ok" || c.kind === "dead" ? 24 : 14;
-  n.w = Math.max(120, Math.ceil((textW + padX * 2) / 4) * 4);
-  n.h = Math.ceil((n.lines.length * LH + (c.tag ? 22 : 0) + 20) / 4) * 4;
+  const padX = c.kind === "ok" || c.kind === "dead" ? 18 : 12;
+  n.w = Math.max(100, Math.ceil((textW + padX * 2) / 4) * 4);
+  n.h = Math.ceil((n.lines.length * LH + 18) / 4) * 4;
 }
 
 // ---------- щасливий шлях ----------
@@ -201,8 +201,8 @@ async function render(src, cfg) {
       "elk.algorithm": "layered",
       "elk.direction": "DOWN",
       "elk.edgeRouting": "ORTHOGONAL",
-      "elk.layered.spacing.nodeNodeBetweenLayers": "40",
-      "elk.spacing.nodeNode": "36",
+      "elk.layered.spacing.nodeNodeBetweenLayers": "28",
+      "elk.spacing.nodeNode": "24",
       "elk.layered.spacing.edgeNodeBetweenLayers": "20",
       "elk.layered.spacing.edgeEdgeBetweenLayers": "14",
       "elk.spacing.edgeEdge": "14",
@@ -235,11 +235,12 @@ async function render(src, cfg) {
     clipEnd(pts, nodes.get(e.to), false);
     const isHappy = happy.has(e.id);
     const back = pts[pts.length - 1].y < pts[0].y - 1; // повернення вгору — пунктир
-    edgeSvg.push(`<path d="${roundedPath(pts.map((p) => ({ x: f(p.x), y: f(p.y) })))}" fill="none" stroke="${isHappy ? C.ok : C.line}" stroke-width="${isHappy ? 2.4 : 1.2}"${back && !isHappy ? ' stroke-dasharray="5,4"' : ""} marker-end="url(#${cfg.slug}-${isHappy ? "ah" : "a"})"/>`);
+    const da = ` data-from="${esc(e.from)}" data-to="${esc(e.to)}"${back ? ' data-back="1"' : ""}`;
+    edgeSvg.push(`<path class="fl-edge"${da} d="${roundedPath(pts.map((p) => ({ x: f(p.x), y: f(p.y) })))}" fill="none" stroke="${isHappy ? C.ok : C.line}" stroke-width="${isHappy ? 2.4 : 1.2}"${back && !isHappy ? ' stroke-dasharray="5,4"' : ""} marker-end="url(#${cfg.slug}-${isHappy ? "ah" : "a"})"/>`);
     if (e.label) {
       // підпис — біля виходу з розвилки, збоку від першого сегмента, з відступом 8px
       const t = e.label.toUpperCase();
-      const tw = cw(t, 10.5, 0.62) + 8;
+      const tw = cw(t, 11, 0.62) + 8;
       const a = pts[0], b = pts[1];
       let cx, cy;
       if (Math.abs(a.x - b.x) < 0.5) {
@@ -254,8 +255,8 @@ async function render(src, cfg) {
         cx = a.x + Math.sign(b.x - a.x) * Math.min(14 + tw / 2, len / 2);
         cy = a.y - 8 - 7;
       }
-      labelSvg.push(`<rect x="${f(cx - tw / 2)}" y="${f(cy - 7)}" width="${f(tw)}" height="14" rx="2" fill="${C.paper}"/>` +
-        `<text x="${f(cx)}" y="${f(cy + 3.6)}" text-anchor="middle" class="fl-lbl"${isHappy ? ` fill="${C.ok}" font-weight="600"` : ""}>${esc(t)}</text>`);
+      labelSvg.push(`<g class="fl-edge"${da}><rect x="${f(cx - tw / 2)}" y="${f(cy - 7)}" width="${f(tw)}" height="14" rx="2" fill="${C.paper}"/>` +
+        `<text x="${f(cx)}" y="${f(cy + 3.6)}" text-anchor="middle" class="fl-lbl"${isHappy ? ` fill="${C.ok}" font-weight="600"` : ""}>${esc(t)}</text></g>`);
     }
   }
 
@@ -281,15 +282,19 @@ async function render(src, cfg) {
       const rx = n.kind === "ok" || n.kind === "dead" ? Math.min(h / 2, 22) : 6;
       shape = `<rect x="${f(x)}" y="${f(y)}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"${dash}/>`;
     }
-    let ty = y + h / 2 - ((n.lines.length - 1) * LH) / 2 + 4.5;
+    let ty = y + h / 2 - ((n.lines.length - 1) * LH) / 2 + 3.8;
+    // тип вузла не друкується в боксі — він з'являється підказкою при наведенні
     let tag = "";
     if (n.tag) {
-      ty += 9;
-      tag = `<text x="${f(x + w / 2)}" y="${f(ty - LH - 3)}" text-anchor="middle" class="fl-tag" fill="${tagFill}">${esc(n.tag.toUpperCase())}</text>`;
+      const label = n.tag.toUpperCase();
+      const tw = Math.ceil(cw(label, TAG_FS, 0.66) + 16);
+      const tx = x + w / 2 - tw / 2, tyy = y - 24;
+      tag = `<title>${esc(n.tag)}</title><g class="fl-tip"><rect x="${f(tx)}" y="${f(tyy)}" width="${tw}" height="20" rx="4" fill="#ffffff" stroke="${tagFill}"/>` +
+        `<text x="${f(x + w / 2)}" y="${f(tyy + 14)}" text-anchor="middle" class="fl-tag" fill="${tagFill}">${esc(label)}</text></g>`;
     }
     const cls = n.kind === "screen" || n.kind === "ok" || n.kind === "dead" ? "fl-name" : "fl-text";
     const text = n.lines.map((l, i) => `<tspan x="${f(x + w / 2)}" y="${f(ty + i * LH)}">${esc(l)}</tspan>`).join("");
-    nodeSvg.push(`<g>${shape}${tag}<text text-anchor="middle" class="${cls}">${text}</text></g>`);
+    nodeSvg.push(`<g class="fl-node" data-id="${esc(n.id)}">${shape}<text text-anchor="middle" class="${cls}">${text}</text>${tag}</g>`);
   }
 
   // легенда — горизонтальна смуга знизу
@@ -319,7 +324,7 @@ async function render(src, cfg) {
   const nTotal = nodes.size;
   const nDead = [...nodes.values()].filter((n) => n.kind === "dead").length;
   const nOk = [...nodes.values()].filter((n) => n.kind === "ok").length;
-  return `<svg class="flow-svg" viewBox="0 0 ${VW} ${VH}" width="${VW}" height="${VH}" style="min-width:${VW}px" role="img" aria-labelledby="${id}-title ${id}-desc" xmlns="http://www.w3.org/2000/svg">` +
+  return `<svg class="flow-svg" viewBox="0 0 ${VW} ${VH}" width="${VW}" height="${VH}" role="img" aria-labelledby="${id}-title ${id}-desc" xmlns="http://www.w3.org/2000/svg">` +
     `<title id="${id}-title">${esc(cfg.title)}</title>` +
     `<desc id="${id}-desc">Блок-схема з ${nTotal} вузлів: ${nOk} успішні кінці, ${nDead} тупики; зеленим виділено щасливий шлях. Словесний опис — під діаграмою.</desc>` +
     `<defs>` +
