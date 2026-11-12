@@ -1,102 +1,117 @@
 /* Навігатор репо — службовий інструмент, не частина продукту.
-   Нейтральний стиль; усі класи з префіксом repo-nav / nav-, щоб не перетинатися зі сторінками. */
+   Білий фон, Inter 13px, бірюзові активні стани. Вкладені рівні — з тонкою
+   напрямною лінією зліва, а не з відступами-сходами.
+   Усі класи з префіксом repo-nav / nav-, щоб не перетинатися зі сторінками. */
 .repo-nav {
-  --nav-w: 240px;
-  --nav-bg: #f6f6f6;
-  --nav-fg: #333333;
-  --nav-muted: #888888;
-  --nav-line: #e2e2e2;
-  --nav-hover: #ebebeb;
-  --nav-current-bg: #e0e0e0;
-  --nav-current-fg: #000000;
+  --nav-w: 256px;
+  --nav-bg: #ffffff;
+  --nav-fg: #1d1d1d;
+  --nav-text: #3d3d3d;
+  --nav-muted: #8a8a8a;
+  --nav-line: #ececec;
+  --nav-hover: #f4f4f4;
+  --nav-active: #0f766e;
+  --nav-active-strong: #115e59;
+  --nav-active-bg: #e8f4f1;
 
   position: fixed;
   inset: 0 auto 0 0;
   width: var(--nav-w);
   overflow-y: auto;
   box-sizing: border-box;
-  padding: 12px 8px 24px;
+  padding: 20px 12px 32px;
   background: var(--nav-bg);
-  color: var(--nav-fg);
+  color: var(--nav-text);
   border-right: 1px solid var(--nav-line);
-  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 400 13px/1.35 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
   z-index: 1000;
 }
 
-
-body.has-repo-nav { margin-left: 240px; }
+body.has-repo-nav { margin-left: var(--nav-w, 256px); }
 
 .repo-nav-head {
   display: block;
-  padding: 6px 8px 10px;
-  margin-bottom: 6px;
-  border-bottom: 1px solid var(--nav-line);
+  padding: 0 10px 16px 30px;
   color: var(--nav-muted);
   font-size: 11px;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  text-decoration: none;
 }
 
 .repo-nav .nav-list { list-style: none; margin: 0; padding: 0; }
+.repo-nav .nav-list > li + li { margin-top: 1px; }
+.repo-nav > .nav-list > li + li { margin-top: 4px; }
 
-.repo-nav .nav-list .nav-list { margin: 1px 0 4px; }
-
-.repo-nav .nav-row {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding-left: calc(var(--depth, 0) * 14px);
+/* Вкладений рівень: напрямна під шевроном батька */
+.repo-nav .nav-list .nav-list {
+  margin: 2px 0 4px 10px;
+  padding-left: 0;
+  border-left: 1px solid var(--nav-line);
 }
-.repo-nav .nav-row.is-leaf { padding-left: calc(var(--depth, 0) * 14px + 26px); }
+
+.repo-nav .nav-row { display: flex; align-items: center; gap: 0; padding-left: 0 !important; }
+.repo-nav .nav-row.is-leaf { padding-left: 20px !important; }
 
 .repo-nav .nav-toggle {
   flex: none;
-  width: 24px;
-  height: 28px;
+  width: 20px;
+  height: 30px;
   padding: 0;
-  border: 0;
-  border-radius: 4px;
-  background: transparent;
-  color: var(--nav-muted);
+  border: 0 !important;
+  border-radius: 6px;
+  background: transparent !important;
+  color: var(--nav-muted) !important;
   cursor: pointer;
 }
 .repo-nav .nav-toggle::before {
   content: "";
   display: block;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   margin: auto;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: rotate(-45deg);
   transition: transform .15s ease;
 }
-.repo-nav .nav-toggle[aria-expanded="true"]::before { transform: rotate(45deg); }
-.repo-nav .nav-toggle:hover { background: var(--nav-hover); color: var(--nav-fg); }
-.repo-nav .nav-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.repo-nav .nav-toggle[aria-expanded="true"]::before { transform: rotate(45deg) translate(-1px, -1px); }
+.repo-nav .nav-toggle:hover { color: var(--nav-active) !important; }
 
 .repo-nav .nav-link {
   flex: 1;
   min-width: 0;
   display: block;
-  padding: 5px 8px;
-  border-radius: 4px;
-  color: inherit;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--nav-text);
   text-decoration: none;
+  transition: background-color .12s ease, color .12s ease;
 }
-.repo-nav .nav-list .nav-list .nav-link { color: var(--nav-muted); }
+.repo-nav > .nav-list > li > .nav-row > .nav-link { color: var(--nav-fg); font-weight: 500; }
+.repo-nav .nav-list .nav-list .nav-link { color: var(--nav-text); }
+.repo-nav .nav-list .nav-list .nav-list .nav-link { color: #5c5c5c; }
+
 .repo-nav .nav-link:hover { background: var(--nav-hover); color: var(--nav-fg); }
-.repo-nav .nav-link:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.repo-nav .nav-link:focus-visible,
+.repo-nav .nav-toggle:focus-visible { outline: 2px solid var(--nav-active); outline-offset: -2px; }
+
 .repo-nav .nav-link[aria-current="page"] {
-  background: var(--nav-current-bg);
-  color: var(--nav-current-fg);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-strong) !important;
   font-weight: 600;
 }
-.repo-nav .nav-link[aria-current="location"] { color: var(--nav-current-fg); font-weight: 600; }
+.repo-nav .nav-link[aria-current="location"] {
+  color: var(--nav-active) !important;
+  font-weight: 600;
+  background: transparent;
+}
 .repo-nav [hidden] { display: none; }
 
-@media (prefers-reduced-motion: reduce) { .repo-nav .nav-toggle::before { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .repo-nav .nav-toggle::before, .repo-nav .nav-link { transition: none; }
+}
 
 /* Вузький екран: меню над сторінкою, а не збоку. */
 @media (max-width: 720px) {

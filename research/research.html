@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Показ — ресерч</title>
-  <link rel="stylesheet" href="../_nav/nav.css?v=202611121015">
-  <script src="../_nav/tree.js?v=202611121015"></script>
-  <script src="../_nav/nav.js?v=202611121015" defer></script>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121200">
+  <script src="../_nav/tree.js?v=202611121200"></script>
+  <script src="../_nav/nav.js?v=202611121200" defer></script>
   <style>
     :root {
       color-scheme: light;
@@ -22,11 +22,6 @@
       --warn: #5e5e5e;
       --ok: #5b5b5b;
     }
-    /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
-    .repo-nav {
-      --nav-bg: #efefef; --nav-fg: #373737; --nav-muted: #6a6a6a; --nav-line: #d7d7d7;
-      --nav-hover: #e3e3e3; --nav-current-bg: #d9d9d9; --nav-current-fg: #1d1d1d;
-    }
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -40,7 +35,6 @@
       margin: 64px 0 8px; padding-top: 16px; border-top: 1px solid var(--line);
       font-size: 24px;
     }
-    h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
     h3 { margin: 32px 0 8px; font-size: 18px; }
     p, ul, ol { max-width: none; }
     a { color: var(--link); text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); text-underline-offset: 2px; }
@@ -103,8 +97,8 @@
       h1 { font-size: 26px; }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;1,400&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="../assets/type.css?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;1,400&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/type.css?v=7">
 </head>
 <body>
 <main>
@@ -128,7 +122,7 @@
     «<span class="nc">Дані не підтверджені</span>» — твердження без зібраного джерела.</p>
 
   <!-- ─────────────── 1 ─────────────── -->
-  <h2 id="competitors"><span class="num">1</span>Конкуренти</h2>
+  <h2 id="competitors">Конкуренти</h2>
   <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/04-matrix.md">notes/04-matrix.md</a>.</p>
 
   <h3>Кого порівнювали</h3>
@@ -241,7 +235,7 @@
   </ol>
 
   <!-- ─────────────── 2 ─────────────── -->
-  <h2 id="benchmark"><span class="num">2</span>Бенчмарк</h2>
+  <h2 id="benchmark">Бенчмарк</h2>
   <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/05-benchmark.md">notes/05-benchmark.md</a>.</p>
 
   <h3>Вимір: «Завершення задачі»</h3>
@@ -314,7 +308,7 @@
   </div>
 
   <!-- ─────────────── 3 ─────────────── -->
-  <h2 id="patterns"><span class="num">3</span>Патерни</h2>
+  <h2 id="patterns">Патерни</h2>
   <p>Повна версія — <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/06-patterns.md">notes/06-patterns.md</a>.</p>
 
   <h3>Обраний патерн: пряма форма з контекстом, де фото — рівноправне джерело цифр</h3>
@@ -341,7 +335,7 @@
   <p>Приклади застосування п'яти патернів у notes/06-patterns.md подано без джерел — <span class="nc">дані не підтверджені</span>.</p>
 
   <!-- ─────────────── 4 ─────────────── -->
-  <h2 id="conclusions"><span class="num">4</span>Висновки: прогалини → гіпотези</h2>
+  <h2 id="conclusions">Висновки: прогалини → гіпотези</h2>
   <p>Формат: <em>Якщо ми зробимо X, то Y, бо Z. Перевіримо: …</em></p>
   <div class="table-wrap"><table>
     <thead><tr><th>#</th><th>Прогалина ринку</th><th>Гіпотеза</th><th>Звідки випливає</th></tr></thead>

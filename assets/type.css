@@ -1,25 +1,22 @@
-/* Типографіка сайту за системою diagram-design:
-   заголовки — Instrument Serif / Noto Serif (кирилиця), текст — Geist,
-   технічне (коди джерел, мітки, заголовки таблиць) — Geist Mono.
+/* Типографіка й активні елементи сайту.
+   Заголовки h1/h2 — Noto Serif, весь інший текст — Inter, включно з діаграмами (обидва з кирилицею).
+   Моно — лише справжній код (<code>, <kbd>).
+   Активні елементи (посилання, кнопки, поточний пункт навігатора, фокус) — бірюза.
    Підключається ПІСЛЯ вбудованого <style>, тому перекриває його. */
 :root {
   --font-serif: "Noto Serif", Georgia, serif; /* Instrument Serif без кирилиці — щоб «персони і jobs» не змішували гарнітури */
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 body {
   font-family: var(--font-sans);
   font-size: 17px; line-height: 1.65;
-  font-feature-settings: "ss01";
+  font-feature-settings: "cv11", "ss03";
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
 h1, h2 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; }
 h1 { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; margin-bottom: 12px; }
 h2 { font-size: 27px; line-height: 1.2; margin-top: 72px; padding-top: 20px; }
-h2 .num {
-  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.12em;
-  vertical-align: 0.5em; margin-right: 12px;
-}
 h3 { font-family: var(--font-sans); font-weight: 600; font-size: 19px; line-height: 1.35; margin-top: 40px; }
 h4 { font-family: var(--font-sans); font-weight: 600; font-size: 17px; }
 p, li { margin-top: 0; }
@@ -28,10 +25,9 @@ li + li { margin-top: 6px; }
 .lead { font-size: 19px; line-height: 1.6; }
 b, strong { font-weight: 600; }
 
-/* Технічне — моно */
-code, kbd, .ref, .src, .num, .meta, .label, .eyebrow {
-  font-family: var(--font-mono);
-}
+/* Моно — лише код; мітки й коди джерел — Inter */
+code, kbd { font-family: var(--font-mono); }
+.ref, .src, .meta, .label, .eyebrow { font-family: var(--font-sans); }
 code { font-size: 0.86em; }
 .meta { font-size: 12.5px; letter-spacing: 0.02em; }
 .label, .eyebrow { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
@@ -39,7 +35,7 @@ code { font-size: 0.86em; }
 /* Таблиці: заголовки — моно-мітки, цифри — табличні */
 table { font-size: 15px; line-height: 1.5; font-variant-numeric: tabular-nums; }
 thead th {
-  font-family: var(--font-mono); font-weight: 500; font-size: 11.5px;
+  font-family: var(--font-sans); font-weight: 500; font-size: 11.5px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted, #5b5b5b);
 }
 th, td { padding: 12px 14px; }
@@ -49,7 +45,51 @@ tbody th { font-weight: 600; }
 .note { font-size: 16px; line-height: 1.6; }
 blockquote, .quote { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.45; }
 
-/* Навігатор у тій самій гарнітурі */
-.repo-nav { font-family: var(--font-sans); }
-.repo-nav .nav-title, .repo-nav header { font-family: var(--font-mono); }
+
 blockquote cite { font-family: var(--font-sans); font-style: normal; font-size: 13px; }
+
+/* ── Активні елементи — бірюза ── */
+:root {
+  --active: #0f766e; --active-hover: #115e59;
+  --active-tint: #e3f2ef; --active-tint-2: #eef7f5;
+}
+a { color: var(--active); }
+a:hover { color: var(--active-hover); }
+:focus-visible { outline: 2px solid var(--active) !important; outline-offset: 2px; }
+main button {
+  color: var(--active) !important; border-color: color-mix(in srgb, var(--active) 40%, transparent) !important;
+  background: var(--active-tint-2) !important; font-family: var(--font-sans);
+}
+main button:hover { background: var(--active-tint) !important; border-color: var(--active) !important; }
+.tag.primary { background: var(--active) !important; border-color: var(--active) !important; color: #fff !important; }
+.job:target, .main-job:target { outline-color: var(--active) !important; background: var(--active-tint-2); }
+
+
+/* ── Єдина шкала розмірів: лише 5 кроків ──
+   11 мітки · 13 дрібне і навігатор · 15 текст · 17 підзаголовок/лід · 24 h2 · 32 h1.
+   Перекриває розміри з вбудованих <style> сторінок. */
+:root { --fs-label: 11px; --fs-small: 13px; --fs-body: 15px; --fs-h3: 20px; --fs-h2: 32px; --fs-h1: 40px; --fs-nav: 13px; }
+html body { font-size: var(--fs-body); line-height: 1.6; }
+html body h1 { font-size: var(--fs-h1); line-height: 1.15; }
+html body h2 { font-size: var(--fs-h2); line-height: 1.25; }
+html body h3, html body .persona h3 { font-size: var(--fs-h3); line-height: 1.35; font-weight: 600; }
+html body h4, html body .card h4, html body .card > h3 { font-size: var(--fs-body); line-height: 1.4; }
+html body .lead { font-size: 17px; line-height: 1.55; }
+
+html body p, html body li, html body td, html body th, html body table,
+html body .card p, html body .card li, html body .job, html body .job b,
+html body .tree .main-job p, html body blockquote, html body .note,
+html body .score b, html body .group .empty { font-size: var(--fs-body); }
+html body table { line-height: 1.5; }
+
+html body .meta, html body .job .meta, html body .tree .main-job .meta, html body blockquote cite,
+html body footer, html body figcaption, html body .toc a, html body .jobs-label,
+html body .node-group { font-size: var(--fs-small); }
+
+html body .label, html body .card .label, html body .tree .main-job .label, html body .tree .group h3,
+html body thead th, html body table.trace thead th, html body .tag, html body .ref, html body .q,
+html body .job-chip, html body code { font-size: var(--fs-label); }
+html body code { font-size: 0.875em; }
+@media (max-width: 720px) {
+  :root { --fs-h1: 30px; --fs-h2: 25px; }
+}
