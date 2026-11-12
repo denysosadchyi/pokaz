@@ -4,26 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Показ — ресерч</title>
-  <link rel="stylesheet" href="../_nav/nav.css?v=202611121010">
-  <script src="../_nav/tree.js?v=202611121010"></script>
-  <script src="../_nav/nav.js?v=202611121010" defer></script>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121013">
+  <script src="../_nav/tree.js?v=202611121013"></script>
+  <script src="../_nav/nav.js?v=202611121013" defer></script>
   <style>
     :root {
       color-scheme: light;
-      --bg: #faf8f3;
+      --bg: #f8f8f8;
       --surface: #ffffff;
-      --surface-2: #f2efe7;
-      --line: #dcd7cb;
-      --fg: #1f1d1a;
-      --muted: #5f5b53;
-      --accent: #7a5a1e;
-      --warn: #8a5a00;
-      --ok: #2f6b3a;
+      --surface-2: #efefef;
+      --line: #d7d7d7;
+      --fg: #1d1d1d;
+      --muted: #5b5b5b;
+      --accent: #5c5c5c;
+      --warn: #5e5e5e;
+      --ok: #5b5b5b;
     }
     /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
     .repo-nav {
-      --nav-bg: #f2efe7; --nav-fg: #3a3732; --nav-muted: #6f6a60; --nav-line: #dcd7cb;
-      --nav-hover: #e8e3d8; --nav-current-bg: #e0d9c8; --nav-current-fg: #1f1d1a;
+      --nav-bg: #efefef; --nav-fg: #373737; --nav-muted: #6a6a6a; --nav-line: #d7d7d7;
+      --nav-hover: #e3e3e3; --nav-current-bg: #d9d9d9; --nav-current-fg: #1d1d1d;
     }
     * { box-sizing: border-box; }
     body {
@@ -74,21 +74,21 @@
       display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px;
       border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
     }
-    .tag.public { color: var(--ok); border-color: #a9cdb0; }
+    .tag.public { color: var(--ok); border-color: #c3c3c3; }
     .tag.own { color: var(--muted); }
-    .tag.brief { color: var(--accent); border-color: #cdbf9f; }
+    .tag.brief { color: var(--accent); border-color: #c0c0c0; }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
     .card { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
     .card h4 { margin: 0 0 6px; font-size: 16px; }
     .card p { margin: 0 0 8px; font-size: 15px; }
     .card .label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin: 10px 0 2px; }
-    .card.dont { border-color: #d8c296; }
+    .card.dont { border-color: #c4c4c4; }
 
     .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 12px 0 24px; }
     figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
     figure a { display: block; }
-    figure img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: #f2efe7; }
+    figure img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: #efefef; }
     figcaption { padding: 8px 12px; font-size: 13px; color: var(--muted); }
     figcaption b { color: var(--fg); font-weight: 600; }
 

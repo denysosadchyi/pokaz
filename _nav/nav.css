@@ -3,12 +3,12 @@
 .repo-nav {
   --nav-w: 240px;
   --nav-bg: #f6f6f6;
-  --nav-fg: #333;
-  --nav-muted: #888;
+  --nav-fg: #333333;
+  --nav-muted: #888888;
   --nav-line: #e2e2e2;
   --nav-hover: #ebebeb;
   --nav-current-bg: #e0e0e0;
-  --nav-current-fg: #000;
+  --nav-current-fg: #000000;
 
   position: fixed;
   inset: 0 auto 0 0;
