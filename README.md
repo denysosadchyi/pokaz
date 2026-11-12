@@ -45,7 +45,7 @@
 | [personas.md](personas.md) | Реєстр персон: primary Наталя, secondary Андрій, сценарій «з телефона» |
 | [jtbd.md](jtbd.md) | Jobs to be done: main job, ієрархія, JTBD-матриця, гіпотези |
 | [sitemap.md](sitemap.md) | Реєстр продукту: сутності зі статусами, реєстр екранів, навігаційна модель, матриця трасування |
-| [flows.md](flows.md) | User flows у Mermaid: main job M і related jobs R6, R2, R7. Flows показують стани й тупики |
+| [flows.md](flows.md) | User flows у Mermaid: main job M і related jobs R6, R2, R7. Flows показують стани й кінці без виходу |
 | [ia.html](ia.html) · [на сайті](https://denysosadchyi.github.io/pokaz/ia.html) | IA на одній HTML-сторінці: дерево sitemap, flows, матриця трасування |
 | [research/notes/personas-review.md](research/notes/personas-review.md) | Критика персон і jobs: статус кожного твердження, ризики, 3 питання |
 | [research/notes/personas-doresearch.md](research/notes/personas-doresearch.md) | Докази доресерчу: відгуки Google Play про показ за електрику |

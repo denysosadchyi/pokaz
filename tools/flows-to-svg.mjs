@@ -4,7 +4,7 @@
 //   ELK_PATH=~/tools/elk/node_modules/elkjs node tools/flows-to-svg.mjs
 //
 // Розкладка — ELK (layered, ортогональні лінії), вигляд — власний:
-// форма несе тип вузла, зелене — щасливий шлях, тупики — темний текст на рожевому.
+// форма несе тип вузла, зелене — основний шлях, кінці без виходу — темний текст на рожевому.
 import { readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { homedir } from "node:os";
@@ -21,7 +21,7 @@ const blocks = [...md.matchAll(/```mermaid\n([\s\S]*?)```/g)].map((m) => m[1]);
 const HAPPY = [
   { slug: "m", title: "M. Закрити місяць без сумніву", via: ["home", "reading", "fields", "photoOk", "accepted", "history", "wait", "bill", "paid", "okClosed"] },
   { slug: "r6", title: "R6. Знати, звідки взялися цифри", via: ["home", "okClear"] },
-  { slug: "r2", title: "R2. Виправити помилку без мороки", via: ["home", "reading", "okFixed"] },
+  { slug: "r2", title: "R2. Виправити помилку в показі", via: ["home", "reading", "okFixed"] },
   { slug: "r7", title: "R7. Вести чужий рахунок", via: ["home", "connected", "okAccount"] },
 ];
 
@@ -56,7 +56,8 @@ function parse(src) {
 const KINDS = [
   ["успіх кроку:", "step", "Успіх кроку"],
   ["успіх:", "ok", "Успіх"],
-  ["тупик:", "dead", "Тупик"],
+  ["без виходу:", "dead", "Без виходу"],
+  ["тупик:", "dead", "Без виходу"], // стара назва
   ["loading:", "loading", "Завантаження"],
   ["error:", "error", "Помилка"],
   ["empty:", "empty", "Порожньо"],
@@ -114,7 +115,7 @@ function measure(n) {
   n.h = Math.ceil((n.lines.length * LH + 18) / 4) * 4;
 }
 
-// ---------- щасливий шлях ----------
+// ---------- основний шлях ----------
 function shortest(adj, a, b) {
   const prev = new Map([[a, null]]);
   const q = [a];
@@ -183,7 +184,7 @@ async function render(src, cfg) {
   for (let i = 0; i < cfg.via.length - 1; i++) shortest(adj, cfg.via[i], cfg.via[i + 1]).forEach((e) => happy.add(e.id));
   const happyNodes = new Set(cfg.via);
   edges.forEach((e) => { if (happy.has(e.id)) { happyNodes.add(e.from); happyNodes.add(e.to); } });
-  // Інші успішні кінці: гілка від найближчого вузла щасливого шляху, повз помилки й тупики.
+  // Інші успішні кінці: гілка від найближчого вузла основного шляху, повз помилки й кінці без виходу.
   const blocked = (id) => ["error", "dead", "link"].includes(nodes.get(id).kind);
   for (const t of [...nodes.values()].filter((n) => n.kind === "ok" && !happyNodes.has(n.id))) {
     const prev = new Map([...happyNodes].map((id) => [id, null]));
@@ -301,7 +302,7 @@ async function render(src, cfg) {
   const LEG_Y = H0 + 24;
   const items = [
     ["screen", "екран"], ["decision", "розвилка"], ["state", "стан"], ["error", "помилка"],
-    ["link", "перехід"], ["ok", "успіх"], ["dead", "тупик"], ["happy", "щасливий шлях"], ["back", "повернення"],
+    ["link", "перехід"], ["ok", "успіх"], ["dead", "без виходу"], ["happy", "основний шлях"], ["back", "повернення"],
   ];
   let lx = 8;
   const leg = items.map(([k, t]) => {
@@ -326,7 +327,7 @@ async function render(src, cfg) {
   const nOk = [...nodes.values()].filter((n) => n.kind === "ok").length;
   return `<svg class="flow-svg" viewBox="0 0 ${VW} ${VH}" width="${VW}" height="${VH}" role="img" aria-labelledby="${id}-title ${id}-desc" xmlns="http://www.w3.org/2000/svg">` +
     `<title id="${id}-title">${esc(cfg.title)}</title>` +
-    `<desc id="${id}-desc">Блок-схема з ${nTotal} вузлів: ${nOk} успішні кінці, ${nDead} тупики; зеленим виділено щасливий шлях. Словесний опис — під діаграмою.</desc>` +
+    `<desc id="${id}-desc">Блок-схема з ${nTotal} вузлів: ${nOk} успішні кінці, ${nDead} кінці без виходу; зеленим виділено основний шлях. Словесний опис — під діаграмою.</desc>` +
     `<defs>` +
     `<marker id="${cfg.slug}-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="${C.line}"/></marker>` +
     `<marker id="${cfg.slug}-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="${C.ok}"/></marker>` +

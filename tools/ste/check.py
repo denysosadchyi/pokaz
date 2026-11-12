@@ -54,6 +54,26 @@ BANNED = {
     r"\bзабезпечу\w*|\bзабезпечи\w*": "давати, робити",
     r"\bімплементу\w*|\bімплементац\w*": "робити, зробити",
     r"\bоптимальн\w*": "найкращий (назвіть критерій)",
+    # Фразеологізми й метафори: пишіть буквально.
+    r"\bнижн\w*\s+меж\w*|\bверхн\w*\s+меж\w*": "щонайменше, найбільше",
+    r"\bзнаменник\w*": "загальна кількість (назвіть чого)",
+    r"\bтупик\w*": "без виходу",
+    r"\bсирот\w*": "екран без job, job без екрана",
+    r"\b(біль|болю|болі|болем|болях|болями|болів)\b": "проблема",
+    r"\bголос\w*\s+людей|\bголос\w*\s+користувач\w*": "слова людей, відгуки",
+    r"\bщаслив\w*\s+шлях\w*": "основний шлях",
+    r"\bза\s+раз\b": "за одну сесію, одразу",
+    r"\b[ув]\s+голові\b": "пам'ятати",
+    r"\bпід\s+капотом\b": "усередині (назвіть де)",
+    r"\bв\s+один\s+клік\b|\bв\s+один\s+дотик\b": "однією дією",
+    r"\bвузьк\w*\s+місц\w*": "проблема (назвіть яка)",
+    r"\bсліп\w*\s+зон\w*|\bбіл\w*\s+плям\w*": "те, чого ми не знаємо",
+    r"\bз\s+коробки\b|\bна\s+льоту\b": "одразу",
+    r"\bчорн\w*\s+скриньк\w*": "незрозуміло (назвіть що)",
+    r"\bточк\w*\s+(опори|відліку)\b|\bвідправн\w*\s+точк\w*": "початок, база",
+    r"\bзолот\w*\s+середин\w*|\bчервон\w*\s+нит\w*|\bвершин\w*\s+айсберга\b": "назвіть буквально",
+    r"\bморок\w*|\bзаморочк\w*": "зусилля, кроки (назвіть які)",
+    r"\bна\s+пальцях\b|\bу\s+сухому\s+залишку\b|\bпо\s+факту\b": "назвіть буквально",
 }
 BANNED_RE = [(re.compile(k, re.I | re.U), v) for k, v in BANNED.items()]
 
@@ -114,6 +134,14 @@ def check_block(block, where, out):
             out.append(("E", where, f"дієприслівник «{m.group(0)}» → окреме речення з дієсловом"))
 
 
+def check_banned(text, where, out):
+    """Заголовки й підписи: лише заборонені слова, без довжини речень."""
+    text = QUOTE_RE.sub("«цитата»", re.sub(r"\s+", " ", text))
+    for rx, repl in BANNED_RE:
+        for m in rx.finditer(text):
+            out.append(("E", where, f"заборонене слово «{m.group(0)}» → {repl}"))
+
+
 def short(s, n=90):
     s = s.strip()
     return s if len(s) <= n else s[: n - 1] + "…"
@@ -156,6 +184,8 @@ def check_markdown(text, name):
         m = re.match(r"^(```+|~~~+)", line)
         if m:
             flush(); fence = m.group(1); continue
+        if re.match(r"^#{1,6}\s", line):
+            flush(); check_banned(strip_inline(line.lstrip("#")), f"{name}:{ln}", out); continue
         if not line or re.match(r"^(#{1,6}\s|>|<!--|-{3,}$|\*{3,}$|<\/?[a-z]+[^>]*>$)", line):
             flush(); continue
         if line.startswith("|"):
@@ -188,6 +218,7 @@ class Extract(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.blocks, self.buf, self.skip, self.head = [], [], 0, 0
+        self.headings = []
         self.start_line = 1
 
     def flush(self):
@@ -218,13 +249,14 @@ class Extract(HTMLParser):
             self.skip = max(0, self.skip - 1)
             return
         if tag in HEAD:
+            self.headings.append((self.start_line, "".join(self.buf)))
             self.buf = []
             self.head = max(0, self.head - 1)
         if tag in BLOCK:
             self.flush()
 
     def handle_data(self, data):
-        if self.skip or self.head:
+        if self.skip:
             return
         if not self.buf:
             self.start_line = self.getpos()[0]
@@ -237,6 +269,8 @@ def check_html(text, name):
     p = Extract()
     p.feed(text)
     p.flush()
+    for ln, h in p.headings:
+        check_banned(h, f"{name}:{ln}", out)
     for ln, block in p.blocks:
         block = re.sub(r"https?://\S+", " URL ", block)
         check_block(block, f"{name}:{ln}", out)
