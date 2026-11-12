@@ -30,14 +30,14 @@ MAX_SENTENCES = 6     # абзац або пункт списку
 # Заборонені слова → дозволена заміна. Ключ — регулярний вираз (без урахування регістру).
 BANNED = {
     r"здійсн\w*": "робити, вносити, платити",
-    r"являє\s+собою|являєть?ся|являються": "є",
+    r"(?<![\w'’ʼ])(?:являє\s+собою|являєть?ся|являються)": "є",
     r"\bданн?(ий|а|е|ого|ої|ому|ою)\b": "цей, ця, це",
     r"\bнаразі\b": "зараз",
     r"\bна\s+даний\s+момент\b": "зараз",
     r"\bу\s+зв['’]язку\s+з\b|\bв\s+зв['’]язку\s+з\b": "тому що, через",
     r"\bз\s+метою\b": "щоб",
     r"\bзадля\b": "щоб, для",
-    r"\bшляхом\b": "через, так:",
+    r"\bшляхом\s+\w+(нн|тт)я\b": "через, так:",
     r"\b[ув]\s+рамках\b": "у, під час",
     r"\bвідносно\b": "про, щодо",
     r"\bвищезазначен\w*|\bвищевказан\w*|\bвищенаведен\w*": "цей (назвіть річ)",
@@ -180,6 +180,7 @@ BLOCK = {"p", "li", "td", "th", "dd", "dt", "figcaption", "caption", "summary", 
          "article", "header", "footer", "main", "aside", "nav", "ul", "ol", "table", "tr", "br",
          "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "details", "figure", "label", "button", "option"}
 SKIP = {"script", "style", "svg", "pre", "code", "blockquote", "head", "title", "kbd", "math"}
+BLOCK_CLASS = {"when", "meta"}  # окремі рядки в картках (job, персона)
 HEAD = {"h1", "h2", "h3", "h4", "h5", "h6"}
 
 
@@ -200,12 +201,13 @@ class Extract(HTMLParser):
         if tag in SKIP:
             self.skip += 1
             return
-        if tag in BLOCK:
+        cls = set((dict(attrs).get("class") or "").split())
+        if tag in BLOCK or cls & BLOCK_CLASS:
             self.flush()
         if tag in HEAD:
             self.head += 1
         if tag in {"a", "span", "b", "strong", "em", "i"}:
-            self.buf.append("")
+            self.buf.append(" ")
 
     def handle_startendtag(self, tag, attrs):
         if tag == "br":
