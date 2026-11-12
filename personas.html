@@ -17,6 +17,8 @@
       --fg: #1d1d1d;
       --muted: #5b5b5b;
       --accent: #5c5c5c;
+      --link: #0f766e;
+      --link-hover: #115e59;
       --warn: #5e5e5e;
       --ok: #5b5b5b;
     }
@@ -41,7 +43,8 @@
     h2 .num { color: var(--muted); font-weight: 400; margin-right: 8px; }
     h3 { margin: 32px 0 8px; font-size: 18px; }
     p, ul, ol { max-width: none; }
-    a { color: var(--accent); }
+    a { color: var(--link); text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); text-underline-offset: 2px; }
+    a:hover { color: var(--link-hover); text-decoration-color: currentColor; }
     .lead { color: var(--muted); margin: 0 0 24px; }
     .toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
     .toc a {
