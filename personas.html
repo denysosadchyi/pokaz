@@ -9,21 +9,21 @@
   <script src="_nav/nav.js" defer></script>
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #111214;
-      --surface: #191a1d;
-      --surface-2: #202125;
-      --line: #2c2d32;
-      --fg: #e6e4df;
-      --muted: #9a9890;
-      --accent: #d9c7a3;
-      --warn: #e2b46a;
-      --ok: #9cc4a0;
+      color-scheme: light;
+      --bg: #faf8f3;
+      --surface: #ffffff;
+      --surface-2: #f2efe7;
+      --line: #dcd7cb;
+      --fg: #1f1d1a;
+      --muted: #5f5b53;
+      --accent: #7a5a1e;
+      --warn: #8a5a00;
+      --ok: #2f6b3a;
     }
     /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
     .repo-nav {
-      --nav-bg: #161719; --nav-fg: #ccc; --nav-muted: #777; --nav-line: #2a2b2f;
-      --nav-hover: #222327; --nav-current-bg: #2e2f34; --nav-current-fg: #fff;
+      --nav-bg: #f2efe7; --nav-fg: #3a3732; --nav-muted: #6f6a60; --nav-line: #dcd7cb;
+      --nav-hover: #e8e3d8; --nav-current-bg: #e0d9c8; --nav-current-fg: #1f1d1a;
     }
     * { box-sizing: border-box; }
     body {
@@ -59,7 +59,7 @@
     table.matrix { min-width: 1280px; }
     table.matrix tbody th { width: 190px; }
     table.matrix td.score { white-space: nowrap; }
-    table.matrix tr.hyp-row > * { background: #16171a; }
+    table.matrix tr.hyp-row > * { background: #f7f4ec; }
     .score b { display: inline-block; min-width: 1.6em; font-size: 16px; font-variant-numeric: tabular-nums; }
 
     .ref {
@@ -73,7 +73,7 @@
     /* [?] — даних немає; «гіпотеза» — job/блок без голосу людей. Обидві позначки з текстом, не лише кольором. */
     .q {
       display: inline-block; padding: 0 6px; border-radius: 4px;
-      border: 1px solid #6b5530; background: #2a2318; color: var(--warn);
+      border: 1px solid #c9a65f; background: #fbf1dc; color: var(--warn);
       font: 600 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; vertical-align: 1px;
     }
     .tag {
@@ -81,7 +81,7 @@
       border: 1px solid var(--line); color: var(--muted); white-space: nowrap; vertical-align: 2px;
     }
     .tag.primary { color: var(--bg); background: var(--accent); border-color: var(--accent); font-weight: 600; }
-    .tag.hyp { color: var(--warn); border: 1px dashed #8a6d3b; }
+    .tag.hyp { color: var(--warn); border: 1px dashed #b08a45; }
     .tag.key { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
@@ -92,7 +92,7 @@
     .card ul { margin: 0 0 8px; padding-left: 20px; }
     .card .label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin: 12px 0 2px; }
 
-    .persona { border-color: #4e4636; padding: 24px 26px; margin: 12px 0 16px; }
+    .persona { border-color: #cdbf9f; padding: 24px 26px; margin: 12px 0 16px; }
     .persona h3 { margin: 0 0 4px; font-size: 22px; }
     .persona .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
     .persona .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
@@ -120,7 +120,7 @@
     .job { padding: 10px 14px; margin: 0 0 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
     .job b { display: block; font-size: 15px; }
     .job .when { color: var(--muted); }
-    .job.hyp { border-style: dashed; border-color: #6b5530; background: transparent; }
+    .job.hyp { border-style: dashed; border-color: #c9a65f; background: transparent; }
     .job .meta { margin-top: 4px; font-size: 13px; color: var(--muted); }
     .group .empty { padding: 10px 14px; border: 1px dashed var(--line); border-radius: 8px; font-size: 14px; color: var(--muted); margin: 0 0 8px; }
 
@@ -146,14 +146,6 @@
     <a href="https://github.com/denysosadchyi/pokaz/blob/main/jtbd.md">jtbd.md</a>; спостереження —
     <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/notes/people.md">research/notes/people.md</a>.</p>
 
-  <ul class="toc">
-    <li><a href="#legend">Як читати</a></li>
-    <li><a href="#personas">1 · Персони</a></li>
-    <li><a href="#scenarios">2 · Сценарій</a></li>
-    <li><a href="#hierarchy">3 · Ієрархія jobs</a></li>
-    <li><a href="#matrix">4 · JTBD-матриця</a></li>
-    <li><a href="#conclusion">5 · Висновок</a></li>
-  </ul>
 
   <h2 id="legend">Як читати</h2>
   <div class="table-wrap"><table>
