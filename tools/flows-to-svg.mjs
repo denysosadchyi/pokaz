@@ -166,12 +166,12 @@ const f = (v) => Math.round(v * 10) / 10;
 
 // ---------- кольори (ролі з палітри сторінки) ----------
 const C = {
-  paper: "#ffffff", ink: "#1d1d1d", muted: "#5b5b5b", line: "#898989", rule: "#d7d7d7",
-  surface2: "#f3f3f3",
-  ok: "#5b5b5b", okTint: "#f0f0f0",
-  dead: "#333333", deadTint: "#f0f0f0",
-  err: "#333333", errTint: "#f8f8f8",
-  link: "#565656", linkTint: "#f5f5f5",
+  paper: "#ffffff", ink: "#1f1d1a", muted: "#5f5b53", line: "#8f897d", rule: "#dcd7cb",
+  surface2: "#f6f3ec",
+  ok: "#2f6b3a", okTint: "#e8f3ea",
+  dead: "#9f1239", deadTint: "#fdecee",
+  err: "#9f1239", errTint: "#fff6f6",
+  link: "#2e5aa8", linkTint: "#f1f5fc",
 };
 
 async function render(src, cfg) {
@@ -270,7 +270,7 @@ async function render(src, cfg) {
       case "decision": fill = C.surface2; stroke = C.muted; break;
       case "ok": case "step": fill = C.okTint; stroke = C.ok; sw = n.kind === "ok" ? 2 : 1.2; tagFill = C.ok; break;
       case "dead": fill = C.deadTint; stroke = C.dead; sw = 2; tagFill = C.dead; break;
-      case "error": fill = C.errTint; stroke = "#afafaf"; tagFill = C.err; break;
+      case "error": fill = C.errTint; stroke = "#d9a3ab"; tagFill = C.err; break;
       case "link": fill = C.linkTint; stroke = C.link; tagFill = C.link; dash = ' stroke-dasharray="4,3"'; break;
       default: fill = C.surface2; stroke = C.rule; break;
     }
@@ -305,7 +305,7 @@ async function render(src, cfg) {
     else if (k === "back") g.push(`<line x1="${lx}" y1="${LEG_Y}" x2="${lx + 22}" y2="${LEG_Y}" stroke="${C.line}" stroke-width="1.2" stroke-dasharray="5,4"/>`);
     else if (k === "decision") g.push(`<polygon points="${lx + 11},${LEG_Y - 7} ${lx + 22},${LEG_Y} ${lx + 11},${LEG_Y + 7} ${lx},${LEG_Y}" fill="${C.surface2}" stroke="${C.muted}"/>`);
     else {
-      const st = { screen: [C.paper, C.ink, 1.4], state: [C.surface2, C.rule, 1], error: [C.errTint, "#afafaf", 1], link: [C.linkTint, C.link, 1], ok: [C.okTint, C.ok, 2], dead: [C.deadTint, C.dead, 2] }[k];
+      const st = { screen: [C.paper, C.ink, 1.4], state: [C.surface2, C.rule, 1], error: [C.errTint, "#d9a3ab", 1], link: [C.linkTint, C.link, 1], ok: [C.okTint, C.ok, 2], dead: [C.deadTint, C.dead, 2] }[k];
       g.push(`<rect x="${lx}" y="${LEG_Y - 7}" width="22" height="14" rx="${k === "ok" || k === "dead" ? 7 : 3}" fill="${st[0]}" stroke="${st[1]}" stroke-width="${st[2]}"${k === "link" ? ' stroke-dasharray="4,3"' : ""}/>`);
     }
     g.push(`<text x="${lx + 30}" y="${LEG_Y + 4}" class="fl-leg">${t}</text>`);
