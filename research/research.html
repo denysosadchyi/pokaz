@@ -9,21 +9,21 @@
   <script src="../_nav/nav.js" defer></script>
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #111214;
-      --surface: #191a1d;
-      --surface-2: #202125;
-      --line: #2c2d32;
-      --fg: #e6e4df;
-      --muted: #9a9890;
-      --accent: #d9c7a3;
-      --warn: #e2b46a;
-      --ok: #9cc4a0;
+      color-scheme: light;
+      --bg: #faf8f3;
+      --surface: #ffffff;
+      --surface-2: #f2efe7;
+      --line: #dcd7cb;
+      --fg: #1f1d1a;
+      --muted: #5f5b53;
+      --accent: #7a5a1e;
+      --warn: #8a5a00;
+      --ok: #2f6b3a;
     }
     /* Навігатор на цій сторінці теж темний, незалежно від системної теми. */
     .repo-nav {
-      --nav-bg: #161719; --nav-fg: #ccc; --nav-muted: #777; --nav-line: #2a2b2f;
-      --nav-hover: #222327; --nav-current-bg: #2e2f34; --nav-current-fg: #fff;
+      --nav-bg: #f2efe7; --nav-fg: #3a3732; --nav-muted: #6f6a60; --nav-line: #dcd7cb;
+      --nav-hover: #e8e3d8; --nav-current-bg: #e0d9c8; --nav-current-fg: #1f1d1a;
     }
     * { box-sizing: border-box; }
     body {
@@ -74,21 +74,21 @@
       display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px;
       border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
     }
-    .tag.public { color: var(--ok); border-color: #3b5240; }
+    .tag.public { color: var(--ok); border-color: #a9cdb0; }
     .tag.own { color: var(--muted); }
-    .tag.brief { color: var(--accent); border-color: #4e4636; }
+    .tag.brief { color: var(--accent); border-color: #cdbf9f; }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 12px 0 24px; }
     .card { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
     .card h4 { margin: 0 0 6px; font-size: 16px; }
     .card p { margin: 0 0 8px; font-size: 15px; }
     .card .label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin: 10px 0 2px; }
-    .card.dont { border-color: #5a4a2c; }
+    .card.dont { border-color: #d8c296; }
 
     .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 12px 0 24px; }
     figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
     figure a { display: block; }
-    figure img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: #000; }
+    figure img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: #f2efe7; }
     figcaption { padding: 8px 12px; font-size: 13px; color: var(--muted); }
     figcaption b { color: var(--fg); font-weight: 600; }
 
@@ -108,14 +108,6 @@
     <a href="https://github.com/denysosadchyi/pokaz/blob/main/research/research.md">research/research.md</a>,
     бриф — <a href="https://github.com/denysosadchyi/pokaz/blob/main/CLAUDE.md">CLAUDE.md</a>.</p>
 
-  <ul class="toc">
-    <li><a href="#sources">Звідки дані</a></li>
-    <li><a href="#competitors">1 · Конкуренти</a></li>
-    <li><a href="#benchmark">2 · Бенчмарк</a></li>
-    <li><a href="#patterns">3 · Патерни</a></li>
-    <li><a href="#conclusions">4 · Висновки</a></li>
-    <li><a href="#refs">Джерела</a></li>
-  </ul>
 
   <h2 id="sources">Звідки дані</h2>
   <div class="table-wrap"><table>
@@ -382,6 +374,14 @@
     <li><strong>Вікно подачі.</strong> Бриф — 1–5 число <span class="tag brief">бриф, розд. 4</span>. YASNO — «в останні два дні поточного місяця або в перші три наступного» [y2]. Рішення за PM.</li>
     <li><strong>Закриті потоки.</strong> Відгуки App Store і демо-відео зібрано (2026-10-29) [y6][n4][n6][o4]. Невидимими лишаються потік «Комуналка» в monobank (відео без субтитрів) і кабінети ДТЕК та Octopus — там <span class="nc">дані не підтверджені</span>.</li>
     <li><strong>Перевірка показу проти чужих цифр.</strong> Бриф: показ «не менше за попередній» <span class="tag brief">бриф, розд. 4</span>. Якщо попередній — за середнім, від контролера або хибний, людина не може внести справжні цифри: «самовольно с потолка завысили мне показания счётчика» [t1]. Варіант: порівнювати з останнім реальним показом і давати вихід. Рішення за PM; бриф не змінено.</li>
+  </ul>
+
+    <p><b>Прогалини, знайдені під час IA (2026-11-05).</b> Це питання до наступного ресерчу: нового пошуку не було, цифр немає. Походження — <a href="../ia.html">ia.html</a>.</p>
+  <ul>
+    <li><b>Підтвердження чужого рахунку.</b> Реєстрація прямо заважає вести чужі рахунки: «навіщо ввели таку реєстрацію… пів дня витратила» [e2]; «мушу підтвердити номер телефону… можу відправити цифри тільки з одного лічильника» [t1]. Спосіб, який можна пройти без тієї людини і який при цьому безпечний, досі не обрано. Без нього лишається тупик у flow R7.</li>
+    <li><b>Куди людині звернутися.</b> Чат поза V1 (бриф, розділ 8), а тупики у flows M, R6 і R7 закінчуються тим, що немає кому написати. Є лише один голос: «по телефону вони вже вихідні» [e1]. Який мінімальний контакт потрібен, невідомо.</li>
+    <li><b>Кількість сповіщень.</b> Екран налаштувань прибрано, бо його ніхто не просить; відгуки кажуть лише, що сповіщення приходять не про всі адреси [y7]. Чи не стане їх забагато за кількох адрес, даних немає.</li>
+    <li><b>Відключення при одній адресі.</b> Усі голоси про R8 — від людей із кількома адресами [y7]. Від цього залежить, чи лишати четвертий пункт глобальної навігації.</li>
   </ul>
 
   <h3 id="doresearch">Доресерч після персон</h3>

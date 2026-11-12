@@ -23,17 +23,6 @@
   z-index: 1000;
 }
 
-@media (prefers-color-scheme: dark) {
-  .repo-nav {
-    --nav-bg: #1c1c1c;
-    --nav-fg: #ccc;
-    --nav-muted: #777;
-    --nav-line: #2e2e2e;
-    --nav-hover: #262626;
-    --nav-current-bg: #333;
-    --nav-current-fg: #fff;
-  }
-}
 
 body.has-repo-nav { margin-left: 240px; }
 
@@ -51,30 +40,63 @@ body.has-repo-nav { margin-left: 240px; }
 
 .repo-nav .nav-list { list-style: none; margin: 0; padding: 0; }
 
-.repo-nav .nav-branch { margin-top: 10px; }
+.repo-nav .nav-list .nav-list { margin: 1px 0 4px; }
 
-.repo-nav .nav-branch-label {
-  padding: 4px 8px;
-  color: var(--nav-muted);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.repo-nav .nav-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-left: calc(var(--depth, 0) * 14px);
 }
+.repo-nav .nav-row.is-leaf { padding-left: calc(var(--depth, 0) * 14px + 26px); }
+
+.repo-nav .nav-toggle {
+  flex: none;
+  width: 24px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--nav-muted);
+  cursor: pointer;
+}
+.repo-nav .nav-toggle::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: auto;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+}
+.repo-nav .nav-toggle[aria-expanded="true"]::before { transform: rotate(45deg); }
+.repo-nav .nav-toggle:hover { background: var(--nav-hover); color: var(--nav-fg); }
+.repo-nav .nav-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
 
 .repo-nav .nav-link {
+  flex: 1;
+  min-width: 0;
   display: block;
-  padding: 4px 8px 4px calc(8px + var(--depth, 0) * 14px);
+  padding: 5px 8px;
   border-radius: 4px;
   color: inherit;
   text-decoration: none;
 }
-.repo-nav .nav-link:hover { background: var(--nav-hover); }
+.repo-nav .nav-list .nav-list .nav-link { color: var(--nav-muted); }
+.repo-nav .nav-link:hover { background: var(--nav-hover); color: var(--nav-fg); }
 .repo-nav .nav-link:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
 .repo-nav .nav-link[aria-current="page"] {
   background: var(--nav-current-bg);
   color: var(--nav-current-fg);
   font-weight: 600;
 }
+.repo-nav .nav-link[aria-current="location"] { color: var(--nav-current-fg); font-weight: 600; }
+.repo-nav [hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .repo-nav .nav-toggle::before { transition: none; } }
 
 /* Вузький екран: меню над сторінкою, а не збоку. */
 @media (max-width: 720px) {
