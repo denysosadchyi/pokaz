@@ -21,7 +21,7 @@ const blocks = [...md.matchAll(/```mermaid\n([\s\S]*?)```/g)].map((m) => m[1]);
 const HAPPY = [
   { slug: "m", title: "M. Закрити місяць без сумніву", via: ["home", "reading", "fields", "photoOk", "accepted", "history", "wait", "bill", "paid", "okClosed"] },
   { slug: "r6", title: "R6. Знати, звідки взялися цифри", via: ["home", "okClear"] },
-  { slug: "r2", title: "R2. Виправити помилку в показі", via: ["home", "reading", "okFixed"] },
+  { slug: "r2", title: "R2. Виправити помилку в показниках", via: ["home", "reading", "okFixed"] },
   { slug: "r7", title: "R7. Вести чужий рахунок", via: ["home", "connected", "okAccount"] },
 ];
 

@@ -1,0 +1,135 @@
+<!doctype html>
+<!--
+  Екран: Сплатити · bill-declined.html. Стан «помилка: платіж не пройшов» [?], гроші не списано. Група «Сума».
+  Flow M: «Платіж пройшов?» — ні → «не пройшов», гроші не списано → «Спробує ще раз?» — так → «проводимо платіж»;
+    ні → борг лишається (без виходу у V1).
+  Персона: Наталя (checker, primary). Один рахунок. Дані — _conventions.md, «Набір даних для головного flow».
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сплатити · Не пройшов · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/bill">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html" aria-current="page"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Сплатити</h1>
+        <p>Нарахування остаточне, 8 листопада</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Оплата. Банк відхилив. Перше — гроші не списано. Дії: ще раз або інший спосіб. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="pay" role="alert">
+            <h2 id="pay"><i data-lucide="circle-alert" aria-hidden="true"></i>Платіж не пройшов</h2>
+            <p class="wf-hero"><span class="wf-big">1 185,84<span class="wf-unit">₴</span></span> <span class="wf-status">не сплачено</span></p>
+            <p><strong>Гроші не списано.</strong> Банк відхилив платіж через Google Pay.</p>
+            <footer>
+              <a class="wf-button wf-primary" href="bill-paying.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Спробувати ще раз</a>
+              <a class="wf-button" href="bill-cards.html"><i data-lucide="credit-card" aria-hidden="true"></i>Інша картка</a>
+            </footer>
+            <p class="wf-muted">Знову не вийшло? Контакт-центр: <a href="tel:0800000000">0 800 000 000</a>, щодня 8:00–20:00.</p>
+          </section>
+
+          <!-- Зона 2. Розшифровка. Сутності «Нарахування» (кВт·год по зонах, тариф, коефіцієнт) і «Баланс».
+               Jobs: R3 («платити, бо згодна»), E3. Розвилка «Сума збігається з моїм розрахунком?». -->
+          <section class="wf-zone" aria-labelledby="breakdown">
+            <h2 id="breakdown"><i data-lucide="receipt" aria-hidden="true"></i>З чого складається сума</h2>
+            <div class="wf-stats">
+              <article class="wf-stat">
+                <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+                <p class="wf-stat__value">959,04 ₴</p>
+                <p class="wf-stat__sub">222 кВт·год × 4,32 ₴</p>
+              </article>
+              <article class="wf-stat">
+                <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+                <p class="wf-stat__value">226,80 ₴</p>
+                <p class="wf-stat__sub">105 кВт·год × 4,32 ₴ × 0,5</p>
+              </article>
+              <article class="wf-stat">
+                <h3><i data-lucide="history" aria-hidden="true"></i>Залишок</h3>
+                <p class="wf-stat__value">0,00 ₴</p>
+                <p class="wf-stat__sub">на 1 листопада</p>
+              </article>
+              <article class="wf-stat">
+                <h3><i data-lucide="wallet" aria-hidden="true"></i>Оплачено</h3>
+                <p class="wf-stat__value">0,00 ₴</p>
+                <p class="wf-stat__sub">у листопаді</p>
+              </article>
+            </div>
+            <p class="wf-muted">Разом 327 кВт·год · тариф 4,32 ₴ за кВт·год, ніч — × 0,5.</p>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 3. Основа нарахування. Сутність «Нарахування»: основа; «Показники»: цифри, дата, автор, спосіб.
+               Jobs: R6 (тригер довіри: рахунок називає показники, за якими пораховано [y7][t1]), M.
+               Розвилки «Пораховано за моїми показниками?» і «Це ті цифри, які я подала?». Вихід для звірки — [Історія показників і платежів]. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="basis">
+            <h2 id="basis"><i data-lucide="gauge" aria-hidden="true"></i>Показники лічильника <span class="wf-status">прийнято</span></h2>
+            <div class="wf-stats">
+              <article class="wf-stat"><h3><i data-lucide="sun" aria-hidden="true"></i>День</h3><p class="wf-stat__value">12 702<span class="wf-unit">кВт·год</span></p><p class="wf-stat__sub">спожито 222 кВт·год</p></article>
+              <article class="wf-stat"><h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3><p class="wf-stat__value">5 341<span class="wf-unit">кВт·год</span></p><p class="wf-stat__sub">спожито 105 кВт·год</p></article>
+              <article class="wf-stat"><h3><i data-lucide="clock" aria-hidden="true"></i>Подано</h3><p class="wf-stat__value"><time datetime="2026-11-03T19:42">3 листопада, 19:42</time></p><p class="wf-stat__sub">Наталя, за фото</p></article>
+            </div>
+            <footer>
+              <a class="wf-button wf-tile__btn" href="history.html"><i data-lucide="history" aria-hidden="true"></i>Звірити з історією</a>
+            </footer>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Сплатити» · стан «не пройшов» [?]. Гроші не списано — це перше речення. Дві дії: той самий спосіб ще раз або інша картка.
+      <p class="wf-flow">Переходи flow: «Спробувати ще раз» → <a href="bill-paying.html">bill-paying.html</a> · «Інша картка» → <a href="bill-cards.html">bill-cards.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

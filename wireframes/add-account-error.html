@@ -1,0 +1,123 @@
+<!doctype html>
+<!--
+  Екран: Додати рахунок · add-account-error.html. Стан «помилка»: не знайшли рахунок, перевірте номер.
+  Група «Рахунки» (sitemap.md, «Екрани»). У flow M: «Подати показники» (порожній) → [Додати рахунок] → «Рахунок підключено?».
+  Кроки і тексти — flows.md, R7 (перший рахунок Наталі — найпростіший шлях R7: свій рахунок, підтвердження з платіжки).
+  Компонування — _conventions.md: шапка, сайдбар, голова сторінки, .wf-layout (блок під блоком).
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Додати рахунок · помилка · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/add-account">
+
+    <!-- Шапка: спільний компонент. Рахунку ще немає — перемикач заблоковано, балансу немає (як на month-empty.html) -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль</span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- «Додати рахунок» — не пункт навігації (_conventions.md, р. 3), тому aria-current немає -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
+          <span>Рахунку ще немає</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </button>
+        <p class="wf-account__meta">Додайте особовий рахунок</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Додати рахунок</h1>
+        <p>Особовий рахунок на світло</p>
+        <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Не знайшли рахунок. Вихід — виправити номер у полі і знайти ще раз (flows.md, R7: errFound → emptyAdd). -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="add-form" role="alert">
+            <h2 id="add-form">Знайдемо рахунок за номером</h2>
+            <div class="wf-media">
+              <figure class="wf-ph wf-ph--sm">
+                <figcaption>Ілюстрація: рахунок не знайдено</figcaption>
+              </figure>
+              <div>
+                <p class="wf-hero"><i data-lucide="circle-alert" aria-hidden="true"></i> <span class="wf-big">Не знайшли рахунок</span></p>
+                <p>№ 2600 418 357 немає серед договорів. Часто плутають дві останні цифри.</p>
+              </div>
+            </div>
+            <form id="add-account-form">
+              <fieldset>
+                <legend>Дані з платіжки</legend>
+                <div class="wf-pair">
+                <div class="wf-field" aria-invalid="true">
+                  <label for="acc-number">Номер особового рахунку</label>
+                  <input id="acc-number" name="number" inputmode="numeric" autocomplete="off" aria-describedby="acc-number-hint" value="2600 418 357" autofocus>
+                  <small id="acc-number-hint">Перевірте цифри в платіжці</small>
+                </div>
+                <div class="wf-field">
+                  <label for="acc-proof">Сума останнього платежу, ₴</label>
+                  <input id="acc-proof" name="proof" inputmode="decimal" autocomplete="off" aria-describedby="acc-proof-hint">
+                  <small id="acc-proof-hint" class="wf-muted">Підтвердить, що рахунок ваш</small>
+                </div>
+                </div>
+              </fieldset>
+            </form>
+            <footer>
+              <a class="wf-button wf-primary" href="add-account-loading.html"><i data-lucide="search" aria-hidden="true"></i>Знайти ще раз</a>
+              <a class="wf-button" href="month-empty.html"><i data-lucide="x" aria-hidden="true"></i>Скасувати</a>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Де знайти дані. Jobs: R7 («номер рахунку або адреса є під рукою?»). Дії немає. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="where">
+            <h2 id="where"><i data-lucide="file-text" aria-hidden="true"></i>Де знайти номер рахунку</h2>
+            <ul class="wf-list">
+              <li>У платіжці, угорі праворуч.</li>
+              <li>У договорі, на першій сторінці.</li>
+              <li>Суму платежу — у виписці банку.</li>
+            </ul>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    <p>Вайрфрейм · «Додати рахунок» · стан «помилка». Варіант 1: не знайшли, перевірте номер.</p>
+    <p>Інші варіанти (flows.md, R7): сервіс недоступний, кнопка «Повторити» · «не підтверджено», сказано, що саме не збіглося (сума платежу) · спроби вичерпано [?].</p>
+      <p class="wf-flow">Переходи flow: Знайти ще раз → <a href="add-account-loading.html">add-account-loading.html</a> · Скасувати → <a href="month-empty.html">month-empty.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

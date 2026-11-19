@@ -1,0 +1,139 @@
+<!doctype html>
+<!--
+  Екран: Історія · history-loading.html. Стан «завантаження» (sitemap.md, колонка «Стани»). Група «Місяць».
+  Jobs: M, R2, R4, R6, E1, E3, H2 [?].
+  Базова сторінка — history.html. Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+
+  Перший варіант: «завантажуємо записи» (flows.md, flow R6: [Історія показників і платежів] → loadHist → «Мої показники є в історії?»).
+  Другий варіант (flow M: «loading: чекаємо нарахування, показуємо дату») — у .wf-note.
+  Компонування (_conventions.md, р. 9): голова сторінки — h1 і рядок контексту;
+    робоча колонка — зона 1 «Записи за місяцями»;
+    колонка контексту — зона 2 «Нарахування», зона 3 «Лічильник». Адресу показує перемикач.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Історія · завантаження · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/history">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge wf-nav__badge--wait" aria-label="до сплати: завантажуємо">…</span></a></li>
+          <li><a href="history.html" aria-current="page"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main" aria-busy="true">
+      <div class="wf-page-head">
+        <h1>Історія показників і платежів</h1>
+        <p>Нові вгорі</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Записи за місяцями. Смуги на місці відповіді, рядків таблиці і дії в рядку.
+               flows.md: flow R6, «loading: завантажуємо записи» (loadHist). -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="hist-records">
+            <h2 id="hist-records">Записи за місяцями</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: індикатор завантаження</figcaption>
+            </figure>
+            <p class="wf-muted" role="status">Завантажуємо записи…</p>
+            <span class="wf-skeleton" style="width: 60%"></span>
+
+            <ol class="wf-hist" aria-hidden="true">
+              <li class="wf-hist__month">
+                <header><span class="wf-skeleton" style="width: 120px"></span></header>
+                <div class="wf-hist__grid">
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                </div>
+              </li>
+              <li class="wf-hist__month">
+                <header><span class="wf-skeleton" style="width: 120px"></span></header>
+                <div class="wf-hist__grid">
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                  <div class="wf-hist__tile"><span class="wf-skeleton" style="width: 70%"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 50%"></span></div>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Нарахування. Смуги на місці дати, основи і кнопок. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-charge">
+            <h2 id="hist-charge"><i data-lucide="receipt" aria-hidden="true"></i>Нарахування</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: календар з датою нарахування</figcaption>
+            </figure>
+            <span class="wf-skeleton wf-skeleton--lg" style="width: 70%"></span>
+            <span class="wf-skeleton" style="width: 85%"></span>
+            <footer>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 140px; height: 44px"></span>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 120px; height: 44px"></span>
+            </footer>
+          </section>
+
+          <!-- Зона 3. Лічильник. Смуги на місці номера і типу. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-meter">
+            <h2 id="hist-meter"><i data-lucide="gauge" aria-hidden="true"></i>Лічильник</h2>
+            <span class="wf-skeleton" style="width: 60%"></span>
+            <span class="wf-skeleton" style="width: 80%"></span>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Історія» · стан «завантаження», перший варіант: завантажуємо записи. Flow R6: loadHist перед розвилкою «Мої показники є в історії?».
+    Другий варіант: чекаємо нарахування, показуємо дату. Flow M: вузол wait після «Наступного дня показники на місці?» — так.
+    Тоді записи вже є, а зона «Нарахування» каже «Нарахуємо 8 листопада 2026». Цей вміст уже є на базовій сторінці.
+      <p class="wf-flow">Переходи flow: Записи прийшли → <a href="history.html">history.html</a> · не прийшли → <a href="history-error.html">history-error.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

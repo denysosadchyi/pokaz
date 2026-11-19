@@ -1,0 +1,130 @@
+<!doctype html>
+<!--
+  Екран: Сплатити · bill-loading.html. Стан «завантаження» (sitemap.md, колонка «Стани»). Група «Сума».
+  Базова сторінка — bill.html. Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+  Компонування (_conventions.md, р. 9): робоча колонка — зона 1 «Оплата» (головна дія) і зона 2 «Розшифровка»;
+    колонка контексту — зона 3 «Основа нарахування».
+
+  Варіант (перший у колонці «Стани»): завантажуємо розшифровку.
+  Крок у flows.md: flow M, [Сплатити] → loading «завантажуємо розшифровку» → «Розшифровка прийшла?».
+    Так → bill.html; ні → bill-error.html. Той самий вузол є у flow R6.
+  Інші варіанти («проводимо платіж», «в обробці» [?]) — у .wf-note.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сплатити · завантаження · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/bill">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html" aria-current="page"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge wf-nav__badge--wait" aria-label="до сплати: завантажуємо">…</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main" aria-busy="true">
+      <div class="wf-page-head">
+        <h1>Сплатити</h1>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Оплата. Смуги на місці суми, полів і головної дії. Кнопки «Сплатити» ще немає. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="pay">
+            <h2 id="pay"><i data-lucide="wallet" aria-hidden="true"></i>До сплати за листопад</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: гаманець</figcaption>
+            </figure>
+            <p class="wf-muted" role="status">Завантажуємо суму…</p>
+            <span class="wf-skeleton wf-skeleton--lg" style="width: 40%"></span>
+            <div class="wf-fields">
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 100%; height: 44px"></span>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 100%; height: 44px"></span>
+            </div>
+
+            <footer>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 100%; height: 44px"></span>
+            </footer>
+            <span class="wf-skeleton" style="width: 70%"></span>
+          </section>
+
+          <!-- Зона 2. Розшифровка. Смуги на місці плиток. -->
+          <section class="wf-zone" aria-labelledby="breakdown">
+            <h2 id="breakdown"><i data-lucide="receipt" aria-hidden="true"></i>З чого складається сума</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: індикатор завантаження</figcaption>
+            </figure>
+            <div class="wf-stats">
+              <span class="wf-stat"><span class="wf-skeleton" style="width: 96px"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 120px"></span></span>
+              <span class="wf-stat"><span class="wf-skeleton" style="width: 96px"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 120px"></span></span>
+              <span class="wf-stat"><span class="wf-skeleton" style="width: 96px"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 120px"></span></span>
+              <span class="wf-stat"><span class="wf-skeleton" style="width: 96px"></span><span class="wf-skeleton wf-skeleton--lg" style="width: 120px"></span></span>
+            </div>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 3. Основа нарахування. Смуги на місці цифр показників, дати і підпису. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="basis">
+            <h2 id="basis"><i data-lucide="gauge" aria-hidden="true"></i>Показники для нарахування</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: цифри лічильника</figcaption>
+            </figure>
+            <span class="wf-skeleton wf-skeleton--lg" style="width: 60%"></span>
+            <span class="wf-skeleton wf-skeleton--lg" style="width: 60%"></span>
+            <span class="wf-skeleton" style="width: 80%"></span>
+            <span class="wf-skeleton" style="width: 50%"></span>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Сплатити» · стан «завантаження». Flow M і R6: завантажуємо розшифровку. Шапка, меню й назви зон видно одразу, смуги стоять на місці даних.
+    Інші варіанти цього стану. «Проводимо платіж»: розшифровка на місці, кнопка «Сплатити» заблокована, поруч текст «Проводимо платіж…».
+    «В обробці» [?]: банк не відповів одразу, ми пишемо, коли покажемо результат. Повторно платити не треба.
+      <p class="wf-flow">Переходи flow: Розшифровка прийшла → <a href="bill.html">bill.html</a> · не прийшла → <a href="bill-error.html">bill-error.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

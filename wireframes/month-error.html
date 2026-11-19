@@ -1,0 +1,118 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · головний · month-error.html. Стан «помилка» (sitemap.md, колонка «Стани»).
+  Базова сторінка — month.html. Шапка, сайдбар, голова сторінки і порядок зон ті самі, змінено лише вміст.
+  Компонування — _conventions.md, р. 9: робоча колонка .wf-work + колонка контексту aside.wf-context.
+
+  Крок main flow (flows.md, «M»): розвилка «Дані місяця прийшли?» — ні → [error: не вдалося завантажити, є кнопка «Повторити»].
+  Виходи:
+    «Повторити» — розвилка «Повтор вдався?»: так → month.html; ні → «сервіс недоступний, лишається прийти пізніше».
+    Для другого випадку даємо, куди звернутися: телефон контакт-центру. Чату у V1 немає (бриф, р. 8).
+  Зони контексту лишаються на своїх місцях і кажуть коротко: даних немає через ту саму помилку. Окремих дій у них немає.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · помилка · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/month">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати: немає даних">—</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Дані місяця не прийшли. Головна дія — повторити. Під дією — куди звернутися.
+               Порядок: відповідь → що робити → дія → запасний шлях. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="month-status" role="alert">
+            <h2 id="month-status">Не вдалося завантажити місяць</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: немає зв'язку з сервісом</figcaption>
+            </figure>
+            <p>Перевірте інтернет і спробуйте ще раз. Показники й платежі збережено.</p>
+            <footer>
+              <a class="wf-button wf-primary" href="month-loading.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Повторити</a>
+            </footer>
+            <p class="wf-muted">Не вийшло? Контакт-центр: <a href="tel:0800000000">0 800 000 000</a>, щодня 8:00–20:00, безкоштовно.</p>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Бенто «Дані місяця» (див. month.html) — той самий каркас, дані не завантажились. -->
+          <section class="wf-bento" aria-label="Дані місяця">
+            <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
+              <p class="wf-muted">Не завантажилося</p>
+            </article>
+            <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
+              <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники</h2>
+              <p class="wf-muted">Не завантажилося</p>
+            </article>
+            <article class="wf-tile wf-tile--day">
+              <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+              <p class="wf-tile__value wf-muted">—</p>
+            </article>
+            <article class="wf-tile wf-tile--night">
+              <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+              <p class="wf-tile__value wf-muted">—</p>
+            </article>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Подати показники» · стан «помилка». Flow M: дані місяця не прийшли. Вихід — «Повторити»; якщо не допомогло — контакт-центр.
+    Номер і години контакт-центру — плейсхолдер [?], їх треба взяти в постачальника. Адресу в перемикачі видно: список рахунків іде окремо від даних місяця [?].
+      <p class="wf-flow">Переходи flow: Повторити → <a href="month-loading.html">month-loading.html</a> · повтор вдався → <a href="month.html">month.html</a> · не вдався → цей стан і контакт-центр.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

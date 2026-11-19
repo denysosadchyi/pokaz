@@ -1,0 +1,161 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · reading-success.html (sitemap.md, «Екрани»). Група «Показники». Екран дії й екран введення.
+  Jobs: M, R1, R2, R4, R5, R6, R7, E1, E2, E4, H4 [?].
+  Стан «успіх» (sitemap.md, колонка «Стани»): «прийнято», цифри, час, орієнтовна сума. Базова сторінка — reading.html.
+  Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+  Компонування (_conventions.md, розділ 9): .wf-page-head; робоча колонка — зона «Показники прийнято»: цифри, сума, виходи, розрахунок; колонка контексту — «Що далі».
+  Окремої зони «Попередні показники» немає: їхні цифри стоять у таблиці розрахунку.
+
+  Крок main flow (flows.md, «M. Закрити місяць без сумніву»): вузол [Подати показники].
+    Звідки: [Подати показники], головна дія «Подати показники», розвилка «Вікно подачі відкрите?» — так.
+    Розвилки екрана: «Попередні показники є?» → «Подає за фото? [?]» → «Цифри розпізнано чітко?» →
+    «Цифри не менші за попередні показники?» → «Стрибок понад 3× від середнього?» → «Сервіс відповів?» → «Показники прийнято?».
+    Куди: успіх «прийнято» → [Історія показників і платежів] або [Подати показники]; «Помітила помилку?» — так → flow R2.
+    Ця сторінка: «Показники прийнято?» — так → [успіх кроку: «прийнято», цифри, час, орієнтовна сума].
+    Виходи: [Подати показники] (головна дія), [Історія показників і платежів], «Помітила помилку?» — так → flow R2 (виправити до 5 листопада).
+  Перемикач рахунку лишаємо disabled, як на всіх сторінках reading* (бриф агентів). Чи розблокувати його після «прийнято» — [?].
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · успіх · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/reading">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація»).
+         На reading.html перемикач заблоковано (disabled), адресу видно (R4). Пункту «Подати показники» у меню немає, тому aria-current ні на чому. -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </button>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <p>За фото або вручну</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Показники прийнято: статус, час і автор, прийняті цифри, орієнтовна сума, виходи, розрахунок суми.
+               Сутності «Показники» і «Нарахування». Jobs: M, R1, R4, R6, R7, E1, E4.
+               Порядок: відповідь → прийняті цифри й сума → дії → деталі розрахунку. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="reading-meter" role="status">
+            <h2 id="reading-meter"><i data-lucide="circle-check" aria-hidden="true"></i> Листопад 2026: <span class="wf-status">показники прийнято</span></h2>
+            <div class="wf-media">
+              <figure class="wf-ph wf-ph--sm">
+                <figcaption>Ілюстрація: показники прийнято</figcaption>
+              </figure>
+              <div>
+                <p><time datetime="2026-11-03T19:42">3 листопада 2026, 19:42</time> · Наталя, за фото</p>
+              </div>
+            </div>
+            <div class="wf-cols wf-cols--even wf-cols--or">
+              <article aria-label="Прийняті показники">
+                <h3>Лічильник № 0172 5543 · двозонний</h3>
+                <dl class="wf-dl">
+                  <dt><i data-lucide="sun" aria-hidden="true"></i> День</dt><dd class="wf-big">12 702<span class="wf-unit">кВт·год</span></dd>
+                  <dt><i data-lucide="moon" aria-hidden="true"></i> Ніч</dt><dd class="wf-big">5 341<span class="wf-unit">кВт·год</span></dd>
+                </dl>
+                <h3>Сума</h3>
+                <p class="wf-hero"><span class="wf-big">1 185,84<span class="wf-unit">₴</span></span> <span class="wf-status">орієнтовна</span></p>
+                <p>327 кВт·год: день 222, ніч 105.</p>
+              </article>
+              <figure class="wf-ph" style="min-height: 160px">
+                <figcaption>Ваше фото лічильника, 3 листопада</figcaption>
+              </figure>
+            </div>
+            <footer>
+              <a class="wf-button wf-primary" href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>До показників і оплати</a>
+              <a class="wf-button" href="reading.html"><i data-lucide="pencil" aria-hidden="true"></i>Виправити показники</a>
+              <span class="wf-muted">для вул. Липова, 14, кв. 27</span>
+            </footer>
+
+            <table>
+              <caption class="wf-muted">Розрахунок суми</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Зона</th>
+                  <th scope="col" class="wf-num">3 жовтня, кВт·год</th>
+                  <th scope="col" class="wf-num">3 листопада, кВт·год</th>
+                  <th scope="col" class="wf-num">Спожито, кВт·год</th>
+                  <th scope="col" class="wf-num">Сума, ₴</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">День · 4,32 ₴ за кВт·год</th><td class="wf-num">12 480</td><td class="wf-num">12 702</td><td class="wf-num">222</td><td class="wf-num">959,04</td></tr>
+                <tr><th scope="row">Ніч · 4,32 ₴ за кВт·год × 0,5</th><td class="wf-num">5 236</td><td class="wf-num">5 341</td><td class="wf-num">105</td><td class="wf-num">226,80</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><th scope="row">Разом</th><td></td><td></td><td class="wf-num">327</td><td class="wf-num">1 185,84</td></tr>
+              </tfoot>
+            </table>
+            <p class="wf-muted">Попередні показники: <time datetime="2026-10-03">3 жовтня 2026</time> · Наталя, вручну.</p>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Що далі: історія, виправлення, дата нарахування. Jobs: R2, R5, E2, H3. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="reading-next">
+            <h2 id="reading-next"><i data-lucide="calendar" aria-hidden="true"></i>Що далі</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: календар з датою нарахування</figcaption>
+            </figure>
+            <ul class="wf-list">
+              <li>Показники вже в <a href="history.html">історії</a>.</li>
+              <li>Помилилися — виправте самі до 5 листопада включно.</li>
+              <li>8 листопада — остаточна сума на «Подати показники».</li>
+            </ul>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Подати показники» · стан «успіх»: показники прийнято, цифри, час, автор, орієнтовна сума. Flow M, «Показники прийнято?» — так.
+    Сума орієнтовна одразу, тому «скільки платити» не вимагає окремого переходу. Розрахунок у таблиці закриває R6: звідки цифри.
+    Виходи: «Подати показники», «Виправити показники» (flow R2), «Історія» — посилання в зоні «Що далі» і пункт меню, без окремої кнопки. Виправлення веде на форму reading.html з поточними цифрами [?].
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

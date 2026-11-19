@@ -1,0 +1,118 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · головний · month-empty.html. Стан «порожній» (sitemap.md, колонка «Стани»).
+  Базова сторінка — month.html. Шапка, сайдбар, голова сторінки і порядок зон ті самі, змінено лише вміст.
+  Компонування — _conventions.md, р. 9: робоча колонка .wf-work + колонка контексту aside.wf-context.
+
+  Крок main flow (flows.md, «M»): розвилка «Особовий рахунок уже є?» — ні → [empty: рахунків ще немає] → [Додати рахунок].
+  Вихід: головна дія «Додати рахунок» (add-account.html), 1 клік (sitemap.md, «Глибина»).
+  Далі flow M іде до «Показники цього місяця вже прийнято?», а якщо рахунок не підключено — у flow R7.
+
+  Рішення про колонку контексту: лишаємо обидві зони («Баланс», «Попередні показники»).
+  Причина: кожна зона має задачу — вона каже, які дані тут з'являться після «Додати рахунок».
+  Так людина вже знає, де шукати суму і показники. Тексти зон різні, повторів немає. Дій у зонах немає.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · порожній · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/month">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль</span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
+          <span>Рахунку ще немає</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </button>
+        <p class="wf-account__meta">Додайте особовий рахунок</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити</a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i>Графік відключень</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Рахунку немає, тому статусу місяця теж немає. Головна дія — додати рахунок.
+               Порядок: відповідь → що робити → дія. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
+            <h2 id="month-status">Рахунків ще немає</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: лічильник і особовий рахунок</figcaption>
+            </figure>
+            <p>Додайте особовий рахунок, щоб подавати показники й бачити статус місяця.</p>
+            <p class="wf-muted">Номер рахунку є в договорі та платіжці за світло.</p>
+            <footer>
+              <a class="wf-button wf-primary" href="add-account.html"><i data-lucide="plus" aria-hidden="true"></i>Додати рахунок</a>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Бенто «Дані місяця» (див. month.html) — той самий каркас, дані порожні: рахунку ще немає. -->
+          <section class="wf-bento" aria-label="Дані місяця">
+            <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
+              <p class="wf-muted">Сума до сплати або переплата.</p>
+            </article>
+            <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
+              <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники</h2>
+              <p class="wf-muted">Останні прийняті показники.</p>
+            </article>
+            <article class="wf-tile wf-tile--day">
+              <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+              <p class="wf-tile__value wf-muted">—</p>
+            </article>
+            <article class="wf-tile wf-tile--night">
+              <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+              <p class="wf-tile__value wf-muted">—</p>
+            </article>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Подати показники» · стан «порожній». Flow M: рахунків ще немає, вихід — «Додати рахунок».
+    Перемикач рахунку заблоковано: адрес ще немає. Пункти меню лишаються, їхні екрани мають власні порожні стани.
+      <p class="wf-flow">Переходи flow: Додати рахунок → <a href="add-account.html">add-account.html</a> · рахунок додано → <a href="month.html">month.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

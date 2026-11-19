@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+  Екран: Історія · history.html (sitemap.md, «Екрани»). Група «Місяць».
+  Jobs: M, R2, R4, R6, E1, E3, H2 [?].
+  Сторінка: базова, робочий вигляд. Стани (-empty, -error, -loading) — окремі сторінки. Стану -success немає: це не екран дії.
+
+  Крок main flow (flows.md, «M. Закрити місяць без сумніву»):
+    вузол [Історія показників і платежів] після «прийнято». Звідки прийшли: [Подати показники] → «прийнято» → «Помітила помилку в цифрах?» — ні.
+    Розвилка на цьому екрані: «Наступного дня показники на місці?»
+      так → «loading: чекаємо нарахування, показуємо дату» → [Подати показники] після нарахування;
+      ні  → «error: показників немає, пояснюємо причину» → [Подати показники] (history-error.html).
+  Той самий екран є у flow R6: «Мої показники є в історії?» (errSame → [Історія показників і платежів] → loadHist).
+
+  Момент: після подачі 3 листопада, до нарахування 8 листопада. Вікно подачі ще відкрите.
+  Персона: Наталя (checker, primary), один рахунок.
+  Дані — wireframes/_conventions.md, «Набір даних для головного flow».
+  Компонування (_conventions.md, р. 9): голова сторінки — h1 і рядок контексту;
+    робоча колонка — зона 1 «Записи за місяцями»;
+    колонка контексту — зона 2 «Нарахування», зона 3 «Лічильник». Адресу показує перемикач.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Історія · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/history">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html" aria-current="page"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Історія показників і платежів</h1>
+        <p>Нові вгорі</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Записи за місяцями. Сутності «Показники» і «Платіж»: цифри по зонах, дата і час, автор, спосіб, статус.
+               Jobs: E1 (показники на місці наступного дня [t1]), R6 (мої показники є в історії?), H2 [?] (підпис автора),
+               R2 (виправити до кінця вікна: дія стоїть у рядку показників, який вона змінює).
+               Порядок: бенто-групи по місяцях (відповідь «на місці» дає сам запис і пілюля «прийнято», окремий заголовок — дубль), дія внизу групи. Головної кнопки немає: це не екран дії. -->
+          <section class="wf-zone wf-zone--primary" aria-label="Записи за місяцями">
+            <ol class="wf-hist" aria-label="Записи за місяцями, нові вгорі">
+              <li class="wf-hist__month" aria-labelledby="m-2026-11">
+                <header>
+                  <h3 id="m-2026-11">Листопад 2026</h3>
+                  <span class="wf-status">прийнято</span>
+                </header>
+                <div class="wf-hist__grid">
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="sun" aria-hidden="true"></i>День</h4>
+                    <p class="wf-hist__value">12 702<span class="wf-unit">кВт·год</span></p>
+                  </div>
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="moon" aria-hidden="true"></i>Ніч</h4>
+                    <p class="wf-hist__value">5 341<span class="wf-unit">кВт·год</span></p>
+                  </div>
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="clock" aria-hidden="true"></i>Подано</h4>
+                    <p class="wf-hist__value"><time datetime="2026-11-03T19:42">3 листопада, 19:42</time></p>
+                    <p class="wf-hist__sub">Наталя, за фото</p>
+                  </div>
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="wallet" aria-hidden="true"></i>Платіж</h4>
+                    <p class="wf-hist__value">ще немає</p>
+                    <p class="wf-hist__sub">після нарахування</p>
+                  </div>
+                </div>
+                <footer>
+                  <a class="wf-button" href="reading.html"><i data-lucide="pencil" aria-hidden="true"></i>Виправити показники</a>
+                  <span class="wf-muted">до 5 листопада включно</span>
+                </footer>
+              </li>
+              <li class="wf-hist__month" aria-labelledby="m-2026-10">
+                <header>
+                  <h3 id="m-2026-10">Жовтень 2026</h3>
+                  <span class="wf-status">прийнято</span>
+                </header>
+                <div class="wf-hist__grid">
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="sun" aria-hidden="true"></i>День</h4>
+                    <p class="wf-hist__value">12 480<span class="wf-unit">кВт·год</span></p>
+                  </div>
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="moon" aria-hidden="true"></i>Ніч</h4>
+                    <p class="wf-hist__value">5 236<span class="wf-unit">кВт·год</span></p>
+                  </div>
+                  <div class="wf-hist__tile">
+                    <h4><i data-lucide="clock" aria-hidden="true"></i>Подано</h4>
+                    <p class="wf-hist__value"><time datetime="2026-10-03">3 жовтня</time></p>
+                    <p class="wf-hist__sub">Наталя, вручну</p>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Нарахування. Сутність «Нарахування»: обіцяна дата, основа.
+               Jobs: M, E3, R6 (за якими показниками пораховано). Виходи: «Сплатити», «Подати показники» (наступний крок flow M після нарахування). -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-charge">
+            <h2 id="hist-charge"><i data-lucide="receipt" aria-hidden="true"></i>Нарахування</h2>
+            <p><strong>Нарахуємо <time datetime="2026-11-08">8 листопада 2026</time></strong></p>
+            <p>За показниками від 3 листопада.</p>
+            <footer>
+              <a class="wf-button wf-tile__btn" href="bill.html">Сплатити</a>
+              <a class="wf-button wf-tile__btn" href="month.html">Подати показники</a>
+            </footer>
+          </section>
+
+          <!-- Зона 3. Лічильник. Jobs: R4 (до якого лічильника належать записи). Адресу показує перемикач, тут її немає. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-meter">
+            <h2 id="hist-meter"><i data-lucide="gauge" aria-hidden="true"></i>Лічильник</h2>
+            <dl class="wf-dl">
+              <dt>Номер</dt><dd>0172 5543</dd>
+              <dt>Тип</dt><dd>двозонний: день і ніч</dd>
+            </dl>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    <p>Вайрфрейм · «Історія» · базова сторінка. Flow M: вузол [Історія показників і платежів] після «прийнято», розвилка «Наступного дня показники на місці?» — так.
+    Jobs: M, R2, R4, R6, E1, E3, H2 [?]. Стани -empty, -error, -loading — окремі сторінки. -success немає: це не екран дії.</p>
+    <p>Головної кнопки немає: «Історія» — не екран дії. «Виправити показники» стоїть у рядку показників за листопад.
+    «Подати показники» — звичайна кнопка в зоні «Нарахування». Наступний крок flow M іде туди після нарахування.
+    Нарахування й платіж за жовтень набір даних не має, тому їх тут немає.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

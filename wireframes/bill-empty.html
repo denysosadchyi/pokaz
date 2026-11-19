@@ -1,0 +1,126 @@
+<!doctype html>
+<!--
+  Екран: Сплатити · bill-empty.html. Стан «порожній» (sitemap.md, колонка «Стани»). Група «Сума».
+  Базова сторінка — bill.html. Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+  Компонування (_conventions.md, р. 9): робоча колонка — зона 1 «Оплата» (головна дія) і зона 2 «Розшифровка»;
+    колонка контексту — зона 3 «Основа нарахування».
+
+  Варіант: «без боргу», суми до сплати немає. Людина відкрила екран з меню.
+  Дата — між 3 і 8 листопада: показники прийнято, нарахування ще немає.
+  Звідки у flows.md:
+    flow M, розвилка «Є сума до сплати?» — ні → «місяць закрито без оплати». Цей кінець стоїть на [Подати показники].
+    flow R6, «Нарахування цього місяця вже є?» — ні → empty «нарахування ще немає, показуємо дату».
+  Виходи: головна дія — «До показників і оплати» (month.html); друга — «Відкрити історію» (history.html).
+  Нових сум немає: баланс 0,00 ₴ з month.html, дата нарахування 8 листопада з набору даних.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сплатити · порожній · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/bill">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html" aria-current="page"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 0,00 ₴">0,00 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Сплатити</h1>
+        <p>Нарахування ще немає</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Оплата. Баланс «без боргу». Платити нічого. Головна дія — вихід на «Подати показники». -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="pay">
+            <h2 id="pay"><i data-lucide="circle-check" aria-hidden="true"></i>Ви нічого не винні<span class="wf-h2-meta">вул. Липова, 14, кв. 27</span></h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: гаманець без боргу</figcaption>
+            </figure>
+            <p class="wf-hero"><span class="wf-big">0,00<span class="wf-unit">₴</span></span> <span class="wf-status">без боргу</span></p>
+
+            <footer>
+              <a class="wf-button wf-primary" href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>До показників і оплати</a>
+            </footer>
+          </section>
+
+          <!-- Зона 2. Розшифровка. Нарахування листопада ще немає. Показуємо дату, а не порожню таблицю. -->
+          <section class="wf-zone" aria-labelledby="breakdown">
+            <h2 id="breakdown"><i data-lucide="receipt" aria-hidden="true"></i>З чого складається сума</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: календар з датою нарахування</figcaption>
+            </figure>
+            <p><strong>Буде <time datetime="2026-11-08">8 листопада 2026</time>.</strong> Тоді покажемо розшифровку: день і ніч.</p>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 3. Основа нарахування. Показники уже прийнято. Наступне нарахування пораховуємо за ним. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="basis">
+            <h2 id="basis"><i data-lucide="gauge" aria-hidden="true"></i>Показники лічильника <span class="wf-status">прийнято</span></h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: показники лічильника</figcaption>
+            </figure>
+            <div class="wf-stats">
+              <article class="wf-stat"><h3><i data-lucide="sun" aria-hidden="true"></i>День</h3><p class="wf-stat__value">12 702<span class="wf-unit">кВт·год</span></p><p class="wf-stat__sub">спожито 222 кВт·год</p></article>
+              <article class="wf-stat"><h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3><p class="wf-stat__value">5 341<span class="wf-unit">кВт·год</span></p><p class="wf-stat__sub">спожито 105 кВт·год</p></article>
+              <article class="wf-stat"><h3><i data-lucide="clock" aria-hidden="true"></i>Подано</h3><p class="wf-stat__value"><time datetime="2026-11-03T19:42">3 листопада, 19:42</time></p><p class="wf-stat__sub">Наталя, за фото</p></article>
+            </div>
+            <footer>
+              <a class="wf-button wf-tile__btn" href="history.html"><i data-lucide="history" aria-hidden="true"></i>Звірити з історією</a>
+            </footer>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    <p>Вайрфрейм · «Сплатити» · стан «порожній». Суми до сплати немає, баланс «без боргу». Людина відкрила екран з меню до 8 листопада.</p>
+    <p>Вихід — «До показників і оплати»; друга дія — «Відкрити історію». Flow M: «Є сума до сплати?» — ні, кінець на «Подати показники». Flow R6: «нарахування ще немає, показуємо дату».</p>
+    <p>Інший варіант цього стану — «переплата»: сума зі знаком плюс і та сама дія-вихід [?].</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

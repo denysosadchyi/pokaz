@@ -1,0 +1,124 @@
+<!doctype html>
+<!--
+  Екран: Сплатити · bill-error.html. Стан «помилка» (sitemap.md, колонка «Стани»). Група «Сума».
+  Базова сторінка — bill.html. Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+  Компонування (_conventions.md, р. 9): робоча колонка — зона 1 «Оплата» (головна дія) і зона 2 «Розшифровка»;
+    колонка контексту — зона 3 «Основа нарахування».
+
+  Варіант (перший у колонці «Стани»): не вдалося завантажити суму, кнопка «Повторити».
+  Крок у flows.md: flow M, розвилка «Розшифровка прийшла?» — ні → [error: не вдалося завантажити суму, є кнопка «Повторити»] → loading «завантажуємо розшифровку».
+    Той самий вузол є у flow R6: «Розшифровка прийшла?» — ні → «Повторити».
+  Виходи:
+    «Повторити» — головна дія, назад до завантаження розшифровки (bill-loading.html → bill.html).
+    Якщо повтор не допоміг — телефон контакт-центру, як на month-error.html. Чату у V1 немає (бриф, р. 8).
+    «До показників і оплати» — друга дія.
+  «Не пройшов» [?] — окрема сторінка bill-declined.html.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сплатити · помилка · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/bill">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html" aria-current="page"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати: немає даних">—</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Сплатити</h1>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Оплата. Суму не завантажено. Головна дія — повторити. Поруч — куди звернутися.
+               Кнопку «Сплатити» не показуємо: людина не платить суму, якої не бачить (R3). -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="pay" role="alert">
+            <h2 id="pay"><i data-lucide="circle-alert" aria-hidden="true"></i>Не вдалося завантажити суму</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: немає зв'язку з сервісом</figcaption>
+            </figure>
+            <p>Перевірте інтернет і повторіть. Показники й платежі збережено.</p>
+
+            <footer>
+              <a class="wf-button wf-primary" href="bill-loading.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Повторити</a>
+              <a class="wf-button" href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>До показників і оплати</a>
+            </footer>
+
+            <p class="wf-muted">Знову не вийшло? Контакт-центр: <a href="tel:0800000000">0 800 000 000</a>, щодня 8:00–20:00, безкоштовно.</p>
+          </section>
+
+          <!-- Зона 2. Розшифровка. Даних немає через ту саму помилку. Окремої дії немає: вихід — «Повторити» в зоні 1. -->
+          <section class="wf-zone" aria-labelledby="breakdown">
+            <h2 id="breakdown"><i data-lucide="receipt" aria-hidden="true"></i>З чого складається сума</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: розшифровку не завантажено</figcaption>
+            </figure>
+            <p class="wf-muted">Покажемо після повтору.</p>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 3. Основа нарахування. Даних немає через ту саму помилку. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="basis">
+            <h2 id="basis"><i data-lucide="gauge" aria-hidden="true"></i>Показники для нарахування</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: показники лічильника не завантажено</figcaption>
+            </figure>
+            <p class="wf-muted">Покажемо після повтору.</p>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    <p>Вайрфрейм · «Сплатити» · стан «помилка». Flow M і R6: розшифровка не прийшла. Вихід — «Повторити»; якщо не допомогло — контакт-центр.</p>
+    <p>Платіж «не пройшов» тепер окрема сторінка: <a href="bill-declined.html">bill-declined.html</a>. Раніше — другий варіант цього стану: платіж «не пройшов» [?]. Тоді зона «Оплата» каже: «Платіж не пройшов. Гроші не списано». Головна дія — «Сплатити ще раз», розшифровка лишається на місці.</p>
+    <p>Flow M: «Спробує ще раз?» — так, знову «проводимо платіж»; ні — борг лишається, далі «прострочено».</p>
+    <p>Номер і години контакт-центру — плейсхолдер [?], їх треба взяти в постачальника.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

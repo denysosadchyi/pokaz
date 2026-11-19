@@ -1,0 +1,124 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · головний · month-loading.html. Стан «завантаження» (sitemap.md, колонка «Стани»).
+  Базова сторінка — month.html. Шапка, сайдбар, голова сторінки і порядок зон ті самі, змінено лише вміст.
+  Компонування — _conventions.md, р. 9: робоча колонка .wf-work + колонка контексту aside.wf-context.
+
+  Крок main flow (flows.md, «M»): [Подати показники] → [loading: завантажуємо місяць] → розвилка «Дані місяця прийшли?».
+  Далі: так → month.html або month-empty.html; ні → month-error.html.
+  Сірі смуги .wf-skeleton стоять на місці вмісту тих самих зон. Назви зон видно одразу.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · завантаження · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/month">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge wf-nav__badge--wait" aria-label="до сплати: завантажуємо">…</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main" aria-busy="true">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <p><span class="wf-skeleton" style="width: 320px"></span></p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Статус місяця. Смуги на місці статусу, головного числа, тексту, головної дії і кроків місяця. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
+            <ol class="wf-steps" aria-hidden="true">
+              <li><span class="wf-steps__icon"></span><span class="wf-skeleton"></span></li>
+              <li><span class="wf-steps__icon"></span><span class="wf-skeleton"></span></li>
+              <li><span class="wf-steps__icon"></span><span class="wf-skeleton"></span></li>
+              <li><span class="wf-steps__icon"></span><span class="wf-skeleton"></span></li>
+            </ol>
+            <h2 id="month-status">Листопад 2026</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: індикатор завантаження</figcaption>
+            </figure>
+            <p class="wf-muted" role="status">Завантажуємо місяць…</p>
+            <span class="wf-skeleton wf-skeleton--lg" style="width: 45%"></span>
+            <span class="wf-skeleton" style="width: 70%"></span>
+            <span class="wf-skeleton" style="width: 60%"></span>
+            <footer>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 100%; height: 44px"></span>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Бенто «Дані місяця» (див. month.html) — той самий каркас, дані завантажуються. -->
+          <section class="wf-bento" aria-label="Дані місяця">
+            <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
+              <span class="wf-skeleton wf-skeleton--lg" style="width: 60%"></span>
+              <span class="wf-skeleton" style="width: 90%"></span>
+            </article>
+            <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
+              <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники</h2>
+              <span class="wf-skeleton" style="width: 70%"></span>
+            </article>
+            <article class="wf-tile wf-tile--day">
+              <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+              <span class="wf-skeleton" style="width: 60%"></span>
+            </article>
+            <article class="wf-tile wf-tile--night">
+              <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+              <span class="wf-skeleton" style="width: 60%"></span>
+            </article>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Подати показники» · стан «завантаження». Flow M: завантажуємо місяць. Шапка, меню й назви зон видно одразу, смуги стоять на місці даних.
+      <p class="wf-flow">Переходи flow: Дані прийшли → <a href="month.html">month.html</a> · не прийшли → <a href="month-error.html">month-error.html</a>.</p>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · reading-error.html (sitemap.md, «Екрани»). Група «Показники». Екран дії й екран введення.
+  Jobs: M, R1, R2, R4, R5, R6, R7, E1, E2, E4, H4 [?].
+  Стан «помилка» (sitemap.md, колонка «Стани»). Базова сторінка — reading.html. Шапка, сайдбар і порядок зон ті самі.
+  Сторінка показує перший варіант: «нечітке фото, далі ручні поля». Інші варіанти — у .wf-note.
+  Компонування (_conventions.md, розділ 9): .wf-page-head; робоча колонка — зона показників з полями і головною дією; колонка контексту — «Строки».
+  Окремої зони «Попередні показники» немає: їхні цифри стоять під полями.
+
+  Крок main flow (flows.md, «M. Закрити місяць без сумніву»): вузол [Подати показники].
+    Звідки: [Подати показники], головна дія «Подати показники», розвилка «Вікно подачі відкрите?» — так.
+    Розвилки екрана: «Попередні показники є?» → «Подає за фото? [?]» → «Цифри розпізнано чітко?» →
+    «Цифри не менші за попередні показники?» → «Стрибок понад 3× від середнього?» → «Сервіс відповів?» → «Показники прийнято?».
+    Куди: успіх «прийнято» → [Історія показників і платежів] або [Подати показники]; «Помітила помилку?» — так → flow R2.
+    Ця сторінка: розвилка «Цифри розпізнано чітко?» — ні → [error: нечітке фото, переходимо до ручних полів] → [стан: вводить цифри вручну].
+    Виходи: ручні поля (основний, flows.md) або нове фото (знову «loading: розпізнаємо цифри»).
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · помилка · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/reading">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація»).
+         На reading.html перемикач заблоковано (disabled), адресу видно (R4). Пункту «Подати показники» у меню немає, тому aria-current ні на чому. -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </button>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <p>За фото або вручну</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Показники лічильника: повідомлення про нечітке фото, фото і ручні поля, попередні показники біля полів, головна дія.
+               Сутності «Лічильник» і «Показники». Jobs: M, R1, R4, R5, R6, R7, E1, E4, H4 [?].
+               Порядок: відповідь → що сталося і що робити → поля → дія. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="reading-meter" role="alert">
+            <h2 id="reading-meter">Листопад 2026: <span class="wf-status">чекає показників</span></h2>
+            <div class="wf-media">
+              <figure class="wf-ph wf-ph--sm">
+                <figcaption>Ілюстрація: нечітке фото лічильника</figcaption>
+              </figure>
+              <div>
+                <p class="wf-hero"><i data-lucide="circle-alert" aria-hidden="true"></i><span class="wf-big">Не вдалося розпізнати цифри</span></p>
+                <p>Фото нечітке. Зробіть нове або введіть цифри вручну. Попередні показники збережено.</p>
+              </div>
+            </div>
+            <form id="reading-form">
+              <fieldset>
+                <legend>Лічильник № 0172 5543 · двозонний</legend>
+                <!-- Два рівноправні шляхи (бриф, рішення 2): фото і ручний ввід. Колонки однакової ширини. -->
+                <div class="wf-cols wf-cols--even wf-cols--or">
+                  <div>
+                    <h3>За фото</h3>
+                    <figure class="wf-ph" style="min-height: 140px">
+                      <figcaption>Ваше фото: цифри нечіткі</figcaption>
+                    </figure>
+                    <p class="wf-muted">Підійдіть ближче: цифри в кадрі, без відблиску.</p>
+                    <a class="wf-button" href="reading-loading.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Зробити нове фото</a>
+                  </div>
+                  <div>
+                    <h3>Вручну</h3>
+                    <p class="wf-muted">Цифри до коми, як на лічильнику.</p>
+                    <div class="wf-pair">
+                      <div class="wf-field">
+                        <label for="reading-day"><i data-lucide="sun" aria-hidden="true"></i>День, кВт·год</label>
+                        <input id="reading-day" name="day" inputmode="numeric" autocomplete="off" aria-describedby="reading-day-prev" autofocus>
+                        <small id="reading-day-prev" class="wf-muted">Попередній: 12 480</small>
+                      </div>
+                      <div class="wf-field">
+                        <label for="reading-night"><i data-lucide="moon" aria-hidden="true"></i>Ніч, кВт·год</label>
+                        <input id="reading-night" name="night" inputmode="numeric" autocomplete="off" aria-describedby="reading-night-prev">
+                        <small id="reading-night-prev" class="wf-muted">Попередній: 5 236</small>
+                      </div>
+                    </div>
+                    <p class="wf-muted wf-after-fields"><time datetime="2026-10-03">3 жовтня 2026</time> · Наталя, вручну. Нові не можуть бути меншими.</p>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <footer>
+              <a class="wf-button wf-primary" href="reading-success.html"><i data-lucide="send" aria-hidden="true"></i>Надіслати показники</a>
+              <span class="wf-muted">для вул. Липова, 14, кв. 27</span>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Строки: вікно подачі, виправлення, нарахування за середнім. Jobs: R2, R5, E2. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="reading-dates">
+            <h2 id="reading-dates"><i data-lucide="calendar" aria-hidden="true"></i>Строки</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: календар з вікном подачі</figcaption>
+            </figure>
+            <ul class="wf-list">
+              <li>Помилилися — виправте самі до 5 листопада включно.</li>
+              <li>Не подали до 5 листопада — нарахуємо за середнім споживанням.</li>
+            </ul>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    <p>Вайрфрейм · «Подати показники» · стан «помилка», перший варіант: нечітке фото, далі ручні поля. Flow M, розвилка «Цифри розпізнано чітко?» — ні.
+    Виходи: ручні поля або «Зробити нове фото». Головна дія лишається «Надіслати показники».</p>
+    <p>Інші варіанти помилки (окремих сторінок немає):</p>
+    <ol>
+      <li>Менше за попередній: «Показники менші за попередній: день 12 480. Перевірте цифри». Поле «День» з aria-invalid. Вихід — виправити цифри. Якщо хибний попередні показники, далі flow R6.</li>
+      <li>«Відхилено» з причиною людською мовою. Вихід — ручні поля. Тексти причин — [?].</li>
+      <li>Сервіс недоступний: показники збережено як чернетку, статус «ще не надіслано» [?]. Вихід — «Надіслати ще раз» до 5 листопада. Після вікна — нарахування за середнім.</li>
+    </ol>
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

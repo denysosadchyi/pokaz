@@ -1,0 +1,117 @@
+<!doctype html>
+<!--
+  Екран: Історія · history-empty.html. Стан «порожній» (sitemap.md, колонка «Стани»). Група «Місяць».
+  Jobs: M, R2, R4, R6, E1, E3, H2 [?].
+  Базова сторінка — history.html. Шапка, сайдбар і порядок зон ті самі, змінено лише вміст.
+
+  Варіант: «записів ще немає: людина відкрила екран з меню до перших показників».
+  У flow M цього стану немає: людина приходить на [Історія показників і платежів] після «прийнято».
+  Звідки прийшли: пункт «Історія» в сайдбарі. Вихід: [Подати показники] (reading.html), вікно 1–5 листопада відкрите.
+  Компонування (_conventions.md, р. 9): голова сторінки — h1 і рядок контексту;
+    робоча колонка — зона 1 «Записи за місяцями»;
+    колонка контексту — зона 2 «Нарахування», зона 3 «Лічильник». Адресу показує перемикач.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Історія · порожній · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/history">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html" aria-current="page"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Історія показників і платежів</h1>
+        <p>Нові вгорі</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Записи за місяцями. Записів ще немає: людина відкрила екран з меню до перших показників.
+               Вихід — «Подати показники» (flows.md, flow M: вікно відкрите → [Подати показники]). На цьому стані це головна кнопка: інших виходів немає. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="hist-records">
+            <h2 id="hist-records">Записів ще немає</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: порожній список записів</figcaption>
+            </figure>
+            <p>Тут з’являться показники й платежі: цифри, дата й хто вніс.</p>
+            <footer>
+              <a class="wf-button wf-primary" href="reading.html"><i data-lucide="gauge" aria-hidden="true"></i>Подати показники</a>
+              <span class="wf-muted">до 5 листопада включно</span>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Зона 2. Нарахування. Даних немає: пояснюємо, коли вони з'являться. Дії немає. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-charge">
+            <h2 id="hist-charge"><i data-lucide="receipt" aria-hidden="true"></i>Нарахування</h2>
+            <figure class="wf-ph wf-ph--sm">
+              <figcaption>Ілюстрація: календар з датою нарахування</figcaption>
+            </figure>
+            <p class="wf-muted">З’явиться після перших показників.</p>
+          </section>
+
+          <!-- Зона 3. Лічильник. Jobs: R4 (до якого лічильника належать записи). Адресу показує перемикач, тут її немає. -->
+          <section class="wf-zone wf-zone--ref" aria-labelledby="hist-meter">
+            <h2 id="hist-meter"><i data-lucide="gauge" aria-hidden="true"></i>Лічильник</h2>
+            <dl class="wf-dl">
+              <dt>Номер</dt><dd>0172 5543</dd>
+              <dt>Тип</dt><dd>двозонний: день і ніч</dd>
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Історія» · стан «порожній». Записів ще немає: людина відкрила екран з меню до перших показників.
+    У flow M цього стану немає, бо людина приходить сюди після «прийнято». Вихід — «Подати показники», вікно 1–5 листопада.
+    Інший варіант з flow R6: «показників за цей місяць в історії немає». Там вихід той самий, якщо вікно ще відкрите.
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>

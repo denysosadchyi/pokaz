@@ -1,0 +1,135 @@
+<!doctype html>
+<!--
+  Екран: Подати показники · головний · month.html (sitemap.md, «Екрани»). Група «Місяць».
+  Сторінка: базова, робочий вигляд. Стани (-empty, -error, -loading) — окремі сторінки.
+
+  Крок main flow (flows.md, «M. Закрити місяць без сумніву»):
+    вузол [Подати показники] на початку flow, перший захід — подача.
+    Розвилки вже пройдено так:
+      «Дані місяця прийшли?» — так;
+      «Особовий рахунок уже є?» — так;
+      «Показники цього місяця вже прийнято?» — ні;
+      «Вікно подачі відкрите?» — так.
+    Далі — [Подати показники]: головна дія екрана, 1 клік.
+  Той самий екран стоїть у flow M ще двічі: [Подати показники] після нарахування (дія «Сплатити»)
+  і [Подати показники] у кінці (статус «сплачено»). Це інші статуси місяця, а не ця сторінка.
+
+  Персона: Наталя (checker, primary), сценарій at-meter. Один рахунок.
+  Дані — wireframes/_conventions.md, «Набір даних для головного flow».
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подати показники · вайрфрейм</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
+  <script src="../_nav/tree.js?v=202611121900"></script>
+  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="_frame.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="device" data-url="pokaz.ua/month">
+
+    <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
+    <header class="wf-header">
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <div class="wf-user">
+        <span class="wf-avatar" aria-hidden="true">НК</span>
+        <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- Перемикач особового рахунку — у шапці. Сайдбар: глобальна навігація (sitemap.md, «Навігація») -->
+    <aside class="wf-sidebar" aria-label="Навігація">
+      <div class="wf-account">
+        <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
+          <span>вул. Липова, 14, кв. 27, Київ</span>
+          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+        </a>
+        <p class="wf-account__meta">Рахунок № 2600 418 375</p>
+      </div>
+      <nav class="wf-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="wf-main">
+      <div class="wf-page-head">
+        <h1>Подати показники</h1>
+        <p>Лічильник № 0172 5543 · день і ніч</p>
+        <div class="wf-page-info">
+          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+        </div>
+      </div>
+
+      <div class="wf-layout">
+        <div class="wf-work">
+
+          <!-- Зона 1. Статус місяця і наступний крок. Сутність «Місяць»: період, вікно подачі, наступний крок і його дата.
+               Jobs: M, R5 (подача — головна дія першого екрана [o4]), H3 (дата наступного кроку).
+               Порядок: відповідь → що робити і до коли → дія → кроки місяця. -->
+          <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
+            <ol class="wf-steps" aria-label="Кроки місяця">
+              <li aria-current="step"><span class="wf-steps__icon"><i data-lucide="gauge" aria-hidden="true"></i></span><span>чекає показників<small>зараз · до 5 листопада</small></span></li>
+              <li><span class="wf-steps__icon"><i data-lucide="circle-check" aria-hidden="true"></i></span><span>показники прийнято<small>одразу після подачі</small></span></li>
+              <li><span class="wf-steps__icon"><i data-lucide="receipt" aria-hidden="true"></i></span><span>нараховано<small>8 листопада</small></span></li>
+              <li><span class="wf-steps__icon"><i data-lucide="wallet" aria-hidden="true"></i></span><span>сплачено<small>після оплати</small></span></li>
+            </ol>
+            <h2 id="month-status"><small>Листопад 2026</small>Залишилося 3 дні</h2>
+            <p>Орієнтовну суму побачите одразу. Виправити цифри можна до 5 листопада включно.</p>
+            <footer>
+              <a class="wf-button wf-primary" href="reading.html"><i data-lucide="gauge" aria-hidden="true"></i>Подати показники</a>
+              <span class="wf-muted">вул. Липова, 14, кв. 27</span>
+            </footer>
+          </section>
+
+        </div>
+
+        <aside class="wf-context" aria-label="Довідка">
+
+          <!-- Бенто «Дані місяця»: один блок замість двох карток.
+               Баланс (сутність «Баланс», jobs M, R6) — велика плитка зліва;
+               попередні показники (jobs E1, M) — плитка-шапка + дві плитки зон День / Ніч. -->
+          <section class="wf-bento" aria-label="Дані місяця">
+            <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
+              <p class="wf-tile__value">1 185,84<span class="wf-unit">₴</span></p>
+              <span class="wf-status">не сплачено</span>
+              <p class="wf-muted">Листопад — за показниками від 3 листопада.</p>
+              <a class="wf-button wf-tile__btn" href="bill.html">Сплатити</a>
+            </article>
+            <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
+              <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники <span class="wf-status">прийнято</span></h2>
+              <p class="wf-muted"><time datetime="2026-10-03">3 жовтня 2026</time> · Наталя, вручну</p>
+              <a class="wf-button wf-tile__btn" href="history.html">Історія</a>
+            </article>
+            <article class="wf-tile wf-tile--day">
+              <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+              <p class="wf-tile__value">12 480<span class="wf-unit">кВт·год</span></p>
+            </article>
+            <article class="wf-tile wf-tile--night">
+              <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+              <p class="wf-tile__value">5 236<span class="wf-unit">кВт·год</span></p>
+            </article>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <aside class="wf-note">
+    Вайрфрейм · «Подати показники» · базова сторінка. Flow M, перший захід: вікно відкрите, показників ще немає.
+    Стани -empty, -error, -loading — окремі сторінки. -success немає: це не екран дії.
+  </aside>
+
+  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+</body>
+</html>
