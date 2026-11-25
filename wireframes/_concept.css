@@ -431,3 +431,6 @@
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   background: var(--color-panel);
 }
+
+/* Верх панелі з адресою — білий з непрозорістю 95 % */
+.wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .95) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
