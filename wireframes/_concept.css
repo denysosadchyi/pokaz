@@ -475,3 +475,6 @@
 /* Пігулка рахунку — зліва, на одній лінії з адресою */
 .wf-sidebar .wf-account__meta { padding-left: var(--space-4); }
 .wf-sidebar .wf-account__meta::before { display: none; }
+
+/* Номер рахунку — жирний 700. Fixel Text не має файлу Bold, тому беремо Fixel Display Bold: без штучного жирного */
+.wf-sidebar .wf-account__meta > span { font-family: var(--font-display); font-weight: 700; }
