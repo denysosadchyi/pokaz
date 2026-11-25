@@ -471,3 +471,7 @@
 }
 .wf-sidebar .wf-account__meta > span::before { right: 100%; background: radial-gradient(circle at 0 0, transparent calc(var(--radius-sm) - .5px), var(--color-panel) var(--radius-sm)); }
 .wf-sidebar .wf-account__meta > span::after { left: 100%; background: radial-gradient(circle at 100% 0, transparent calc(var(--radius-sm) - .5px), var(--color-panel) var(--radius-sm)); }
+
+/* Пігулка рахунку — зліва, на одній лінії з адресою */
+.wf-sidebar .wf-account__meta { padding-left: var(--space-4); }
+.wf-sidebar .wf-account__meta::before { display: none; }
