@@ -620,3 +620,6 @@
    Рамка .device обрізає кути через overflow: clip, а не hidden: hidden робить рамку контейнером прокрутки, і sticky не працює */
 .device { overflow: clip; }
 .wf-sidebar { position: sticky; top: var(--space-4); align-self: start; z-index: 2; }
+
+/* Шапка — нижні кути круглі, як у блоків */
+.wf-header { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
