@@ -760,3 +760,9 @@
 
 /* Адреса на головній кнопці теж біла */
 .wf-primary--addr .wf-primary__addr { color: #fff; opacity: .9; }
+
+/* Головна кнопка «Подати показники»: легкий діагональний градієнт відтінків оранжевого (лампа → тепліший),
+   біла назва і адреса мають легку тінь */
+.wf-zone--primary > footer > .wf-button.wf-primary--addr { background: linear-gradient(135deg, #F7A274 0%, #F28A55 50%, #EC7640 100%); }
+.wf-zone--primary > footer > .wf-button.wf-primary--addr:hover { background: linear-gradient(135deg, #F8AE85 0%, #F59B6D 50%, #EF8550 100%); }
+.wf-primary--addr .wf-primary__label, .wf-primary--addr .wf-primary__addr { text-shadow: 0 1px 2px rgba(120, 45, 10, .25); }
