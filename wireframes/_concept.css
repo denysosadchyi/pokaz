@@ -804,3 +804,6 @@
 /* Статуси «до сплати» і «прийнято» — у правому верхньому куті плитки, на рівні заголовка */
 .wf-tile--balance > .wf-status, .wf-tile--prev h2 > .wf-status { position: absolute; top: var(--space-5); right: var(--space-5); margin: 0; }
 .wf-tile--balance > h2, .wf-tile--prev > h2 { padding-right: 120px; }
+
+/* Кружки іконок у плитках — легка тінь */
+.wf-main .wf-tile h2 iconify-icon, .wf-main .wf-tile h3 iconify-icon { box-shadow: 0 2px 6px -1px rgba(60, 40, 110, .14); }
