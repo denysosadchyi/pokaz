@@ -447,3 +447,6 @@
    Висота 21 px ставить лінію на цілий піксель 10. Межа білого 95 % і білого — одразу під лінією */
 .wf-sidebar .wf-account__meta { height: 21px; }
 .wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .95) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
+
+/* Верх панелі з адресою — білий 70 %: при 95 % фон крізь скло майже не видно */
+.wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .70) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
