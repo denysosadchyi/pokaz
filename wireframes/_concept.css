@@ -506,3 +506,6 @@
 .wf-sidebar .wf-switcher__text b { font-size: var(--fs-xs); }
 .wf-sidebar .wf-switcher__text small { font-size: 12px; }
 .wf-sidebar .wf-switcher__pin { margin-top: 1px; }
+
+/* Місто і вулиця ближче: без проміжку, щільна висота рядка */
+.wf-sidebar .wf-switcher__text { gap: 0; line-height: 1.2; }
