@@ -891,3 +891,6 @@
   background: #F4F2F8; opacity: 0; transition: opacity .15s ease; pointer-events: none;
 }
 .wf-sidebar .wf-nav li:not(:last-child) > a:hover::before { opacity: 1; }
+
+/* Плашка ховера меню — радіус менший: 12 px замість 20 px */
+.wf-sidebar .wf-nav li:not(:last-child) > a::before { border-radius: 12px; }
