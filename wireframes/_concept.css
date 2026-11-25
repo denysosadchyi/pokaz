@@ -751,3 +751,6 @@
 
 /* Іконка календаря трохи більша: 14 px */
 .wf-work .wf-zone > h2 .wf-period iconify-icon { font-size: 14px; }
+
+/* Іконка календаря — 16 px, щоб різниця з 12 px була добре видна */
+.wf-work .wf-zone > h2 .wf-period iconify-icon { font-size: 16px; }
