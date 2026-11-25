@@ -434,3 +434,11 @@
 
 /* Верх панелі з адресою — білий з непрозорістю 95 % */
 .wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .95) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
+
+/* Неактивні таби — прозорі: чорний 5 % поверх скла, не поверх білого.
+   Зона під табами не має фону. Біле тіло зони малює тінь смуги табів: вона йде вниз і в боки, під саму смугу не заходить.
+   clip-path обрізає тінь по краях зони і лишає місце для кружків над табами */
+.wf-mainbox > .wf-zone--primary { background: none; clip-path: inset(calc(var(--size-step) / -2 - 4px) 0 0 0 round 0 0 var(--radius-lg) var(--radius-lg)); }
+.wf-zone--primary > .wf-steps { box-shadow: 0 100vmax 0 100vmax var(--color-panel); }
+.wf-zone--primary > .wf-steps li:not([aria-current="step"]) { background: rgba(0, 0, 0, .05); }
+.wf-zone--primary > .wf-steps li[aria-current="step"] { background: var(--color-panel); }
