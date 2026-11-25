@@ -812,3 +812,9 @@
    За правилом «внутрішній = зовнішній − відступ» біла зона і кнопка мають 0 px. Кути лишаємо м'якими: зона 12 px, кнопка 8 px */
 .wf-mainbox > .wf-zone--primary { border-radius: 12px; clip-path: inset(calc(var(--size-step) / -2 - 4px) 0 0 0 round 0 0 12px 12px); }
 .wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: 8px; }
+
+/* Пункти лівого меню: без ліній між пунктами. Ховер — тихий фон на всьому пункті (li), тому текст і відступи не рухаються */
+.wf-sidebar .wf-nav li + li { border-top: 0; }
+.wf-sidebar .wf-nav li { transition: background-color .15s ease; }
+.wf-sidebar .wf-nav li:has(> a:hover) { background: #F4F2F8; }
+@media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li { transition: none; } }
