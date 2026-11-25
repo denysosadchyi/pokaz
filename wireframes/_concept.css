@@ -454,3 +454,6 @@
 /* Без лінії-розділювача між верхом панелі і меню: межу показує лише зміна фону. Панель без рамки */
 .wf-sidebar .wf-account__meta::before, .wf-sidebar .wf-account__meta::after { background: none; }
 .wf-sidebar { border: 0; box-shadow: none; }
+
+/* Пігулка з номером рахунку — біла */
+.wf-sidebar .wf-account__meta > span { background: var(--color-panel); }
