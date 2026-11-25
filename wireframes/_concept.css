@@ -817,3 +817,9 @@
 .wf-mainbox > .wf-zone--primary > .wf-steps li:last-child { border-top-right-radius: var(--r-zone); }
 .wf-mainbox > .wf-zone--primary > footer { margin-inline: -8px; margin-bottom: -8px; }
 .wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: var(--r-btn); }
+
+/* Вкладені радіуси — рахунок від головної картки (обгортки). Її радіус лишається 24 px, як у всіх карток.
+   Обгортка 24 px → відступ 8 px → біла зона 16 px → відступ 8 px → кнопка 8 px */
+.wf-mainbox { --r-zone: 16px; --r-btn: 8px; padding: 8px; border-radius: var(--radius-lg); }
+.wf-mainbox > .wf-page-head { padding: 16px 16px 8px; }
+.wf-mainbox > .wf-zone--primary > footer { margin-inline: -16px; margin-bottom: -16px; }
