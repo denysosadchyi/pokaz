@@ -775,3 +775,12 @@
 .wf-zone--primary > footer > .wf-button.wf-primary--addr:hover {
   background: linear-gradient(180deg, rgba(255, 255, 255, .30), rgba(255, 255, 255, 0)), linear-gradient(135deg, #F8AE85 0%, #F59B6D 50%, #EF8550 100%);
 }
+
+/* Верхній шар головних кнопок — жовтий замість білого: #FFD666 з непрозорістю 50 % угорі, повністю прозорий унизу */
+.wf-main button.wf-primary, .wf-button.wf-primary { background-image: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)); }
+.wf-zone--primary > footer > .wf-button.wf-primary--addr {
+  background: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)), linear-gradient(135deg, #F7A274 0%, #F28A55 50%, #EC7640 100%);
+}
+.wf-zone--primary > footer > .wf-button.wf-primary--addr:hover {
+  background: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)), linear-gradient(135deg, #F8AE85 0%, #F59B6D 50%, #EF8550 100%);
+}
