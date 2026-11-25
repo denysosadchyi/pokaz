@@ -517,3 +517,9 @@
 .wf-sidebar a.wf-switcher .wf-switcher__text b { grid-column: 2; grid-row: 1; }
 .wf-sidebar a.wf-switcher .wf-switcher__text small { grid-column: 1 / 3; grid-row: 2; }
 .wf-sidebar a.wf-switcher > iconify-icon:last-child { grid-column: 3; grid-row: 1 / 3; }
+
+/* Без піна: місто і вулиця — з одного лівого краю */
+.wf-sidebar a.wf-switcher { grid-template-columns: 1fr auto; }
+.wf-sidebar a.wf-switcher .wf-switcher__text b { grid-column: 1; }
+.wf-sidebar a.wf-switcher .wf-switcher__text small { grid-column: 1; }
+.wf-sidebar a.wf-switcher > iconify-icon:last-child { grid-column: 2; }
