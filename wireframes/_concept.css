@@ -322,3 +322,9 @@
   flex: none; padding: var(--pad-chip) var(--space-3); border-radius: var(--radius-pill);
   background: var(--color-surface-2); color: var(--color-text-muted); font-size: var(--fs-xs);
 }
+
+/* Пункти меню без фону і без бічних відступів: іконки на одній лінії з адресою.
+   Поточний пункт — жирний текст, темний колір і іконка кольору лампи (не лише колір) */
+.wf-sidebar .wf-nav a { padding-inline: 0; border-radius: 0; }
+.wf-sidebar .wf-nav a, .wf-sidebar .wf-nav a:hover, .wf-sidebar .wf-nav a[aria-current="page"] { background: none; }
+.wf-sidebar .wf-nav a:hover { color: var(--color-text); }
