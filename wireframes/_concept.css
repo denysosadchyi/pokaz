@@ -867,3 +867,7 @@
 .wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 4px; }
 .wf-sidebar .wf-nav li:nth-last-child(2)::before { inset: 4px 8px 8px; }
 .wf-sidebar .wf-nav li:not(:last-child)::before { border-radius: 16px; }
+
+/* Плашка ховера меню — 4 px від країв пункту з усіх боків, також від низу картки. Радіус 20 px = 24 px картки − 4 px */
+.wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 0; }
+.wf-sidebar .wf-nav li:not(:last-child)::before, .wf-sidebar .wf-nav li:nth-last-child(2)::before { inset: 4px; border-radius: 20px; }
