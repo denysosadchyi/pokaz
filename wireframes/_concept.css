@@ -821,3 +821,14 @@
 
 /* Усі кнопки — повне заокруглення (пігулка). Головна кнопка теж: сильніший селектор, бо правило вкладених радіусів ставило 8 px */
 .wf-main button, .wf-button, .wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: var(--radius-pill); }
+
+/* Ховер пункту меню — плашка з виходом 8 px за іконку і за суму, з заокругленням. Текст і відступи не рухаються */
+.wf-sidebar .wf-nav li:has(> a:hover) { background: var(--color-panel); }
+.wf-sidebar .wf-nav li:last-child:has(> a:hover) { background: var(--color-panel); }
+.wf-sidebar .wf-nav li:not(:last-child) > a { position: relative; isolation: isolate; }
+.wf-sidebar .wf-nav li:not(:last-child) > a::before {
+  content: ""; position: absolute; inset: 0 -8px; z-index: -1; border-radius: var(--radius-md);
+  background: #F4F2F8; opacity: 0; transition: opacity .15s ease; pointer-events: none;
+}
+.wf-sidebar .wf-nav li:not(:last-child) > a:hover::before { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li > a::before { transition: none; } }
