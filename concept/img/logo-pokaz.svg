@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Знак Показ">
+  <defs>
+    <linearGradient id="glow" x1="14" y1="12" x2="35" y2="37" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F59B6D"/>
+      <stop offset="1" stop-color="#F28A55"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="36" height="36" rx="11" fill="#1B1830"/>
+  <path d="M11 18c0-3.866 3.134-7 7-7h12c3.866 0 7 3.134 7 7v19H11V18Z" fill="url(#glow)"/>
+  <path d="M24 25 31.5 17.5" fill="none" stroke="#1B1830" stroke-width="4" stroke-linecap="round"/>
+</svg>

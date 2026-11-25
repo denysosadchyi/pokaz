@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Альтернативний знак Показ — лічильне колесо світла">
+  <rect x="5" y="12" width="38" height="24" rx="12" fill="#1B1830"/>
+  <rect x="10" y="17" width="28" height="14" rx="7" fill="#F28A55"/>
+  <path d="M18 18.5v11M30 18.5v11" fill="none" stroke="#C2521C" stroke-width="3" stroke-linecap="round"/>
+</svg>

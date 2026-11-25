@@ -635,3 +635,15 @@
 .wf-main button, .wf-button { padding-block: 2px 0; }
 .wf-status, .wf-nav__badge { padding-top: 6px; padding-bottom: 5px; }
 .wf-sidebar .wf-account__meta > span { padding-top: 8px; padding-bottom: 7px; }
+
+/* Знак продукту — SVG від Codex (concept/img/logo-pokaz.svg). Рамка і світло вже є в самому знаку, тому без підкладки */
+.wf-logo--mark { display: block; width: var(--size-avatar); height: var(--size-avatar); padding: 0; background: none; box-shadow: none; border-radius: 0; }
+
+/* Вторинні і головні кнопки — більший відступ з боків: 32 px замість 24 px */
+.wf-main button, .wf-button { padding-inline: var(--space-6); }
+
+/* Оптичний центр — точне правило в одиницях em. Fixel не вмикає метрики Typo, тому браузер бере Win-метрики (750/250).
+   Тоді центр великих літер і цифр на 0,1 кегля вище центру рядка. Різниця відступів зверху і знизу — 0,2 кегля, текст іде вниз на 0,1 кегля */
+.wf-nav a .wf-nav__badge, .wf-main .wf-status { line-height: 1; padding-top: calc(6px + .1em); padding-bottom: calc(6px - .1em); }
+.wf-sidebar .wf-account__meta > span { line-height: 1; padding-top: calc(8px + .1em); padding-bottom: calc(8px - .1em); }
+.wf-main button, .wf-button { line-height: 1; padding-block: .2em 0; }
