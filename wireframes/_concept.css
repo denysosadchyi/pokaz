@@ -9,7 +9,7 @@
   border: 0; border-radius: var(--radius-lg); overflow: hidden;
   color: var(--color-text);
   /* фон: складний світлий градієнт поверх розмитого фото вечірнього вікна */
-  background: var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
+  background: var(--bg-grain), var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
   font-family: var(--font-text); font-size: var(--fs-md); line-height: var(--lh-text);
   box-shadow: var(--shadow-float);
 }
@@ -30,7 +30,7 @@
 .device :focus-visible { outline: var(--focus-ring) solid var(--color-focus); outline-offset: var(--focus-ring); border-radius: var(--radius-sm); }
 .device a { text-underline-offset: var(--focus-ring); }
 
-/* ── Іконки Solar bold-duotone (iconify-icon) ── */
+/* ── Іконки Hugeicons stroke rounded (iconify-icon) ── */
 .device iconify-icon { display: inline-block; flex: none; width: 1em; height: 1em; font-size: var(--icon-md); color: var(--color-icon); }
 
 /* ── Шапка ── */
@@ -186,7 +186,7 @@
 }
 
 /* ── Скло: шапка, меню, зони і плитки напівпрозорі, фон просвічує ── */
-.device { background: var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat; }
+.device { background: var(--bg-grain), var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat; }
 .wf-header, .wf-sidebar { background: var(--color-surface); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4); backdrop-filter: blur(var(--glass-blur)) saturate(1.4); }
 .wf-header { border-bottom-color: var(--glass-edge); }
 .wf-sidebar { border-right-color: var(--glass-edge); background: linear-gradient(180deg, var(--color-surface-hi), var(--color-surface) 40%); }
@@ -253,3 +253,14 @@
 }
 .wf-sidebar .wf-nav a[aria-current="page"], .wf-sidebar .wf-switcher { background: var(--color-surface-2); box-shadow: none; }
 .wf-sidebar .wf-nav a:hover { background: var(--color-surface-2); }
+
+/* Блоки без тіней і без меж: скло тримається лише на заливці і розмитті */
+.wf-zone, .wf-zone--primary, .wf-zone--ref, .wf-tile, .wf-sidebar { border: 0; box-shadow: none; }
+.wf-header { border-bottom: 0; }
+.wf-tile h2 iconify-icon, .wf-tile h3 iconify-icon, .wf-context .wf-zone > h2 iconify-icon,
+.wf-steps__icon, .wf-logo, .wf-avatar, .wf-nav a[aria-current="page"], .wf-switcher { box-shadow: none; }
+/* Ліве меню — по висоті вмісту, не до низу рамки */
+.wf-sidebar { align-self: start; }
+/* Шапка біла, як ліва панель: скло лишається тільки в блоках вмісту */
+.wf-header { background: var(--color-panel); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.wf-logo, .wf-avatar { background: var(--color-surface-2); }

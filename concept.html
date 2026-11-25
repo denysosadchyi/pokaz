@@ -4,7 +4,7 @@
   Усі значення продукту — з concept/tokens.css. Стенд не має своїх кольорів продукту.
   Сторінка-виняток з чорно-білого правила сайту: демо продукту кольорові. Решта сторінки — сірий сайт.
   Таблицю контрасту пише скрипт: node tools/contrast.mjs (між мітками contrast:start і contrast:end). Руками її не правимо.
-  Фото — Unsplash (перелік — concept/references.md). Іконки — Solar bold-duotone (Iconify).
+  Фото — Unsplash (перелік — concept/references.md). Іконки — Hugeicons stroke rounded (Iconify).
 -->
 <html lang="uk" data-root="./">
 <head>
@@ -39,7 +39,7 @@
 
     /* ── Демо продукту: лише токени ── */
     .cx { font-family: var(--font-text); font-size: var(--fs-md); line-height: var(--lh-text); color: var(--color-text);
-          background: var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
+          background: var(--bg-grain), var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
           border-radius: var(--radius-lg); padding: var(--space-6); font-variant-numeric: tabular-nums; }
     .cx *, .cx *::before, .cx *::after { box-sizing: border-box; }
     .cx p, .cx h3, .cx h4, .cx figure, .cx dl, .cx dd { margin: 0; }
@@ -49,7 +49,7 @@
     .cx .num { font-family: var(--font-display); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
     .cx .muted { color: var(--color-text-muted); }
     /* скло: напівпрозора картка, фон просвічує */
-    .glass { border: var(--border-hair) solid var(--glass-edge); background: var(--glass-fill); box-shadow: var(--glass-shine), var(--shadow-float);
+    .glass { border: 0; background: var(--glass-fill); box-shadow: none;
       -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.3); backdrop-filter: blur(var(--glass-blur)) saturate(1.3); }
 
     /* кнопки: більша специфічність і !important — бо type.css фарбує всі main button у бірюзу */
@@ -71,7 +71,7 @@
 
     /* ── Постер «стиль у дії» ── */
     .hero { min-height: 520px; padding: var(--space-7); display: grid; align-content: end; gap: var(--space-5); color: var(--color-text);
-      background: var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 70% 40% / cover no-repeat; }
+      background: var(--bg-grain), var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 70% 40% / cover no-repeat; }
     .hero .addr { display: inline-flex; align-items: center; gap: var(--space-2); justify-self: start; padding: var(--space-2) var(--space-4);
       border-radius: var(--radius-pill); background: var(--color-surface); border: var(--border-hair) solid var(--glass-edge); color: var(--color-text); font-size: var(--fs-sm); font-weight: var(--weight-medium); }
     .hero .addr iconify-icon { font-size: var(--icon-sm); }
@@ -169,18 +169,18 @@
     <h2 id="live">Стиль у дії</h2>
     <p class="why">Головний екран після подачі показників. Фон — розмите фото вечірнього вікна під світлим градієнтом. Картки — напівпрозоре скло. Колір лампи має лише одна головна дія.</p>
     <div class="cx hero" data-ste="off">
-      <span class="addr"><iconify-icon icon="solar:home-smile-bold-duotone" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
+      <span class="addr"><iconify-icon icon="hugeicons:home-09" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
       <p class="lbl">До сплати за листопад</p>
       <p class="num sum">1 185,84 <small>₴</small></p>
       <div class="row">
-        <span class="cx-status cx-status--ok"><iconify-icon icon="solar:check-circle-bold-duotone" aria-hidden="true"></iconify-icon>показники прийнято</span>
+        <span class="cx-status cx-status--ok"><iconify-icon icon="hugeicons:checkmark-circle-02" aria-hidden="true"></iconify-icon>показники прийнято</span>
         <span class="meta">Подано 3 листопада 2026 · Наталя, за фото</span>
       </div>
       <div class="zones">
-        <div class="zone glass"><h4><iconify-icon icon="solar:sun-2-bold-duotone" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
-        <div class="zone glass"><h4><iconify-icon icon="solar:moon-bold-duotone" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="hugeicons:sun-03" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="hugeicons:moon-02" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
       </div>
-      <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
+      <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
     </div>
     <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері», розмите (<code>concept/img/bg-blur.jpg</code>).</p>
   </section>
@@ -209,7 +209,7 @@
         <figcaption><b>Успіх: «прийнято»</b><code>--color-success-*</code><br>Атрибут 2 «доказ видно». Тихий зелений, не «еко».</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-error-bg" data-fg="--color-error-text" data-show="--color-error-text"></span></div>
         <figcaption><b>Помилка</b><code>--color-error-*</code><br>Атрибут 1: приглушена троянда. Без червоної тривоги (бриф, р. 9; voice.md).</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-off" data-fg="--color-bg" data-show="--color-off"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-off" data-fg="--color-panel" data-show="--color-off"></span></div>
         <figcaption><b>Година без світла</b><code>--color-off</code><br>Графік відключень. Холодний сірий-синій: не жовтий і не червоний.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-text" data-show="--color-line-strong" style="box-shadow: inset 0 0 0 3px var(--color-line-strong)"></span></div>
         <figcaption><b>Межа контролу</b><code>--color-line-strong</code><br>Поле і вторинна кнопка. Не менше 3:1.</figcaption></figure>
@@ -232,7 +232,7 @@
 
   <section aria-labelledby="form">
     <h2 id="form">Форма</h2>
-    <p class="why">М'які кути, як у кімнаті (атрибути 1 і 4). Картка — скло, її край — тонка світла лінія. Тінь м'яка. Відступи — одна шкала з кроком 4 і 8.</p>
+    <p class="why">М'які кути, як у кімнаті (атрибути 1 і 4). Картка — скло без межі і без тіні: її тримають лише заливка і розмиття. Шапка і ліве меню — білі. Відступи — одна шкала з кроком 4 і 8.</p>
     <div class="cx" data-ste="off">
       <div class="shapes">
         <div class="shape"><i style="border-radius:var(--radius-lg)"></i>--radius-lg 24 · зона</div>
@@ -270,34 +270,34 @@
 
   <section aria-labelledby="icons">
     <h2 id="icons">Іконки</h2>
-    <p class="why">Solar, стиль bold-duotone: дві тональності одного кольору, м'які форми. Колір — <code>--color-icon</code>, у кнопці — колір тексту кнопки. Розміри: 18 у меню і кнопках, 22 у заголовках зон, 40 у стані.</p>
+    <p class="why">Hugeicons, стиль stroke rounded: тонка лінія 1,5 px, круглі кінці, багато повітря всередині. Іконка легка, як скло, і не важча за текст. Колір — <code>--color-icon</code>, у кнопці — колір тексту кнопки. Розміри: 18 у меню і кнопках, 22 у заголовках зон, 40 у стані.</p>
     <div class="cx icons" data-ste="off">
       <h4>Навігація</h4>
-      <div><iconify-icon icon="solar:calendar-mark-bold-duotone"></iconify-icon><span>Подати показники<small>calendar-mark</small></span></div>
-      <div><iconify-icon icon="solar:wallet-bold-duotone"></iconify-icon><span>Сплатити<small>wallet</small></span></div>
-      <div><iconify-icon icon="solar:history-2-bold-duotone"></iconify-icon><span>Історія<small>history-2</small></span></div>
-      <div><iconify-icon icon="solar:power-bold-duotone"></iconify-icon><span>Графік відключень<small>power</small></span></div>
-      <div><iconify-icon icon="solar:sort-vertical-bold-duotone"></iconify-icon><span>Змінити адресу<small>sort-vertical</small></span></div>
-      <div><iconify-icon icon="solar:settings-bold-duotone"></iconify-icon><span>Налаштування<small>settings</small></span></div>
+      <div><iconify-icon icon="hugeicons:calendar-check-in-01"></iconify-icon><span>Подати показники<small>calendar-mark</small></span></div>
+      <div><iconify-icon icon="hugeicons:wallet-03"></iconify-icon><span>Сплатити<small>wallet</small></span></div>
+      <div><iconify-icon icon="hugeicons:time-quarter-pass"></iconify-icon><span>Історія<small>history-2</small></span></div>
+      <div><iconify-icon icon="hugeicons:flash-off"></iconify-icon><span>Графік відключень<small>power</small></span></div>
+      <div><iconify-icon icon="hugeicons:arrow-up-down"></iconify-icon><span>Змінити адресу<small>sort-vertical</small></span></div>
+      <div><iconify-icon icon="hugeicons:settings-02"></iconify-icon><span>Налаштування<small>settings</small></span></div>
       <h4>Характеристики</h4>
-      <div><iconify-icon icon="solar:sun-2-bold-duotone"></iconify-icon><span>День<small>sun-2</small></span></div>
-      <div><iconify-icon icon="solar:moon-bold-duotone"></iconify-icon><span>Ніч<small>moon</small></span></div>
-      <div><iconify-icon icon="solar:speedometer-middle-bold-duotone"></iconify-icon><span>Показники<small>speedometer-middle</small></span></div>
-      <div><iconify-icon icon="solar:bill-list-bold-duotone"></iconify-icon><span>Нараховано<small>bill-list</small></span></div>
-      <div><iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon><span>Наступні дні<small>calendar</small></span></div>
-      <div><iconify-icon icon="solar:home-smile-bold-duotone"></iconify-icon><span>Адреса<small>home-smile</small></span></div>
+      <div><iconify-icon icon="hugeicons:sun-03"></iconify-icon><span>День<small>sun-2</small></span></div>
+      <div><iconify-icon icon="hugeicons:moon-02"></iconify-icon><span>Ніч<small>moon</small></span></div>
+      <div><iconify-icon icon="hugeicons:dashboard-speed-01"></iconify-icon><span>Показники<small>speedometer-middle</small></span></div>
+      <div><iconify-icon icon="hugeicons:invoice-03"></iconify-icon><span>Нараховано<small>bill-list</small></span></div>
+      <div><iconify-icon icon="hugeicons:calendar-03"></iconify-icon><span>Наступні дні<small>calendar</small></span></div>
+      <div><iconify-icon icon="hugeicons:home-09"></iconify-icon><span>Адреса<small>home-smile</small></span></div>
       <h4>Галочка і кнопки</h4>
-      <div><iconify-icon icon="solar:check-circle-bold-duotone" style="color:var(--color-success-text)"></iconify-icon><span>Прийнято<small>check-circle</small></span></div>
-      <div><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon><span>За фото<small>camera</small></span></div>
-      <div><iconify-icon icon="solar:pen-bold-duotone"></iconify-icon><span>Вручну<small>pen</small></span></div>
-      <div><iconify-icon icon="solar:add-circle-bold-duotone"></iconify-icon><span>Додати рахунок<small>add-circle</small></span></div>
-      <div><iconify-icon icon="solar:restart-bold-duotone"></iconify-icon><span>Повторити<small>restart</small></span></div>
+      <div><iconify-icon icon="hugeicons:checkmark-circle-02" style="color:var(--color-success-text)"></iconify-icon><span>Прийнято<small>check-circle</small></span></div>
+      <div><iconify-icon icon="hugeicons:camera-01"></iconify-icon><span>За фото<small>camera</small></span></div>
+      <div><iconify-icon icon="hugeicons:pencil-edit-02"></iconify-icon><span>Вручну<small>pen</small></span></div>
+      <div><iconify-icon icon="hugeicons:add-circle"></iconify-icon><span>Додати рахунок<small>add-circle</small></span></div>
+      <div><iconify-icon icon="hugeicons:refresh"></iconify-icon><span>Повторити<small>restart</small></span></div>
       <h4>Стани</h4>
-      <div><iconify-icon icon="solar:lamp-bold-duotone" style="color:var(--color-accent-ink)"></iconify-icon><span>Знак продукту<small>lamp</small></span></div>
-      <div><iconify-icon icon="solar:bell-bold-duotone"></iconify-icon><span>Сповіщення<small>bell</small></span></div>
-      <div><iconify-icon icon="solar:info-circle-bold-duotone"></iconify-icon><span>Пояснення<small>info-circle</small></span></div>
-      <div><iconify-icon icon="solar:danger-triangle-bold-duotone"></iconify-icon><span>Перевірте цифри<small>danger-triangle</small></span></div>
-      <div><iconify-icon icon="solar:hourglass-bold-duotone"></iconify-icon><span>Чекає показників<small>hourglass</small></span></div>
+      <div><iconify-icon icon="hugeicons:lamp" style="color:var(--color-accent-ink)"></iconify-icon><span>Знак продукту<small>lamp</small></span></div>
+      <div><iconify-icon icon="hugeicons:notification-03"></iconify-icon><span>Сповіщення<small>bell</small></span></div>
+      <div><iconify-icon icon="hugeicons:information-circle"></iconify-icon><span>Пояснення<small>info-circle</small></span></div>
+      <div><iconify-icon icon="hugeicons:alert-02"></iconify-icon><span>Перевірте цифри<small>danger-triangle</small></span></div>
+      <div><iconify-icon icon="hugeicons:hourglass"></iconify-icon><span>Чекає показників<small>hourglass</small></span></div>
     </div>
   </section>
 
@@ -307,17 +307,17 @@
     <div class="grid1">
       <div class="cx stack comps" data-ste="off">
         <div class="comp"><h4>Головна кнопка і вторинна кнопка</h4>
-          <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
+          <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="hugeicons:calendar-check-in-01" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
         <div class="comp"><h4>Картка «До сплати» з фото і галочкою «Показники прийнято»</h4>
           <article class="card glass">
-            <h3><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
+            <h3><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
             <p class="num">1 185,84 <small>₴</small></p>
-            <div class="done"><iconify-icon icon="solar:check-circle-bold-duotone" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
-            <button class="cx-btn cx-btn--primary cx-btn--lg" type="button"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</button>
+            <div class="done"><iconify-icon icon="hugeicons:checkmark-circle-02" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
+            <button class="cx-btn cx-btn--primary cx-btn--lg" type="button"><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>Сплатити</button>
           </article></div>
         <div class="comp"><h4>Поле показників</h4>
           <div class="field"><label for="f-day-d">День, кВт·год</label><div class="box"><input id="f-day-d" inputmode="numeric" value="12 480"><span class="unit">кВт·год</span></div><p class="hint">Попередні: 12 266</p></div>
-          <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-d">Ніч, кВт·год</label><div class="box"><input id="f-night-d" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="solar:danger-triangle-bold-duotone" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
+          <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-d">Ніч, кВт·год</label><div class="box"><input id="f-night-d" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="hugeicons:alert-02" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
       </div>
     </div>
     <p class="cap">Попередження про зайву цифру не блокує кнопку (бриф, р. 4). Колір — троянда помилки, текст — дія, а не звинувачення.</p>
@@ -349,26 +349,26 @@
 <table class="contrast">
 <thead><tr><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>
 <tbody>
-<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>10,56:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
-<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>13,63:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
-<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>11,99:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
-<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>4,96:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
-<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,40:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:#F0C2AB"></i><code>--color-bg</code> #F0C2AB</td><td>10,66:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>13,65:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>12,01:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:#F0C2AB"></i><code>--color-bg</code> #F0C2AB</td><td>5,01:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,41:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
 <tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>5,64:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
 <tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-panel</code> #FFFFFF</td><td>8,09:1</td><td>4,50</td><td>проходить</td><td>підпис у білій лівій панелі</td></tr>
-<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>8,70:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
-<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>7,65:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
+<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>8,71:1</td><td>3,00</td><td>проходить</td><td>лінійна іконка в зоні</td></tr>
+<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>7,66:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
 <tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка</td></tr>
 <tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F59B6D"></i><code>--color-accent-hover</code> #F59B6D</td><td>8,15:1</td><td>4,50</td><td>проходить</td><td>головна кнопка, наведення</td></tr>
-<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>3,68:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
-<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>5,49:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
-<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>4,25:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
+<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>3,69:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
+<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>5,50:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
+<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:#F0C2AB"></i><code>--color-bg</code> #F0C2AB</td><td>4,29:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
 <tr><td><i class="chip" style="background:#7A7494"></i><code>--color-line-strong</code> #7A7494</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>3,50:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
 <tr><td><i class="chip" style="background:#22472B"></i><code>--color-success-text</code> #22472B</td><td><i class="chip" style="background:#D6EEDD"></i><code>--color-success-bg</code> #D6EEDD</td><td>8,55:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
 <tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#F8DCE2"></i><code>--color-error-bg</code> #F8DCE2</td><td>6,78:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
-<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,91:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
-<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,18:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
-<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .80)"></i><code>--color-on</code> rgba(255, 255, 255, .80)</td><td>7,47:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
+<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,92:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
+<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,19:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
+<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .80)"></i><code>--color-on</code> rgba(255, 255, 255, .80)</td><td>7,46:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
 </tbody></table>
 <!-- contrast:end -->
     </div>
@@ -386,7 +386,7 @@
 <tr><td>4 · 4</td><td>wireframes/outages-empty.html, outages-loading.html</td><td>фото стану <code>.cx-photo</code></td><td>Одне фото лампи має два різні значення: «відключень немає» і «завантажуємо».</td><td>У порожньому стані — фото вікна ввечері (світло є). Лампа лишається лише в станах завантаження.</td><td>grep <code>us-lamp</code> до: 3 сторінки, після: 2 (обидві -loading).</td></tr>
 <tr><td>5 · 4</td><td>—</td><td>спільні компоненти month і outages</td><td>Перевірка: зона, пілюля, кнопка, стани мають однакові значення на обох екранах.</td><td>Дефектів немає. Різна композиція фото — рішення, запис у «month і outages: порівняння».</td><td>Таблиця порівняння в concept.md.</td></tr>
 <tr><td>6 · 5</td><td>concept.html</td><td>фокус поля показників</td><td>Поле мало кільце 2 px, інші елементи — 3 px. Один елемент фокуса — два значення.</td><td>Поле бере <code>--border-control</code> і <code>--focus-ring</code>, як інші елементи.</td><td>CSS <code>.field .box:focus-within</code>.</td></tr>
-<tr><td>7 · 6</td><td>8 сторінок month* і outages*</td><td>іконки і плейсхолдери</td><td>Іконки Lucide і сірі плейсхолдери <code>wf-ph</code>.</td><td>Solar bold-duotone; фото Unsplash або значок стану.</td><td>grep <code>lucide|wf-ph</code> = 0; усі <code>icon=</code> — <code>solar:*-bold-duotone</code>.</td></tr>
+<tr><td>7 · 6</td><td>8 сторінок month* і outages*</td><td>іконки і плейсхолдери</td><td>Іконки Lucide і сірі плейсхолдери <code>wf-ph</code>.</td><td>Hugeicons stroke rounded; фото Unsplash або значок стану.</td><td>grep <code>lucide|wf-ph</code> = 0; усі <code>icon=</code> — <code>solar:*-bold-duotone</code>.</td></tr>
 <tr><td>8 · 7</td><td>8 сторінок month* і outages*</td><td>тег <code>&lt;img&gt;</code> фото стану</td><td>Атрибути <code>width</code>/<code>height</code> = 1200×800 для всіх фото. Справжні пропорції інші (1200×675, 1200×1837, 1200×2134).</td><td>Справжні розміри в атрибутах.</td><td>PIL: розміри файлів у concept/img/.</td></tr>
 <tr><td>9 · 8</td><td>wireframes/_concept.css</td><td>розміри елементів</td><td>23 жорсткі значення: 64, 36, 44, 32, 72, 144, 96, 220, 36, 18, 3, 2, 1, 1.5 px.</td><td>Нові токени в tokens.css: <code>--size-*</code>, <code>--photo-*</code>, <code>--chart-*</code>, <code>--border-*</code>, <code>--focus-ring</code>, <code>--pad-chip</code>.</td><td>grep <code>[0-9]+px</code> у _concept.css: лишилася лише межа <code>@media</code>.</td></tr>
 <tr><td>10 · 8</td><td>concept.html</td><td>палітра «Колір»</td><td>24 кольори hex у <code>style</code> дублювали токени.</td><td>Картка бере <code>var(--token)</code>; підпис — обчислене значення токена (скрипт).</td><td>У розділі «Колір» немає hex у <code>style</code>. Hex лишився лише в квадратиках таблиці контрасту: їх пише скрипт з токенів.</td></tr>

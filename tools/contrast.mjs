@@ -44,7 +44,7 @@ const PAIRS = [
   ["--color-text-muted", "--color-surface", 4.5, "текст", "підпис у зоні, мітка плитки, шкала графіка"],
   ["--color-text-muted", "--color-surface-2", 4.5, "текст", "підпис у плитці на підкладці"],
   ["--color-text-muted", "--color-panel", 4.5, "текст", "підпис у білій лівій панелі"],
-  ["--color-icon", "--color-surface", 3, "графіка", "іконка Solar у зоні"],
+  ["--color-icon", "--color-surface", 3, "графіка", "лінійна іконка в зоні"],
   ["--color-icon", "--color-surface-2", 3, "графіка", "іконка в поточному пункті меню"],
   ["--color-on-accent", "--color-accent", 4.5, "текст", "головна кнопка"],
   ["--color-on-accent", "--color-accent-hover", 4.5, "текст", "головна кнопка, наведення"],
