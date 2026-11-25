@@ -544,3 +544,8 @@
 
 /* Пункти меню — Fixel Text Medium, товщина 500 */
 .wf-sidebar .wf-nav a, .wf-sidebar .wf-nav__text { font-family: var(--font-text); font-weight: var(--weight-medium); }
+
+/* Усі жирні тексти — товщина 500 (рішення дизайнера).
+   Товщини 600 і 700 на цих екранах показують файли Medium. Так правило діє на кожен жирний текст, без переліку селекторів */
+@font-face { font-family: "Fixel Text"; src: url("../concept/fonts/FixelText-Medium.woff2") format("woff2"); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: "Fixel Display"; src: url("../concept/fonts/FixelDisplay-Medium.woff2") format("woff2"); font-weight: 500 700; font-display: swap; }
