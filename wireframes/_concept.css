@@ -501,3 +501,8 @@
 .wf-sidebar .wf-switcher__text b { font-size: var(--fs-sm); }
 .wf-sidebar .wf-switcher__pin { font-size: 14px; margin-top: 2px; }
 .wf-sidebar .wf-switcher > iconify-icon:last-child { width: 22px; height: 22px; font-size: 14px; }
+
+/* Місто 13 px, вулиця 12 px */
+.wf-sidebar .wf-switcher__text b { font-size: var(--fs-xs); }
+.wf-sidebar .wf-switcher__text small { font-size: 12px; }
+.wf-sidebar .wf-switcher__pin { margin-top: 1px; }
