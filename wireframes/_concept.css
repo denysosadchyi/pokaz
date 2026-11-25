@@ -653,3 +653,24 @@
 
 /* Логотип: знак зліва, текст справа (Codex). Знак — вікно у формі «П» з теплим світлом. Висота 32 px */
 .wf-wordmark--lockup { height: 32px; }
+
+/* «Графік відключень» — окремий віджет під меню. Між меню і віджетом — 16 px фону.
+   Панель не має розмиття: розмиття всієї панелі було б видно в проміжку */
+.wf-sidebar { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+.wf-sidebar .wf-nav { background: none; padding-bottom: 0; margin-bottom: 0; }
+.wf-sidebar .wf-nav li { background: var(--color-panel); }
+.wf-sidebar .wf-nav li:nth-last-child(2) { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+.wf-sidebar .wf-nav li:last-child { margin-top: var(--space-4); border-top: 0; border-radius: var(--radius-lg); }
+.wf-sidebar .wf-nav li:last-child a { padding-block: var(--space-4); align-items: flex-start; }
+.wf-sidebar .wf-account, .wf-sidebar .wf-nav li {
+  box-shadow: 0 1px 1px rgba(40, 32, 70, .0045), 0 4px 8px rgba(40, 32, 70, .006), 0 16px 32px rgba(40, 32, 70, .0095);
+}
+.wf-sidebar .wf-nav li:not(:last-child) { box-shadow: 0 16px 32px rgba(40, 32, 70, .0095); }
+
+/* Графік на день у віджеті: 24 години в одну смугу. Години без світла — колір «вимкнено» */
+.wf-nav__text { min-width: 0; flex: 1; }
+.wf-nav__day { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; margin-top: var(--space-3); height: 14px; }
+.wf-nav__day i { border-radius: 3px; background: var(--color-surface-2); }
+.wf-nav__day i.is-off { background: var(--color-off); }
+.wf-nav__day--loading i { background: var(--color-line); }
+.wf-nav__scale { display: flex; justify-content: space-between; margin-top: var(--space-1); color: var(--color-text-muted); font-size: var(--fs-2xs); font-weight: var(--weight-regular); font-variant-numeric: tabular-nums; }
