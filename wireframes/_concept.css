@@ -784,3 +784,6 @@
 .wf-zone--primary > footer > .wf-button.wf-primary--addr:hover {
   background: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)), linear-gradient(135deg, #F8AE85 0%, #F59B6D 50%, #EF8550 100%);
 }
+
+/* Головні кнопки без межі: без світлої лінії по верхньому краю (inset) і без border. Лишається тільки світіння лампи під кнопкою */
+.wf-main button.wf-primary, .wf-button.wf-primary { border: 0; outline-offset: 3px; box-shadow: 0 10px 30px -6px rgba(242, 110, 50, .55); }
