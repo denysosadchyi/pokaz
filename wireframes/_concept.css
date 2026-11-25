@@ -787,3 +787,6 @@
 
 /* Головні кнопки без межі: без світлої лінії по верхньому краю (inset) і без border. Лишається тільки світіння лампи під кнопкою */
 .wf-main button.wf-primary, .wf-button.wf-primary { border: 0; outline-offset: 3px; box-shadow: 0 10px 30px -6px rgba(242, 110, 50, .55); }
+
+/* Абзац під заголовком головної зони трохи менший: 15 px замість 16 px */
+.wf-work .wf-zone--primary > p { font-size: 15px; }
