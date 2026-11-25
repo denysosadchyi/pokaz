@@ -1,0 +1,776 @@
+<!doctype html>
+<!--
+  Урок 6, крок 3. Шість напрямів стилю для «Показників». Вибір робить дизайнер.
+  Кожен напрям — окремий постер: головний екран «Мій місяць» зі своєю композицією і фірмовим елементом.
+  Сторінка-виняток з чорно-білого правила сайту: постери кольорові.
+  Значення тут — лише для порівняння. Єдине джерело стилю з'явиться після вибору: concept/tokens.css.
+  Фото — Unsplash (перелік — concept/references.md). Концепт-картинки і макети — Codex (concept/img/codex-d*.jpg, codex-ui-d*.jpg). Іконки — Solar (Iconify).
+  Дані однакові в усіх постерах: день 12 266 → 12 480 (214 кВт·год × 4,32 ₴ = 924,48 ₴), ніч 5 115 → 5 236 (121 кВт·год × 2,16 ₴ = 261,36 ₴), разом 1 185,84 ₴.
+-->
+<html lang="uk" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Напрями стилю · Показники</title>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611251900">
+  <script src="../_nav/tree.js?v=202611251900"></script>
+  <script src="../_nav/nav.js?v=202611251900" defer></script>
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; color: #1d1d1d; background: #f8f8f8; font: 16px/1.6 Inter, system-ui, sans-serif; }
+    main { padding: 32px 24px 64px; }
+    a { color: #0f766e; text-underline-offset: 2px; }
+    a:hover { color: #115e59; }
+    .why { margin: 0 0 16px; color: #444; }
+    section.dirsec { margin-top: 56px; }
+    section.dirsec h2 { margin: 0 0 6px; scroll-margin-top: 16px; }
+    table.cmp { border-collapse: collapse; width: 100%; margin-top: 12px; background: #fff; }
+    table.cmp th, table.cmp td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+    table.cmp th { background: #efefef; }
+    .cmpwrap { overflow-x: auto; }
+    @media (max-width: 700px) { table.cmp { min-width: 760px; } }
+
+    /* ---------- Спільне для постерів ---------- */
+    .poster { position: relative; overflow: hidden; border-radius: 20px; }
+    .poster * { box-sizing: border-box; }
+    .poster p, .poster h3, .poster h4, .poster dl, .poster dd, .poster figure, .poster ol { margin: 0; }
+    .poster ol { padding: 0; list-style: none; }
+    .poster img { display: block; max-width: none; }
+    .poster .num { font-variant-numeric: tabular-nums; }
+    .poster a { text-decoration: none; }
+    .poster iconify-icon { flex: none; }
+    .poster .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; font-weight: 600; font-size: 17px; cursor: pointer; }
+    .poster .btn iconify-icon { font-size: 22px; }
+    .poster :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    /* Довідка під постером */
+    .ref { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; margin-top: 12px; padding: 16px; background: #fff; border: 1px solid #e3e3e3; border-radius: 12px; font-size: 14px; }
+    .ref h4 { margin: 0 0 8px; font: 600 13px Inter, sans-serif; color: #555; }
+    .ref p { margin: 0; }
+    .ref .sws { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+    @media (max-width: 700px) { .ref .sws { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .ref .sw i { display: block; height: 40px; border-radius: 6px; border: 1px solid rgba(0,0,0,.12); }
+    .ref .sw span { display: block; font-size: 12px; line-height: 1.3; margin-top: 4px; }
+    .ref .icons { display: flex; flex-wrap: wrap; gap: 14px; font-size: 26px; color: #1d1d1d; }
+    @media (max-width: 1000px) { .ref { grid-template-columns: 1fr; } }
+
+    /* ========== 1 · Квитанція ========== */
+    .p1 { --focus: #4338CA; background: #F3F3F1; color: #16161A; font-family: "Onest", system-ui, sans-serif; padding: 40px; display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 24px 48px; align-items: start; }
+    .p1 .objs { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+    .p1 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; color: #16161A; box-shadow: inset 0 0 0 1px #CFCFD6; font-size: 15px; }
+    .p1 .obj[aria-current] { background: #16161A; color: #fff; box-shadow: none; }
+    .p1 .obj iconify-icon { font-size: 20px; }
+    .p1 .receipt { position: relative; background: #fff; padding: 32px 32px 40px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(22,22,26,.06), 0 12px 32px rgba(22,22,26,.08); }
+    .p1 .receipt::after { content: ""; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px;
+      background: linear-gradient(135deg, #fff 7px, transparent 0) 0 0 / 14px 10px repeat-x, linear-gradient(-135deg, #fff 7px, transparent 0) 0 0 / 14px 10px repeat-x; }
+    .p1 .rhead { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px dashed #BDBDC6; font-size: 15px; color: #55555E; }
+    .p1 .rhead b { color: #16161A; font-weight: 600; }
+    .p1 .lbl { margin-top: 24px; font-size: 16px; color: #55555E; }
+    .p1 .sum { font: 600 76px/1 "Literata", Georgia, serif; letter-spacing: -0.02em; margin-top: 6px; font-variant-numeric: tabular-nums lining-nums; }
+    .p1 .sum small { font: 500 28px "Onest", sans-serif; margin-left: 8px; color: #55555E; }
+    .p1 .due { margin-top: 8px; color: #55555E; }
+    .p1 .stamp { position: absolute; right: 28px; top: 84px; width: 132px; height: 132px; border-radius: 50%; border: 3px solid #4338CA; color: #4338CA; display: grid; place-content: center; justify-items: center; text-align: center; transform: rotate(-12deg); font: 700 15px/1.25 "Onest", sans-serif; box-shadow: inset 0 0 0 5px #fff, inset 0 0 0 6px #4338CA; background: rgba(255,255,255,.6); }
+    .p1 .stamp iconify-icon { font-size: 26px; margin-bottom: 2px; }
+    .p1 .stamp span { font-weight: 500; font-size: 13px; }
+    .p1 .lines { margin-top: 24px; display: grid; gap: 10px; font-size: 16px; }
+    .p1 .lines div { display: flex; align-items: baseline; gap: 8px; }
+    .p1 .lines dt { white-space: nowrap; }
+    .p1 .lines .lead { flex: 1; border-bottom: 2px dotted #BDBDC6; transform: translateY(-4px); }
+    .p1 .lines dd { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .p1 .lines .total { margin-top: 6px; padding-top: 12px; border-top: 1px dashed #BDBDC6; font-weight: 700; }
+    .p1 .lines .total .lead { border: 0; }
+    .p1 .proof { margin-top: 20px; padding: 12px 14px; background: #ECEBFB; color: #2F2A8A; border-radius: 8px; font-size: 15px; display: flex; gap: 10px; align-items: center; }
+    .p1 .proof iconify-icon { font-size: 22px; }
+    .p1 .acts { margin-top: 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .p1 .btn--p { background: #16161A; color: #fff; border-radius: 999px; }
+    .p1 .btn--p:hover { background: #33333A; }
+    .p1 .link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #16161A; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+    .p1 .link iconify-icon { font-size: 20px; }
+    .p1 aside { display: grid; gap: 24px; }
+    .p1 .hero img { width: 100%; height: 380px; object-fit: cover; border-radius: 12px; }
+    .p1 .side { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .p1 .note { background: #fff; border-radius: 12px; padding: 18px; display: grid; gap: 6px; box-shadow: inset 0 0 0 1px #E4E4E8; }
+    .p1 .note h3 { font: 600 15px "Onest", sans-serif; color: #55555E; display: flex; gap: 8px; align-items: center; }
+    .p1 .note h3 iconify-icon { font-size: 20px; color: #16161A; }
+    .p1 .note p { font: 600 28px/1.15 "Literata", serif; font-variant-numeric: tabular-nums lining-nums; }
+    .p1 .note span { color: #55555E; font-size: 15px; }
+    @media (max-width: 1000px) { .p1 { grid-template-columns: 1fr; padding: 20px; } .p1 .side { grid-template-columns: 1fr; } .p1 .sum { font-size: 52px; } .p1 .stamp { position: static; margin-top: 16px; } .p1 .lines dt { white-space: normal; } }
+
+    /* ========== 2 · Вечірнє вікно ========== */
+    .p2 { --focus: #FFB088; min-height: 720px; color: #EEF0F4; font-family: "Golos Text", system-ui, sans-serif; background: #0F1218; }
+    .p2 .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+    .p2 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, #0F1218 0%, rgba(15,18,24,.94) 36%, rgba(15,18,24,.55) 58%, rgba(15,18,24,0) 80%); }
+    .p2 .in { position: relative; padding: 44px 48px; max-width: 620px; display: grid; gap: 28px; }
+    .p2 .objs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .p2 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 14px; background: #222936; color: #C9CFDA; font-size: 15px; }
+    .p2 .obj[aria-current] { background: #EEF0F4; color: #0F1218; }
+    .p2 .obj iconify-icon { font-size: 20px; }
+    .p2 h3 { font: 500 18px "Golos Text", sans-serif; color: #A6AEBD; }
+    .p2 .sum { font: 600 84px/0.95 "Unbounded", sans-serif; letter-spacing: -0.04em; margin-top: 10px; font-variant-numeric: tabular-nums; }
+    .p2 .sum small { font: 500 30px "Golos Text", sans-serif; letter-spacing: 0; color: #A6AEBD; margin-left: 10px; }
+    .p2 .sub { color: #C9CFDA; margin-top: 12px; font-size: 17px; }
+    .p2 .ok { display: inline-flex; gap: 10px; align-items: center; width: fit-content; padding: 8px 14px 8px 10px; border-radius: 999px; background: #20352F; color: #9BE3C4; font-weight: 600; }
+    .p2 .ok iconify-icon { font-size: 22px; }
+    .p2 .acts { display: flex; gap: 12px; flex-wrap: wrap; }
+    .p2 .btn--p { background: #FFB088; color: #2A1406; border-radius: 16px; box-shadow: 0 10px 40px rgba(255,176,136,.28); }
+    .p2 .btn--p:hover { background: #FFC4A6; }
+    .p2 .btn--g { color: #EEF0F4; border-radius: 16px; box-shadow: inset 0 0 0 1.5px #5B6478; }
+    .p2 .btn--g:hover { background: #222936; }
+    .p2 .zones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .p2 .zone { background: #181D26; border-radius: 20px; padding: 16px 18px; }
+    .p2 .zone h4 { font: 500 15px "Golos Text", sans-serif; color: #A6AEBD; display: flex; gap: 8px; align-items: center; }
+    .p2 .zone h4 iconify-icon { font-size: 20px; color: #FFB088; }
+    .p2 .zone p { font: 600 26px/1.2 "Unbounded", sans-serif; letter-spacing: -0.02em; margin-top: 6px; font-variant-numeric: tabular-nums; }
+    .p2 .zone span { font-size: 14px; color: #A6AEBD; }
+    .p2 .outage { position: absolute; right: 40px; bottom: 40px; width: 340px; background: #181D26; border-radius: 24px; padding: 20px 22px; display: grid; gap: 4px; box-shadow: 0 18px 48px rgba(0,0,0,.45); }
+    .p2 .outage h4 { font: 500 15px "Golos Text", sans-serif; color: #A6AEBD; display: flex; gap: 8px; align-items: center; }
+    .p2 .outage h4 iconify-icon { font-size: 22px; color: #FFB088; }
+    .p2 .outage p { font: 600 30px/1.15 "Unbounded", sans-serif; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .p2 .outage span { color: #A6AEBD; font-size: 15px; }
+    @media (max-width: 1000px) { .p2 .shade { background: rgba(15,18,24,.88); } .p2 .in { padding: 24px; } .p2 .outage { position: relative; right: auto; bottom: auto; width: auto; margin: 0 24px 24px; } .p2 .sum { font-size: 52px; } }
+
+    /* ========== 3 · Табло ========== */
+    .p3 { --focus: #2E5BFF; border-radius: 4px; background: #fff; color: #0A0A0A; font-family: "Manrope", system-ui, sans-serif; border: 2px solid #0A0A0A; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .p3 > * { border-right: 2px solid #0A0A0A; border-bottom: 2px solid #0A0A0A; }
+    .p3 .bar { grid-column: 1 / -1; background: #0A0A0A; color: #fff; display: flex; align-items: center; gap: 4px; padding: 0 12px; flex-wrap: wrap; border: 0; }
+    .p3 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 16px; color: #BDBDBD; font-weight: 600; }
+    .p3 .obj[aria-current] { color: #fff; box-shadow: inset 0 -4px 0 #fff; }
+    .p3 .obj iconify-icon { font-size: 22px; }
+    .p3 .month { margin-left: auto; font: 700 18px "IBM Plex Sans Condensed", sans-serif; color: #fff; padding-right: 8px; }
+    .p3 .main { grid-column: span 7; padding: 32px; display: grid; gap: 18px; align-content: start; }
+    .p3 .main h3 { font: 700 18px "Manrope", sans-serif; }
+    .p3 .drums { display: flex; gap: 6px; align-items: flex-end; flex-wrap: wrap; }
+    .p3 .drums b { display: grid; place-items: center; width: 74px; height: 112px; background: #0A0A0A; color: #fff; font: 700 92px/1 "IBM Plex Sans Condensed", sans-serif; border-radius: 3px; box-shadow: inset 0 14px 14px -10px rgba(255,255,255,.25), inset 0 -14px 14px -10px rgba(255,255,255,.18); }
+    .p3 .drums b.r { background: #C8281C; }
+    .p3 .drums i { font: 700 92px/1 "IBM Plex Sans Condensed", sans-serif; font-style: normal; align-self: flex-end; padding: 0 2px; }
+    .p3 .drums em { font: 700 40px "IBM Plex Sans Condensed", sans-serif; font-style: normal; margin-left: 10px; }
+    .p3 .ok { display: inline-flex; gap: 8px; align-items: center; width: fit-content; padding: 8px 14px 8px 10px; background: #CFE2FF; font-weight: 700; border-radius: 3px; }
+    .p3 .ok iconify-icon { font-size: 22px; }
+    .p3 .proof { color: #4A4A4A; }
+    .p3 .acts { display: flex; gap: 10px; flex-wrap: wrap; }
+    .p3 .btn--p { background: #0A0A0A; color: #fff; border-radius: 3px; }
+    .p3 .btn--p:hover { background: #2E2E2E; }
+    .p3 .btn--g { color: #0A0A0A; border-radius: 3px; box-shadow: inset 0 0 0 2px #0A0A0A; }
+    .p3 .btn--g:hover { background: #F0F0F0; }
+    .p3 .pic { grid-column: span 5; border-right: 0; min-height: 380px; }
+    .p3 .pic img { width: 100%; height: 100%; object-fit: cover; }
+    .p3 .zone { grid-column: span 4; padding: 22px 24px; display: grid; gap: 10px; align-content: start; }
+    .p3 .zone.day { background: #CFE2FF; }
+    .p3 .zone.night { background: #FFD7C2; }
+    .p3 .zone h4, .p3 .out h4 { display: flex; gap: 8px; align-items: center; font: 700 18px "Manrope", sans-serif; }
+    .p3 .zone h4 iconify-icon, .p3 .out h4 iconify-icon { font-size: 24px; }
+    .p3 .mini { display: flex; gap: 3px; }
+    .p3 .mini b { display: grid; place-items: center; width: 38px; height: 54px; background: #0A0A0A; color: #fff; font: 700 40px/1 "IBM Plex Sans Condensed", sans-serif; border-radius: 2px; }
+    .p3 .zone p { font-size: 15px; }
+    .p3 .zone p b { font: 700 20px "IBM Plex Sans Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+    .p3 .out { grid-column: span 4; border-right: 0; padding: 22px 24px; display: grid; gap: 8px; align-content: start; }
+    .p3 .out p { font: 700 44px/1 "IBM Plex Sans Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+    .p3 .out span { color: #4A4A4A; }
+    .p3 .steps { grid-column: 1 / -1; border-right: 0; border-bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .p3 .steps li { padding: 16px 20px; display: flex; gap: 10px; align-items: center; font-weight: 700; border-right: 2px solid #0A0A0A; }
+    .p3 .steps li:last-child { border-right: 0; background: #0A0A0A; color: #fff; }
+    .p3 .steps iconify-icon { font-size: 24px; }
+    @media (max-width: 1000px) { .p3 .main, .p3 .pic, .p3 .zone, .p3 .out { grid-column: 1 / -1; border-right: 0; } .p3 .main { padding: 20px; } .p3 .pic { min-height: 220px; } .p3 .drums { gap: 4px; } .p3 .drums b { width: 34px; height: 54px; font-size: 42px; } .p3 .drums i { font-size: 42px; } .p3 .drums em { font-size: 24px; margin-left: 4px; } .p3 .steps { grid-template-columns: 1fr 1fr; } .p3 .steps li:nth-child(2) { border-right: 0; } .p3 .steps li:nth-child(-n+2) { border-bottom: 2px solid #0A0A0A; } }
+
+    /* ========== 4 · Зошит ========== */
+    .p4 { --focus: #C93C3C; --cell: 40px; --grid: #DCE3F0; --red: #C93C3C; border-radius: 6px; color: #1B2440; font-family: "PT Sans", system-ui, sans-serif; background-color: #FCFCFA;
+      background-image: linear-gradient(90deg, transparent 119px, var(--red) 119px, var(--red) 120px, transparent 120px), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 100% 100%, var(--cell) var(--cell), var(--cell) var(--cell);
+      padding: var(--cell) var(--cell) calc(var(--cell) * 1.5) 0; display: grid; grid-template-columns: 120px minmax(0, 1fr) minmax(0, 420px); column-gap: var(--cell); }
+    .p4 .margin { display: grid; align-content: start; padding: calc(var(--cell) * 3) 12px 0; text-align: right; font: 700 24px/1 "Caveat", cursive; color: #C93C3C; gap: calc(var(--cell) / 2); }
+    .p4 .margin span { display: flex; justify-content: flex-end; align-items: center; gap: 4px; height: var(--cell); }
+    .p4 .margin iconify-icon { font-size: 22px; }
+    .p4 .page { display: grid; align-content: start; }
+    .p4 .objs { display: flex; flex-wrap: wrap; min-height: var(--cell); }
+    .p4 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; color: #4D5675; font-size: 16px; }
+    .p4 .obj:first-child { padding-left: 0; }
+    .p4 .obj[aria-current] { color: #1F3A93; font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+    .p4 .obj iconify-icon { font-size: 20px; }
+    .p4 h3 { font: 600 30px/1 "Lora", serif; height: calc(var(--cell) * 2); display: flex; align-items: center; }
+    .p4 .row { display: grid; grid-template-columns: calc(var(--cell) * 3) auto 1fr; align-items: center; min-height: calc(var(--cell) * 1.5); column-gap: 16px; }
+    .p4 .row > span:first-child { font-size: 17px; display: flex; gap: 6px; align-items: center; }
+    .p4 .row > span:first-child iconify-icon { font-size: 22px; color: #1F3A93; }
+    .p4 .cells { display: flex; }
+    .p4 .cells b { width: var(--cell); height: var(--cell); display: grid; place-items: center; font: 700 36px/1 "Caveat", cursive; color: #1F3A93; }
+    .p4 .row small { font-size: 15px; color: #4D5675; }
+    .p4 .total { margin-top: calc(var(--cell) / 2); display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; padding-bottom: 10px; border-bottom: 4px double #1B2440; width: fit-content; }
+    .p4 .total span { font-size: 18px; }
+    .p4 .total b { font: 600 64px/1 "Lora", serif; font-variant-numeric: tabular-nums lining-nums; }
+    .p4 .calc { margin-top: 14px; color: #4D5675; font-size: 16px; }
+    .p4 .proof { margin-top: 20px; display: flex; gap: 10px; align-items: center; background: #E6ECFA; color: #1F3A93; padding: 10px 14px; border-radius: 4px; width: fit-content; font-weight: 700; }
+    .p4 .proof iconify-icon { font-size: 22px; }
+    .p4 .acts { margin-top: var(--cell); display: flex; gap: 12px; flex-wrap: wrap; }
+    .p4 .btn--p { background: #1F3A93; color: #fff; border-radius: 6px; box-shadow: 0 2px 4px rgba(20,39,102,.35); }
+    .p4 .btn--p:hover { background: #2B4BB0; }
+    .p4 .btn--g { color: #1F3A93; border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1.5px #1F3A93; }
+    .p4 aside { display: grid; gap: var(--cell); align-content: start; }
+    .p4 .photo { background: #fff; padding: 10px 10px 14px; box-shadow: 0 2px 4px rgba(27,36,64,.10), 0 14px 30px rgba(27,36,64,.12); transform: rotate(1.5deg); }
+    .p4 .photo img { width: 100%; height: 260px; object-fit: cover; }
+    .p4 .photo figcaption { font: 700 22px "Caveat", cursive; color: #1B2440; margin-top: 6px; }
+    .p4 .out { background: #fff; border: 1.5px solid #1F3A93; border-radius: 6px; padding: 16px 18px; display: grid; gap: 4px; }
+    .p4 .out h4 { font: 700 16px "PT Sans", sans-serif; display: flex; gap: 8px; align-items: center; color: #4D5675; }
+    .p4 .out h4 iconify-icon { font-size: 22px; color: #1F3A93; }
+    .p4 .out p { font: 600 30px/1.2 "Lora", serif; font-variant-numeric: tabular-nums lining-nums; }
+    @media (max-width: 1100px) { .p4 { grid-template-columns: 64px minmax(0, 1fr); column-gap: 16px; padding-right: 16px; background-image: linear-gradient(90deg, transparent 63px, var(--red) 63px, var(--red) 64px, transparent 64px), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); } .p4 .margin { padding: calc(var(--cell) * 3) 6px 0; font-size: 20px; } .p4 aside { grid-column: 2; margin-top: var(--cell); } .p4 .row { grid-template-columns: 1fr; } .p4 .total b { font-size: 44px; } }
+
+    /* ========== 5 · Графіт ========== */
+    .p5 { --focus: #9CC9FF; border-radius: 10px; background: #111315; color: #F2F4F5; font-family: "Fira Sans", system-ui, sans-serif; padding: 0 48px 48px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 56px; }
+    .p5 .nav { grid-column: 1 / -1; display: flex; align-items: center; gap: 28px; border-bottom: 1px solid #33383E; margin-bottom: 48px; flex-wrap: wrap; }
+    .p5 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 60px; color: #9AA3AB; font-size: 16px; }
+    .p5 .obj[aria-current] { color: #F2F4F5; box-shadow: inset 0 -2px 0 #9CC9FF; }
+    .p5 .obj iconify-icon { font-size: 22px; }
+    .p5 .nav .m { margin-left: auto; color: #9AA3AB; font-variant-numeric: tabular-nums; }
+    .p5 .lbl { color: #9AA3AB; font-size: 17px; }
+    .p5 .sum { font: 700 96px/0.95 "Geologica", sans-serif; letter-spacing: -0.04em; margin-top: 12px; font-variant-numeric: tabular-nums; }
+    .p5 .sum small { font: 400 36px "Fira Sans", sans-serif; letter-spacing: 0; color: #9AA3AB; margin-left: 12px; }
+    .p5 .scale { margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .p5 .scale li { display: grid; gap: 10px; font-size: 14px; color: #9AA3AB; }
+    .p5 .scale li::before { content: ""; height: 4px; border-radius: 2px; background: #5A626B; }
+    .p5 .scale li.done { color: #F2F4F5; }
+    .p5 .scale li.done::before { background: #F2F4F5; }
+    .p5 .scale li.now { color: #9CC9FF; font-weight: 600; }
+    .p5 .scale li.now::before { background: #9CC9FF; box-shadow: 0 2px 12px rgba(156,201,255,.6); }
+    .p5 table { width: 100%; border-collapse: collapse; margin-top: 36px; font-variant-numeric: tabular-nums; }
+    .p5 th, .p5 td { text-align: left; padding: 12px 8px 12px 0; border-bottom: 1px solid #33383E; font-weight: 400; }
+    .p5 th { color: #9AA3AB; font-size: 14px; }
+    .p5 td:last-child, .p5 th:last-child { text-align: right; padding-right: 0; }
+    .p5 td iconify-icon { font-size: 20px; color: #9CC9FF; vertical-align: -4px; margin-right: 6px; }
+    .p5 tfoot td { font-weight: 600; border-bottom: 0; }
+    .p5 .proof { margin-top: 20px; display: flex; gap: 10px; align-items: center; color: #B9D9FF; }
+    .p5 .proof iconify-icon { font-size: 22px; }
+    .p5 .acts { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .p5 .btn--p { background: #9CC9FF; color: #0B1A2E; border-radius: 8px; }
+    .p5 .btn--p:hover { background: #B9D9FF; }
+    .p5 .btn--g { color: #F2F4F5; border-radius: 8px; box-shadow: inset 0 0 0 1px #5A626B; }
+    .p5 .btn--g:hover { background: #1B1E21; }
+    .p5 aside { display: grid; gap: 20px; align-content: start; }
+    .p5 .pic { border: 1px solid #33383E; border-radius: 10px; overflow: hidden; }
+    .p5 .pic img { width: 100%; height: 400px; object-fit: cover; }
+    .p5 .out { border: 1px solid #33383E; border-radius: 10px; padding: 20px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: center; }
+    .p5 .out iconify-icon { font-size: 32px; color: #9CC9FF; grid-row: span 2; }
+    .p5 .out p { font: 700 32px/1.1 "Geologica", sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .p5 .out span { color: #9AA3AB; }
+    @media (max-width: 1000px) { .p5 { grid-template-columns: 1fr; padding: 0 20px 24px; } .p5 .sum { font-size: 60px; } .p5 aside { margin-top: 32px; } .p5 .pic img { height: 240px; } .p5 .scale { grid-template-columns: 1fr 1fr; row-gap: 14px; } .p5 table { font-size: 14px; } }
+
+    /* ========== 6 · Пастельний дім ========== */
+    .p6 { --focus: #3B1F4E; border-radius: 32px; background: #F7F3FF; color: #2A1838; font-family: "Nunito", system-ui, sans-serif; padding: 28px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .p6 .objs { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+    .p6 .obj { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 999px; background: #fff; color: #5E4F6B; font-weight: 700; }
+    .p6 .obj[aria-current] { background: #3B1F4E; color: #fff; }
+    .p6 .obj iconify-icon { font-size: 22px; }
+    .p6 .t { border-radius: 28px; padding: 26px; display: grid; gap: 10px; align-content: start; }
+    .p6 .t h4 { display: flex; gap: 8px; align-items: center; font: 700 17px "Nunito", sans-serif; }
+    .p6 .t h4 iconify-icon { font-size: 26px; }
+    .p6 .sumt { grid-column: span 2; grid-row: span 2; background: #fff; box-shadow: 0 8px 24px rgba(59,31,78,.10); gap: 14px; align-content: space-between; }
+    .p6 .sumt .hi { font: 600 24px/1.2 "Rubik", sans-serif; }
+    .p6 .sumt .lbl { color: #5E4F6B; font-size: 17px; margin-top: 6px; }
+    .p6 .sum { font: 600 84px/1 "Rubik", sans-serif; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .p6 .sum small { font: 500 32px "Nunito", sans-serif; letter-spacing: 0; color: #5E4F6B; margin-left: 8px; }
+    .p6 .ok { display: inline-flex; gap: 8px; align-items: center; width: fit-content; padding: 8px 16px 8px 10px; border-radius: 999px; background: #CDEFE3; color: #123B2E; font-weight: 700; }
+    .p6 .ok iconify-icon { font-size: 22px; }
+    .p6 .proof { color: #5E4F6B; }
+    .p6 .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+    .p6 .btn--p { background: #3B1F4E; color: #fff; border-radius: 999px; min-height: 60px; padding: 0 30px; font-size: 18px; }
+    .p6 .btn--p:hover { background: #55306E; }
+    .p6 .btn--g { color: #3B1F4E; border-radius: 999px; min-height: 60px; background: #EDE6FF; }
+    .p6 .btn--g:hover { background: #E3D9FF; }
+    .p6 .pic { grid-column: span 2; padding: 0; overflow: hidden; }
+    .p6 .pic img { width: 100%; height: 280px; object-fit: cover; }
+    .p6 .day { background: #CDEFE3; color: #123B2E; }
+    .p6 .night { background: #FFC9BD; color: #4A1A10; }
+    .p6 .zone p { font: 600 38px/1.1 "Rubik", sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .p6 .zone p small { font: 600 16px "Nunito", sans-serif; letter-spacing: 0; margin-left: 4px; }
+    .p6 .zone span { font-size: 15px; }
+    .p6 .out { grid-column: span 2; background: #3B1F4E; color: #fff; grid-template-columns: auto 1fr; align-items: center; column-gap: 18px; }
+    .p6 .out .ic { width: 64px; height: 64px; border-radius: 50%; background: #55306E; display: grid; place-items: center; grid-row: span 2; }
+    .p6 .out .ic iconify-icon { font-size: 32px; color: #E3D9FF; }
+    .p6 .out p { font: 600 34px/1.1 "Rubik", sans-serif; font-variant-numeric: tabular-nums; }
+    .p6 .out span { color: #E3D9FF; }
+    .p6 .steps { grid-column: span 2; background: #E3D9FF; }
+    .p6 .steps ol { display: flex; gap: 8px; flex-wrap: wrap; }
+    .p6 .steps li { display: inline-flex; gap: 6px; align-items: center; padding: 8px 14px 8px 10px; border-radius: 999px; background: #fff; font-weight: 700; font-size: 15px; }
+    .p6 .steps li iconify-icon { font-size: 20px; color: #2E7D5B; }
+    .p6 .steps li.now { background: #3B1F4E; color: #fff; }
+    .p6 .steps li.now iconify-icon { color: #E3D9FF; }
+    @media (max-width: 1000px) { .p6 { grid-template-columns: 1fr 1fr; padding: 16px; border-radius: 24px; } .p6 .sumt, .p6 .pic, .p6 .out, .p6 .steps { grid-column: 1 / -1; } .p6 .sumt { grid-row: auto; } .p6 .sum { font-size: 52px; } .p6 .t { padding: 20px; } .p6 .zone p { font-size: 30px; } .p6 .out p { font-size: 26px; } }
+    /* ---------- Друга тема (копію постера робить скрипт унизу) ---------- */
+    .altlbl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 20px 0 10px; font-size: 14px; color: #444; }
+    .altlbl b { font-weight: 600; color: #1d1d1d; }
+    .altlbl .mini-sws { display: flex; gap: 4px; flex-wrap: wrap; }
+    .altlbl .mini-sws span { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; }
+    .altlbl .mini-sws i { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(0,0,0,.15); }
+
+    .p1.alt { --focus: #A5A0FF; background: #17171B; color: #ECECF0; }
+    .p1.alt .obj { color: #ECECF0; box-shadow: inset 0 0 0 1px #45454E; }
+    .p1.alt .obj[aria-current] { background: #ECECF0; color: #16161A; }
+    .p1.alt .receipt { background: #232329; box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+    .p1.alt .receipt::after { background: linear-gradient(135deg, #232329 7px, transparent 0) 0 0 / 14px 10px repeat-x, linear-gradient(-135deg, #232329 7px, transparent 0) 0 0 / 14px 10px repeat-x; }
+    .p1.alt .rhead, .p1.alt .lines .total { border-color: #45454E; }
+    .p1.alt .rhead, .p1.alt .lbl, .p1.alt .due, .p1.alt .sum small, .p1.alt .note span, .p1.alt .note h3 { color: #A3A3AD; }
+    .p1.alt .rhead b, .p1.alt .note h3 iconify-icon { color: #ECECF0; }
+    .p1.alt .lines .lead { border-color: #45454E; }
+    .p1.alt .stamp { border-color: #A5A0FF; color: #A5A0FF; background: rgba(35,35,41,.7); box-shadow: inset 0 0 0 5px #232329, inset 0 0 0 6px #A5A0FF; }
+    .p1.alt .proof { background: #2A2850; color: #CFCBFF; }
+    .p1.alt .btn--p { background: #ECECF0; color: #16161A; }
+    .p1.alt .btn--p:hover { background: #FFFFFF; }
+    .p1.alt .link { color: #ECECF0; }
+    .p1.alt .note { background: #232329; box-shadow: inset 0 0 0 1px #33333A; }
+    .p1.alt .hero img { filter: brightness(.82); }
+
+    .p2.alt { --focus: #C2521C; background: #F4F5F7; color: #14171D; }
+    .p2.alt .shade { background: linear-gradient(90deg, #F4F5F7 0%, rgba(244,245,247,.95) 38%, rgba(244,245,247,.6) 58%, rgba(244,245,247,0) 80%); }
+    .p2.alt .obj { background: #E4E7EC; color: #2E3440; }
+    .p2.alt .obj[aria-current] { background: #14171D; color: #FFFFFF; }
+    .p2.alt h3, .p2.alt .sum small, .p2.alt .zone h4, .p2.alt .zone span, .p2.alt .outage h4, .p2.alt .outage span { color: #545B68; }
+    .p2.alt .sub { color: #2E3440; }
+    .p2.alt .ok { background: #DDF1E8; color: #1C4A37; }
+    .p2.alt .btn--p { background: #F28A55; color: #2A1406; box-shadow: 0 10px 30px rgba(242,138,85,.3); }
+    .p2.alt .btn--p:hover { background: #F59B6D; }
+    .p2.alt .btn--g { color: #14171D; box-shadow: inset 0 0 0 1.5px #9AA1AE; }
+    .p2.alt .btn--g:hover { background: #E4E7EC; }
+    .p2.alt .zone, .p2.alt .outage { background: #FFFFFF; box-shadow: 0 8px 24px rgba(20,23,29,.10); }
+    .p2.alt .zone h4 iconify-icon, .p2.alt .outage h4 iconify-icon { color: #C2521C; }
+
+    .p3.alt { --focus: #8AA6FF; background: #111214; color: #F2F2F2; border-color: #F2F2F2; }
+    .p3.alt > *, .p3.alt .steps li { border-color: #F2F2F2; }
+    .p3.alt .bar { background: #F2F2F2; }
+    .p3.alt .obj { color: #4A4A4A; }
+    .p3.alt .obj[aria-current] { color: #111214; box-shadow: inset 0 -4px 0 #111214; }
+    .p3.alt .month { color: #111214; }
+    .p3.alt .drums b, .p3.alt .mini b { background: #F2F2F2; color: #111214; box-shadow: inset 0 14px 14px -10px rgba(0,0,0,.18); }
+    .p3.alt .drums b.r { background: #C8281C; color: #FFFFFF; }
+    .p3.alt .ok { background: #213A63; color: #CFE2FF; }
+    .p3.alt .proof, .p3.alt .out span { color: #B5B5B5; }
+    .p3.alt .btn--p { background: #F2F2F2; color: #111214; }
+    .p3.alt .btn--p:hover { background: #FFFFFF; }
+    .p3.alt .btn--g { color: #F2F2F2; box-shadow: inset 0 0 0 2px #F2F2F2; }
+    .p3.alt .btn--g:hover { background: #24262A; }
+    .p3.alt .zone.day { background: #213A63; }
+    .p3.alt .zone.night { background: #5A2E1E; }
+    .p3.alt .steps li:last-child { background: #F2F2F2; color: #111214; }
+    @media (max-width: 1000px) { .p3.alt .steps li:nth-child(-n+2) { border-bottom-color: #F2F2F2; } }
+
+    .p4.alt { --focus: #E06A6A; --grid: #262C44; --red: #E06A6A; background-color: #15192A; color: #E4E8F5; }
+    .p4.alt .margin { color: #E06A6A; }
+    .p4.alt .obj, .p4.alt .row small, .p4.alt .calc, .p4.alt .out h4 { color: #A3ABC7; }
+    .p4.alt .obj[aria-current], .p4.alt .row > span:first-child iconify-icon, .p4.alt .cells b, .p4.alt .out h4 iconify-icon { color: #9DB4FF; }
+    .p4.alt .total { border-color: #E4E8F5; }
+    .p4.alt .proof { background: #222B4D; color: #BFD0FF; }
+    .p4.alt .btn--p { background: #9DB4FF; color: #0E1530; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+    .p4.alt .btn--p:hover { background: #B6C7FF; }
+    .p4.alt .btn--g { background: #15192A; color: #9DB4FF; box-shadow: inset 0 0 0 1.5px #9DB4FF; }
+    .p4.alt .photo { background: #20253A; box-shadow: 0 14px 30px rgba(0,0,0,.4); }
+    .p4.alt .photo img { filter: brightness(.85); }
+    .p4.alt .photo figcaption { color: #E4E8F5; }
+    .p4.alt .out { background: #1B2036; border-color: #9DB4FF; }
+
+    .p5.alt { --focus: #1F5FBF; background: #F4F5F6; color: #111315; }
+    .p5.alt .nav, .p5.alt th, .p5.alt td, .p5.alt .pic, .p5.alt .out { border-color: #D3D7DB; }
+    .p5.alt .obj, .p5.alt .nav .m, .p5.alt .lbl, .p5.alt .sum small, .p5.alt th, .p5.alt .scale li, .p5.alt .out span { color: #5B636B; }
+    .p5.alt .obj[aria-current] { color: #111315; box-shadow: inset 0 -2px 0 #1F5FBF; }
+    .p5.alt .scale li::before { background: #C3C8CD; }
+    .p5.alt .scale li.done { color: #111315; }
+    .p5.alt .scale li.done::before { background: #111315; }
+    .p5.alt .scale li.now { color: #1F5FBF; }
+    .p5.alt .scale li.now::before { background: #1F5FBF; box-shadow: 0 2px 10px rgba(31,95,191,.4); }
+    .p5.alt td iconify-icon, .p5.alt .out iconify-icon, .p5.alt .proof { color: #1F5FBF; }
+    .p5.alt .btn--p { background: #1F5FBF; color: #FFFFFF; }
+    .p5.alt .btn--p:hover { background: #1A51A3; }
+    .p5.alt .btn--g { color: #111315; box-shadow: inset 0 0 0 1px #9AA1A8; }
+    .p5.alt .btn--g:hover { background: #E8EAEC; }
+    .p5.alt .out { background: #FFFFFF; }
+
+    .p6.alt { --focus: #E3D9FF; background: #1C1424; color: #F3ECFA; }
+    .p6.alt .obj { background: #2A1F35; color: #CFC3DC; }
+    .p6.alt .obj[aria-current] { background: #E3D9FF; color: #2A1838; }
+    .p6.alt .sumt { background: #2A1F35; box-shadow: none; }
+    .p6.alt .sumt .lbl, .p6.alt .sum small, .p6.alt .proof { color: #BDB0CC; }
+    .p6.alt .ok { background: #173A30; color: #CDEFE3; }
+    .p6.alt .btn--p { background: #E3D9FF; color: #2A1838; }
+    .p6.alt .btn--p:hover { background: #F0EAFF; }
+    .p6.alt .btn--g { background: #3A2D47; color: #F3ECFA; }
+    .p6.alt .btn--g:hover { background: #46375A; }
+    .p6.alt .day { background: #173A30; color: #CDEFE3; }
+    .p6.alt .night { background: #4A2219; color: #FFC9BD; }
+    .p6.alt .out { background: #E3D9FF; color: #2A1838; }
+    .p6.alt .out .ic { background: #CDBEF5; }
+    .p6.alt .out .ic iconify-icon { color: #3B1F4E; }
+    .p6.alt .out span { color: #3B1F4E; }
+    .p6.alt .steps { background: #2A1F35; }
+    .p6.alt .steps li { background: #3A2D47; color: #F3ECFA; }
+    .p6.alt .steps li iconify-icon { color: #7FD9B3; }
+    .p6.alt .steps li.now { background: #E3D9FF; color: #2A1838; }
+    .p6.alt .steps li.now iconify-icon { color: #3B1F4E; }
+    .p6.alt .pic img { filter: brightness(.8); }
+    .cxui { margin: 20px 0 0; }
+    .cxui .cxlbl { margin: 0 0 10px; font-size: 14px; color: #444; }
+    .cxui .cxlbl b { font-weight: 600; color: #1d1d1d; }
+    .cxui img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid #e3e3e3; }
+    .cxui figcaption { margin-top: 8px; font-size: 14px; color: #444; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;700&family=Manrope:wght@400;600;700&family=Lora:wght@400;600&family=PT+Sans:wght@400;700&family=Caveat:wght@600;700&family=Geologica:wght@400;700&family=Fira+Sans:wght@400;600&family=Rubik:wght@500;600&family=Nunito:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/type.css?v=8">
+</head>
+<body>
+<main>
+  <h1>Напрями стилю</h1>
+  <p class="lead">Шість напрямів для «Показників». Кожен напрям — головний екран «Мій місяць» зі своєю композицією і своїм фірмовим елементом. Дані в усіх постерах однакові. Під постером — друга тема того самого напряму і довідка: палітра, шрифти, іконки. Нижче — макет того самого екрана від Codex: так інший генератор бачить цей стиль. Ви обираєте стиль, а не тему: світла і темна теми є в кожного напряму.</p>
+  <p class="meta">Атрибути і смак — <a href="../concept.md">concept.md</a>. Референси і фото — <a href="references.md">concept/references.md</a>. Обраний напрям стане стендом <code>concept.html</code> і файлом <code>concept/tokens.css</code>.</p>
+
+  <!-- ================= 1 ================= -->
+  <section class="dirsec" aria-labelledby="d1">
+    <h2 id="d1">1 · Квитанція</h2>
+    <p class="why">Екран — це квитанція з зубчастим краєм. Фірмовий елемент — фіолетова печатка «Прийнято» поверх суми: доказ, який видно одразу. Сума — найбільша, під нею рядки розрахунку з крапками, як у чеку. Атрибути 2, 3. Прийоми: Wise (сума і пояснення під нею), GOV.UK (панель доказу), monobank (одна темна кнопка).</p>
+    <div class="poster p1" data-ste="off" data-alt="темна" data-alt-pal="#17171B #232329 #ECECF0 #A3A3AD #A5A0FF #2A2850">
+      <nav class="objs" aria-label="Об'єкти">
+        <a class="obj" href="#d1" aria-current="page"><iconify-icon icon="solar:home-2-linear" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</a>
+        <a class="obj" href="#d1"><iconify-icon icon="solar:home-2-linear" aria-hidden="true"></iconify-icon>Мама · пр. Науки, 8</a>
+      </nav>
+      <article class="receipt">
+        <div class="rhead"><span>Особовий рахунок <b class="num">0412 7781</b></span><b>Листопад 2026</b></div>
+        <p class="lbl">До сплати</p>
+        <p class="sum">1 185,84<small>₴</small></p>
+        <p class="due">Сплатити до 20 листопада</p>
+        <div class="stamp" role="img" aria-label="Показники прийнято 3 листопада 2026"><iconify-icon icon="solar:check-circle-linear" aria-hidden="true"></iconify-icon>Прийнято<span class="num">03.11.2026</span></div>
+        <dl class="lines">
+          <div><dt>Попередній залишок</dt><span class="lead"></span><dd>0,00 ₴</dd></div>
+          <div><dt>День · 214 кВт·год × 4,32 ₴</dt><span class="lead"></span><dd>924,48 ₴</dd></div>
+          <div><dt>Ніч · 121 кВт·год × 2,16 ₴</dt><span class="lead"></span><dd>261,36 ₴</dd></div>
+          <div><dt>Оплачено</dt><span class="lead"></span><dd>0,00 ₴</dd></div>
+          <div class="total"><dt>Разом до сплати</dt><span class="lead"></span><dd>1 185,84 ₴</dd></div>
+        </dl>
+        <p class="proof"><iconify-icon icon="solar:camera-linear" aria-hidden="true"></iconify-icon>Показники внесла Наталя, 3 листопада, 19:42, за фото</p>
+        <div class="acts">
+          <a class="btn btn--p" href="#d1"><iconify-icon icon="solar:wallet-linear" aria-hidden="true"></iconify-icon>Сплатити 1 185,84 ₴</a>
+          <a class="link" href="#d1"><iconify-icon icon="solar:history-2-linear" aria-hidden="true"></iconify-icon>Історія</a>
+        </div>
+      </article>
+      <aside>
+        <figure class="hero"><img src="img/codex-d1.jpg" alt="Квитанції на світлому столі, фіолетова печатка, ручка" width="1200" height="800"></figure>
+        <div class="side">
+          <div class="note"><h3><iconify-icon icon="solar:speedometer-middle-linear" aria-hidden="true"></iconify-icon>Показники</h3><p>12 480 · 5 236</p><span>день · ніч, кВт·год</span></div>
+          <div class="note"><h3><iconify-icon icon="solar:power-linear" aria-hidden="true"></iconify-icon>Відключення сьогодні</h3><p>18:00–22:00</p><span>черга 3.2</span></div>
+        </div>
+      </aside>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#F3F3F1"></i><span>фон #F3F3F1</span></div>
+        <div class="sw"><i style="background:#FFFFFF"></i><span>папір #FFFFFF</span></div>
+        <div class="sw"><i style="background:#16161A"></i><span>чорнило #16161A</span></div>
+        <div class="sw"><i style="background:#55555E"></i><span>другорядний #55555E</span></div>
+        <div class="sw"><i style="background:#4338CA"></i><span>печатка #4338CA</span></div>
+        <div class="sw"><i style="background:#ECEBFB"></i><span>доказ #ECEBFB</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>Literata 600 — сума і цифри</p><p>Onest 400–700 — текст і кнопки</p></div>
+      <div><h4>Іконки Solar linear</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-linear"></iconify-icon><iconify-icon icon="solar:wallet-linear"></iconify-icon><iconify-icon icon="solar:history-2-linear"></iconify-icon><iconify-icon icon="solar:power-linear"></iconify-icon><iconify-icon icon="solar:bill-list-linear"></iconify-icon><iconify-icon icon="solar:danger-triangle-linear"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d1.jpg" alt="Макет екрана: квитанція з печаткою «Прийнято» біля суми, фото лічильника, чорна кнопка оплати" width="1536" height="960" loading="lazy">
+      <figcaption>Печатка стоїть біля суми, а не поверх неї. Друга дія — «Завантажити квитанцію».</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 2 ================= -->
+  <section class="dirsec" aria-labelledby="d2">
+    <h2 id="d2">2 · Вечірнє вікно</h2>
+    <p class="why">Людина подає показники ввечері вдома. Фірмовий елемент — кімната з лампою на весь фон: колір лампи — єдиний теплий колір і йде лише на головну дію. Екран темний, текст стоїть на темній частині фото. Атрибути 1, 4. Прийоми: Octopus (фото дому), monobank (одна кнопка). Ризик: темна тема першою — читабельність для Ігоря.</p>
+    <div class="poster p2" data-ste="off" data-alt="світла" data-alt-pal="#F4F5F7 #FFFFFF #14171D #545B68 #F28A55 #DDF1E8">
+      <img class="bg" src="img/codex-d2.jpg" alt="" width="1200" height="800">
+      <div class="shade"></div>
+      <div class="in">
+        <nav class="objs" aria-label="Об'єкти">
+          <a class="obj" href="#d2" aria-current="page"><iconify-icon icon="solar:home-2-bold-duotone" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</a>
+          <a class="obj" href="#d2"><iconify-icon icon="solar:home-2-bold-duotone" aria-hidden="true"></iconify-icon>Мама · пр. Науки, 8</a>
+        </nav>
+        <div>
+          <h3>До сплати за листопад</h3>
+          <p class="sum">1 185,84<small>₴</small></p>
+          <p class="sub">214 кВт·год вдень і 121 вночі. Сплатити до 20 листопада.</p>
+        </div>
+        <span class="ok"><iconify-icon icon="solar:check-circle-bold-duotone" aria-hidden="true"></iconify-icon>Показники прийнято · 3 листопада, 19:42, Наталя</span>
+        <div class="acts">
+          <a class="btn btn--p" href="#d2"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити 1 185,84 ₴</a>
+          <a class="btn btn--g" href="#d2"><iconify-icon icon="solar:bill-list-bold-duotone" aria-hidden="true"></iconify-icon>Розшифровка</a>
+        </div>
+        <div class="zones">
+          <div class="zone"><h4><iconify-icon icon="solar:sun-2-bold-duotone" aria-hidden="true"></iconify-icon>День</h4><p>12 480</p><span>було 12 266 · +214</span></div>
+          <div class="zone"><h4><iconify-icon icon="solar:moon-bold-duotone" aria-hidden="true"></iconify-icon>Ніч</h4><p>5 236</p><span>було 5 115 · +121</span></div>
+        </div>
+      </div>
+      <div class="outage"><h4><iconify-icon icon="solar:power-bold-duotone" aria-hidden="true"></iconify-icon>Відключення сьогодні</h4><p>18:00–22:00</p><span>черга 3.2 · завтра без відключень</span></div>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#0F1218"></i><span>ніч #0F1218</span></div>
+        <div class="sw"><i style="background:#181D26"></i><span>картка #181D26</span></div>
+        <div class="sw"><i style="background:#EEF0F4"></i><span>текст #EEF0F4</span></div>
+        <div class="sw"><i style="background:#A6AEBD"></i><span>другорядний #A6AEBD</span></div>
+        <div class="sw"><i style="background:#FFB088"></i><span>лампа #FFB088</span></div>
+        <div class="sw"><i style="background:#20352F"></i><span>прийнято #20352F</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>Unbounded 600 — сума і цифри</p><p>Golos Text 400–600 — текст і кнопки</p></div>
+      <div><h4>Іконки Solar bold-duotone</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-bold-duotone"></iconify-icon><iconify-icon icon="solar:wallet-bold-duotone"></iconify-icon><iconify-icon icon="solar:history-2-bold-duotone"></iconify-icon><iconify-icon icon="solar:power-bold-duotone"></iconify-icon><iconify-icon icon="solar:bill-list-bold-duotone"></iconify-icon><iconify-icon icon="solar:danger-triangle-bold-duotone"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d2.jpg" alt="Макет екрана: темний фасад, вікно з теплою лампою, сума і персикова кнопка оплати" width="1536" height="960" loading="lazy">
+      <figcaption>Фото — фасад з вікном, а не кімната. Колір лампи є лише на кнопці оплати.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 3 ================= -->
+  <section class="dirsec" aria-labelledby="d3">
+    <h2 id="d3">3 · Табло</h2>
+    <p class="why">Мова приладу. Фірмовий елемент — сума в барабанах лічильника, копійки на червоних барабанах, як десяті частки на справжньому лічильнику. Екран — сітка з чорних ліній, зони — великі кольорові блоки. Атрибути 2, 3, 5. Прийоми: Wise (сума найбільша, кольорові блоки), фото табло лічильника.</p>
+    <div class="poster p3" data-ste="off" data-alt="темна" data-alt-pal="#111214 #F2F2F2 #213A63 #5A2E1E #C8281C #8AA6FF">
+      <nav class="bar" aria-label="Об'єкти">
+        <a class="obj" href="#d3" aria-current="page"><iconify-icon icon="solar:home-2-bold" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</a>
+        <a class="obj" href="#d3"><iconify-icon icon="solar:home-2-bold" aria-hidden="true"></iconify-icon>Мама · пр. Науки, 8</a>
+        <span class="month">Листопад 2026</span>
+      </nav>
+      <div class="main">
+        <h3>До сплати</h3>
+        <div class="drums" role="img" aria-label="1 185,84 гривні"><b>1</b><b>1</b><b>8</b><b>5</b><i>,</i><b class="r">8</b><b class="r">4</b><em>₴</em></div>
+        <span class="ok"><iconify-icon icon="solar:check-circle-bold" aria-hidden="true"></iconify-icon>Показники прийнято</span>
+        <p class="proof">3 листопада, 19:42 · внесла Наталя, за фото · сплатити до 20 листопада</p>
+        <div class="acts">
+          <a class="btn btn--p" href="#d3"><iconify-icon icon="solar:wallet-bold" aria-hidden="true"></iconify-icon>Сплатити</a>
+          <a class="btn btn--g" href="#d3"><iconify-icon icon="solar:bill-list-bold" aria-hidden="true"></iconify-icon>З чого сума</a>
+        </div>
+      </div>
+      <figure class="pic"><img src="img/codex-d3.jpg" alt="Барабани лічильника, останній червоний, на блакитному і персиковому папері" width="1200" height="800"></figure>
+      <div class="zone day"><h4><iconify-icon icon="solar:sun-2-bold" aria-hidden="true"></iconify-icon>День</h4><div class="mini" role="img" aria-label="12480"><b>1</b><b>2</b><b>4</b><b>8</b><b>0</b></div><p>+<b>214</b> кВт·год × 4,32 ₴ = <b>924,48 ₴</b></p></div>
+      <div class="zone night"><h4><iconify-icon icon="solar:moon-bold" aria-hidden="true"></iconify-icon>Ніч</h4><div class="mini" role="img" aria-label="05236"><b>0</b><b>5</b><b>2</b><b>3</b><b>6</b></div><p>+<b>121</b> кВт·год × 2,16 ₴ = <b>261,36 ₴</b></p></div>
+      <div class="out"><h4><iconify-icon icon="solar:power-bold" aria-hidden="true"></iconify-icon>Відключення сьогодні</h4><p>18:00–22:00</p><span>черга 3.2</span></div>
+      <ol class="steps" aria-label="Стан місяця">
+        <li><iconify-icon icon="solar:check-circle-bold" aria-hidden="true"></iconify-icon>Показники</li>
+        <li><iconify-icon icon="solar:check-circle-bold" aria-hidden="true"></iconify-icon>Прийнято</li>
+        <li><iconify-icon icon="solar:check-circle-bold" aria-hidden="true"></iconify-icon>Нараховано</li>
+        <li aria-current="step"><iconify-icon icon="solar:wallet-bold" aria-hidden="true"></iconify-icon>Сплатити</li>
+      </ol>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#FFFFFF"></i><span>фон #FFFFFF</span></div>
+        <div class="sw"><i style="background:#0A0A0A"></i><span>чорний #0A0A0A</span></div>
+        <div class="sw"><i style="background:#CFE2FF"></i><span>день #CFE2FF</span></div>
+        <div class="sw"><i style="background:#FFD7C2"></i><span>ніч #FFD7C2</span></div>
+        <div class="sw"><i style="background:#C8281C"></i><span>барабан #C8281C</span></div>
+        <div class="sw"><i style="background:#2E5BFF"></i><span>фокус #2E5BFF</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>IBM Plex Sans Condensed 700 — цифри</p><p>Manrope 400–700 — текст і кнопки</p></div>
+      <div><h4>Іконки Solar bold</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-bold"></iconify-icon><iconify-icon icon="solar:wallet-bold"></iconify-icon><iconify-icon icon="solar:history-2-bold"></iconify-icon><iconify-icon icon="solar:power-bold"></iconify-icon><iconify-icon icon="solar:bill-list-bold"></iconify-icon><iconify-icon icon="solar:danger-triangle-bold"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d3.jpg" alt="Макет екрана: сітка з чорних ліній, сума в барабанах, блоки зон блакитний і персиковий" width="1536" height="960" loading="lazy">
+      <figcaption>Даних багато, але сітка тримає порядок. Адреси стоять у шапці як два списки.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 4 ================= -->
+  <section class="dirsec" aria-labelledby="d4">
+    <h2 id="d4">4 · Зошит</h2>
+    <p class="why">Багато людей записують показники в зошит. Фірмовий елемент — клітинка: вона сітка макета, і кожна цифра показників стоїть у своїй клітинці синім чорнилом. На полі — дати й позначки, як олівцем. Разом — під подвійною лінією, як у рахунку в зошиті. Атрибути 2, 4. Прийоми: GOV.UK (панель доказу), Дія (тонові підкладки).</p>
+    <div class="poster p4" data-ste="off" data-alt="темна" data-alt-pal="#15192A #262C44 #9DB4FF #E4E8F5 #E06A6A #222B4D">
+      <div class="margin" aria-hidden="true">
+        <span>3.11 <iconify-icon icon="solar:check-circle-broken"></iconify-icon></span>
+        <span></span>
+        <span></span>
+        <span>20.11</span>
+      </div>
+      <div class="page">
+        <nav class="objs" aria-label="Об'єкти">
+          <a class="obj" href="#d4" aria-current="page"><iconify-icon icon="solar:home-2-broken" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</a>
+          <a class="obj" href="#d4"><iconify-icon icon="solar:home-2-broken" aria-hidden="true"></iconify-icon>Мама · пр. Науки, 8</a>
+        </nav>
+        <h3>Листопад 2026</h3>
+        <div class="row"><span><iconify-icon icon="solar:sun-2-broken" aria-hidden="true"></iconify-icon>День</span><span class="cells" role="img" aria-label="12480"><b>1</b><b>2</b><b>4</b><b>8</b><b>0</b></span><small>було 12 266 · +214 кВт·год</small></div>
+        <div class="row"><span><iconify-icon icon="solar:moon-broken" aria-hidden="true"></iconify-icon>Ніч</span><span class="cells" role="img" aria-label="05236"><b>0</b><b>5</b><b>2</b><b>3</b><b>6</b></span><small>було 5 115 · +121 кВт·год</small></div>
+        <div class="total"><span>Разом до сплати</span><b>1 185,84 ₴</b></div>
+        <p class="calc">214 × 4,32 ₴ + 121 × 2,16 ₴ = 924,48 ₴ + 261,36 ₴</p>
+        <p class="proof"><iconify-icon icon="solar:check-circle-broken" aria-hidden="true"></iconify-icon>Показники прийнято · 3 листопада, 19:42, внесла Наталя</p>
+        <div class="acts">
+          <a class="btn btn--p" href="#d4"><iconify-icon icon="solar:wallet-broken" aria-hidden="true"></iconify-icon>Сплатити до 20 листопада</a>
+          <a class="btn btn--g" href="#d4"><iconify-icon icon="solar:history-2-broken" aria-hidden="true"></iconify-icon>Історія</a>
+        </div>
+      </div>
+      <aside>
+        <figure class="photo"><img src="img/codex-d4.jpg" alt="Зошит у клітинку з червоним полем і синя ручка" width="1200" height="800"><figcaption>так ми записували показники раніше</figcaption></figure>
+        <div class="out"><h4><iconify-icon icon="solar:power-broken" aria-hidden="true"></iconify-icon>Відключення сьогодні · черга 3.2</h4><p>18:00–22:00</p></div>
+      </aside>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#FCFCFA"></i><span>папір #FCFCFA</span></div>
+        <div class="sw"><i style="background:#DCE3F0"></i><span>клітинка #DCE3F0</span></div>
+        <div class="sw"><i style="background:#1F3A93"></i><span>чорнило #1F3A93</span></div>
+        <div class="sw"><i style="background:#1B2440"></i><span>текст #1B2440</span></div>
+        <div class="sw"><i style="background:#C93C3C"></i><span>поле #C93C3C</span></div>
+        <div class="sw"><i style="background:#E6ECFA"></i><span>доказ #E6ECFA</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>Lora 600 — заголовки і сума</p><p>PT Sans 400–700 — текст і кнопки</p><p>Caveat 700 — лише цифри в клітинках і поле</p></div>
+      <div><h4>Іконки Solar broken</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-broken"></iconify-icon><iconify-icon icon="solar:wallet-broken"></iconify-icon><iconify-icon icon="solar:history-2-broken"></iconify-icon><iconify-icon icon="solar:power-broken"></iconify-icon><iconify-icon icon="solar:bill-list-broken"></iconify-icon><iconify-icon icon="solar:danger-triangle-broken"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d4.jpg" alt="Макет екрана: сторінка зошита, цифри в клітинках, фото лічильника на скотчі" width="1536" height="960" loading="lazy">
+      <figcaption>Рукописний шрифт займає майже весь екран. Ігорю це важко читати. Іконку опори лінії електропередачі не беремо: це кліше енергетики.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 5 ================= -->
+  <section class="dirsec" aria-labelledby="d5">
+    <h2 id="d5">5 · Графіт</h2>
+    <p class="why">Холодний і точний, протилежний теплому «Вечірньому вікну». Фірмовий елемент — дуже велика сума і шкала стану з чотирьох відрізків: поточний крок світиться крижаним кольором. Тонкі лінії замість карток, майже без кольору. Атрибути 1, 3. Прийоми: monobank (мало кольору), Wise (сума і кроки статусу).</p>
+    <div class="poster p5" data-ste="off" data-alt="світла" data-alt-pal="#F4F5F6 #FFFFFF #111315 #5B636B #1F5FBF #D3D7DB">
+      <nav class="nav" aria-label="Об'єкти">
+        <a class="obj" href="#d5" aria-current="page"><iconify-icon icon="solar:home-2-line-duotone" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</a>
+        <a class="obj" href="#d5"><iconify-icon icon="solar:home-2-line-duotone" aria-hidden="true"></iconify-icon>Мама · пр. Науки, 8</a>
+        <span class="m">Листопад 2026</span>
+      </nav>
+      <div>
+        <p class="lbl">До сплати · до 20 листопада</p>
+        <p class="sum">1 185,84<small>₴</small></p>
+        <ol class="scale" aria-label="Стан місяця">
+          <li class="done">Показники подано</li>
+          <li class="done">Прийнято</li>
+          <li class="done">Нараховано</li>
+          <li class="now" aria-current="step">Сплатити</li>
+        </ol>
+        <table>
+          <thead><tr><th>Зона</th><th>Було → стало</th><th>кВт·год</th><th>Сума</th></tr></thead>
+          <tbody>
+            <tr><td><iconify-icon icon="solar:sun-2-line-duotone" aria-hidden="true"></iconify-icon>День</td><td>12 266 → 12 480</td><td>214 × 4,32 ₴</td><td>924,48 ₴</td></tr>
+            <tr><td><iconify-icon icon="solar:moon-line-duotone" aria-hidden="true"></iconify-icon>Ніч</td><td>5 115 → 5 236</td><td>121 × 2,16 ₴</td><td>261,36 ₴</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="3">Разом</td><td>1 185,84 ₴</td></tr></tfoot>
+        </table>
+        <p class="proof"><iconify-icon icon="solar:check-circle-line-duotone" aria-hidden="true"></iconify-icon>Прийнято 3 листопада, 19:42 · внесла Наталя, за фото</p>
+        <div class="acts">
+          <a class="btn btn--p" href="#d5"><iconify-icon icon="solar:wallet-line-duotone" aria-hidden="true"></iconify-icon>Сплатити 1 185,84 ₴</a>
+          <a class="btn btn--g" href="#d5"><iconify-icon icon="solar:history-2-line-duotone" aria-hidden="true"></iconify-icon>Історія</a>
+        </div>
+      </div>
+      <aside>
+        <figure class="pic"><img src="img/codex-d5.jpg" alt="Темна стіна з вимикачем і холодним світлом по краю" width="1200" height="800"></figure>
+        <div class="out"><iconify-icon icon="solar:power-line-duotone" aria-hidden="true"></iconify-icon><p>18:00–22:00</p><span>відключення сьогодні · черга 3.2</span></div>
+      </aside>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#111315"></i><span>графіт #111315</span></div>
+        <div class="sw"><i style="background:#1B1E21"></i><span>підкладка #1B1E21</span></div>
+        <div class="sw"><i style="background:#F2F4F5"></i><span>текст #F2F4F5</span></div>
+        <div class="sw"><i style="background:#9AA3AB"></i><span>другорядний #9AA3AB</span></div>
+        <div class="sw"><i style="background:#9CC9FF"></i><span>крига #9CC9FF</span></div>
+        <div class="sw"><i style="background:#33383E"></i><span>лінія #33383E</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>Geologica 700 — сума і цифри</p><p>Fira Sans 400–600 — текст і кнопки</p></div>
+      <div><h4>Іконки Solar line-duotone</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-line-duotone"></iconify-icon><iconify-icon icon="solar:wallet-line-duotone"></iconify-icon><iconify-icon icon="solar:history-2-line-duotone"></iconify-icon><iconify-icon icon="solar:power-line-duotone"></iconify-icon><iconify-icon icon="solar:bill-list-line-duotone"></iconify-icon><iconify-icon icon="solar:danger-triangle-line-duotone"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d5.jpg" alt="Макет екрана: графітовий фон, дуже велика сума, шкала з чотирьох кроків" width="1536" height="960" loading="lazy">
+      <figcaption>Codex поставив назву напряму на місце назви продукту. Крок «Передано» не є станом з нашого словника.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 6 ================= -->
+  <section class="dirsec" aria-labelledby="d6">
+    <h2 id="d6">6 · Пастельний дім</h2>
+    <p class="why">Дружній і м'який. Фірмовий елемент — великі круглі плитки різного кольору: кожна плитка — одна відповідь (скільки, що за зонами, коли відключення, на якому кроці місяць). Кнопки великі, кути дуже круглі. Атрибути 1, 4. Прийоми: Octopus (дім і людська мова), Дія (тонові підкладки).</p>
+    <div class="poster p6" data-ste="off" data-alt="темна" data-alt-pal="#1C1424 #2A1F35 #E3D9FF #173A30 #4A2219 #BDB0CC">
+      <nav class="objs" aria-label="Об'єкти">
+        <a class="obj" href="#d6" aria-current="page"><iconify-icon icon="solar:home-2-outline" aria-hidden="true"></iconify-icon>Квартира на Липовій</a>
+        <a class="obj" href="#d6"><iconify-icon icon="solar:home-2-outline" aria-hidden="true"></iconify-icon>Мамина квартира</a>
+      </nav>
+      <div class="t sumt">
+        <p class="hi">Листопад: лишилося сплатити</p>
+        <p class="lbl">До сплати до 20 листопада</p>
+        <p class="sum">1 185,84<small>₴</small></p>
+        <span class="ok"><iconify-icon icon="solar:check-circle-outline" aria-hidden="true"></iconify-icon>Показники прийнято</span>
+        <p class="proof">3 листопада, 19:42 · внесла Наталя, за фото</p>
+        <div class="acts">
+          <a class="btn btn--p" href="#d6"><iconify-icon icon="solar:wallet-outline" aria-hidden="true"></iconify-icon>Сплатити</a>
+          <a class="btn btn--g" href="#d6"><iconify-icon icon="solar:bill-list-outline" aria-hidden="true"></iconify-icon>Чому стільки</a>
+        </div>
+      </div>
+      <figure class="t pic"><img src="img/codex-d6.jpg" alt="Пастельний куток кімнати з лампою і рослиною" width="1200" height="800"></figure>
+      <div class="t zone day"><h4><iconify-icon icon="solar:sun-2-outline" aria-hidden="true"></iconify-icon>День</h4><p>214<small>кВт·год</small></p><span>924,48 ₴ · лічильник 12 480</span></div>
+      <div class="t zone night"><h4><iconify-icon icon="solar:moon-outline" aria-hidden="true"></iconify-icon>Ніч</h4><p>121<small>кВт·год</small></p><span>261,36 ₴ · лічильник 5 236</span></div>
+      <div class="t out"><span class="ic"><iconify-icon icon="solar:power-outline" aria-hidden="true"></iconify-icon></span><p>18:00–22:00</p><span>сьогодні без світла · черга 3.2</span></div>
+      <div class="t steps"><h4>Листопад</h4><ol aria-label="Стан місяця">
+        <li><iconify-icon icon="solar:check-circle-outline" aria-hidden="true"></iconify-icon>Показники</li>
+        <li><iconify-icon icon="solar:check-circle-outline" aria-hidden="true"></iconify-icon>Нараховано</li>
+        <li class="now" aria-current="step"><iconify-icon icon="solar:wallet-outline" aria-hidden="true"></iconify-icon>Оплата</li>
+      </ol></div>
+    </div>
+    <div class="ref">
+      <div><h4>Палітра</h4><div class="sws">
+        <div class="sw"><i style="background:#F7F3FF"></i><span>фон #F7F3FF</span></div>
+        <div class="sw"><i style="background:#E3D9FF"></i><span>бузок #E3D9FF</span></div>
+        <div class="sw"><i style="background:#CDEFE3"></i><span>м'ята #CDEFE3</span></div>
+        <div class="sw"><i style="background:#FFC9BD"></i><span>корал #FFC9BD</span></div>
+        <div class="sw"><i style="background:#3B1F4E"></i><span>слива #3B1F4E</span></div>
+        <div class="sw"><i style="background:#5E4F6B"></i><span>другорядний #5E4F6B</span></div>
+      </div></div>
+      <div><h4>Шрифти</h4><p>Rubik 600 — сума і заголовки</p><p>Nunito 400–700 — текст і кнопки</p></div>
+      <div><h4>Іконки Solar outline</h4><div class="icons">
+        <iconify-icon icon="solar:speedometer-middle-outline"></iconify-icon><iconify-icon icon="solar:wallet-outline"></iconify-icon><iconify-icon icon="solar:history-2-outline"></iconify-icon><iconify-icon icon="solar:power-outline"></iconify-icon><iconify-icon icon="solar:bill-list-outline"></iconify-icon><iconify-icon icon="solar:danger-triangle-outline"></iconify-icon>
+      </div></div>
+    </div>
+    <figure class="cxui">
+      <p class="cxlbl"><b>Макет від Codex</b> — Codex намалював головний екран у цьому стилі (картинка, не код).</p>
+      <img src="img/codex-ui-d6.jpg" alt="Макет екрана: бузкові плитки з питаннями, м'ятна і коралова плитки зон, сливова плитка відключень" width="1536" height="960" loading="lazy">
+      <figcaption>Codex поставив назву напряму на місце назви продукту. Плитки-питання — сильний прийом для Наталі.</figcaption>
+    </figure>
+  </section>
+
+  <section class="dirsec" aria-labelledby="compare">
+    <h2 id="compare">Порівняння</h2>
+    <div class="cmpwrap"><table class="cmp">
+      <thead><tr><th>Ознака</th><th>1 · Квитанція</th><th>2 · Вечірнє вікно</th><th>3 · Табло</th><th>4 · Зошит</th><th>5 · Графіт</th><th>6 · Пастельний дім</th></tr></thead>
+      <tbody>
+        <tr><td>Фірмовий елемент</td><td>печатка «Прийнято» поверх суми</td><td>кімната з лампою на весь фон</td><td>сума в барабанах лічильника</td><td>цифри в клітинках, поле з датами</td><td>дуже велика сума і шкала стану</td><td>круглі кольорові плитки</td></tr>
+        <tr><td>Композиція</td><td>квитанція зліва, фото справа</td><td>текст на темній частині фото</td><td>сітка з чорних ліній</td><td>сітка зошита — сітка макета</td><td>одна колонка цифр, фото збоку</td><td>плитки різного розміру</td></tr>
+        <tr><td>Головна тема (друга — під постером)</td><td>світлий</td><td>темний</td><td>світлий</td><td>світлий</td><td>темний</td><td>світлий</td></tr>
+        <tr><td>Скільки кольору</td><td>мало: лише печатка</td><td>середньо: колір лампи</td><td>багато: блоки зон</td><td>мало: синє чорнило і червоне поле</td><td>мало: один крижаний акцент</td><td>багато: м'ята, корал, бузок</td></tr>
+        <tr><td>Шрифти</td><td>Literata + Onest</td><td>Unbounded + Golos Text</td><td>IBM Plex Sans Condensed + Manrope</td><td>Lora + PT Sans (Caveat для цифр)</td><td>Geologica + Fira Sans</td><td>Rubik + Nunito</td></tr>
+        <tr><td>Форма</td><td>папір із зубчастим краєм, кнопка-«пігулка»</td><td>24 px, м'яка тінь</td><td>3–4 px, лінії 2 px</td><td>6 px, клітинка 40 px</td><td>10 px, лінії 1 px</td><td>28–32 px</td></tr>
+        <tr><td>Іконки Solar</td><td>linear</td><td>bold-duotone</td><td>bold</td><td>broken</td><td>line-duotone</td><td>outline</td></tr>
+        <tr><td>Найсильніше для</td><td>Наталя: доказ видно одразу</td><td>сценарій «ввечері вдома»</td><td>Ігор: цифри, як на лічильнику</td><td>Ігор: «як я записую в зошит»</td><td>сценарій «швидко і точно»</td><td>Олена, Марта: дружній тон</td></tr>
+        <tr><td>Ризик</td><td>печатка може закрити суму на телефоні</td><td>темна тема першою; текст на фото</td><td>багато чорного, може здатися грубим</td><td>рукописні цифри важче читати</td><td>холодний, менше тепла з брифу</td><td>може здатися несерйозним для грошей</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</main>
+<script>
+  // Друга тема: копія кожного постера з класом .alt. Кольори — у блоці «Друга тема» в <style>.
+  document.querySelectorAll('.poster[data-alt]').forEach(function (p) {
+    var lbl = document.createElement('p');
+    lbl.className = 'altlbl';
+    lbl.innerHTML = '<b>Друга тема — ' + p.dataset.alt + '</b><span class="mini-sws">' +
+      p.dataset.altPal.split(' ').map(function (c) { return '<span><i style="background:' + c + '"></i>' + c + '</span>'; }).join('') + '</span>';
+    var c = p.cloneNode(true);
+    c.classList.add('alt');
+    c.removeAttribute('data-alt');
+    c.querySelectorAll('nav').forEach(function (n) { n.setAttribute('aria-label', 'Об\'єкти, друга тема'); });
+    p.after(lbl, c);
+  });
+</script>
+</body>
+</html>

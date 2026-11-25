@@ -1,0 +1,143 @@
+/* Токени стилю «Вечірнє вікно» (напрям 2, урок 6).
+   Єдине джерело значень для concept.html і для екранів month* і outages*.
+   Головна тема — темна (:root). Друга тема — світла ([data-theme="light"]).
+   Контраст кожної пари — concept/contrast.md (скрипт tools/contrast.mjs).
+   Атрибути — concept.md, «Атрибути». Біля кожного значення — номер атрибута. */
+
+:root {
+  color-scheme: dark;
+
+  /* ── Колір: нейтральні ── атрибут 1 «спокійний» і 4 «домашній»: нічна кімната, без чистого чорного */
+  --color-bg: #0F1218;            /* ніч — фон екрана */
+  --color-surface: #181D26;       /* картка, зона */
+  --color-surface-2: #222936;     /* плитка в зоні, чип, поточний пункт меню */
+  --color-line: #2E3544;          /* лінія-розділювач (декор, не межа контролу) */
+  --color-line-strong: #6B7488;   /* межа поля і вторинної кнопки, ≥ 3:1 */
+  --color-text: #EEF0F4;          /* основний текст */
+  --color-text-muted: #A6AEBD;    /* другорядний текст */
+  --color-icon: #C9CFDA;          /* іконки Solar duotone */
+
+  /* ── Колір: головний акцент ── атрибут 4: колір лампи. Лише головна дія, знак продукту і фокус */
+  --color-accent: #FFB088;        /* лампа */
+  --color-accent-hover: #FFC4A6;
+  --color-on-accent: #2A1406;     /* текст на кнопці кольору лампи */
+  --color-accent-ink: #FFB088;    /* знак продукту — графіка кольору лампи на зоні, ≥ 3:1 */
+  --color-focus: #FFB088;
+
+  /* ── Колір: стани ── атрибут 2 «доказ видно»: прийнято — тихий зелений, не «еко» */
+  --color-success-bg: #20352F;
+  --color-success-text: #9BE3C4;
+  /* атрибут 1: помилка — приглушена троянда, без червоної тривоги (бриф, р. 9; voice.md) */
+  --color-error-bg: #3A2230;
+  --color-error-text: #F4B3C2;
+  /* графік відключень: години без світла — холодний сірий-синій, не жовтий і не червоний */
+  --color-off: #8E9BB8;
+  --color-on: #2A3140;            /* години зі світлом */
+
+  /* ── Фото ── атрибут 4: текст на фото стоїть на тіні кольору ночі */
+  --photo-shade: rgba(15, 18, 24, .86);
+  --photo-shade-soft: rgba(15, 18, 24, .35);
+  --color-on-photo: #EEF0F4;        /* текст на тіні фото — однаковий в обох темах */
+  --color-on-photo-muted: #C9CFDA;
+
+  /* ── Шрифти ── атрибут 3 «цифри головні»: Unbounded для сум і показників; Golos Text — текст. Обидва з кирилицею */
+  --font-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --font-text: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ── Шкала розмірів ── база 16 (бриф, р. 10: 16–18 px) */
+  --fs-xs: 13px;    /* підпис під кроком, шкала графіка */
+  --fs-sm: 14px;    /* меню, мітки плиток */
+  --fs-md: 16px;    /* основний текст */
+  --fs-lg: 18px;    /* лід, підзаголовок */
+  --fs-xl: 24px;    /* h1 екрана, число в плитці */
+  --fs-2xl: 32px;   /* термін у головній зоні, час відключення */
+  --fs-3xl: 48px;   /* сума до сплати */
+  --lh-tight: 1.1;
+  --lh-text: 1.5;
+  --tracking-display: -0.02em;
+
+  /* ── Форма ── атрибут 1 і 4: м'які кути, як у кімнаті, а не в щитовій */
+  --radius-lg: 24px;   /* зона, картка */
+  --radius-md: 16px;   /* кнопка, плитка в зоні, поле */
+  --radius-sm: 10px;   /* дрібний чип, знак продукту */
+  --radius-xs: 4px;    /* година в графіку */
+  --radius-pill: 999px;
+
+  /* Тінь: м'яка, зі зсувом. Акцентна — лише під головною кнопкою */
+  --shadow-float: 0 18px 48px rgba(0, 0, 0, .45);
+  --shadow-accent: 0 10px 32px rgba(255, 176, 136, .24);
+
+  /* ── Відступи ── одна шкала */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* ── Розміри ── зона натискання ≥ 44 px (бриф, р. 10) */
+  --control-h: 48px;
+  --control-h-lg: 56px;
+  --icon-sm: 18px;
+  --icon-md: 22px;
+  --icon-lg: 40px;
+
+  /* ── Лінії і дрібні розміри ── */
+  --border-hair: 1px;          /* лінія-розділювач */
+  --border-control: 1.5px;     /* межа поля і вторинної кнопки */
+  --focus-ring: 3px;           /* кільце фокуса, зсув — теж 3 px */
+  --pad-chip: 2px;             /* вертикальний відступ статус-пілюлі */
+
+  /* ── Розміри елементів ── */
+  --size-header: 64px;         /* висота шапки продукту */
+  --size-avatar: 36px;         /* аватар і знак продукту */
+  --size-touch: 44px;          /* мінімальна зона натискання (бриф, р. 10) */
+  --size-step: 32px;           /* кружок кроку місяця */
+  --size-skeleton-step: 72px;  /* скелетон підпису кроку */
+  --photo-state: 144px;        /* фото стану в головній зоні */
+  --photo-state-sm: 96px;      /* фото або значок стану в зоні контексту */
+  --photo-side: 220px;         /* фото збоку головної зони */
+  --photo-band: 144px;         /* смуга фото над текстом у головній зоні */
+  --chart-hour: 36px;          /* година в графіку доби */
+  --chart-hour-sm: 18px;       /* година в графіку наступних днів */
+  --chart-gap: 3px;            /* проміжок між годинами */
+  --chart-now: 2px;            /* лінія «зараз» */
+  --chart-label: 220px;        /* колонка дати в «Наступних днях» */
+  --fs-hero: clamp(56px, 9vw, 96px); /* сума на постері */
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #F4F5F7;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #ECEEF2;
+  --color-line: #DDE1E7;
+  --color-line-strong: #7C8493;
+  --color-text: #14171D;
+  --color-text-muted: #545B68;
+  --color-icon: #3B4250;
+
+  --color-accent: #F28A55;
+  --color-accent-hover: #F59B6D;
+  --color-on-accent: #2A1406;
+  --color-accent-ink: #C2521C;
+  --color-focus: #C2521C;
+
+  --color-success-bg: #DDF1E8;
+  --color-success-text: #1C4A37;
+  --color-error-bg: #FBE4EA;
+  --color-error-text: #8A2440;
+  --color-off: #55627E;
+  --color-on: #E1E5EC;
+
+  --photo-shade: rgba(15, 18, 24, .86);   /* фото лишається нічним і в світлій темі */
+  --photo-shade-soft: rgba(15, 18, 24, .35);
+
+  --shadow-float: 0 8px 24px rgba(20, 23, 29, .10);
+  --shadow-accent: 0 10px 28px rgba(242, 138, 85, .28);
+}

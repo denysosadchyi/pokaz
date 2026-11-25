@@ -12,22 +12,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Графік відключень · помилка · вайрфрейм</title>
-  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
-  <script src="../_nav/tree.js?v=202611121900"></script>
-  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611251900">
+  <script src="../_nav/tree.js?v=202611251900"></script>
+  <script src="../_nav/nav.js?v=202611251900" defer></script>
   <link rel="stylesheet" href="_frame.css">
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+  <!-- Стиль «Вечірнє вікно» (урок 6): токени, шрифти з кирилицею, іконки Solar. Друга тема — ?theme=light -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../concept/tokens.css">
+  <link rel="stylesheet" href="_concept.css">
+  <script>if (new URLSearchParams(location.search).get("theme") === "light") document.documentElement.dataset.theme = "light";</script>
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
 </head>
 <body>
   <div class="device" data-url="pokaz.ua/outages">
 
     <!-- Шапка: спільний компонент -->
     <header class="wf-header">
-      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true"><iconify-icon icon="solar:lamp-bold-duotone"></iconify-icon></span>Показ</a>
       <div class="wf-user">
         <span class="wf-avatar" aria-hidden="true">НК</span>
         <span class="wf-user__name">Наталя Коваль<small>власниця договору</small></span>
-        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><iconify-icon icon="solar:settings-bold-duotone" aria-hidden="true"></iconify-icon></button>
       </div>
     </header>
 
@@ -36,16 +43,16 @@
       <div class="wf-account">
         <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
           <span>вул. Липова, 14, кв. 27, Київ</span>
-          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+          <iconify-icon icon="solar:sort-vertical-bold-duotone" aria-hidden="true"></iconify-icon>
         </a>
         <p class="wf-account__meta">Рахунок № 2600 418 375</p>
       </div>
       <nav class="wf-nav" aria-label="Головна навігація">
         <ul>
-          <li><a href="month.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
-          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
-          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
-          <li><a href="outages.html" aria-current="page"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
+          <li><a href="month.html"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</a></li>
+          <li><a href="bill.html"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити<span class="wf-nav__badge" aria-label="до сплати 1 185,84 ₴">1 185,84 ₴</span></a></li>
+          <li><a href="history.html"><iconify-icon icon="solar:history-2-bold-duotone" aria-hidden="true"></iconify-icon>Історія показників і платежів</a></li>
+          <li><a href="outages.html" aria-current="page"><iconify-icon icon="solar:power-bold-duotone" aria-hidden="true"></iconify-icon><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
         </ul>
       </nav>
     </aside>
@@ -65,9 +72,7 @@
           <!-- Зона 1. Графік не завантажився. Показуємо останній відомий графік з часом оновлення. Вихід — спробувати ще раз. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="out-next" role="alert">
             <h2 id="out-next">Не вдалося оновити графік</h2>
-            <figure class="wf-ph wf-ph--sm">
-              <figcaption>Ілюстрація: графік з хмаркою помилки</figcaption>
-            </figure>
+            <figure class="cx-photo"><img src="../concept/img/us-building-night.jpg" alt="" width="1200" height="675"></figure>
             <p>ДТЕК зараз не відповідає. Нижче — графік станом на 06:00, він міг змінитися.</p>
             <div class="wf-day" role="img" aria-label="Станом на 06:00: сьогодні без світла з 18:00 до 22:00.">
               <ol class="wf-day__hours" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li></li><li></li></ol>
@@ -75,7 +80,7 @@
             </div>
             <p class="wf-muted">Сьогодні: 18:00–22:00 · завтра: 08:00–12:00, 20:00–24:00</p>
             <footer>
-              <a class="wf-button wf-primary" href="outages.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Повторити</a>
+              <a class="wf-button wf-primary" href="outages.html"><iconify-icon icon="solar:restart-bold-duotone" aria-hidden="true"></iconify-icon>Повторити</a>
             </footer>
           </section>
 
@@ -85,14 +90,14 @@
 
           <!-- Зона 2. Сповіщення [?] (sitemap.md, «Сповіщення»; гіпотеза H3). Окремого екрана налаштувань ще немає — без дії. -->
           <section class="wf-zone wf-zone--ref" aria-labelledby="out-notify">
-            <h2 id="out-notify"><i data-lucide="bell" aria-hidden="true"></i>Сповіщення</h2>
-            <figure class="wf-ph wf-ph--sm"><figcaption>Ілюстрація: дзвіночок</figcaption></figure>
+            <h2 id="out-notify"><iconify-icon icon="solar:bell-bold-duotone" aria-hidden="true"></iconify-icon>Сповіщення</h2>
+            <span class="cx-badge" aria-hidden="true"><iconify-icon icon="solar:bell-bold-duotone"></iconify-icon></span>
             <p>Напишемо, щойно графік оновиться.</p>
           </section>
 
           <!-- Зона 3. Звідки дані. Черга вже в голові сторінки, адреса — у перемикачі; тут лише джерело графіка. -->
           <section class="wf-zone wf-zone--ref" aria-labelledby="out-source">
-            <h2 id="out-source"><i data-lucide="info" aria-hidden="true"></i>Звідки графік</h2>
+            <h2 id="out-source"><iconify-icon icon="solar:info-circle-bold-duotone" aria-hidden="true"></iconify-icon>Звідки графік</h2>
             <p>ДТЕК Київські електромережі</p>
           </section>
 
@@ -105,6 +110,5 @@
     <p>Вайрфрейм · «Графік відключень» · стан «помилка»: оператор не відповів. Показуємо останній відомий графік із часом, вихід — «Спробувати ще раз». Job R8. Дані — черга 3.2 з набору даних (_conventions.md).</p>
   </aside>
 
-  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
 </body>
 </html>

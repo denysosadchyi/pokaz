@@ -42,6 +42,27 @@ window.NAV_TREE = [
     ] },
     { title: "Трасування", href: "ia.html#trace" },
   ] },
+  { title: "Напрями стилю", icon: "swatches", href: "concept/directions.html", children: [
+    { title: "1 · Квитанція", href: "concept/directions.html#d1" },
+    { title: "2 · Вечірнє вікно", href: "concept/directions.html#d2" },
+    { title: "3 · Табло", href: "concept/directions.html#d3" },
+    { title: "4 · Зошит", href: "concept/directions.html#d4" },
+    { title: "5 · Графіт", href: "concept/directions.html#d5" },
+    { title: "6 · Пастельний дім", href: "concept/directions.html#d6" },
+    { title: "Порівняння", href: "concept/directions.html#compare" },
+  ] },
+  { title: "Концепт", icon: "palette", href: "concept.html", children: [
+    { title: "Стиль у дії", href: "concept.html#live" },
+    { title: "Колір", href: "concept.html#color" },
+    { title: "Шрифти і розміри", href: "concept.html#type" },
+    { title: "Форма", href: "concept.html#form" },
+    { title: "Фото", href: "concept.html#photo" },
+    { title: "Іконки", href: "concept.html#icons" },
+    { title: "Компоненти", href: "concept.html#components" },
+    { title: "Екрани в стилі", href: "concept.html#screens" },
+    { title: "Контраст", href: "concept.html#contrast" },
+    { title: "Дефекти", href: "concept.html#defects" },
+  ] },
   // Гілка «Екрани»: вайрфрейми продукту. Розділи — групи з sitemap.md, «Екрани».
   // Розділ групи з'являється разом із першою сторінкою цієї групи. Гілка й розділи не мають своєї сторінки (без href).
   // Вузол екрана не має children-блоків: зони екрана в дереві не показуємо. Children екрана — лише сторінки його станів.

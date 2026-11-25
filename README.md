@@ -33,6 +33,17 @@
 - Проміжні кроки: [03 · конкуренти](research/notes/03-competitors.md) · [04 · матриця, стори й відгуки](research/notes/04-matrix.md) · [05 · бенчмарк](research/notes/05-benchmark.md) · [06 · UX-патерни](research/notes/06-patterns.md)
 - [research/screens/](research/screens/) — скріни; [індекс джерел](research/screens/README.md)
 
+## Концепт
+
+| Артефакт | Що це |
+|----------|-------|
+| [concept.md](concept.md) | Смак дизайнера, атрибути, шість напрямів, вибір напряму 2 «Вечірнє вікно», критика, порівняння екранів, таблиця дефектів |
+| [concept/directions.html](concept/directions.html) · [на сайті](https://denysosadchyi.github.io/pokaz/concept/directions.html) | Шість напрямів стилю: постери в двох темах і макети Codex |
+| [concept.html](concept.html) · [на сайті](https://denysosadchyi.github.io/pokaz/concept.html) | Стенд стилю: колір, шрифти, форма, фото, іконки, три компоненти, контраст, дефекти |
+| [concept/tokens.css](concept/tokens.css) | Токени стилю, темна і світла теми — єдине джерело значень |
+| [concept/contrast.md](concept/contrast.md) | Таблиця контрасту WCAG AA; її пише `node tools/contrast.mjs` |
+| [wireframes/_concept.css](wireframes/_concept.css) | Шкіра стилю для екранів `month*` і `outages*` |
+
 ## Артефакти
 
 | Артефакт | Що це |

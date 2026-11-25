@@ -17,22 +17,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Подати показники · порожній · вайрфрейм</title>
-  <link rel="stylesheet" href="../_nav/nav.css?v=202611121900">
-  <script src="../_nav/tree.js?v=202611121900"></script>
-  <script src="../_nav/nav.js?v=202611121900" defer></script>
+  <link rel="stylesheet" href="../_nav/nav.css?v=202611251900">
+  <script src="../_nav/tree.js?v=202611251900"></script>
+  <script src="../_nav/nav.js?v=202611251900" defer></script>
   <link rel="stylesheet" href="_frame.css">
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+  <!-- Стиль «Вечірнє вікно» (урок 6): токени, шрифти з кирилицею, іконки Solar. Друга тема — ?theme=light -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../concept/tokens.css">
+  <link rel="stylesheet" href="_concept.css">
+  <script>if (new URLSearchParams(location.search).get("theme") === "light") document.documentElement.dataset.theme = "light";</script>
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
 </head>
 <body>
   <div class="device" data-url="pokaz.ua/month">
 
     <!-- Шапка: спільний компонент — назва продукту, перемикач особового рахунку, період, баланс -->
     <header class="wf-header">
-      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true">лого</span>Показ</a>
+      <a class="wf-product" href="month.html"><span class="wf-logo" aria-hidden="true"><iconify-icon icon="solar:lamp-bold-duotone"></iconify-icon></span>Показ</a>
       <div class="wf-user">
         <span class="wf-avatar" aria-hidden="true">НК</span>
         <span class="wf-user__name">Наталя Коваль</span>
-        <button class="wf-icon-button" type="button" aria-label="Налаштування"><i data-lucide="settings" aria-hidden="true"></i></button>
+        <button class="wf-icon-button" type="button" aria-label="Налаштування"><iconify-icon icon="solar:settings-bold-duotone" aria-hidden="true"></iconify-icon></button>
       </div>
     </header>
 
@@ -41,16 +48,16 @@
       <div class="wf-account">
         <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
           <span>Рахунків ще немає</span>
-          <i data-lucide="chevrons-up-down" aria-hidden="true"></i>
+          <iconify-icon icon="solar:sort-vertical-bold-duotone" aria-hidden="true"></iconify-icon>
         </button>
         <p class="wf-account__meta">Додайте особовий рахунок</p>
       </div>
       <nav class="wf-nav" aria-label="Головна навігація">
         <ul>
-          <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
-          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити</a></li>
-          <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
-          <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i>Графік відключень</a></li>
+          <li><a href="month.html" aria-current="page"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</a></li>
+          <li><a href="bill.html"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</a></li>
+          <li><a href="history.html"><iconify-icon icon="solar:history-2-bold-duotone" aria-hidden="true"></iconify-icon>Історія показників і платежів</a></li>
+          <li><a href="outages.html"><iconify-icon icon="solar:power-bold-duotone" aria-hidden="true"></iconify-icon>Графік відключень</a></li>
         </ul>
       </nav>
     </aside>
@@ -68,13 +75,11 @@
                Порядок: відповідь → що робити → дія. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
             <h2 id="month-status">Рахунків ще немає</h2>
-            <figure class="wf-ph wf-ph--sm">
-              <figcaption>Ілюстрація: лічильник і особовий рахунок</figcaption>
-            </figure>
+            <figure class="cx-photo"><img src="../concept/img/us-meter.jpg" alt="" width="1200" height="675"></figure>
             <p>Додайте особовий рахунок, щоб подавати показники й бачити статус місяця.</p>
             <p class="wf-muted">Номер рахунку є в договорі та платіжці за світло.</p>
             <footer>
-              <a class="wf-button wf-primary" href="add-account.html"><i data-lucide="plus" aria-hidden="true"></i>Додати рахунок</a>
+              <a class="wf-button wf-primary" href="add-account.html"><iconify-icon icon="solar:add-circle-bold-duotone" aria-hidden="true"></iconify-icon>Додати рахунок</a>
             </footer>
           </section>
 
@@ -85,19 +90,19 @@
           <!-- Бенто «Дані місяця» (див. month.html) — той самий каркас, дані порожні: рахунку ще немає. -->
           <section class="wf-bento" aria-label="Сума і попередні показники">
             <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
-              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>До сплати за листопад</h2>
+              <h2 id="balance"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>До сплати за листопад</h2>
               <p class="wf-muted">Суму покажемо, коли додасте рахунок.</p>
             </article>
             <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
-              <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники</h2>
+              <h2 id="last-reading"><iconify-icon icon="solar:speedometer-middle-bold-duotone" aria-hidden="true"></iconify-icon>Попередні показники</h2>
               <p class="wf-muted">Попередніх показників ще немає.</p>
             </article>
             <article class="wf-tile wf-tile--day">
-              <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
+              <h3><iconify-icon icon="solar:sun-2-bold-duotone" aria-hidden="true"></iconify-icon>День</h3>
               <p class="wf-tile__value wf-muted">—</p>
             </article>
             <article class="wf-tile wf-tile--night">
-              <h3><i data-lucide="moon" aria-hidden="true"></i>Ніч</h3>
+              <h3><iconify-icon icon="solar:moon-bold-duotone" aria-hidden="true"></iconify-icon>Ніч</h3>
               <p class="wf-tile__value wf-muted">—</p>
             </article>
           </section>
@@ -113,6 +118,5 @@
       <p class="wf-flow">Переходи flow: Додати рахунок → <a href="add-account.html">add-account.html</a> · рахунок додано → <a href="month.html">month.html</a>.</p>
   </aside>
 
-  <script>addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
 </body>
 </html>
