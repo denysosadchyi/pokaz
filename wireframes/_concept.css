@@ -526,3 +526,10 @@
 
 /* Адреса починається на одній вертикалі з текстом «Рахунок № …»: 16 px поля + 12 px відступу пігулки */
 .wf-sidebar a.wf-switcher { padding-left: var(--space-3); }
+
+/* Пін біля міста — у лівому полі, поза рядком тексту: місто і вулиця не зсуваються */
+.wf-sidebar a.wf-switcher .wf-switcher__text b { position: relative; }
+.wf-sidebar a.wf-switcher .wf-switcher__pin {
+  position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
+  margin-right: 3px; font-size: 12px; color: var(--color-icon);
+}
