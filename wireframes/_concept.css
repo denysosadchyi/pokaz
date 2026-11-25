@@ -382,3 +382,5 @@
 /* Меню: усі пункти жирні. Поточний пункт — текст і іконка кольору лампи (4,6:1 на білому) */
 .wf-sidebar .wf-nav a { font-weight: var(--weight-semibold); }
 .wf-sidebar .wf-nav a[aria-current="page"], .wf-sidebar .wf-nav a[aria-current="page"] iconify-icon { color: var(--color-accent-ink); }
+/* Підрядок пункту меню («Наступне: …») — 10 px, як номер рахунку */
+.wf-sidebar .wf-nav__sub { font-size: var(--fs-2xs); font-weight: var(--weight-regular); }
