@@ -57,9 +57,9 @@
   --color-off: #4B4F78;
   --color-on: rgba(255, 255, 255, .80); /* години зі світлом */
 
-  /* ── Шрифти ── атрибут 3 «цифри головні»: Unbounded для сум і показників; Golos Text — текст. Обидва з кирилицею */
-  --font-display: "Unbounded", "Golos Text", system-ui, sans-serif;
-  --font-text: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* ── Шрифти ── атрибут 3 «цифри головні»: Fixel Display для сум і показників; Fixel Text — текст. Одна родина, кирилиця є. Файли — concept/fonts/ */
+  --font-display: "Fixel Display", "Fixel Text", system-ui, sans-serif;
+  --font-text: "Fixel Text", system-ui, -apple-system, "Segoe UI", sans-serif;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;

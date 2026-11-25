@@ -1,0 +1,7 @@
+/* Fixel (MacPaw), ліцензія SIL OFL 1.1 — OFL.txt поруч. Кирилиця є.
+   Fixel Display — суми, показники, заголовки екрана. Fixel Text — увесь інший текст. */
+@font-face { font-family: "Fixel Display"; src: url("FixelDisplay-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Fixel Display"; src: url("FixelDisplay-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Fixel Text"; src: url("FixelText-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Fixel Text"; src: url("FixelText-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Fixel Text"; src: url("FixelText-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }

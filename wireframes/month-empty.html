@@ -24,7 +24,7 @@
   <!-- Стиль «Вечірнє вікно» (урок 6): токени, шрифти з кирилицею, іконки Solar. Тема одна — світла -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../concept/fonts/fixel.css">
   <link rel="stylesheet" href="../concept/tokens.css">
   <link rel="stylesheet" href="_concept.css">
   <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
@@ -47,7 +47,7 @@
       <div class="wf-account">
         <button class="wf-switcher" type="button" aria-haspopup="menu" disabled>
           <span>Рахунків ще немає</span>
-          <iconify-icon icon="hugeicons:arrow-up-down" aria-hidden="true"></iconify-icon>
+          <iconify-icon icon="hugeicons:arrow-down-01" aria-hidden="true"></iconify-icon>
         </button>
         <p class="wf-account__meta">Додайте особовий рахунок</p>
       </div>
@@ -62,10 +62,6 @@
     </aside>
 
     <main class="wf-main">
-      <div class="wf-page-head">
-        <h1>Подати показники</h1>
-        <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
-      </div>
 
       <div class="wf-layout">
         <div class="wf-work">
@@ -73,6 +69,10 @@
           <!-- Зона 1. Рахунку немає, тому статусу місяця теж немає. Головна дія — додати рахунок.
                Порядок: відповідь → що робити → дія. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
+            <div class="wf-page-head">
+              <h1>Подати показники</h1>
+              <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+            </div>
             <h2 id="month-status">Рахунків ще немає</h2>
             <figure class="cx-photo"><img src="../concept/img/us-meter.jpg" alt="" width="1200" height="675"></figure>
             <p>Додайте особовий рахунок, щоб подавати показники й бачити статус місяця.</p>

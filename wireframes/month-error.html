@@ -22,7 +22,7 @@
   <!-- Стиль «Вечірнє вікно» (урок 6): токени, шрифти з кирилицею, іконки Solar. Тема одна — світла -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../concept/fonts/fixel.css">
   <link rel="stylesheet" href="../concept/tokens.css">
   <link rel="stylesheet" href="_concept.css">
   <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
@@ -45,7 +45,7 @@
       <div class="wf-account">
         <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
           <span>вул. Липова, 14, кв. 27, Київ</span>
-          <iconify-icon icon="hugeicons:arrow-up-down" aria-hidden="true"></iconify-icon>
+          <iconify-icon icon="hugeicons:arrow-down-01" aria-hidden="true"></iconify-icon>
         </a>
         <p class="wf-account__meta">Рахунок № 2600 418 375</p>
       </div>
@@ -60,12 +60,6 @@
     </aside>
 
     <main class="wf-main">
-      <div class="wf-page-head">
-        <h1>Подати показники</h1>
-        <div class="wf-page-info">
-          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
-        </div>
-      </div>
 
       <div class="wf-layout">
         <div class="wf-work">
@@ -73,6 +67,12 @@
           <!-- Зона 1. Дані місяця не прийшли. Головна дія — повторити. Під дією — куди звернутися.
                Порядок: відповідь → що робити → дія → запасний шлях. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status" role="alert">
+            <div class="wf-page-head">
+              <h1>Подати показники</h1>
+              <div class="wf-page-info">
+                <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+              </div>
+            </div>
             <h2 id="month-status">Не вдалося завантажити показники і суму</h2>
             <figure class="cx-photo"><img src="../concept/img/us-building-night.jpg" alt="" width="1200" height="675"></figure>
             <p>Перевірте інтернет і повторіть. Показники й платежі збережено.</p>

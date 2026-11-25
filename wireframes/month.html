@@ -29,7 +29,7 @@
   <!-- Стиль «Вечірнє вікно» (урок 6): токени, шрифти з кирилицею, іконки Solar. Тема одна — світла -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../concept/fonts/fixel.css">
   <link rel="stylesheet" href="../concept/tokens.css">
   <link rel="stylesheet" href="_concept.css">
   <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
@@ -52,7 +52,7 @@
       <div class="wf-account">
         <a class="wf-switcher" href="account-menu.html" aria-haspopup="menu">
           <span>вул. Липова, 14, кв. 27, Київ</span>
-          <iconify-icon icon="hugeicons:arrow-up-down" aria-hidden="true"></iconify-icon>
+          <iconify-icon icon="hugeicons:arrow-down-01" aria-hidden="true"></iconify-icon>
         </a>
         <p class="wf-account__meta">Рахунок № 2600 418 375</p>
       </div>
@@ -67,13 +67,6 @@
     </aside>
 
     <main class="wf-main">
-      <div class="wf-page-head">
-        <h1>Подати показники</h1>
-        <p>Лічильник № 0172 5543 · двозонний</p>
-        <div class="wf-page-info">
-          <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
-        </div>
-      </div>
 
       <div class="wf-layout">
         <div class="wf-work">
@@ -82,6 +75,13 @@
                Jobs: M, R5 (подача — головна дія першого екрана [o4]), H3 (дата наступного кроку).
                Порядок: відповідь → що робити і до коли → дія → кроки місяця. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
+            <div class="wf-page-head">
+              <h1>Подати показники</h1>
+              <p>Лічильник № 0172 5543 · двозонний</p>
+              <div class="wf-page-info">
+                <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
+              </div>
+            </div>
             <ol class="wf-steps" aria-label="Кроки місяця">
               <li aria-current="step"><span class="wf-steps__icon"><iconify-icon icon="hugeicons:dashboard-speed-01" aria-hidden="true"></iconify-icon></span><span>чекає показників<small>зараз · до 5 листопада</small></span></li>
               <li><span class="wf-steps__icon"><iconify-icon icon="hugeicons:checkmark-circle-02" aria-hidden="true"></iconify-icon></span><span>показники прийнято<small>одразу, як подасте</small></span></li>

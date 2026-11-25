@@ -264,3 +264,52 @@
 /* Шапка біла, як ліва панель: скло лишається тільки в блоках вмісту */
 .wf-header { background: var(--color-panel); -webkit-backdrop-filter: none; backdrop-filter: none; }
 .wf-logo, .wf-avatar { background: var(--color-surface-2); }
+
+/* Кроки місяця — таби на верхньому краї головної зони.
+   Поточний таб прозорий: він переходить у тіло зони. Інші таби — тонована смуга. На межі табів — стрілка */
+.wf-zone--primary > .wf-steps {
+  margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) var(--space-6);
+  padding: 0; gap: 0; border: 0; flex-wrap: nowrap; align-items: stretch;
+}
+.wf-zone--primary > .wf-steps li {
+  position: relative; flex: 1 1 auto; padding: var(--space-4) var(--space-5) var(--space-4) var(--space-4);
+  background: var(--color-surface-2);
+}
+.wf-zone--primary > .wf-steps li[aria-current="step"] { background: transparent; }
+.wf-zone--primary > .wf-steps li[aria-current="step"] + li { border-bottom-left-radius: var(--radius-md); }
+.wf-zone--primary > .wf-steps li:has(+ li[aria-current="step"]) { border-bottom-right-radius: var(--radius-md); }
+.wf-zone--primary > .wf-steps li:not(:last-child)::after {
+  content: ""; position: absolute; z-index: 1; right: -6px; top: 50%; flex: none;
+  width: 10px; height: 10px; margin: 0; opacity: 1; background: none;
+  border: solid var(--color-line-strong); border-width: var(--border-control) var(--border-control) 0 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+.wf-zone--primary > .wf-steps li[aria-current="step"]::after { border-color: var(--color-accent-ink); }
+@container (max-width: 720px) {
+  .wf-zone--primary > .wf-steps { flex-wrap: wrap; }
+  .wf-zone--primary > .wf-steps li { flex: 1 1 50%; }
+}
+
+/* Головний блок екрана — один великий білий блок: заголовок екрана, таби кроків і головна дія.
+   Скло лишається в плитках під ним */
+.wf-zone--primary:has(> .wf-page-head) { background: var(--color-panel); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.wf-zone--primary > .wf-page-head { margin-bottom: var(--space-5); text-align: left; }
+.wf-zone--primary > .wf-page-head + .wf-steps { margin-top: 0; }
+.wf-zone--primary > .wf-page-head + :not(.wf-steps) { padding-top: var(--space-5); border-top: var(--border-hair) solid var(--color-line); }
+/* Таби: іконка зверху, під нею назва кроку і дата. Верхні кути табів круглі */
+.wf-zone--primary > .wf-steps li {
+  flex-direction: column; align-items: flex-start; gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) var(--space-4) var(--space-5);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.wf-zone--primary > .wf-steps li:not(:last-child)::after { top: 50%; }
+
+/* Перемикач адреси — селектор: без фону, сіра лінія знизу, шеврон вниз */
+.wf-sidebar .wf-switcher {
+  background: none; box-shadow: none; border: 0; border-radius: 0;
+  border-bottom: var(--border-hair) solid var(--color-line);
+  padding: var(--space-2) 0 var(--space-3);
+}
+.wf-sidebar .wf-switcher:hover { border-bottom-color: var(--color-line-strong); }
+.wf-sidebar .wf-switcher iconify-icon { color: var(--color-icon); }
+.wf-sidebar .wf-account__meta { padding-left: 0; }
