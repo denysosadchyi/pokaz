@@ -607,3 +607,11 @@
     0 16px 16px rgba(40, 32, 70, .0085),
     0 32px 32px rgba(40, 32, 70, .0095);
 }
+
+/* Вторинна кнопка — без фону і без тіні, лише межа. Текст оптично по центру:
+   у Fixel над малими літерами більше місця, ніж під ними, тому текст іде на 1 px вгору (відступ знизу 2 px) */
+.wf-main button:not(.wf-primary), .wf-button:not(.wf-primary) {
+  background: none; box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong);
+}
+.wf-main button, .wf-button { padding-block: 0 2px; line-height: 1; }
+.wf-main button:not(.wf-primary):hover, .wf-button:not(.wf-primary):hover { background: var(--color-surface-2); }
