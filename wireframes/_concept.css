@@ -808,24 +808,7 @@
 /* Кружки іконок у плитках — легка тінь */
 .wf-main .wf-tile h2 iconify-icon, .wf-main .wf-tile h3 iconify-icon { box-shadow: 0 2px 6px -1px rgba(60, 40, 110, .14); }
 
-/* Вкладені радіуси: внутрішній радіус = зовнішній радіус − відступ між краями.
-   Кнопка 16 px → відступ до краю білої зони 16 px → зона 32 px → відступ до краю обгортки 16 px → обгортка 48 px */
-.wf-mainbox { --r-btn: 16px; --r-zone: 32px; padding: 16px; border-radius: 48px; }
-.wf-mainbox > .wf-page-head { padding-inline: 8px; }
-.wf-mainbox > .wf-zone--primary { border-radius: var(--r-zone); clip-path: inset(calc(var(--size-step) / -2 - 4px) 0 0 0 round 0 0 var(--r-zone) var(--r-zone)); }
-.wf-mainbox > .wf-zone--primary > .wf-steps li:first-child { border-top-left-radius: var(--r-zone); }
-.wf-mainbox > .wf-zone--primary > .wf-steps li:last-child { border-top-right-radius: var(--r-zone); }
-.wf-mainbox > .wf-zone--primary > footer { margin-inline: -8px; margin-bottom: -8px; }
-.wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: var(--r-btn); }
-
-/* Вкладені радіуси — рахунок від головної картки (обгортки). Її радіус лишається 24 px, як у всіх карток.
-   Обгортка 24 px → відступ 8 px → біла зона 16 px → відступ 8 px → кнопка 8 px */
-.wf-mainbox { --r-zone: 16px; --r-btn: 8px; padding: 8px; border-radius: var(--radius-lg); }
-.wf-mainbox > .wf-page-head { padding: 16px 16px 8px; }
-.wf-mainbox > .wf-zone--primary > footer { margin-inline: -16px; margin-bottom: -16px; }
-
-/* Відступи — як були до правок радіусів (обгортка 24 px, заголовок без своїх полів, кнопка без зсуву).
-   Радіуси від головної картки — білої зони 24 px: обгортка 24 + 24 = 48 px; кнопка 24 − 24 = 0, тому мінімум 8 px */
-.wf-mainbox { --r-zone: var(--radius-lg); --r-btn: 8px; padding: var(--space-5); border-radius: 48px; }
-.wf-mainbox > .wf-page-head { padding: 0; }
-.wf-mainbox > .wf-zone--primary > footer { margin-inline: 0; margin-bottom: 0; }
+/* Вкладені радіуси, змінено лише радіуси. Головна картка (обгортка) — 24 px і відступ 24 px без змін.
+   За правилом «внутрішній = зовнішній − відступ» біла зона і кнопка мають 0 px. Кути лишаємо м'якими: зона 12 px, кнопка 8 px */
+.wf-mainbox > .wf-zone--primary { border-radius: 12px; clip-path: inset(calc(var(--size-step) / -2 - 4px) 0 0 0 round 0 0 12px 12px); }
+.wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: 8px; }
