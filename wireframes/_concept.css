@@ -737,3 +737,7 @@
 /* Лінії біля періоду — оптичний центр. Центр рядка Fixel на 250/1000 над базовою лінією.
    Оптичний центр тексту (між висотою малих і великих літер) — на ~320/1000. Тому лінії йдуть вгору на 0,07 кегля */
 .wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after { transform: translateY(-0.07em); }
+
+/* Маленька іконка календаря перед періодом, 14 px. Лінії лишаються з обох боків від пари «іконка + текст» */
+.wf-period { display: inline-flex; align-items: center; gap: 6px; }
+.wf-period iconify-icon { font-size: 14px; color: var(--color-text-muted); transform: translateY(-0.05em); }
