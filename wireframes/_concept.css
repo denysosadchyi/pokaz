@@ -881,3 +881,13 @@
 .wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 8px; }
 .wf-sidebar .wf-nav li:first-child::before { top: 12px; }
 .wf-sidebar .wf-nav li:nth-last-child(2)::before { bottom: 12px; }
+
+/* Ховер меню, остаточно: плашка на посиланні (a), не на пункті (li). Тому відступи над першим і під останнім пунктом на неї не діють.
+   Кожна плашка — 4 px від країв посилання 44 px: висота 36 px, радіус 20 px */
+.wf-sidebar .wf-nav li:not(:last-child)::before { display: none; }
+.wf-sidebar .wf-nav li:not(:last-child) > a { position: relative; isolation: isolate; }
+.wf-sidebar .wf-nav li:not(:last-child) > a::before {
+  display: block; content: ""; position: absolute; inset: 4px; z-index: -1; border-radius: 20px;
+  background: #F4F2F8; opacity: 0; transition: opacity .15s ease; pointer-events: none;
+}
+.wf-sidebar .wf-nav li:not(:last-child) > a:hover::before { opacity: 1; }
