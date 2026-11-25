@@ -823,3 +823,9 @@
 .wf-mainbox { --r-zone: 16px; --r-btn: 8px; padding: 8px; border-radius: var(--radius-lg); }
 .wf-mainbox > .wf-page-head { padding: 16px 16px 8px; }
 .wf-mainbox > .wf-zone--primary > footer { margin-inline: -16px; margin-bottom: -16px; }
+
+/* Відступи — як були до правок радіусів (обгортка 24 px, заголовок без своїх полів, кнопка без зсуву).
+   Радіуси від головної картки — білої зони 24 px: обгортка 24 + 24 = 48 px; кнопка 24 − 24 = 0, тому мінімум 8 px */
+.wf-mainbox { --r-zone: var(--radius-lg); --r-btn: 8px; padding: var(--space-5); border-radius: 48px; }
+.wf-mainbox > .wf-page-head { padding: 0; }
+.wf-mainbox > .wf-zone--primary > footer { margin-inline: 0; margin-bottom: 0; }
