@@ -874,3 +874,10 @@
 
 /* Пункти меню ближче: 44 px — мінімальна зона натискання (бриф, р. 10). Плашка ховера лишається на 4 px від країв */
 .wf-sidebar .wf-nav li:not(:last-child) > a { height: var(--size-touch); }
+
+/* Більше місця над першим пунктом меню (під пігулкою рахунку) і під останнім («Історія») — по 8 px.
+   Плашка ховера лишається 36 px заввишки і на 4 px від країв посилання */
+.wf-sidebar .wf-nav li:first-child { padding-top: 8px; }
+.wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 8px; }
+.wf-sidebar .wf-nav li:first-child::before { top: 12px; }
+.wf-sidebar .wf-nav li:nth-last-child(2)::before { bottom: 12px; }
