@@ -757,3 +757,6 @@
 
 /* Назва на головній кнопці — біла (рішення дизайнера). Адреса під нею лишається темною */
 .wf-primary--addr .wf-primary__label { color: #fff; }
+
+/* Адреса на головній кнопці теж біла */
+.wf-primary--addr .wf-primary__addr { color: #fff; opacity: .9; }
