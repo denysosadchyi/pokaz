@@ -800,3 +800,7 @@
 
 /* Висока плитка «До сплати» — білий радіальний градієнт більший: ширше, нижче і сильніше */
 .wf-tile--balance::after { background: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 75%); }
+
+/* Статуси «до сплати» і «прийнято» — у правому верхньому куті плитки, на рівні заголовка */
+.wf-tile--balance > .wf-status, .wf-tile--prev h2 > .wf-status { position: absolute; top: var(--space-5); right: var(--space-5); margin: 0; }
+.wf-tile--balance > h2, .wf-tile--prev > h2 { padding-right: 120px; }
