@@ -733,3 +733,7 @@
 
 /* Лінії біля періоду — тонші (1 px) і прозоріші (непрозорість 25 %) */
 .wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after { height: 1px; opacity: .25; }
+
+/* Лінії біля періоду — оптичний центр. Центр рядка Fixel на 250/1000 над базовою лінією.
+   Оптичний центр тексту (між висотою малих і великих літер) — на ~320/1000. Тому лінії йдуть вгору на 0,07 кегля */
+.wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after { transform: translateY(-0.07em); }
