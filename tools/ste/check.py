@@ -11,7 +11,9 @@
 Блоки поза перевіркою:
   - код (``` і `...`), URL, заголовки, цитати (> і <blockquote>);
   - <script>, <style>, <svg>, <pre>, <code>;
-  - усе між <!-- ste-off --> і <!-- ste-on -->.
+  - усе між <!-- ste-off --> і <!-- ste-on -->;
+  - текст інтерфейсу продукту: елемент з класом device (рамка вайрфрейма)
+    або з атрибутом data-ste="off". Текст продукту пишемо за voice.md, не за STE-UA.
 """
 import html as htmllib
 import json
@@ -212,6 +214,10 @@ BLOCK = {"p", "li", "td", "th", "dd", "dt", "figcaption", "caption", "summary", 
 SKIP = {"script", "style", "svg", "pre", "code", "blockquote", "head", "title", "kbd", "math"}
 BLOCK_CLASS = {"when", "meta"}  # окремі рядки в картках (job, персона)
 HEAD = {"h1", "h2", "h3", "h4", "h5", "h6"}
+# Текст інтерфейсу продукту: STE-UA на нього не діє (правила — voice.md).
+UI_CLASS = {"device"}
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param",
+        "source", "track", "wbr"}
 
 
 class Extract(HTMLParser):
@@ -220,6 +226,7 @@ class Extract(HTMLParser):
         self.blocks, self.buf, self.skip, self.head = [], [], 0, 0
         self.headings = []
         self.start_line = 1
+        self.ui = 0  # глибина всередині тексту продукту
 
     def flush(self):
         t = "".join(self.buf)
@@ -229,6 +236,15 @@ class Extract(HTMLParser):
         self.start_line = self.getpos()[0]
 
     def handle_starttag(self, tag, attrs):
+        if self.ui:
+            if tag not in VOID:
+                self.ui += 1
+            return
+        a = dict(attrs)
+        if (set((a.get("class") or "").split()) & UI_CLASS or a.get("data-ste") == "off") and tag not in VOID:
+            self.flush()
+            self.ui = 1
+            return
         if tag in SKIP:
             self.skip += 1
             return
@@ -241,10 +257,19 @@ class Extract(HTMLParser):
             self.buf.append(" ")
 
     def handle_startendtag(self, tag, attrs):
+        if self.ui:
+            return
         if tag == "br":
             self.flush()
 
     def handle_endtag(self, tag):
+        if self.ui:
+            if tag not in VOID:
+                self.ui -= 1
+            if not self.ui:
+                self.buf = []
+                self.start_line = self.getpos()[0]
+            return
         if tag in SKIP:
             self.skip = max(0, self.skip - 1)
             return
@@ -256,7 +281,7 @@ class Extract(HTMLParser):
             self.flush()
 
     def handle_data(self, data):
-        if self.skip:
+        if self.skip or self.ui:
             return
         if not self.buf:
             self.start_line = self.getpos()[0]

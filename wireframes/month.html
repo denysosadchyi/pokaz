@@ -63,7 +63,7 @@
     <main class="wf-main">
       <div class="wf-page-head">
         <h1>Подати показники</h1>
-        <p>Лічильник № 0172 5543 · день і ніч</p>
+        <p>Лічильник № 0172 5543 · двозонний</p>
         <div class="wf-page-info">
           <span class="wf-period">Листопад 2026<small>вікно подачі 1–5 листопада</small></span>
         </div>
@@ -78,12 +78,12 @@
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status">
             <ol class="wf-steps" aria-label="Кроки місяця">
               <li aria-current="step"><span class="wf-steps__icon"><i data-lucide="gauge" aria-hidden="true"></i></span><span>чекає показників<small>зараз · до 5 листопада</small></span></li>
-              <li><span class="wf-steps__icon"><i data-lucide="circle-check" aria-hidden="true"></i></span><span>показники прийнято<small>одразу після подачі</small></span></li>
+              <li><span class="wf-steps__icon"><i data-lucide="circle-check" aria-hidden="true"></i></span><span>показники прийнято<small>одразу, як подасте</small></span></li>
               <li><span class="wf-steps__icon"><i data-lucide="receipt" aria-hidden="true"></i></span><span>нараховано<small>8 листопада</small></span></li>
-              <li><span class="wf-steps__icon"><i data-lucide="wallet" aria-hidden="true"></i></span><span>сплачено<small>після оплати</small></span></li>
+              <li><span class="wf-steps__icon"><i data-lucide="wallet" aria-hidden="true"></i></span><span>сплачено<small>коли сплатите</small></span></li>
             </ol>
             <h2 id="month-status"><small>Листопад 2026</small>Залишилося 3 дні</h2>
-            <p>Орієнтовну суму побачите одразу. Виправити цифри можна до 5 листопада включно.</p>
+            <p>Орієнтовну суму побачите одразу. Виправити показники можна до 5 листопада включно.</p>
             <footer>
               <a class="wf-button wf-primary" href="reading.html"><i data-lucide="gauge" aria-hidden="true"></i>Подати показники</a>
               <span class="wf-muted">вул. Липова, 14, кв. 27</span>
@@ -97,17 +97,17 @@
           <!-- Бенто «Дані місяця»: один блок замість двох карток.
                Баланс (сутність «Баланс», jobs M, R6) — велика плитка зліва;
                попередні показники (jobs E1, M) — плитка-шапка + дві плитки зон День / Ніч. -->
-          <section class="wf-bento" aria-label="Дані місяця">
+          <section class="wf-bento" aria-label="Сума і попередні показники">
             <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
-              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>До сплати за листопад</h2>
               <p class="wf-tile__value">1 185,84<span class="wf-unit">₴</span></p>
-              <span class="wf-status">не сплачено</span>
+              <span class="wf-status">до сплати</span>
               <p class="wf-muted">Листопад — за показниками від 3 листопада.</p>
               <a class="wf-button wf-tile__btn" href="bill.html">Сплатити</a>
             </article>
             <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
               <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники <span class="wf-status">прийнято</span></h2>
-              <p class="wf-muted"><time datetime="2026-10-03">3 жовтня 2026</time> · Наталя, вручну</p>
+              <p class="wf-muted">Подано <time datetime="2026-10-03">3 жовтня 2026</time> · Наталя, вручну</p>
               <a class="wf-button wf-tile__btn" href="history.html">Історія</a>
             </article>
             <article class="wf-tile wf-tile--day">

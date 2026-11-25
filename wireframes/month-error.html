@@ -46,7 +46,7 @@
       <nav class="wf-nav" aria-label="Головна навігація">
         <ul>
           <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
-          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати: немає даних">—</span></a></li>
+          <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити<span class="wf-nav__badge" aria-label="до сплати: не завантажено">—</span></a></li>
           <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
           <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i><span class="wf-nav__text">Графік відключень<small class="wf-nav__sub">Наступне: сьогодні 18:00–22:00</small></span></a></li>
         </ul>
@@ -67,11 +67,11 @@
           <!-- Зона 1. Дані місяця не прийшли. Головна дія — повторити. Під дією — куди звернутися.
                Порядок: відповідь → що робити → дія → запасний шлях. -->
           <section class="wf-zone wf-zone--primary" aria-labelledby="month-status" role="alert">
-            <h2 id="month-status">Не вдалося завантажити місяць</h2>
+            <h2 id="month-status">Не вдалося завантажити показники і суму</h2>
             <figure class="wf-ph wf-ph--sm">
               <figcaption>Ілюстрація: немає зв'язку з сервісом</figcaption>
             </figure>
-            <p>Перевірте інтернет і спробуйте ще раз. Показники й платежі збережено.</p>
+            <p>Перевірте інтернет і повторіть. Показники й платежі збережено.</p>
             <footer>
               <a class="wf-button wf-primary" href="month-loading.html"><i data-lucide="rotate-cw" aria-hidden="true"></i>Повторити</a>
             </footer>
@@ -83,14 +83,14 @@
         <aside class="wf-context" aria-label="Довідка">
 
           <!-- Бенто «Дані місяця» (див. month.html) — той самий каркас, дані не завантажились. -->
-          <section class="wf-bento" aria-label="Дані місяця">
+          <section class="wf-bento" aria-label="Сума і попередні показники">
             <article class="wf-tile wf-tile--balance" aria-labelledby="balance">
-              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>Баланс</h2>
-              <p class="wf-muted">Не завантажилося</p>
+              <h2 id="balance"><i data-lucide="wallet" aria-hidden="true"></i>До сплати за листопад</h2>
+              <p class="wf-muted">Суму не завантажено. Покажемо після повтору.</p>
             </article>
             <article class="wf-tile wf-tile--prev" aria-labelledby="last-reading">
               <h2 id="last-reading"><i data-lucide="gauge" aria-hidden="true"></i>Попередні показники</h2>
-              <p class="wf-muted">Не завантажилося</p>
+              <p class="wf-muted">Показники не завантажено. Покажемо після повтору.</p>
             </article>
             <article class="wf-tile wf-tile--day">
               <h3><i data-lucide="sun" aria-hidden="true"></i>День</h3>
