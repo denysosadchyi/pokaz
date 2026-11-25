@@ -724,3 +724,9 @@
 
 /* Головна кнопка «Подати показники» — знову на всю ширину зони. Висота лишається 88 px */
 .wf-zone--primary > footer > .wf-button.wf-primary--addr { width: 100%; padding-inline: var(--space-6); }
+
+/* Період над заголовком головної зони: короткі лінії з обох боків, 40 × 2 px, колір лінії */
+.wf-zone--primary h2 > small { display: flex; align-items: center; justify-content: center; gap: var(--space-3); }
+.wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after {
+  content: ""; flex: none; width: 40px; height: 2px; border-radius: 2px; background: var(--color-line-strong); opacity: .5;
+}
