@@ -366,3 +366,13 @@
 .wf-zone--primary > .wf-steps .wf-steps__icon { margin-top: calc(var(--size-step) / -2); }
 .wf-zone--primary > .wf-steps li:first-child { border-top-left-radius: var(--radius-lg); }
 .wf-zone--primary > .wf-steps li:last-child { border-top-right-radius: var(--radius-lg); }
+
+/* Шеврон між табами — у круглій білій підкладці на межі табів */
+.wf-zone--primary > .wf-steps li:not(:last-child)::after {
+  width: var(--space-5); height: var(--space-5); right: calc(var(--space-5) / -2);
+  border: 0; border-radius: var(--radius-pill); transform: translateY(-50%);
+  background: var(--color-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7494' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m10 7 5 5-5 5'/%3E%3C/svg%3E") center / var(--icon-sm) no-repeat;
+}
+.wf-zone--primary > .wf-steps li[aria-current="step"]::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C2521C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m10 7 5 5-5 5'/%3E%3C/svg%3E");
+}
