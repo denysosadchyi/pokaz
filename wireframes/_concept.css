@@ -797,3 +797,6 @@
   content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
   background: radial-gradient(80% 60% at 50% 0%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 70%);
 }
+
+/* Висока плитка «До сплати» — білий радіальний градієнт більший: ширше, нижче і сильніше */
+.wf-tile--balance::after { background: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 75%); }
