@@ -851,3 +851,7 @@
 }
 .wf-sidebar .wf-nav li:not(:last-child):has(> a:hover)::before { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li::before { transition: none; } }
+
+/* Пункти меню однакової висоти, 56 px: пункт із сумою більше не вищий за інші. Плашка ховера — 1 px від верху і низу пункту, 8 px з боків */
+.wf-sidebar .wf-nav li:not(:last-child) > a { height: 56px; min-height: 0; padding-block: 0; align-items: center; }
+.wf-sidebar .wf-nav li:not(:last-child)::before { inset: 1px 8px; }
