@@ -478,3 +478,7 @@
 
 /* Номер рахунку — жирний 700. Fixel Text не має файлу Bold, тому беремо Fixel Display Bold: без штучного жирного */
 .wf-sidebar .wf-account__meta > span { font-family: var(--font-display); font-weight: 700; }
+
+/* Лінії між пунктами меню — на всю ширину панелі. Відступ 16 px тепер усередині пункту */
+.wf-sidebar .wf-nav { padding-inline: 0; }
+.wf-sidebar .wf-nav a { padding-inline: var(--space-4); }
