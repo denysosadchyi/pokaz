@@ -871,3 +871,6 @@
 /* Плашка ховера меню — 4 px від країв пункту з усіх боків, також від низу картки. Радіус 20 px = 24 px картки − 4 px */
 .wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 0; }
 .wf-sidebar .wf-nav li:not(:last-child)::before, .wf-sidebar .wf-nav li:nth-last-child(2)::before { inset: 4px; border-radius: 20px; }
+
+/* Пункти меню ближче: 44 px — мінімальна зона натискання (бриф, р. 10). Плашка ховера лишається на 4 px від країв */
+.wf-sidebar .wf-nav li:not(:last-child) > a { height: var(--size-touch); }
