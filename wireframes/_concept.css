@@ -400,3 +400,8 @@
 .wf-sidebar .wf-nav li:last-child a { padding-bottom: 0; }
 /* Шеврони між неактивними табами — без підкладки і без тіні. Біле коло лишається лише після поточного таба */
 .wf-zone--primary > .wf-steps li:not(:last-child):not([aria-current="step"])::after { background-color: transparent; box-shadow: none; }
+
+/* Аватар — фото Наталі в колі. Ім'я жирне, роль під ним — звичайна */
+.wf-avatar--photo { display: block; padding: 0; border: 0; border-radius: var(--radius-pill); object-fit: cover; background: none; }
+.wf-user__name { font-weight: var(--weight-semibold); }
+.wf-user__name small { font-weight: var(--weight-regular); }
