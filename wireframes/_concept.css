@@ -482,3 +482,11 @@
 /* Лінії між пунктами меню — на всю ширину панелі. Відступ 16 px тепер усередині пункту */
 .wf-sidebar .wf-nav { padding-inline: 0; }
 .wf-sidebar .wf-nav a { padding-inline: var(--space-4); }
+
+/* Адреса в перемикачі: зверху місто, перед ним іконка піна. Під містом — вулиця і квартира звичайним текстом */
+.wf-sidebar .wf-switcher { align-items: flex-start; gap: var(--space-2); }
+.wf-sidebar .wf-switcher__pin { flex: none; font-size: var(--icon-sm); margin-top: 2px; color: var(--color-icon); }
+.wf-sidebar .wf-switcher__text { display: grid; gap: 2px; }
+.wf-sidebar .wf-switcher__text b { font-weight: var(--weight-semibold); font-size: var(--fs-md); color: var(--color-text); }
+.wf-sidebar .wf-switcher__text small { font-weight: var(--weight-regular); font-size: var(--fs-sm); color: var(--color-text-muted); }
+.wf-sidebar .wf-switcher > iconify-icon:last-child { align-self: center; }
