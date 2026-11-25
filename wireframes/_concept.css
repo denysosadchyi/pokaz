@@ -337,3 +337,6 @@
   padding: var(--pad-chip) var(--space-2);
   font-size: var(--fs-2xs); font-weight: var(--weight-semibold); color: var(--color-text-muted);
 }
+
+/* Сірі лінії між пунктами меню */
+.wf-sidebar .wf-nav li + li { border-top: var(--border-hair) solid var(--color-line); }
