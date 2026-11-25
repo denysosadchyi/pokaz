@@ -376,3 +376,5 @@
 .wf-zone--primary > .wf-steps li[aria-current="step"]::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C2521C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m10 7 5 5-5 5'/%3E%3C/svg%3E");
 }
+/* Підкладка шеврона — чорна, прозорість 5 % */
+.wf-zone--primary > .wf-steps li:not(:last-child)::after { background-color: rgba(0, 0, 0, .05); }
