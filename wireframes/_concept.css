@@ -894,3 +894,7 @@
 
 /* Плашка ховера меню — радіус менший: 12 px замість 20 px */
 .wf-sidebar .wf-nav li:not(:last-child) > a::before { border-radius: 12px; }
+
+/* Рівні відступи плашки ховера: 8 px з боків, і на «Історії» — 8 px до низу картки (4 px плашки + 4 px пункту) */
+.wf-sidebar .wf-nav li:not(:last-child) > a::before { inset: 4px 8px; }
+.wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 4px; }
