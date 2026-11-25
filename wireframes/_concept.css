@@ -328,3 +328,12 @@
 .wf-sidebar .wf-nav a { padding-inline: 0; border-radius: 0; }
 .wf-sidebar .wf-nav a, .wf-sidebar .wf-nav a:hover, .wf-sidebar .wf-nav a[aria-current="page"] { background: none; }
 .wf-sidebar .wf-nav a:hover { color: var(--color-text); }
+
+/* Рівні відступи над адресою і під нею: 12 + 10 зверху, 12 + 10 знизу до лінії */
+.wf-sidebar { padding-top: var(--space-3); }
+.wf-sidebar .wf-switcher { min-height: 0; padding-block: 10px; }
+/* Номер рахунку: дрібний жирний текст у компактній пігулці */
+.wf-sidebar .wf-account__meta > span {
+  padding: var(--pad-chip) var(--space-2);
+  font-size: var(--fs-2xs); font-weight: var(--weight-semibold); color: var(--color-text-muted);
+}
