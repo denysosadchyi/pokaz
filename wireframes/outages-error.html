@@ -62,26 +62,28 @@
         <div class="wf-work">
 
           <!-- Зона 1. Графік не завантажився. Показуємо останній відомий графік з часом оновлення. Вихід — спробувати ще раз. -->
-          <section class="wf-zone wf-zone--primary" aria-labelledby="out-next" role="alert">
-            <div class="wf-page-head">
-              <h1>Графік відключень</h1>
-              <p>Черга 3.2</p>
-              <div class="wf-page-info">
-                <span class="wf-period">10 листопада 2026<small>оновлено о 06:00</small></span>
+          <div class="wf-mainbox">
+          <div class="wf-page-head">
+            <h1>Графік відключень</h1>
+            <p>Черга 3.2</p>
+            <div class="wf-page-info">
+              <span class="wf-period">10 листопада 2026<small>оновлено о 06:00</small></span>
+            </div>
+          </div>
+            <section class="wf-zone wf-zone--primary" aria-labelledby="out-next" role="alert">
+              <h2 id="out-next">Не вдалося оновити графік</h2>
+              <figure class="cx-photo"><img src="../concept/img/us-building-night.jpg" alt="" width="1200" height="675"></figure>
+              <p>ДТЕК зараз не відповідає. Нижче — графік станом на 06:00, він міг змінитися.</p>
+              <div class="wf-day" role="img" aria-label="Станом на 06:00: сьогодні без світла з 18:00 до 22:00.">
+                <ol class="wf-day__hours" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li></li><li></li></ol>
+                <div class="wf-day__scale" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
               </div>
-            </div>
-            <h2 id="out-next">Не вдалося оновити графік</h2>
-            <figure class="cx-photo"><img src="../concept/img/us-building-night.jpg" alt="" width="1200" height="675"></figure>
-            <p>ДТЕК зараз не відповідає. Нижче — графік станом на 06:00, він міг змінитися.</p>
-            <div class="wf-day" role="img" aria-label="Станом на 06:00: сьогодні без світла з 18:00 до 22:00.">
-              <ol class="wf-day__hours" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li class="is-off"></li><li></li><li></li></ol>
-              <div class="wf-day__scale" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
-            </div>
-            <p class="wf-muted">Сьогодні: 18:00–22:00 · завтра: 08:00–12:00, 20:00–24:00</p>
-            <footer>
-              <a class="wf-button wf-primary" href="outages.html"><iconify-icon icon="hugeicons:refresh" aria-hidden="true"></iconify-icon>Повторити</a>
-            </footer>
-          </section>
+              <p class="wf-muted">Сьогодні: 18:00–22:00 · завтра: 08:00–12:00, 20:00–24:00</p>
+              <footer>
+                <a class="wf-button wf-primary" href="outages.html"><iconify-icon icon="hugeicons:refresh" aria-hidden="true"></iconify-icon>Повторити</a>
+              </footer>
+            </section>
+          </div>
 
         </div>
 
