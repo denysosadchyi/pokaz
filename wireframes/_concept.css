@@ -623,3 +623,9 @@
 
 /* Шапка — нижні кути круглі, як у блоків */
 .wf-header { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+
+/* Оптичний центр тексту в пігулках. Висота рядка 1, тож текст займає рівно кегль.
+   У Fixel гліфи сидять трохи нижче центру кегля, тому знизу на 1 px більше відступу. Висота пігулок майже та сама */
+.wf-status, .wf-nav__badge { display: inline-flex; align-items: center; line-height: 1; padding: 5px var(--space-3) 6px; }
+.wf-nav__badge { padding-inline: var(--space-2); }
+.wf-sidebar .wf-account__meta > span { line-height: 1; padding: 7px var(--space-3) 8px; }
