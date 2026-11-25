@@ -790,3 +790,10 @@
 
 /* Абзац під заголовком головної зони трохи менший: 15 px замість 16 px */
 .wf-work .wf-zone--primary > p { font-size: 15px; }
+
+/* Плитки: білий радіальний градієнт угорі, як світло згори. Шар ::after поверх фону, під текстом, кліки проходять крізь нього */
+.wf-tile { position: relative; isolation: isolate; }
+.wf-tile::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(80% 60% at 50% 0%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 70%);
+}
