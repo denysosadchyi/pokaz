@@ -584,3 +584,6 @@
 
 /* Біле коло шеврона перемикача — легка тінь */
 .wf-sidebar .wf-switcher > iconify-icon:last-child { box-shadow: 0 1px 2px rgba(40, 32, 70, .06), 0 2px 6px rgba(40, 32, 70, .08); }
+
+/* Номер рахунку в пігулці — товщина 400, Fixel Text Regular */
+.wf-sidebar .wf-account__meta > span { font-family: var(--font-text); font-weight: var(--weight-regular); }
