@@ -741,3 +741,7 @@
 /* Маленька іконка календаря перед періодом, 14 px. Лінії лишаються з обох боків від пари «іконка + текст» */
 .wf-period { display: inline-flex; align-items: center; gap: 6px; }
 .wf-period iconify-icon { font-size: 14px; color: var(--color-text-muted); transform: translateY(-0.05em); }
+
+/* Іконка календаря менша: 12 px */
+.wf-period iconify-icon { font-size: 12px; }
+.wf-period { gap: 5px; }
