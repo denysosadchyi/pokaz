@@ -730,3 +730,6 @@
 .wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after {
   content: ""; flex: none; width: 40px; height: 2px; border-radius: 2px; background: var(--color-line-strong); opacity: .5;
 }
+
+/* Лінії біля періоду — тонші (1 px) і прозоріші (непрозорість 25 %) */
+.wf-zone--primary h2 > small::before, .wf-zone--primary h2 > small::after { height: 1px; opacity: .25; }
