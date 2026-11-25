@@ -538,3 +538,6 @@
 .wf-sidebar .wf-nav a { font-weight: 700; }
 .wf-sidebar .wf-nav__text { font-family: var(--font-display); font-weight: 700; }
 .wf-sidebar .wf-nav__sub { font-family: var(--font-text); font-weight: var(--weight-regular); }
+
+/* Верх панелі — градієнт: зверху білий 70 %, внизу прозоріше — білий 45 % */
+.wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .70), rgba(255, 255, 255, .45)); }
