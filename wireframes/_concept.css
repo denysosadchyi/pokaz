@@ -7,7 +7,9 @@
 /* ── Рамка продукту. Поза рамкою — сірий сайт, як раніше ── */
 .device {
   border: 0; border-radius: var(--radius-lg); overflow: hidden;
-  background: var(--color-bg); color: var(--color-text);
+  color: var(--color-text);
+  /* фон: складний світлий градієнт поверх розмитого фото вечірнього вікна */
+  background: var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
   font-family: var(--font-text); font-size: var(--fs-md); line-height: var(--lh-text);
   box-shadow: var(--shadow-float);
 }
@@ -76,9 +78,9 @@
 .wf-main a:not(.wf-button) { color: var(--color-text); }
 .wf-muted { color: var(--color-text-muted); }
 
-/* Зони: картка без рамки, м'який кут */
+/* Зони: скло з тонкою світлою лінією, м'який кут */
 .wf-layout, .wf-work, .wf-context { gap: var(--space-3); }
-.wf-zone, .wf-zone--primary, .wf-zone--ref { padding: var(--space-5); border: 0; border-radius: var(--radius-lg); background: var(--color-surface); }
+.wf-zone, .wf-zone--primary, .wf-zone--ref { padding: var(--space-5); border: var(--border-hair) solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); }
 .wf-context .wf-zone { padding: var(--space-5); }
 .wf-context .wf-zone > h2, .wf-tile h2, .wf-tile h3 { gap: var(--space-2); font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--color-text-muted); }
 .wf-context .wf-zone > h2 iconify-icon, .wf-tile h2 iconify-icon, .wf-tile h3 iconify-icon { font-size: var(--icon-sm); }
@@ -101,33 +103,13 @@
 .wf-button:hover { background: var(--color-surface-2); }
 .wf-button iconify-icon { font-size: var(--icon-sm); color: currentColor; }
 .wf-main button.wf-primary, .wf-button.wf-primary {
-  background: var(--color-accent); color: var(--color-on-accent); box-shadow: var(--shadow-accent);
+  background: var(--color-accent); color: var(--color-on-accent); box-shadow: none;
 }
 .wf-button.wf-primary:hover { background: var(--color-accent-hover); }
 .wf-zone--primary > footer > .wf-button { min-height: var(--control-h-lg); font-size: var(--fs-md); }
 .wf-zone--primary > footer > .wf-muted { font-size: var(--fs-sm); }
 .wf-tile__btn { padding: 0 var(--space-4); }
 
-/* ── Головна зона «Подати показники»: фото вечірнього вікна на фоні (фірмовий елемент напряму) ── */
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) {
-  --cx-band: var(--photo-band); /* смуга фото над текстом: вікно видно без тіні */
-  position: relative; isolation: isolate; overflow: hidden;
-  padding: calc(var(--cx-band) + var(--space-5)) var(--space-6) var(--space-6);
-  color: var(--color-on-photo);
-  background: var(--color-bg) url("../concept/img/us-window-warm.jpg") 50% 58% / cover no-repeat;
-}
-.wf-zone--primary:has(> .wf-steps [aria-current="step"])::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  /* верх — м'яка тінь (там лише фото), від смуги вниз — повна тінь: текст має контраст навіть на білому пікселі */
-  background: linear-gradient(180deg, var(--photo-shade-soft) 0, var(--photo-shade-soft) calc(var(--cx-band) - var(--space-7)), var(--photo-shade) var(--cx-band), var(--photo-shade) 100%);
-}
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-muted,
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps small,
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) > h2 > small { color: var(--color-on-photo-muted); }
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) a:not(.wf-button) { color: var(--color-on-photo); }
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) iconify-icon { color: var(--color-on-photo); }
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-button.wf-primary iconify-icon { color: var(--color-on-accent); }
-/* Стани (порожній, помилка, завантаження) мають своє фото стану, тому фото-фон лише на базовій сторінці */
 
 .wf-zone--primary > h2:has(> small) { gap: var(--space-2); font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--fs-2xl); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
 .wf-zone--primary > h2 > small { font-family: var(--font-text); font-size: var(--fs-sm); font-weight: var(--weight-medium); letter-spacing: 0; }
@@ -143,12 +125,12 @@
 .wf-steps__icon iconify-icon { font-size: var(--icon-sm); }
 .wf-steps li[aria-current="step"] .wf-steps__icon { border: 0; background: var(--color-text); }
 .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon,
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon { color: var(--color-bg); }
+.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon { color: var(--color-on-accent); }
 .wf-steps .wf-skeleton { width: var(--size-skeleton-step); }
 
 /* ── Бенто «Дані місяця» ── */
 .wf-bento { gap: var(--space-3); }
-.wf-tile { padding: var(--space-5); gap: var(--space-2); border-radius: var(--radius-lg); background: var(--color-surface); }
+.wf-tile { padding: var(--space-5); gap: var(--space-2); border: var(--border-hair) solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-surface); }
 .wf-tile--balance { padding: var(--space-5); }
 .wf-tile__value { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--space-1); white-space: nowrap; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--fs-xl); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
 .wf-tile--balance .wf-tile__value { font-size: var(--fs-3xl); }
@@ -187,32 +169,87 @@
 .wf-days h3 { font-size: var(--fs-md); font-weight: var(--weight-semibold); }
 .wf-days p { font-size: var(--fs-sm); color: var(--color-text-muted); }
 
-/* Головна зона «Наступне відключення» (базова сторінка — є позначка «зараз»): фото свічки в кімнаті справа */
-.wf-zone--primary:has(.wf-day__now) { position: relative; overflow: hidden; padding-right: calc(var(--space-6) + var(--photo-side)); }
-.wf-zone--primary:has(.wf-day__now)::after {
-  content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: var(--photo-side);
-  background: var(--color-bg) url("../concept/img/us-candle.jpg") 30% 50% / cover no-repeat;
-}
-
 /* ── Примітка під рамкою — частина сірого сайту, не продукту ── */
 .wf-note { border-radius: var(--radius-md); }
 
 @media (max-width: 760px) {
   .wf-main { padding: var(--space-4); }
-  .wf-zone--primary:has(> .wf-steps [aria-current="step"]) { padding: var(--space-5); }
-  .wf-zone--primary:has(.wf-day__now) { padding-right: var(--space-5); }
-  .wf-zone--primary:has(.wf-day__now)::after { display: none; }
   .wf-days > li { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ── Перевірка Playwright (світла тема) ── */
-/* Кроки місяця на фото: кружок — тінь фото з контуром, поточний крок — світлий кружок */
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps__icon { background: var(--photo-shade-soft); box-shadow: inset 0 0 0 var(--border-hair) var(--color-on-photo-muted); }
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon { background: var(--color-on-photo); box-shadow: none; }
-.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon { color: var(--color-text); }
 /* Вузька головна область: кроки переносяться, бенто — у два стовпці */
 .wf-steps { flex-wrap: wrap; row-gap: var(--space-3); }
 .wf-context { container-type: inline-size; }
 @container (max-width: 640px) {
   .wf-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "bal bal" "prev prev" "day night"; }
 }
+
+/* ── Скло: шапка, меню, зони і плитки напівпрозорі, фон просвічує ── */
+.device { background: var(--bg-mesh), var(--color-bg) url("../concept/img/bg-blur.jpg") 50% 40% / cover no-repeat; }
+.wf-header, .wf-sidebar { background: var(--color-surface); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4); backdrop-filter: blur(var(--glass-blur)) saturate(1.4); }
+.wf-header { border-bottom-color: var(--glass-edge); }
+.wf-sidebar { border-right-color: var(--glass-edge); background: linear-gradient(180deg, var(--color-surface-hi), var(--color-surface) 40%); }
+.device::before { background-color: var(--color-surface); border-bottom-color: var(--glass-edge); }
+.device::after { background: var(--color-surface-2); }
+.wf-zone, .wf-zone--primary, .wf-zone--ref, .wf-tile {
+  position: relative; isolation: isolate;
+  border: var(--border-hair) solid var(--glass-edge);
+  background: var(--glass-fill); box-shadow: var(--glass-shine), var(--shadow-float);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4); backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+}
+
+/* Меню: поточний пункт — біле скло з бліком, іконка кольору лампи */
+.wf-nav a[aria-current="page"], .wf-switcher { background: var(--color-surface-hi); box-shadow: var(--glass-shine), 0 4px 14px -6px rgba(60, 40, 110, .25); }
+.wf-nav a[aria-current="page"] iconify-icon, .wf-logo iconify-icon { color: var(--color-accent-ink); }
+.wf-logo, .wf-avatar { background: var(--glass-fill); box-shadow: var(--glass-shine), 0 2px 8px -2px rgba(60, 40, 110, .2); }
+
+/* Головна зона: світіння лампи в куті, великий термін */
+.wf-zone--primary { overflow: hidden; }
+.wf-zone--primary::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  width: 520px; height: 520px; right: -160px; top: -220px; background: var(--glow-lamp);
+}
+.wf-zone--primary > h2:has(> small) { font-size: var(--fs-display); }
+
+/* Головна кнопка: лампа з переходом, блік і тепле світіння */
+.wf-main button.wf-primary, .wf-button.wf-primary {
+  background: linear-gradient(180deg, var(--color-accent-hover), var(--color-accent)); box-shadow: var(--shadow-accent);
+}
+.wf-button.wf-primary:hover { background: var(--color-accent-hover); }
+/* Вторинна кнопка: скло з контуром */
+.wf-main button:not(.wf-primary), .wf-button:not(.wf-primary) { background: var(--color-surface-hi); box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong), 0 2px 8px -4px rgba(60, 40, 110, .25); }
+
+/* Кроки місяця: скляні кружки; поточний — лампа */
+.wf-steps__icon { background: var(--color-surface-hi); box-shadow: var(--glass-shine), 0 3px 10px -4px rgba(60, 40, 110, .3); }
+.wf-steps li[aria-current="step"] .wf-steps__icon { background: linear-gradient(180deg, var(--color-accent-hover), var(--color-accent)); box-shadow: var(--shadow-accent); }
+.wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon,
+.wf-zone--primary .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon { color: var(--color-on-accent); }
+.wf-steps li:not(:last-child)::after { background: linear-gradient(90deg, var(--color-line-strong), transparent); opacity: .7; }
+
+/* Іконки заголовків плиток — у скляному кружку; день — лампа, ніч — вечірній синій */
+.wf-tile h2 iconify-icon, .wf-tile h3 iconify-icon, .wf-context .wf-zone > h2 iconify-icon {
+  box-sizing: content-box; padding: 7px; border-radius: var(--radius-pill);
+  background: var(--color-surface-hi); box-shadow: var(--glass-shine), 0 2px 8px -3px rgba(60, 40, 110, .3);
+}
+.wf-tile--day h2 iconify-icon, .wf-tile--day h3 iconify-icon, .wf-tile--balance h2 iconify-icon { color: var(--color-accent-ink); }
+.wf-tile--night h2 iconify-icon, .wf-tile--night h3 iconify-icon { color: var(--color-off); }
+
+/* Сума: тепле світіння лампи за числом */
+.wf-tile--balance { overflow: hidden; }
+.wf-tile--balance::before { content: ""; position: absolute; z-index: -1; width: 420px; height: 300px; left: -80px; top: -40px; background: var(--glow-lamp); opacity: .7; pointer-events: none; }
+.wf-tile--balance .wf-tile__value { font-size: var(--fs-3xl); }
+
+/* Графік: години зі світлом — скло, без світла — вечірній синій з переходом */
+.wf-day__hours li { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8); }
+.wf-day__hours li.is-off { background: var(--color-off); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25); }
+
+/* Ліва панель: плаває над фоном — біла картка з відступом і тінню */
+.wf-sidebar {
+  margin: var(--space-3) 0 var(--space-3) var(--space-3);
+  border: 0; border-radius: var(--radius-lg);
+  background: var(--color-panel); box-shadow: var(--shadow-float);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.wf-sidebar .wf-nav a[aria-current="page"], .wf-sidebar .wf-switcher { background: var(--color-surface-2); box-shadow: none; }
+.wf-sidebar .wf-nav a:hover { background: var(--color-surface-2); }

@@ -6,7 +6,6 @@
 //
 // Пара = колір тексту або графіки, фон, поріг, де пара є на екранах.
 // Пороги: текст 4.5; великий текст (≥ 24 px або ≥ 18.66 px жирний) 3; графіка і межі контролів 3.
-// Напівпрозорий фон (тінь на фото) рахуємо для найгіршого випадку: тінь поверх білого пікселя фото.
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -35,7 +34,6 @@ const over = (c, bg) => ({ r: c.r * c.a + bg.r * (1 - c.a), g: c.g * c.a + bg.g 
 const lum = ({ r, g, b }) => [r, g, b].map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; })
   .reduce((s, x, i) => s + x * [0.2126, 0.7152, 0.0722][i], 0);
 const ratio = (a, b) => { const [l1, l2] = [lum(a), lum(b)].sort((x, y) => y - x); return (l1 + 0.05) / (l2 + 0.05); };
-const WHITE = { r: 255, g: 255, b: 255, a: 1 };
 
 // [передній план, фон, поріг, вид, де]
 const PAIRS = [
@@ -45,6 +43,7 @@ const PAIRS = [
   ["--color-text-muted", "--color-bg", 4.5, "текст", "рядок під заголовком екрана, період"],
   ["--color-text-muted", "--color-surface", 4.5, "текст", "підпис у зоні, мітка плитки, шкала графіка"],
   ["--color-text-muted", "--color-surface-2", 4.5, "текст", "підпис у плитці на підкладці"],
+  ["--color-text-muted", "--color-panel", 4.5, "текст", "підпис у білій лівій панелі"],
   ["--color-icon", "--color-surface", 3, "графіка", "іконка Solar у зоні"],
   ["--color-icon", "--color-surface-2", 3, "графіка", "іконка в поточному пункті меню"],
   ["--color-on-accent", "--color-accent", 4.5, "текст", "головна кнопка"],
@@ -58,16 +57,17 @@ const PAIRS = [
   ["--color-error-text", "--color-surface", 4.5, "текст", "заголовок зони з помилкою"],
   ["--color-off", "--color-surface", 3, "графіка", "година без світла в графіку"],
   ["--color-off", "--color-on", 3, "графіка", "година без світла поруч з годиною зі світлом"],
-  ["--color-on-photo", "--photo-shade", 4.5, "текст", "текст на фото (тінь поверх білого пікселя)"],
-  ["--color-on-photo-muted", "--photo-shade", 4.5, "текст", "підпис на фото (тінь поверх білого пікселя)"],
-  ["--color-on-accent", "--color-accent", 4.5, "текст", "головна кнопка на фото"],
 ];
 
 function rows(vars, theme) {
   return PAIRS.map(([fg, bg, min, kind, where]) => {
     const f = parse(vars[fg]);
+    // Скло: напівпрозорий фон кладемо на найтемнішу точку градієнта (--color-bg).
+    // --color-surface-2 лежить на склі --color-surface, тож рахуємо обидва шари.
+    const base = parse(vars["--color-bg"]);
+    const glass = over(parse(vars["--color-surface"]), base);
     let b = parse(vars[bg]);
-    if (b.a < 1) b = over(b, WHITE);
+    if (b.a < 1) b = over(b, bg === "--color-surface-2" || bg === "--color-on" ? glass : base);
     const r = ratio(over(f, b), b);
     return { theme, fg, fgv: vars[fg], bg, bgv: vars[bg], r, min, ok: r >= min, kind, where };
   });
@@ -80,7 +80,7 @@ const md = [
   "",
   "Таблицю пише скрипт `node tools/contrast.mjs` з [concept/tokens.css](tokens.css). Руками її не правимо.",
   "Пороги WCAG 2.2 AA: текст 4,5:1; великий текст, графіка і межі контролів 3:1.",
-  "Тінь на фото напівпрозора. Ми рахуємо найгірший випадок: тінь поверх білого пікселя фото.",
+  "Картки — скло. Фон картки рахуємо поверх найтемнішої точки градієнта `--color-bg`, плитку — поверх скла.",
   "",
   "| Колір тексту або графіки | Фон | Контраст | Поріг | Результат | Де |",
   "|---|---|---|---|---|---|",

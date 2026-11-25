@@ -38,7 +38,8 @@
     .cap { margin: 8px 0 0; font-size: 14px; color: #555; }
 
     /* ── Демо продукту: лише токени ── */
-    .cx { font-family: var(--font-text); font-size: var(--fs-md); line-height: var(--lh-text); color: var(--color-text); background: var(--color-bg);
+    .cx { font-family: var(--font-text); font-size: var(--fs-md); line-height: var(--lh-text); color: var(--color-text);
+          background: var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 50% 40% / cover no-repeat;
           border-radius: var(--radius-lg); padding: var(--space-6); font-variant-numeric: tabular-nums; }
     .cx *, .cx *::before, .cx *::after { box-sizing: border-box; }
     .cx p, .cx h3, .cx h4, .cx figure, .cx dl, .cx dd { margin: 0; }
@@ -47,6 +48,9 @@
     .cx iconify-icon { display: inline-block; flex: none; width: 1em; height: 1em; font-size: var(--icon-md); color: var(--color-icon); }
     .cx .num { font-family: var(--font-display); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
     .cx .muted { color: var(--color-text-muted); }
+    /* скло: напівпрозора картка, фон просвічує */
+    .glass { border: var(--border-hair) solid var(--glass-edge); background: var(--glass-fill); box-shadow: var(--glass-shine), var(--shadow-float);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.3); backdrop-filter: blur(var(--glass-blur)) saturate(1.3); }
 
     /* кнопки: більша специфічність і !important — бо type.css фарбує всі main button у бірюзу */
     main .cx button.cx-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -54,8 +58,8 @@
       font: var(--weight-semibold) var(--fs-md)/1 var(--font-text) !important; cursor: pointer;
       background: transparent !important; color: var(--color-text) !important; box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong); }
     main .cx button.cx-btn:hover { background: var(--color-surface-2) !important; }
-    main .cx.hero button.cx-btn:not(.cx-btn--primary) { color: var(--color-on-photo) !important; background: var(--photo-shade-soft) !important; box-shadow: inset 0 0 0 var(--border-control) var(--color-on-photo-muted); }
-    main .cx button.cx-btn--primary { background: var(--color-accent) !important; color: var(--color-on-accent) !important; box-shadow: var(--shadow-accent); }
+    main .cx button.cx-btn--primary { background: linear-gradient(180deg, var(--color-accent-hover), var(--color-accent)) !important; color: var(--color-on-accent) !important; box-shadow: var(--shadow-accent); }
+    main .cx button.cx-btn:not(.cx-btn--primary) { background: var(--color-surface-hi) !important; }
     main .cx button.cx-btn--primary:hover { background: var(--color-accent-hover) !important; }
     main .cx button.cx-btn--lg { min-height: var(--control-h-lg); width: 100%; }
     .cx button.cx-btn iconify-icon { font-size: var(--icon-sm); color: currentColor; }
@@ -66,26 +70,25 @@
     .cx-status iconify-icon { font-size: var(--fs-md); color: currentColor; }
 
     /* ── Постер «стиль у дії» ── */
-    .hero { position: relative; overflow: hidden; isolation: isolate; min-height: 560px; padding: var(--space-7);
-      display: grid; align-content: end; gap: var(--space-5); color: var(--color-on-photo);
-      background: var(--color-bg) url("concept/img/us-window-warm.jpg") 70% 40% / cover no-repeat; }
-    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
-      background: linear-gradient(90deg, var(--photo-shade) 0%, var(--photo-shade) 48%, var(--photo-shade-soft) 100%); }
+    .hero { min-height: 520px; padding: var(--space-7); display: grid; align-content: end; gap: var(--space-5); color: var(--color-text);
+      background: var(--bg-mesh), var(--color-bg) url("concept/img/bg-blur.jpg") 70% 40% / cover no-repeat; }
     .hero .addr { display: inline-flex; align-items: center; gap: var(--space-2); justify-self: start; padding: var(--space-2) var(--space-4);
-      border-radius: var(--radius-pill); background: var(--color-surface-2); color: var(--color-text); font-size: var(--fs-sm); font-weight: var(--weight-medium); }
+      border-radius: var(--radius-pill); background: var(--color-surface); border: var(--border-hair) solid var(--glass-edge); color: var(--color-text); font-size: var(--fs-sm); font-weight: var(--weight-medium); }
     .hero .addr iconify-icon { font-size: var(--icon-sm); }
-    .hero .lbl { font-size: var(--fs-lg); color: var(--color-on-photo-muted); }
-    .hero .sum { font-size: var(--fs-hero); color: var(--color-on-photo); }
-    .hero .sum small { font-size: .4em; color: var(--color-on-photo-muted); }
-    .hero .meta { color: var(--color-on-photo-muted); }
+    .hero .lbl { font-size: var(--fs-lg); color: var(--color-text-muted); }
+    .hero .sum { font-size: var(--fs-hero); color: var(--color-text); white-space: nowrap; }
+    .hero .sum small { font-size: .4em; color: var(--color-text-muted); }
+    .hero .meta { color: var(--color-text-muted); }
     .hero .row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
     .hero .zones { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-    .hero .zone { min-width: 168px; padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); }
+    .hero .zone { min-width: 168px; padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); color: var(--color-text); }
     .hero .zone h4 { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--color-text-muted); }
-    .hero .zone h4 iconify-icon { font-size: var(--icon-sm); }
+    .hero .zone h4 iconify-icon { font-size: var(--icon-sm); box-sizing: content-box; padding: 6px; border-radius: var(--radius-pill); background: var(--color-surface-hi); box-shadow: var(--glass-shine); }
+    .hero .zone:first-child h4 iconify-icon { color: var(--color-accent-ink); }
+    .hero .zone:last-child h4 iconify-icon { color: var(--color-off); }
     .hero .zone p { font-size: var(--fs-xl); }
     .hero .zone p small { font-family: var(--font-text); font-size: var(--fs-xs); color: var(--color-text-muted); letter-spacing: 0; }
-    @media (max-width: 700px) { .hero { padding: var(--space-5); min-height: 520px; } }
+    @media (max-width: 700px) { .hero { padding: var(--space-5); min-height: 0; } }
 
     /* ── Палітра ── */
     .sws { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
@@ -129,13 +132,11 @@
     .comp h4 { margin-bottom: var(--space-3); font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--color-text-muted); }
     .btns { display: flex; flex-wrap: wrap; gap: var(--space-3); }
     .card { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: var(--space-3); padding: var(--space-5);
-      border-radius: var(--radius-lg); color: var(--color-on-photo);
-      background: var(--color-bg) url("concept/img/us-building-night.jpg") 50% 30% / cover no-repeat; box-shadow: var(--shadow-float); }
-    .card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--photo-shade); }
-    .card h3 { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--color-on-photo-muted); }
-    .card h3 iconify-icon, .card .done > iconify-icon { color: var(--color-on-photo); }
-    .card .num { font-size: var(--fs-3xl); color: var(--color-on-photo); }
-    .card .num small { font-size: .45em; color: var(--color-on-photo-muted); }
+      border-radius: var(--radius-lg); color: var(--color-text); }
+    .card h3 { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--color-text-muted); }
+    .card h3 iconify-icon { color: var(--color-icon); }
+    .card .num { font-size: var(--fs-3xl); color: var(--color-text); }
+    .card .num small { font-size: .45em; color: var(--color-text-muted); }
     .card .done { display: flex; gap: var(--space-3); align-items: start; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-success-bg); color: var(--color-success-text); }
     .card .done iconify-icon { font-size: var(--icon-lg); color: var(--color-success-text); }
     .card .done b { display: block; }
@@ -166,7 +167,7 @@
 
   <section aria-labelledby="live">
     <h2 id="live">Стиль у дії</h2>
-    <p class="why">Головний екран після подачі показників. Фото кімнати з лампою — фірмовий елемент. Текст стоїть на тіні. Колір лампи має лише одна головна дія.</p>
+    <p class="why">Головний екран після подачі показників. Фон — розмите фото вечірнього вікна під світлим градієнтом. Картки — напівпрозоре скло. Колір лампи має лише одна головна дія.</p>
     <div class="cx hero" data-ste="off">
       <span class="addr"><iconify-icon icon="solar:home-smile-bold-duotone" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
       <p class="lbl">До сплати за листопад</p>
@@ -176,12 +177,12 @@
         <span class="meta">Подано 3 листопада 2026 · Наталя, за фото</span>
       </div>
       <div class="zones">
-        <div class="zone"><h4><iconify-icon icon="solar:sun-2-bold-duotone" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
-        <div class="zone"><h4><iconify-icon icon="solar:moon-bold-duotone" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="solar:sun-2-bold-duotone" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="solar:moon-bold-duotone" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
       </div>
       <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
     </div>
-    <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері». Фото нічне. Текст на фото стоїть на тіні.</p>
+    <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері», розмите (<code>concept/img/bg-blur.jpg</code>).</p>
   </section>
 
   <section aria-labelledby="color">
@@ -192,12 +193,12 @@
         <figcaption><b>Головний: лампа</b><code>--color-accent</code><br>Атрибут 4 «домашній». Лише головна дія, знак продукту і фокус.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-accent-hover" data-fg="--color-on-accent" data-show="--color-accent-hover"></span></div>
         <figcaption><b>Акцент: лампа ближче</b><code>--color-accent-hover</code><br>Наведення на головну дію. Атрибут 4.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-accent-ink" data-fg="--color-surface" data-show="--color-accent-ink"></span></div>
-        <figcaption><b>Лампа як графіка</b><code>--color-accent-ink</code>, <code>--color-focus</code><br>Знак продукту і кільце фокуса. Темніше за лампу, щоб мати 3:1 на білому.</figcaption></figure>
+      <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-accent-ink" data-show="--color-accent-ink"></span></div>
+        <figcaption><b>Лампа як графіка</b><code>--color-accent-ink</code>, <code>--color-focus</code><br>Знак продукту і кільце фокуса. Темніше за лампу, щоб мати 3:1 на склі і на фоні.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-bg" data-fg="--color-text" data-show="--color-bg"></span></div>
-        <figcaption><b>Нейтральний: фон</b><code>--color-bg</code><br>Атрибут 1 «спокійний». Світлий сірий папір, без чистого білого.</figcaption></figure>
+        <figcaption><b>Нейтральний: фон</b><code>--color-bg</code><br>Атрибут 1 і 4. Найгірша точка фону: світлий градієнт над розмитим фото. Від неї рахуємо контраст.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-text" data-show="--color-surface"></span></div>
-        <figcaption><b>Нейтральний: картка</b><code>--color-surface</code><br>Зона і картка. Підкладка замість рамки.</figcaption></figure>
+        <figcaption><b>Скло: картка</b><code>--color-surface</code><br>Зона, картка, шапка, меню. Біле скло 58 %, фон розмитий під ним.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-surface-2" data-fg="--color-text" data-show="--color-surface-2"></span></div>
         <figcaption><b>Нейтральний: плитка</b><code>--color-surface-2</code><br>Плитка в зоні, чип, поточний пункт меню.</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-text" data-fg="--color-bg" data-show="--color-text"></span></div>
@@ -210,7 +211,7 @@
         <figcaption><b>Помилка</b><code>--color-error-*</code><br>Атрибут 1: приглушена троянда. Без червоної тривоги (бриф, р. 9; voice.md).</figcaption></figure>
       <figure class="sw"><div class="pair"><span data-bg="--color-off" data-fg="--color-bg" data-show="--color-off"></span></div>
         <figcaption><b>Година без світла</b><code>--color-off</code><br>Графік відключень. Холодний сірий-синій: не жовтий і не червоний.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-line-strong" data-fg="--color-text" data-show="--color-line-strong"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-text" data-show="--color-line-strong" style="box-shadow: inset 0 0 0 3px var(--color-line-strong)"></span></div>
         <figcaption><b>Межа контролу</b><code>--color-line-strong</code><br>Поле і вторинна кнопка. Не менше 3:1.</figcaption></figure>
     </div>
   </section>
@@ -231,7 +232,7 @@
 
   <section aria-labelledby="form">
     <h2 id="form">Форма</h2>
-    <p class="why">М'які кути, як у кімнаті, а не в щитовій (атрибути 1 і 4). Тінь м'яка і має зсув донизу. Відступи — одна шкала з кроком 4 і 8.</p>
+    <p class="why">М'які кути, як у кімнаті (атрибути 1 і 4). Картка — скло, її край — тонка світла лінія. Тінь м'яка. Відступи — одна шкала з кроком 4 і 8.</p>
     <div class="cx" data-ste="off">
       <div class="shapes">
         <div class="shape"><i style="border-radius:var(--radius-lg)"></i>--radius-lg 24 · зона</div>
@@ -241,8 +242,7 @@
         <div class="shape"><i style="border-radius:var(--radius-pill);height:28px"></i>--radius-pill · статус</div>
       </div>
       <div class="shadows">
-        <div style="box-shadow:var(--shadow-float)">--shadow-float<br><span class="muted">рамка продукту, картка на фото</span></div>
-        <div style="box-shadow:var(--shadow-accent)">--shadow-accent<br><span class="muted">лише головна кнопка</span></div>
+        <div style="box-shadow:var(--shadow-float)">--shadow-float<br><span class="muted">скляна картка, рамка продукту</span></div>
       </div>
       <div class="spaces">
         <div><i style="width:var(--space-1)"></i>--space-1 4</div>
@@ -258,7 +258,7 @@
 
   <section aria-labelledby="photo">
     <h2 id="photo">Фото</h2>
-    <p class="why">Фото — дім увечері: вікно, лампа, свічка, лічильник. Без схем мережі і без блискавки (атрибут 4). На фото не буває людей з обличчями: фото — фон, а не історія. Текст на фото стоїть лише на тіні <code>--photo-shade</code>. Перелік і автори — <a href="concept/references.md">concept/references.md</a>.</p>
+    <p class="why">Фото — дім увечері: вікно, лампа, свічка, лічильник. Без схем мережі і без блискавки (атрибут 4). На фото не буває людей з обличчями: фото — фон, а не історія. Текст на фото не ставимо: фото — окремий кадр. Перелік і автори — <a href="concept/references.md">concept/references.md</a>.</p>
     <div class="photos">
       <figure><img src="concept/img/us-window-warm.jpg" alt="Тепле вікно в цегляному будинку ввечері"><figcaption>Головна зона «Подати показники» — фон; стан «Відключень не заплановано».</figcaption></figure>
       <figure><img src="concept/img/us-candle.jpg" alt="Свічка на столі в темній кімнаті"><figcaption>«Наступне відключення» — фото збоку.</figcaption></figure>
@@ -309,7 +309,7 @@
         <div class="comp"><h4>Головна кнопка і вторинна кнопка</h4>
           <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
         <div class="comp"><h4>Картка «До сплати» з фото і галочкою «Показники прийнято»</h4>
-          <article class="card">
+          <article class="card glass">
             <h3><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
             <p class="num">1 185,84 <small>₴</small></p>
             <div class="done"><iconify-icon icon="solar:check-circle-bold-duotone" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
@@ -343,34 +343,32 @@
 
   <section aria-labelledby="contrast">
     <h2 id="contrast">Контраст</h2>
-    <p class="why">Таблицю пише скрипт <code>node tools/contrast.mjs</code> з токенів. Пороги WCAG 2.2 AA: текст 4,5:1; великий текст, графіка і межі контролів 3:1. Тінь на фото ми рахуємо для найгіршого випадку: тінь поверх білого пікселя. Копія — <a href="concept/contrast.md">concept/contrast.md</a>.</p>
+    <p class="why">Таблицю пише скрипт <code>node tools/contrast.mjs</code> з токенів. Пороги WCAG 2.2 AA: текст 4,5:1; великий текст, графіка і межі контролів 3:1. Скло ми рахуємо для найгіршого випадку: поверх найтемнішої точки фону <code>--color-bg</code>. Копія — <a href="concept/contrast.md">concept/contrast.md</a>.</p>
     <div class="tbl" tabindex="0" role="region" aria-label="Контраст">
 <!-- contrast:start -->
 <table class="contrast">
 <thead><tr><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>
 <tbody>
-<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>16,45:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
-<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>17,95:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
-<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>15,45:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
-<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>6,26:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
-<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,83:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
-<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>5,88:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
-<tr><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>10,09:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
-<tr><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>8,69:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>10,56:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>13,63:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
+<tr><td><i class="chip" style="background:#1B1830"></i><code>--color-text</code> #1B1830</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>11,99:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>4,96:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,40:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>5,64:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
+<tr><td><i class="chip" style="background:#514C6B"></i><code>--color-text-muted</code> #514C6B</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-panel</code> #FFFFFF</td><td>8,09:1</td><td>4,50</td><td>проходить</td><td>підпис у білій лівій панелі</td></tr>
+<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>8,70:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
+<tr><td><i class="chip" style="background:#3E3858"></i><code>--color-icon</code> #3E3858</td><td><i class="chip" style="background:rgba(40, 32, 70, .07)"></i><code>--color-surface-2</code> rgba(40, 32, 70, .07)</td><td>7,65:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
 <tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка</td></tr>
 <tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F59B6D"></i><code>--color-accent-hover</code> #F59B6D</td><td>8,15:1</td><td>4,50</td><td>проходить</td><td>головна кнопка, наведення</td></tr>
-<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
-<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
-<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>4,26:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
-<tr><td><i class="chip" style="background:#7C8493"></i><code>--color-line-strong</code> #7C8493</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>3,76:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
-<tr><td><i class="chip" style="background:#1C4A37"></i><code>--color-success-text</code> #1C4A37</td><td><i class="chip" style="background:#DDF1E8"></i><code>--color-success-bg</code> #DDF1E8</td><td>8,55:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
-<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FBE4EA"></i><code>--color-error-bg</code> #FBE4EA</td><td>7,22:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
-<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>8,72:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
-<tr><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,11:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
-<tr><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#E1E5EC"></i><code>--color-on</code> #E1E5EC</td><td>4,84:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
-<tr><td><i class="chip" style="background:#EEF0F4"></i><code>--color-on-photo</code> #EEF0F4</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>11,07:1</td><td>4,50</td><td>проходить</td><td>текст на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td><i class="chip" style="background:#C9CFDA"></i><code>--color-on-photo-muted</code> #C9CFDA</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>8,07:1</td><td>4,50</td><td>проходить</td><td>підпис на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка на фото</td></tr>
+<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>3,68:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
+<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>5,49:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
+<tr><td><i class="chip" style="background:#9A3C12"></i><code>--color-focus</code> #9A3C12</td><td><i class="chip" style="background:#CEC7E1"></i><code>--color-bg</code> #CEC7E1</td><td>4,25:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
+<tr><td><i class="chip" style="background:#7A7494"></i><code>--color-line-strong</code> #7A7494</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>3,50:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
+<tr><td><i class="chip" style="background:#22472B"></i><code>--color-success-text</code> #22472B</td><td><i class="chip" style="background:#D6EEDD"></i><code>--color-success-bg</code> #D6EEDD</td><td>8,55:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
+<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#F8DCE2"></i><code>--color-error-bg</code> #F8DCE2</td><td>6,78:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
+<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,91:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
+<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .50)"></i><code>--color-surface</code> rgba(255, 255, 255, .50)</td><td>6,18:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
+<tr><td><i class="chip" style="background:#4B4F78"></i><code>--color-off</code> #4B4F78</td><td><i class="chip" style="background:rgba(255, 255, 255, .80)"></i><code>--color-on</code> rgba(255, 255, 255, .80)</td><td>7,47:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
 </tbody></table>
 <!-- contrast:end -->
     </div>
