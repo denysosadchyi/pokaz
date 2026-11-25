@@ -378,3 +378,7 @@
 }
 /* Підкладка шеврона — чорна, прозорість 5 % */
 .wf-zone--primary > .wf-steps li:not(:last-child)::after { background-color: rgba(0, 0, 0, .05); }
+
+/* Меню: усі пункти жирні. Поточний пункт — текст і іконка кольору лампи (4,6:1 на білому) */
+.wf-sidebar .wf-nav a { font-weight: var(--weight-semibold); }
+.wf-sidebar .wf-nav a[aria-current="page"], .wf-sidebar .wf-nav a[aria-current="page"] iconify-icon { color: var(--color-accent-ink); }

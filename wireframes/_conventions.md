@@ -101,7 +101,7 @@
     <ul>
       <li><a href="month.html" aria-current="page"><i data-lucide="calendar-check" aria-hidden="true"></i>Подати показники</a></li>
       <li><a href="bill.html"><i data-lucide="wallet" aria-hidden="true"></i>Сплатити</a></li>
-      <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія показників і платежів</a></li>
+      <li><a href="history.html"><i data-lucide="history" aria-hidden="true"></i>Історія</a></li>
       <li><a href="outages.html"><i data-lucide="power-off" aria-hidden="true"></i>Графік відключень</a></li>
     </ul>
   </nav>
@@ -347,7 +347,7 @@
 
 **Логотипи гаманців.** Кнопки Apple Pay / Google Pay — справжні логотипи (simple-icons 11.0.0 з jsdelivr): Apple — гліф `apple` + «Pay» (без рамки), Google — `googlepay`. Сайдбар — 264 px, щоб пілюля боргу влазила в пункт меню.
 
-**Меню.** Пункти дієсловами: «Подати показники», «Сплатити», «Історія показників і платежів», «Графік відключень».
+**Меню.** Пункти: «Подати показники», «Сплатити», «Історія», «Графік відключень».
 
 **Графік відключень у меню.** Під назвою другим рядком (`.wf-nav__sub`) — наступне відключення з часом: «Наступне: сьогодні 18:00–22:00». Без рахунку (month-empty) — лише назва.
 
