@@ -748,3 +748,6 @@
 
 /* Виправлення: правило .wf-work .wf-zone > h2 iconify-icon (22 px) сильніше. Селектор іконки календаря тепер сильніший */
 .wf-work .wf-zone > h2 .wf-period iconify-icon { font-size: 12px; }
+
+/* Іконка календаря трохи більша: 14 px */
+.wf-work .wf-zone > h2 .wf-period iconify-icon { font-size: 14px; }
