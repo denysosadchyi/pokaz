@@ -442,3 +442,8 @@
 .wf-zone--primary > .wf-steps { box-shadow: 0 100vmax 0 100vmax var(--color-panel); }
 .wf-zone--primary > .wf-steps li:not([aria-current="step"]) { background: rgba(0, 0, 0, .05); }
 .wf-zone--primary > .wf-steps li[aria-current="step"] { background: var(--color-panel); }
+
+/* Лінія з рахунком — рівно 1 px. При висоті 20 px лінія ставала на пів пікселя (9,5 px) і браузер малював її у 2 px.
+   Висота 21 px ставить лінію на цілий піксель 10. Межа білого 95 % і білого — одразу під лінією */
+.wf-sidebar .wf-account__meta { height: 21px; }
+.wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .95) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
