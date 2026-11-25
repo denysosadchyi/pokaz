@@ -398,3 +398,5 @@
 .wf-sidebar .wf-nav ul { gap: 0; }
 .wf-sidebar .wf-nav a { min-height: 0; padding-block: var(--space-4); }
 .wf-sidebar .wf-nav li:last-child a { padding-bottom: 0; }
+/* Шеврони між неактивними табами — без підкладки і без тіні. Біле коло лишається лише після поточного таба */
+.wf-zone--primary > .wf-steps li:not(:last-child):not([aria-current="step"])::after { background-color: transparent; box-shadow: none; }

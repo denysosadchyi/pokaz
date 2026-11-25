@@ -99,13 +99,13 @@
 | `month.pageHead.title` | month | Голова сторінки | «Подати показники» | без змін | заголовок | `Н1` |
 | `month.pageHead.meter` | month | Голова сторінки | «Лічильник № {meterNumber} · день і ніч» | «Лічильник № {meterNumber} · двозонний» | підпис поля | `Н10` |
 | `month.status.stepsLabel` | month | Статус місяця | «Кроки місяця» (`aria-label`) | без змін | повідомлення стану | |
-| `month.status.stepWaiting` | month | Статус місяця | «чекає показників» | без змін | повідомлення стану | |
+| `month.status.stepWaiting` | month | Статус місяця | «Чекає показників» | без змін | повідомлення стану | |
 | `month.status.stepWaitingHint` | month | Статус місяця | «зараз · до {windowEnd}» | без змін | повідомлення стану | |
-| `month.status.stepAccepted` | month | Статус місяця | «показники прийнято» | без змін | повідомлення стану | |
+| `month.status.stepAccepted` | month | Статус місяця | «Показники прийнято» | без змін | повідомлення стану | |
 | `month.status.stepAcceptedHint` | month | Статус місяця | «одразу після подачі» | «одразу, як подасте» | повідомлення стану | |
-| `month.status.stepCharged` | month | Статус місяця | «нараховано» | без змін | повідомлення стану | `Н9` |
+| `month.status.stepCharged` | month | Статус місяця | «Нараховано» | без змін | повідомлення стану | `Н9` |
 | `month.status.stepChargedHint` | month | Статус місяця | «{chargeDate}» | без змін | повідомлення стану | `Н9` |
-| `month.status.stepPaid` | month | Статус місяця | «сплачено» | без змін | повідомлення стану | |
+| `month.status.stepPaid` | month | Статус місяця | «Сплачено» | без змін | повідомлення стану | |
 | `month.status.stepPaidHint` | month | Статус місяця | «після оплати» | «коли сплатите» | повідомлення стану | `Н7` |
 | `month.status.overline` | month | Статус місяця | «{month} {year}» | без змін | заголовок | |
 | `month.status.title` | month | Статус місяця | «Залишилося {days} дні» | без змін | заголовок | |
