@@ -807,3 +807,13 @@
 
 /* Кружки іконок у плитках — легка тінь */
 .wf-main .wf-tile h2 iconify-icon, .wf-main .wf-tile h3 iconify-icon { box-shadow: 0 2px 6px -1px rgba(60, 40, 110, .14); }
+
+/* Вкладені радіуси: внутрішній радіус = зовнішній радіус − відступ між краями.
+   Кнопка 16 px → відступ до краю білої зони 16 px → зона 32 px → відступ до краю обгортки 16 px → обгортка 48 px */
+.wf-mainbox { --r-btn: 16px; --r-zone: 32px; padding: 16px; border-radius: 48px; }
+.wf-mainbox > .wf-page-head { padding-inline: 8px; }
+.wf-mainbox > .wf-zone--primary { border-radius: var(--r-zone); clip-path: inset(calc(var(--size-step) / -2 - 4px) 0 0 0 round 0 0 var(--r-zone) var(--r-zone)); }
+.wf-mainbox > .wf-zone--primary > .wf-steps li:first-child { border-top-left-radius: var(--r-zone); }
+.wf-mainbox > .wf-zone--primary > .wf-steps li:last-child { border-top-right-radius: var(--r-zone); }
+.wf-mainbox > .wf-zone--primary > footer { margin-inline: -8px; margin-bottom: -8px; }
+.wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: var(--r-btn); }
