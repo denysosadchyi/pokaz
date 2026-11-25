@@ -629,3 +629,9 @@
 .wf-status, .wf-nav__badge { display: inline-flex; align-items: center; line-height: 1; padding: 5px var(--space-3) 6px; }
 .wf-nav__badge { padding-inline: var(--space-2); }
 .wf-sidebar .wf-account__meta > span { line-height: 1; padding: 7px var(--space-3) 8px; }
+
+/* Оптичний центр — виправлення. Метрики Fixel Text: при висоті рядка 1 центр великих літер на 0,5 % кегля нижче центру рядка,
+   але браузер ставить текст на ~1 px вище. Тому текст іде вниз: зверху відступ більший, ніж знизу */
+.wf-main button, .wf-button { padding-block: 2px 0; }
+.wf-status, .wf-nav__badge { padding-top: 6px; padding-bottom: 5px; }
+.wf-sidebar .wf-account__meta > span { padding-top: 8px; padding-bottom: 7px; }
