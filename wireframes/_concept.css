@@ -861,3 +861,9 @@
 
 /* Пункти лівого меню нижчі: 48 px замість 56 px (зона натискання ≥ 44 px) */
 .wf-sidebar .wf-nav li:not(:last-child) > a { height: 48px; }
+
+/* Нижній пункт меню («Історія»): плашка ховера — 8 px від низу картки, як з боків. Для цього пункт має 4 px знизу.
+   Радіус плашки 16 px = радіус картки 24 px − відступ 8 px */
+.wf-sidebar .wf-nav li:nth-last-child(2) { padding-bottom: 4px; }
+.wf-sidebar .wf-nav li:nth-last-child(2)::before { inset: 4px 8px 8px; }
+.wf-sidebar .wf-nav li:not(:last-child)::before { border-radius: 16px; }
