@@ -858,3 +858,6 @@
 
 /* Плашка ховера меню — 4 px від верху і низу пункту (було 1 px), 8 px з боків */
 .wf-sidebar .wf-nav li:not(:last-child)::before { inset: 4px 8px; }
+
+/* Пункти лівого меню нижчі: 48 px замість 56 px (зона натискання ≥ 44 px) */
+.wf-sidebar .wf-nav li:not(:last-child) > a { height: 48px; }
