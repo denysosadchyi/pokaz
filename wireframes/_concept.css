@@ -414,3 +414,20 @@
 
 /* Ліва панель — білий з прозорістю 96 % (непрозорість 4 %), як неактивні таби. Розмиття під панеллю лишається */
 .wf-sidebar { background: rgba(255, 255, 255, .04); }
+
+/* Прозорий лише верх панелі: адреса до лінії з рахунком — білий з прозорістю 96 %.
+   Нижче лінії — меню на білому. Лінія — межа двох частин */
+.wf-sidebar { background: none; }
+.wf-sidebar .wf-account {
+  margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) 0;
+  padding: var(--space-4) var(--space-4) 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .04) calc(100% - 10px), var(--color-panel) calc(100% - 10px));
+}
+.wf-sidebar .wf-account__meta { height: 20px; }
+.wf-sidebar .wf-nav {
+  margin: 0 calc(-1 * var(--space-4)) calc(-1 * var(--space-4));
+  padding: 0 var(--space-4) var(--space-4);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  background: var(--color-panel);
+}
