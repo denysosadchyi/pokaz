@@ -650,3 +650,6 @@
 
 /* Логотип з текстом від Codex: «Показ» з контурів Fixel Display і теплою деталлю. Висота 28 px */
 .wf-wordmark { display: block; height: 28px; width: auto; }
+
+/* Логотип: знак зліва, текст справа (Codex). Знак — вікно у формі «П» з теплим світлом. Висота 32 px */
+.wf-wordmark--lockup { height: 32px; }
