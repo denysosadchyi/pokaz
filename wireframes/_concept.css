@@ -408,3 +408,6 @@
 
 /* Ліва панель — біла, прозорість 96 %: фон ледь просвічує */
 .wf-sidebar { background: rgba(255, 255, 255, .96); -webkit-backdrop-filter: blur(var(--glass-blur)); backdrop-filter: blur(var(--glass-blur)); }
+
+/* Неактивні таби — чорний з прозорістю 96 % (непрозорість 4 %) */
+.wf-zone--primary > .wf-steps li:not([aria-current="step"]) { background: rgba(0, 0, 0, .04); }
