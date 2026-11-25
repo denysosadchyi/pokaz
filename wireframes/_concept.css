@@ -587,3 +587,12 @@
 
 /* Номер рахунку в пігулці — товщина 400, Fixel Text Regular */
 .wf-sidebar .wf-account__meta > span { font-family: var(--font-text); font-weight: var(--weight-regular); }
+
+/* Увігнутий кут біля поточного таба — білий. Під табами білого фону немає, тож кут малює сам сусідній таб:
+   квадрат 16 px у нижньому куті, білий поза дугою */
+.wf-zone--primary > .wf-steps li[aria-current="step"] + li::before,
+.wf-zone--primary > .wf-steps li:has(+ li[aria-current="step"])::before {
+  content: ""; position: absolute; bottom: 0; width: var(--radius-md); height: var(--radius-md); pointer-events: none;
+}
+.wf-zone--primary > .wf-steps li[aria-current="step"] + li::before { left: 0; background: radial-gradient(circle at 100% 0, transparent calc(var(--radius-md) - .5px), var(--color-panel) var(--radius-md)); }
+.wf-zone--primary > .wf-steps li:has(+ li[aria-current="step"])::before { right: 0; background: radial-gradient(circle at 0 0, transparent calc(var(--radius-md) - .5px), var(--color-panel) var(--radius-md)); }
