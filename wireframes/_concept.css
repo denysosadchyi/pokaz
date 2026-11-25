@@ -457,3 +457,17 @@
 
 /* Пігулка з номером рахунку — біла */
 .wf-sidebar .wf-account__meta > span { background: var(--color-panel); }
+
+/* Пігулка рахунку — виступ білого фону меню: вона стоїть на межі, верхні кути круглі, низ переходить у білий.
+   Біля основи — увігнуті кути радіусом 10 px, як у таба */
+.wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .70), rgba(255, 255, 255, .70)); }
+.wf-sidebar .wf-account__meta { height: auto; align-items: flex-end; }
+.wf-sidebar .wf-account__meta > span {
+  position: relative; padding: 6px var(--space-3) 4px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--color-panel);
+}
+.wf-sidebar .wf-account__meta > span::before, .wf-sidebar .wf-account__meta > span::after {
+  content: ""; position: absolute; bottom: 0; width: var(--radius-sm); height: var(--radius-sm);
+}
+.wf-sidebar .wf-account__meta > span::before { right: 100%; background: radial-gradient(circle at 0 0, transparent calc(var(--radius-sm) - .5px), var(--color-panel) var(--radius-sm)); }
+.wf-sidebar .wf-account__meta > span::after { left: 100%; background: radial-gradient(circle at 100% 0, transparent calc(var(--radius-sm) - .5px), var(--color-panel) var(--radius-sm)); }
