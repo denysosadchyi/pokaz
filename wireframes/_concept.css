@@ -717,3 +717,7 @@
 /* Головна кнопка «Подати показники»: вища (88 px) і не на всю ширину — за шириною тексту, по центру */
 .wf-primary--addr { min-height: 88px; width: auto; align-self: center; padding-inline: 56px; }
 .wf-zone--primary footer:has(.wf-primary--addr) { display: flex; justify-content: center; }
+
+/* Виправлення: правило .wf-zone--primary > footer > .wf-button сильніше і ставило ширину 100 % і висоту 56 px.
+   Тепер селектор має ту саму силу плюс клас кнопки */
+.wf-zone--primary > footer > .wf-button.wf-primary--addr { width: auto; min-height: 88px; padding-inline: 56px; }
