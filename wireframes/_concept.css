@@ -754,3 +754,6 @@
 
 /* Іконка календаря — 16 px, щоб різниця з 12 px була добре видна */
 .wf-work .wf-zone > h2 .wf-period iconify-icon { font-size: 16px; }
+
+/* Назва на головній кнопці — біла (рішення дизайнера). Адреса під нею лишається темною */
+.wf-primary--addr .wf-primary__label { color: #fff; }
