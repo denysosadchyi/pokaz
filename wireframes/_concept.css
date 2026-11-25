@@ -615,3 +615,8 @@
 }
 .wf-main button, .wf-button { padding-block: 0 2px; line-height: 1; }
 .wf-main button:not(.wf-primary):hover, .wf-button:not(.wf-primary):hover { background: var(--color-surface-2); }
+
+/* Ліва панель закріплена при прокрутці: 16 px від верху вікна.
+   Рамка .device обрізає кути через overflow: clip, а не hidden: hidden робить рамку контейнером прокрутки, і sticky не працює */
+.device { overflow: clip; }
+.wf-sidebar { position: sticky; top: var(--space-4); align-self: start; z-index: 2; }
