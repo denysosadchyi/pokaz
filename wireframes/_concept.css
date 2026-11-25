@@ -30,7 +30,7 @@
 .device :focus-visible { outline: var(--focus-ring) solid var(--color-focus); outline-offset: var(--focus-ring); border-radius: var(--radius-sm); }
 .device a { text-underline-offset: var(--focus-ring); }
 
-/* ── Іконки Hugeicons stroke rounded (iconify-icon) ── */
+/* ── Іконки Tabler, лінія 2 px (iconify-icon) ── */
 .device iconify-icon { display: inline-block; flex: none; width: 1em; height: 1em; font-size: var(--icon-md); color: var(--color-icon); }
 
 /* ── Шапка ── */

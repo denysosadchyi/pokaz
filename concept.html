@@ -4,7 +4,7 @@
   Усі значення продукту — з concept/tokens.css. Стенд не має своїх кольорів продукту.
   Сторінка-виняток з чорно-білого правила сайту: демо продукту кольорові. Решта сторінки — сірий сайт.
   Таблицю контрасту пише скрипт: node tools/contrast.mjs (між мітками contrast:start і contrast:end). Руками її не правимо.
-  Фото — Unsplash (перелік — concept/references.md). Іконки — Hugeicons stroke rounded (Iconify).
+  Фото — Unsplash (перелік — concept/references.md). Іконки — Tabler (Iconify).
 -->
 <html lang="uk" data-root="./">
 <head>
@@ -169,18 +169,18 @@
     <h2 id="live">Стиль у дії</h2>
     <p class="why">Головний екран після подачі показників. Фон — розмите фото вечірнього вікна під світлим градієнтом. Картки — напівпрозоре скло. Колір лампи має лише одна головна дія.</p>
     <div class="cx hero" data-ste="off">
-      <span class="addr"><iconify-icon icon="hugeicons:home-09" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
+      <span class="addr"><iconify-icon icon="tabler:home" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
       <p class="lbl">До сплати за листопад</p>
       <p class="num sum">1 185,84 <small>₴</small></p>
       <div class="row">
-        <span class="cx-status cx-status--ok"><iconify-icon icon="hugeicons:checkmark-circle-02" aria-hidden="true"></iconify-icon>показники прийнято</span>
+        <span class="cx-status cx-status--ok"><iconify-icon icon="tabler:circle-check" aria-hidden="true"></iconify-icon>показники прийнято</span>
         <span class="meta">Подано 3 листопада 2026 · Наталя, за фото</span>
       </div>
       <div class="zones">
-        <div class="zone glass"><h4><iconify-icon icon="hugeicons:sun-03" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
-        <div class="zone glass"><h4><iconify-icon icon="hugeicons:moon-02" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="tabler:sun" aria-hidden="true"></iconify-icon>День</h4><p class="num">12 480 <small>кВт·год</small></p></div>
+        <div class="zone glass"><h4><iconify-icon icon="tabler:moon" aria-hidden="true"></iconify-icon>Ніч</h4><p class="num">5 236 <small>кВт·год</small></p></div>
       </div>
-      <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
+      <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="tabler:wallet" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
     </div>
     <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері», розмите (<code>concept/img/bg-blur.jpg</code>).</p>
   </section>
@@ -270,34 +270,34 @@
 
   <section aria-labelledby="icons">
     <h2 id="icons">Іконки</h2>
-    <p class="why">Hugeicons, стиль stroke rounded: тонка лінія 1,5 px, круглі кінці, багато повітря всередині. Іконка легка, як скло, і не важча за текст. Колір — <code>--color-icon</code>, у кнопці — колір тексту кнопки. Розміри: 18 у меню і кнопках, 22 у заголовках зон, 40 у стані.</p>
+    <p class="why">Tabler: лінія 2 px, круглі кінці, багато повітря всередині. Іконка має ту саму вагу, що й жирний текст меню. Колір — <code>--color-icon</code>, у кнопці — колір тексту кнопки. Розміри: 18 у меню і кнопках, 22 у заголовках зон, 40 у стані.</p>
     <div class="cx icons" data-ste="off">
       <h4>Навігація</h4>
-      <div><iconify-icon icon="hugeicons:calendar-check-in-01"></iconify-icon><span>Подати показники<small>calendar-mark</small></span></div>
-      <div><iconify-icon icon="hugeicons:wallet-03"></iconify-icon><span>Сплатити<small>wallet</small></span></div>
-      <div><iconify-icon icon="hugeicons:time-quarter-pass"></iconify-icon><span>Історія<small>history-2</small></span></div>
-      <div><iconify-icon icon="hugeicons:flash-off"></iconify-icon><span>Графік відключень<small>power</small></span></div>
-      <div><iconify-icon icon="hugeicons:arrow-up-down"></iconify-icon><span>Змінити адресу<small>sort-vertical</small></span></div>
-      <div><iconify-icon icon="hugeicons:settings-02"></iconify-icon><span>Налаштування<small>settings</small></span></div>
+      <div><iconify-icon icon="tabler:calendar-check"></iconify-icon><span>Подати показники<small>calendar-mark</small></span></div>
+      <div><iconify-icon icon="tabler:wallet"></iconify-icon><span>Сплатити<small>wallet</small></span></div>
+      <div><iconify-icon icon="tabler:history"></iconify-icon><span>Історія<small>history-2</small></span></div>
+      <div><iconify-icon icon="tabler:bolt-off"></iconify-icon><span>Графік відключень<small>power</small></span></div>
+      <div><iconify-icon icon="tabler:arrows-sort"></iconify-icon><span>Змінити адресу<small>sort-vertical</small></span></div>
+      <div><iconify-icon icon="tabler:settings"></iconify-icon><span>Налаштування<small>settings</small></span></div>
       <h4>Характеристики</h4>
-      <div><iconify-icon icon="hugeicons:sun-03"></iconify-icon><span>День<small>sun-2</small></span></div>
-      <div><iconify-icon icon="hugeicons:moon-02"></iconify-icon><span>Ніч<small>moon</small></span></div>
-      <div><iconify-icon icon="hugeicons:dashboard-speed-01"></iconify-icon><span>Показники<small>speedometer-middle</small></span></div>
-      <div><iconify-icon icon="hugeicons:invoice-03"></iconify-icon><span>Нараховано<small>bill-list</small></span></div>
-      <div><iconify-icon icon="hugeicons:calendar-03"></iconify-icon><span>Наступні дні<small>calendar</small></span></div>
-      <div><iconify-icon icon="hugeicons:home-09"></iconify-icon><span>Адреса<small>home-smile</small></span></div>
+      <div><iconify-icon icon="tabler:sun"></iconify-icon><span>День<small>sun-2</small></span></div>
+      <div><iconify-icon icon="tabler:moon"></iconify-icon><span>Ніч<small>moon</small></span></div>
+      <div><iconify-icon icon="tabler:gauge"></iconify-icon><span>Показники<small>speedometer-middle</small></span></div>
+      <div><iconify-icon icon="tabler:receipt"></iconify-icon><span>Нараховано<small>bill-list</small></span></div>
+      <div><iconify-icon icon="tabler:calendar"></iconify-icon><span>Наступні дні<small>calendar</small></span></div>
+      <div><iconify-icon icon="tabler:home"></iconify-icon><span>Адреса<small>home-smile</small></span></div>
       <h4>Галочка і кнопки</h4>
-      <div><iconify-icon icon="hugeicons:checkmark-circle-02" style="color:var(--color-success-text)"></iconify-icon><span>Прийнято<small>check-circle</small></span></div>
-      <div><iconify-icon icon="hugeicons:camera-01"></iconify-icon><span>За фото<small>camera</small></span></div>
-      <div><iconify-icon icon="hugeicons:pencil-edit-02"></iconify-icon><span>Вручну<small>pen</small></span></div>
-      <div><iconify-icon icon="hugeicons:add-circle"></iconify-icon><span>Додати рахунок<small>add-circle</small></span></div>
-      <div><iconify-icon icon="hugeicons:refresh"></iconify-icon><span>Повторити<small>restart</small></span></div>
+      <div><iconify-icon icon="tabler:circle-check" style="color:var(--color-success-text)"></iconify-icon><span>Прийнято<small>check-circle</small></span></div>
+      <div><iconify-icon icon="tabler:camera"></iconify-icon><span>За фото<small>camera</small></span></div>
+      <div><iconify-icon icon="tabler:pencil"></iconify-icon><span>Вручну<small>pen</small></span></div>
+      <div><iconify-icon icon="tabler:circle-plus"></iconify-icon><span>Додати рахунок<small>add-circle</small></span></div>
+      <div><iconify-icon icon="tabler:refresh"></iconify-icon><span>Повторити<small>restart</small></span></div>
       <h4>Стани</h4>
-      <div><iconify-icon icon="hugeicons:lamp" style="color:var(--color-accent-ink)"></iconify-icon><span>Знак продукту<small>lamp</small></span></div>
-      <div><iconify-icon icon="hugeicons:notification-03"></iconify-icon><span>Сповіщення<small>bell</small></span></div>
-      <div><iconify-icon icon="hugeicons:information-circle"></iconify-icon><span>Пояснення<small>info-circle</small></span></div>
-      <div><iconify-icon icon="hugeicons:alert-02"></iconify-icon><span>Перевірте цифри<small>danger-triangle</small></span></div>
-      <div><iconify-icon icon="hugeicons:hourglass"></iconify-icon><span>Чекає показників<small>hourglass</small></span></div>
+      <div><iconify-icon icon="tabler:lamp-2" style="color:var(--color-accent-ink)"></iconify-icon><span>Знак продукту<small>lamp</small></span></div>
+      <div><iconify-icon icon="tabler:bell"></iconify-icon><span>Сповіщення<small>bell</small></span></div>
+      <div><iconify-icon icon="tabler:info-circle"></iconify-icon><span>Пояснення<small>info-circle</small></span></div>
+      <div><iconify-icon icon="tabler:alert-triangle"></iconify-icon><span>Перевірте цифри<small>danger-triangle</small></span></div>
+      <div><iconify-icon icon="tabler:hourglass"></iconify-icon><span>Чекає показників<small>hourglass</small></span></div>
     </div>
   </section>
 
@@ -307,17 +307,17 @@
     <div class="grid1">
       <div class="cx stack comps" data-ste="off">
         <div class="comp"><h4>Головна кнопка і вторинна кнопка</h4>
-          <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="hugeicons:calendar-check-in-01" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
+          <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="tabler:calendar-check" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
         <div class="comp"><h4>Картка «До сплати» з фото і галочкою «Показники прийнято»</h4>
           <article class="card glass">
-            <h3><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
+            <h3><iconify-icon icon="tabler:wallet" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
             <p class="num">1 185,84 <small>₴</small></p>
-            <div class="done"><iconify-icon icon="hugeicons:checkmark-circle-02" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
-            <button class="cx-btn cx-btn--primary cx-btn--lg" type="button"><iconify-icon icon="hugeicons:wallet-03" aria-hidden="true"></iconify-icon>Сплатити</button>
+            <div class="done"><iconify-icon icon="tabler:circle-check" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
+            <button class="cx-btn cx-btn--primary cx-btn--lg" type="button"><iconify-icon icon="tabler:wallet" aria-hidden="true"></iconify-icon>Сплатити</button>
           </article></div>
         <div class="comp"><h4>Поле показників</h4>
           <div class="field"><label for="f-day-d">День, кВт·год</label><div class="box"><input id="f-day-d" inputmode="numeric" value="12 480"><span class="unit">кВт·год</span></div><p class="hint">Попередні: 12 266</p></div>
-          <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-d">Ніч, кВт·год</label><div class="box"><input id="f-night-d" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="hugeicons:alert-02" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
+          <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-d">Ніч, кВт·год</label><div class="box"><input id="f-night-d" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="tabler:alert-triangle" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
       </div>
     </div>
     <p class="cap">Попередження про зайву цифру не блокує кнопку (бриф, р. 4). Колір — троянда помилки, текст — дія, а не звинувачення.</p>
@@ -386,7 +386,7 @@
 <tr><td>4 · 4</td><td>wireframes/outages-empty.html, outages-loading.html</td><td>фото стану <code>.cx-photo</code></td><td>Одне фото лампи має два різні значення: «відключень немає» і «завантажуємо».</td><td>У порожньому стані — фото вікна ввечері (світло є). Лампа лишається лише в станах завантаження.</td><td>grep <code>us-lamp</code> до: 3 сторінки, після: 2 (обидві -loading).</td></tr>
 <tr><td>5 · 4</td><td>—</td><td>спільні компоненти month і outages</td><td>Перевірка: зона, пілюля, кнопка, стани мають однакові значення на обох екранах.</td><td>Дефектів немає. Різна композиція фото — рішення, запис у «month і outages: порівняння».</td><td>Таблиця порівняння в concept.md.</td></tr>
 <tr><td>6 · 5</td><td>concept.html</td><td>фокус поля показників</td><td>Поле мало кільце 2 px, інші елементи — 3 px. Один елемент фокуса — два значення.</td><td>Поле бере <code>--border-control</code> і <code>--focus-ring</code>, як інші елементи.</td><td>CSS <code>.field .box:focus-within</code>.</td></tr>
-<tr><td>7 · 6</td><td>8 сторінок month* і outages*</td><td>іконки і плейсхолдери</td><td>Іконки Lucide і сірі плейсхолдери <code>wf-ph</code>.</td><td>Hugeicons stroke rounded; фото Unsplash або значок стану.</td><td>grep <code>lucide|wf-ph</code> = 0; усі <code>icon=</code> — <code>solar:*-bold-duotone</code>.</td></tr>
+<tr><td>7 · 6</td><td>8 сторінок month* і outages*</td><td>іконки і плейсхолдери</td><td>Іконки Lucide і сірі плейсхолдери <code>wf-ph</code>.</td><td>Tabler, лінія 2 px; фото Unsplash або значок стану.</td><td>grep <code>lucide|wf-ph</code> = 0; усі <code>icon=</code> — <code>solar:*-bold-duotone</code>.</td></tr>
 <tr><td>8 · 7</td><td>8 сторінок month* і outages*</td><td>тег <code>&lt;img&gt;</code> фото стану</td><td>Атрибути <code>width</code>/<code>height</code> = 1200×800 для всіх фото. Справжні пропорції інші (1200×675, 1200×1837, 1200×2134).</td><td>Справжні розміри в атрибутах.</td><td>PIL: розміри файлів у concept/img/.</td></tr>
 <tr><td>9 · 8</td><td>wireframes/_concept.css</td><td>розміри елементів</td><td>23 жорсткі значення: 64, 36, 44, 32, 72, 144, 96, 220, 36, 18, 3, 2, 1, 1.5 px.</td><td>Нові токени в tokens.css: <code>--size-*</code>, <code>--photo-*</code>, <code>--chart-*</code>, <code>--border-*</code>, <code>--focus-ring</code>, <code>--pad-chip</code>.</td><td>grep <code>[0-9]+px</code> у _concept.css: лишилася лише межа <code>@media</code>.</td></tr>
 <tr><td>10 · 8</td><td>concept.html</td><td>палітра «Колір»</td><td>24 кольори hex у <code>style</code> дублювали токени.</td><td>Картка бере <code>var(--token)</code>; підпис — обчислене значення токена (скрипт).</td><td>У розділі «Колір» немає hex у <code>style</code>. Hex лишився лише в квадратиках таблиці контрасту: їх пише скрипт з токенів.</td></tr>
