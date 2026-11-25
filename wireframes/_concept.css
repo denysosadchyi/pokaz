@@ -680,3 +680,25 @@
 .wf-primary--addr { flex-direction: column; justify-content: center; gap: 2px; padding-block: var(--space-3); min-height: 72px; line-height: 1.15; }
 .wf-primary__label { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: var(--weight-medium); letter-spacing: -0.01em; }
 .wf-primary__addr { font-size: var(--fs-xs); font-weight: var(--weight-regular); opacity: .8; }
+
+/* Віджет графіка: без іконки, смуга доби на всю ширину картки.
+   Смуга суцільна: години зі світлом — світлі, без світла — темні. Лінія «зараз» з часом над нею */
+.wf-sidebar .wf-nav li:last-child a > iconify-icon { display: none; }
+.wf-sidebar .wf-nav li:last-child .wf-nav__day {
+  position: relative; height: 20px; margin-top: 30px; gap: 1px;
+  border-radius: 6px; background: var(--color-panel);
+}
+.wf-sidebar .wf-nav li:last-child .wf-nav__day i { border-radius: 0; background: var(--color-surface-2); }
+.wf-sidebar .wf-nav li:last-child .wf-nav__day i:first-of-type { border-radius: 6px 0 0 6px; }
+.wf-sidebar .wf-nav li:last-child .wf-nav__day i:last-of-type { border-radius: 0 6px 6px 0; }
+.wf-sidebar .wf-nav li:last-child .wf-nav__day i.is-off { background: var(--color-off); }
+.wf-sidebar .wf-nav li:last-child .wf-nav__day--loading i { background: var(--color-line); }
+.wf-nav__now {
+  position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 2px;
+  background: var(--color-accent-ink); font-size: 0;
+}
+.wf-nav__now::after {
+  content: attr(data-t); position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+  padding: 2px 6px; border-radius: var(--radius-pill); background: var(--color-accent-ink); color: #fff;
+  font-size: var(--fs-2xs); font-weight: var(--weight-medium); line-height: 1.2; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
