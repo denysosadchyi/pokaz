@@ -450,3 +450,7 @@
 
 /* Верх панелі з адресою — білий 70 %: при 95 % фон крізь скло майже не видно */
 .wf-sidebar .wf-account { background: linear-gradient(180deg, rgba(255, 255, 255, .70) calc(100% - 10px), var(--color-panel) calc(100% - 10px)); }
+
+/* Без лінії-розділювача між верхом панелі і меню: межу показує лише зміна фону. Панель без рамки */
+.wf-sidebar .wf-account__meta::before, .wf-sidebar .wf-account__meta::after { background: none; }
+.wf-sidebar { border: 0; box-shadow: none; }
