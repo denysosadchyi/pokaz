@@ -386,3 +386,5 @@
 .wf-sidebar .wf-nav__sub { font-size: var(--fs-2xs); font-weight: var(--weight-regular); }
 /* Підкладка шеврона — біла, з легкою тінню */
 .wf-zone--primary > .wf-steps li:not(:last-child)::after { background-color: var(--color-panel); box-shadow: 0 2px 8px -2px rgba(40, 32, 70, .18); }
+/* Лінія доходить до пігулки рахунку без розриву */
+.wf-sidebar .wf-account__meta { gap: 0; }
