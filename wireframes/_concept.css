@@ -355,3 +355,14 @@
 /* Ритм: один крок 16 px — від шапки, від країв рамки, між лівою панеллю і змістом, між блоками змісту */
 .wf-sidebar { margin: var(--space-4) 0 var(--space-4) var(--space-4); }
 .wf-main { padding: var(--space-4); gap: var(--space-4); }
+
+/* Таби: іконка по центру таба і наполовину виходить за верхній край. Текст по центру */
+.wf-mainbox > .wf-zone--primary { overflow: visible; }
+.wf-zone--primary > .wf-steps li {
+  align-items: center; text-align: center;
+  padding: 0 var(--space-4) var(--space-4);
+}
+.wf-zone--primary > .wf-steps li > span:not(.wf-steps__icon) { align-items: center; }
+.wf-zone--primary > .wf-steps .wf-steps__icon { margin-top: calc(var(--size-step) / -2); }
+.wf-zone--primary > .wf-steps li:first-child { border-top-left-radius: var(--radius-lg); }
+.wf-zone--primary > .wf-steps li:last-child { border-top-right-radius: var(--radius-lg); }
