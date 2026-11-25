@@ -818,3 +818,6 @@
 .wf-sidebar .wf-nav li { transition: background-color .15s ease; }
 .wf-sidebar .wf-nav li:has(> a:hover) { background: #F4F2F8; }
 @media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li { transition: none; } }
+
+/* Усі кнопки — повне заокруглення (пігулка). Головна кнопка теж: сильніший селектор, бо правило вкладених радіусів ставило 8 px */
+.wf-main button, .wf-button, .wf-mainbox > .wf-zone--primary > footer > .wf-button { border-radius: var(--radius-pill); }
