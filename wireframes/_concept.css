@@ -674,3 +674,9 @@
 .wf-nav__day i.is-off { background: var(--color-off); }
 .wf-nav__day--loading i { background: var(--color-line); }
 .wf-nav__scale { display: flex; justify-content: space-between; margin-top: var(--space-1); color: var(--color-text-muted); font-size: var(--fs-2xs); font-weight: var(--weight-regular); font-variant-numeric: tabular-nums; }
+
+/* Головна кнопка «Подати показники»: без іконки, великий текст, під ним дрібно адреса.
+   Адреса каже, для якого об'єкта людина подає показники */
+.wf-primary--addr { flex-direction: column; justify-content: center; gap: 2px; padding-block: var(--space-3); min-height: 72px; line-height: 1.15; }
+.wf-primary__label { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: var(--weight-medium); letter-spacing: -0.01em; }
+.wf-primary__addr { font-size: var(--fs-xs); font-weight: var(--weight-regular); opacity: .8; }
