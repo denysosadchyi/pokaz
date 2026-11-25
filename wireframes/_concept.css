@@ -706,3 +706,10 @@
 /* Адреса тепер у самій кнопці, тому рядок під кнопкою зайвий. Кнопка ближче до тексту над нею */
 .wf-zone--primary footer:has(.wf-primary--addr) { margin-top: 0; padding-top: 0; }
 .wf-zone--primary p:has(+ footer .wf-primary--addr) { margin-bottom: var(--space-3); }
+
+/* «Подати показники» жирніше: окреме ім'я шрифту з файлом Fixel Display SemiBold (600).
+   Правило «усі жирні — 500» лишається для іншого тексту. Адреса ближче до назви */
+@font-face { font-family: "Fixel Display Strong"; src: url("../concept/fonts/FixelDisplay-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+.wf-primary__label { font-family: "Fixel Display Strong", var(--font-display); font-weight: 600; line-height: 1; }
+.wf-primary__addr { line-height: 1; }
+.wf-primary--addr { gap: 4px; }
