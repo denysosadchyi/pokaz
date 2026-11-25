@@ -841,3 +841,13 @@
   content: ""; position: absolute; top: 100%; left: -100vmax; right: -100vmax; height: 100vmax; z-index: -1; pointer-events: none;
   background: linear-gradient(180deg, var(--color-panel) 0, rgba(255, 255, 255, .4) 440px);
 }
+
+/* Виправлення ховера меню: плашка всередині картки — 8 px від країв пункту, не назовні */
+.wf-sidebar .wf-nav li:not(:last-child) > a::before { display: none; }
+.wf-sidebar .wf-nav li:not(:last-child) { position: relative; isolation: isolate; }
+.wf-sidebar .wf-nav li:not(:last-child)::before {
+  content: ""; position: absolute; inset: 4px 8px; z-index: -1; border-radius: var(--radius-md);
+  background: #F4F2F8; opacity: 0; transition: opacity .15s ease; pointer-events: none;
+}
+.wf-sidebar .wf-nav li:not(:last-child):has(> a:hover)::before { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li::before { transition: none; } }
