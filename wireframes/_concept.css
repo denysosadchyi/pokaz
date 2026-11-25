@@ -832,3 +832,12 @@
 }
 .wf-sidebar .wf-nav li:not(:last-child) > a:hover::before { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .wf-sidebar .wf-nav li > a::before { transition: none; } }
+
+/* Біла зона під кроками — градієнт: угорі білий, унизу прозоріший (білий 40 %).
+   Раніше білий давала тінь кроків (box-shadow). Тепер — шар ::after під кроками, зона обрізає його по своїх краях */
+.wf-mainbox > .wf-zone--primary { isolation: isolate; }
+.wf-mainbox > .wf-zone--primary > .wf-steps { position: relative; box-shadow: none; }
+.wf-mainbox > .wf-zone--primary > .wf-steps::after {
+  content: ""; position: absolute; top: 100%; left: -100vmax; right: -100vmax; height: 100vmax; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, var(--color-panel) 0, rgba(255, 255, 255, .4) 440px);
+}
