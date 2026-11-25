@@ -523,3 +523,6 @@
 .wf-sidebar a.wf-switcher .wf-switcher__text b { grid-column: 1; }
 .wf-sidebar a.wf-switcher .wf-switcher__text small { grid-column: 1; }
 .wf-sidebar a.wf-switcher > iconify-icon:last-child { grid-column: 2; }
+
+/* Адреса починається на одній вертикалі з текстом «Рахунок № …»: 16 px поля + 12 px відступу пігулки */
+.wf-sidebar a.wf-switcher { padding-left: var(--space-3); }
