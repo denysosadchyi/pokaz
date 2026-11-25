@@ -552,3 +552,14 @@
 
 /* Блоки — дуже легка велика тінь: блок ледь піднятий над фоном */
 .wf-sidebar, .wf-mainbox, .wf-main .wf-zone:not(.wf-zone--primary) { box-shadow: 0 24px 64px -16px rgba(40, 32, 70, .10); }
+
+/* Тінь блоків — нелінійна: шість шарів, розмір росте вдвічі, непрозорість спадає. Край тіні м'який, без різкої межі */
+.wf-sidebar, .wf-mainbox, .wf-main .wf-zone:not(.wf-zone--primary) {
+  box-shadow:
+    0 1px 1px rgba(40, 32, 70, .018),
+    0 2px 2px rgba(40, 32, 70, .022),
+    0 4px 4px rgba(40, 32, 70, .026),
+    0 8px 8px rgba(40, 32, 70, .03),
+    0 16px 16px rgba(40, 32, 70, .034),
+    0 32px 32px rgba(40, 32, 70, .038);
+}
