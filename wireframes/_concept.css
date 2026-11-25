@@ -2,7 +2,7 @@
    Підключають лише month*.html і outages*.html — решта екранів лишається сірим вайрфреймом.
    Значення — тільки токени з concept/tokens.css. Нових кольорів, розмірів і радіусів тут немає.
    Тексти й розмітку екранів шкіра не змінює.
-   Друга тема: ?theme=light в адресі (скрипт у сторінці ставить data-theme="light"). */
+   Тема одна — світла. */
 
 /* ── Рамка продукту. Поза рамкою — сірий сайт, як раніше ── */
 .device {
@@ -56,7 +56,7 @@
 .wf-switcher iconify-icon { font-size: var(--icon-sm); }
 .wf-account__meta { padding: 0 var(--space-4); font-size: var(--fs-xs); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
 .wf-nav ul { gap: var(--space-1); }
-.wf-nav a { min-height: var(--control-h); padding: 0 var(--space-3); gap: var(--space-3); border-radius: var(--radius-md); font-size: var(--fs-sm); color: var(--color-text-muted); }
+.wf-nav a { min-height: var(--control-h); padding: var(--space-2) var(--space-3); white-space: normal; line-height: var(--lh-tight); gap: var(--space-3); border-radius: var(--radius-md); font-size: var(--fs-sm); color: var(--color-text-muted); }
 .wf-nav a:hover { background: var(--color-surface-2); color: var(--color-text); }
 .wf-nav a[aria-current="page"] { background: var(--color-surface-2); color: var(--color-text); font-weight: var(--weight-semibold); }
 .wf-nav a[aria-current="page"] iconify-icon { color: var(--color-text); }
@@ -150,7 +150,7 @@
 .wf-bento { gap: var(--space-3); }
 .wf-tile { padding: var(--space-5); gap: var(--space-2); border-radius: var(--radius-lg); background: var(--color-surface); }
 .wf-tile--balance { padding: var(--space-5); }
-.wf-tile__value { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--fs-xl); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
+.wf-tile__value { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--space-1); white-space: nowrap; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--fs-xl); letter-spacing: var(--tracking-display); line-height: var(--lh-tight); }
 .wf-tile--balance .wf-tile__value { font-size: var(--fs-3xl); }
 .wf-unit { font-family: var(--font-text); font-size: .5em; font-weight: var(--weight-medium); letter-spacing: 0; color: var(--color-text-muted); }
 .wf-tile h2 .wf-status { font-weight: var(--weight-medium); }
@@ -203,4 +203,16 @@
   .wf-zone--primary:has(.wf-day__now) { padding-right: var(--space-5); }
   .wf-zone--primary:has(.wf-day__now)::after { display: none; }
   .wf-days > li { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Перевірка Playwright (світла тема) ── */
+/* Кроки місяця на фото: кружок — тінь фото з контуром, поточний крок — світлий кружок */
+.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps__icon { background: var(--photo-shade-soft); box-shadow: inset 0 0 0 var(--border-hair) var(--color-on-photo-muted); }
+.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon { background: var(--color-on-photo); box-shadow: none; }
+.wf-zone--primary:has(> .wf-steps [aria-current="step"]) .wf-steps li[aria-current="step"] .wf-steps__icon iconify-icon { color: var(--color-text); }
+/* Вузька головна область: кроки переносяться, бенто — у два стовпці */
+.wf-steps { flex-wrap: wrap; row-gap: var(--space-3); }
+.wf-context { container-type: inline-size; }
+@container (max-width: 640px) {
+  .wf-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "bal bal" "prev prev" "day night"; }
 }

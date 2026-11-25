@@ -54,6 +54,7 @@
       font: var(--weight-semibold) var(--fs-md)/1 var(--font-text) !important; cursor: pointer;
       background: transparent !important; color: var(--color-text) !important; box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong); }
     main .cx button.cx-btn:hover { background: var(--color-surface-2) !important; }
+    main .cx.hero button.cx-btn:not(.cx-btn--primary) { color: var(--color-on-photo) !important; background: var(--photo-shade-soft) !important; box-shadow: inset 0 0 0 var(--border-control) var(--color-on-photo-muted); }
     main .cx button.cx-btn--primary { background: var(--color-accent) !important; color: var(--color-on-accent) !important; box-shadow: var(--shadow-accent); }
     main .cx button.cx-btn--primary:hover { background: var(--color-accent-hover) !important; }
     main .cx button.cx-btn--lg { min-height: var(--control-h-lg); width: 100%; }
@@ -89,7 +90,7 @@
     /* ── Палітра ── */
     .sws { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
     .sw { margin: 0; background: #fff; border: 1px solid #ddd; border-radius: 12px; overflow: hidden; }
-    .sw .pair { display: grid; grid-template-columns: 1fr 1fr; height: 84px; }
+    .sw .pair { display: grid; height: 84px; }
     .sw .pair span { background: var(--sw-bg); color: var(--sw-fg); display: flex; align-items: end; padding: 6px 8px; font-size: 12px; }
     .sw figcaption { padding: 10px 12px; font-size: 14px; line-height: 1.45; }
     .sw figcaption b { display: block; }
@@ -103,7 +104,7 @@
     /* ── Форма ── */
     .shapes { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: end; }
     .shape { display: grid; gap: var(--space-2); justify-items: center; font-size: var(--fs-xs); color: var(--color-text-muted); }
-    .shape i { display: block; width: 96px; height: 72px; background: var(--color-surface-2); }
+    .shape i { display: block; width: 96px; height: 72px; background: var(--color-surface); box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong); }
     .spaces { display: grid; gap: var(--space-2); margin-top: var(--space-6); }
     .spaces div { display: flex; align-items: center; gap: var(--space-3); font-size: var(--fs-xs); color: var(--color-text-muted); }
     .spaces i { display: block; height: 16px; border-radius: var(--radius-xs); background: var(--color-off); }
@@ -139,12 +140,12 @@
     .card .done iconify-icon { font-size: var(--icon-lg); color: var(--color-success-text); }
     .card .done b { display: block; }
     .card .done span { font-size: var(--fs-sm); }
-    .field { display: grid; gap: var(--space-2); }
+    .field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
     .field label { font-size: var(--fs-sm); font-weight: var(--weight-medium); }
     .field .box { display: flex; align-items: center; gap: var(--space-2); min-height: var(--control-h-lg); padding: 0 var(--space-4);
       border-radius: var(--radius-md); background: var(--color-surface); box-shadow: inset 0 0 0 var(--border-control) var(--color-line-strong); }
     .field .box:focus-within { box-shadow: inset 0 0 0 var(--border-control) var(--color-focus), 0 0 0 var(--focus-ring) color-mix(in srgb, var(--color-focus) 35%, transparent); }
-    .field input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--color-text); caret-color: var(--color-accent-ink);
+    .field input { flex: 1; width: 100%; min-width: 0; align-self: stretch; border: 0; background: transparent; color: var(--color-text); caret-color: var(--color-accent-ink);
       font: var(--weight-semibold) var(--fs-xl)/1 var(--font-display); letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; }
     main .cx .field input:focus-visible { outline: 0 !important; }
     .field .unit { font-size: var(--fs-sm); color: var(--color-text-muted); }
@@ -152,6 +153,8 @@
     .field--warn .hint { padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); background: var(--color-error-bg); color: var(--color-error-text); display: flex; gap: var(--space-2); align-items: start; }
     .field--warn .hint iconify-icon { font-size: var(--icon-sm); color: currentColor; margin-top: var(--pad-chip); }
     .stack { display: grid; gap: var(--space-5); }
+    .comps { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: start; }
+    .comps > .comp { min-width: 0; }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600&family=Inter:wght@400;500;600;700&family=Unbounded:wght@500;600&family=Golos+Text:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/type.css?v=8">
@@ -159,11 +162,11 @@
 <body>
 <main>
   <h1>Концепт: «Вечірнє вікно»</h1>
-  <p class="why">Вибраний напрям — 2 з <a href="concept/directions.html">шести напрямів</a>. Ця сторінка — стенд стилю: колір, шрифти, форма, фото, іконки і три готові компоненти. Усі значення — у <a href="concept/tokens.css">concept/tokens.css</a>. Атрибути й вибір — у <a href="concept.md">concept.md</a>. Головна тема — темна. Друга тема — світла, вона стоїть поруч з кожним демо.</p>
+  <p class="why">Вибраний напрям — 2 з <a href="concept/directions.html">шести напрямів</a>. Ця сторінка — стенд стилю: колір, шрифти, форма, фото, іконки і три готові компоненти. Усі значення — у <a href="concept/tokens.css">concept/tokens.css</a>. Атрибути й вибір — у <a href="concept.md">concept.md</a>. Тема одна — світла.</p>
 
   <section aria-labelledby="live">
     <h2 id="live">Стиль у дії</h2>
-    <p class="why">Головний екран після подачі показників. Фото кімнати з лампою — фірмовий елемент. Текст стоїть на тіні кольору ночі. Колір лампи має лише одна головна дія.</p>
+    <p class="why">Головний екран після подачі показників. Фото кімнати з лампою — фірмовий елемент. Текст стоїть на тіні. Колір лампи має лише одна головна дія.</p>
     <div class="cx hero" data-ste="off">
       <span class="addr"><iconify-icon icon="solar:home-smile-bold-duotone" aria-hidden="true"></iconify-icon>вул. Липова, 14, кв. 27</span>
       <p class="lbl">До сплати за листопад</p>
@@ -178,36 +181,36 @@
       </div>
       <div class="row"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</button><button class="cx-btn" type="button">Історія</button></div>
     </div>
-    <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері». Тінь фото однакова в обох темах: фото завжди нічне.</p>
+    <p class="cap">Фото — Unsplash, «вікно цегляного будинку ввечері». Фото нічне. Текст на фото стоїть на тіні.</p>
   </section>
 
   <section aria-labelledby="color">
     <h2 id="color">Колір</h2>
-    <p class="why">Кожна картка: темна тема зліва, світла справа. Під картками — токен і атрибут, який пояснює колір. Атрибути — у <a href="concept.md">concept.md</a>, «Атрибути».</p>
+    <p class="why">Під кожною карткою — токен і атрибут, який пояснює колір. Атрибути — у <a href="concept.md">concept.md</a>, «Атрибути».</p>
     <div class="sws">
-      <figure class="sw"><div class="pair"><span data-bg="--color-accent" data-fg="--color-on-accent" data-show="--color-accent"></span><span data-theme="light" data-bg="--color-accent" data-fg="--color-on-accent" data-show="--color-accent"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-accent" data-fg="--color-on-accent" data-show="--color-accent"></span></div>
         <figcaption><b>Головний: лампа</b><code>--color-accent</code><br>Атрибут 4 «домашній». Лише головна дія, знак продукту і фокус.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-accent-hover" data-fg="--color-on-accent" data-show="--color-accent-hover"></span><span data-theme="light" data-bg="--color-accent-hover" data-fg="--color-on-accent" data-show="--color-accent-hover"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-accent-hover" data-fg="--color-on-accent" data-show="--color-accent-hover"></span></div>
         <figcaption><b>Акцент: лампа ближче</b><code>--color-accent-hover</code><br>Наведення на головну дію. Атрибут 4.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-accent-ink" data-fg="--color-surface" data-show="--color-accent-ink"></span><span data-theme="light" data-bg="--color-accent-ink" data-fg="--color-surface" data-show="--color-accent-ink"></span></div>
-        <figcaption><b>Лампа як графіка</b><code>--color-accent-ink</code>, <code>--color-focus</code><br>Знак продукту і кільце фокуса. У світлій темі темніше, щоб мати 3:1.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-bg" data-fg="--color-text" data-show="--color-bg"></span><span data-theme="light" data-bg="--color-bg" data-fg="--color-text" data-show="--color-bg"></span></div>
-        <figcaption><b>Нейтральний: ніч</b><code>--color-bg</code><br>Атрибут 1 «спокійний». Без чистого чорного.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-text" data-show="--color-surface"></span><span data-theme="light" data-bg="--color-surface" data-fg="--color-text" data-show="--color-surface"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-accent-ink" data-fg="--color-surface" data-show="--color-accent-ink"></span></div>
+        <figcaption><b>Лампа як графіка</b><code>--color-accent-ink</code>, <code>--color-focus</code><br>Знак продукту і кільце фокуса. Темніше за лампу, щоб мати 3:1 на білому.</figcaption></figure>
+      <figure class="sw"><div class="pair"><span data-bg="--color-bg" data-fg="--color-text" data-show="--color-bg"></span></div>
+        <figcaption><b>Нейтральний: фон</b><code>--color-bg</code><br>Атрибут 1 «спокійний». Світлий сірий папір, без чистого білого.</figcaption></figure>
+      <figure class="sw"><div class="pair"><span data-bg="--color-surface" data-fg="--color-text" data-show="--color-surface"></span></div>
         <figcaption><b>Нейтральний: картка</b><code>--color-surface</code><br>Зона і картка. Підкладка замість рамки.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-surface-2" data-fg="--color-text" data-show="--color-surface-2"></span><span data-theme="light" data-bg="--color-surface-2" data-fg="--color-text" data-show="--color-surface-2"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-surface-2" data-fg="--color-text" data-show="--color-surface-2"></span></div>
         <figcaption><b>Нейтральний: плитка</b><code>--color-surface-2</code><br>Плитка в зоні, чип, поточний пункт меню.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-text" data-fg="--color-bg" data-show="--color-text"></span><span data-theme="light" data-bg="--color-text" data-fg="--color-bg" data-show="--color-text"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-text" data-fg="--color-bg" data-show="--color-text"></span></div>
         <figcaption><b>Текст</b><code>--color-text</code><br>Атрибут 3 «цифри головні»: суми найконтрастніші.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-text-muted" data-fg="--color-bg" data-show="--color-text-muted"></span><span data-theme="light" data-bg="--color-text-muted" data-fg="--color-bg" data-show="--color-text-muted"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-text-muted" data-fg="--color-bg" data-show="--color-text-muted"></span></div>
         <figcaption><b>Текст другорядний</b><code>--color-text-muted</code><br>Підписи і мітки. Не менше 4,5:1 на всіх фонах.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-success-bg" data-fg="--color-success-text" data-show="--color-success-text"></span><span data-theme="light" data-bg="--color-success-bg" data-fg="--color-success-text" data-show="--color-success-text"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-success-bg" data-fg="--color-success-text" data-show="--color-success-text"></span></div>
         <figcaption><b>Успіх: «прийнято»</b><code>--color-success-*</code><br>Атрибут 2 «доказ видно». Тихий зелений, не «еко».</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-error-bg" data-fg="--color-error-text" data-show="--color-error-text"></span><span data-theme="light" data-bg="--color-error-bg" data-fg="--color-error-text" data-show="--color-error-text"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-error-bg" data-fg="--color-error-text" data-show="--color-error-text"></span></div>
         <figcaption><b>Помилка</b><code>--color-error-*</code><br>Атрибут 1: приглушена троянда. Без червоної тривоги (бриф, р. 9; voice.md).</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-off" data-fg="--color-bg" data-show="--color-off"></span><span data-theme="light" data-bg="--color-off" data-fg="--color-bg" data-show="--color-off"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-off" data-fg="--color-bg" data-show="--color-off"></span></div>
         <figcaption><b>Година без світла</b><code>--color-off</code><br>Графік відключень. Холодний сірий-синій: не жовтий і не червоний.</figcaption></figure>
-      <figure class="sw"><div class="pair"><span data-bg="--color-line-strong" data-fg="--color-bg" data-show="--color-line-strong"></span><span data-theme="light" data-bg="--color-line-strong" data-fg="--color-bg" data-show="--color-line-strong"></span></div>
+      <figure class="sw"><div class="pair"><span data-bg="--color-line-strong" data-fg="--color-text" data-show="--color-line-strong"></span></div>
         <figcaption><b>Межа контролу</b><code>--color-line-strong</code><br>Поле і вторинна кнопка. Не менше 3:1.</figcaption></figure>
     </div>
   </section>
@@ -300,9 +303,9 @@
 
   <section aria-labelledby="components">
     <h2 id="components">Компоненти</h2>
-    <p class="why">Три готові компоненти. Зліва — темна тема, справа — світла. Тексти — з <a href="microcopy.md">microcopy.md</a>.</p>
-    <div class="grid2">
-      <div class="cx stack" data-ste="off">
+    <p class="why">Три готові компоненти. Тексти — з <a href="microcopy.md">microcopy.md</a>.</p>
+    <div class="grid1">
+      <div class="cx stack comps" data-ste="off">
         <div class="comp"><h4>Головна кнопка і вторинна кнопка</h4>
           <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
         <div class="comp"><h4>Картка «До сплати» з фото і галочкою «Показники прийнято»</h4>
@@ -316,38 +319,24 @@
           <div class="field"><label for="f-day-d">День, кВт·год</label><div class="box"><input id="f-day-d" inputmode="numeric" value="12 480"><span class="unit">кВт·год</span></div><p class="hint">Попередні: 12 266</p></div>
           <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-d">Ніч, кВт·год</label><div class="box"><input id="f-night-d" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="solar:danger-triangle-bold-duotone" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
       </div>
-      <div class="cx stack" data-theme="light" data-ste="off">
-        <div class="comp"><h4>Головна кнопка і вторинна кнопка</h4>
-          <div class="btns"><button class="cx-btn cx-btn--primary" type="button"><iconify-icon icon="solar:calendar-mark-bold-duotone" aria-hidden="true"></iconify-icon>Подати показники</button><button class="cx-btn" type="button">Історія</button></div></div>
-        <div class="comp"><h4>Картка «До сплати» з фото і галочкою «Показники прийнято»</h4>
-          <article class="card">
-            <h3><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>До сплати за листопад</h3>
-            <p class="num">1 185,84 <small>₴</small></p>
-            <div class="done"><iconify-icon icon="solar:check-circle-bold-duotone" aria-hidden="true"></iconify-icon><p><b>Показники прийнято</b><span>Подано 3 листопада 2026 · Наталя, за фото</span></p></div>
-            <button class="cx-btn cx-btn--primary cx-btn--lg" type="button"><iconify-icon icon="solar:wallet-bold-duotone" aria-hidden="true"></iconify-icon>Сплатити</button>
-          </article></div>
-        <div class="comp"><h4>Поле показників</h4>
-          <div class="field"><label for="f-day-l">День, кВт·год</label><div class="box"><input id="f-day-l" inputmode="numeric" value="12 480"><span class="unit">кВт·год</span></div><p class="hint">Попередні: 12 266</p></div>
-          <div class="field field--warn" style="margin-top:var(--space-4)"><label for="f-night-l">Ніч, кВт·год</label><div class="box"><input id="f-night-l" inputmode="numeric" value="52 360"><span class="unit">кВт·год</span></div><p class="hint"><iconify-icon icon="solar:danger-triangle-bold-duotone" aria-hidden="true"></iconify-icon>Схоже на зайву цифру. Перевірте.</p></div></div>
-      </div>
     </div>
     <p class="cap">Попередження про зайву цифру не блокує кнопку (бриф, р. 4). Колір — троянда помилки, текст — дія, а не звинувачення.</p>
   </section>
 
   <section aria-labelledby="screens">
     <h2 id="screens">Екрани в стилі</h2>
-    <p class="why">Стиль перенесено на два екрани і їхні стани. Розмітка і тексти екранів не змінилися: змінилася лише шкіра <code>wireframes/_concept.css</code>. Другу тему відкриває параметр <code>?theme=light</code>.</p>
-    <div class="tbl"><table class="site">
-      <thead><tr><th>Екран</th><th>Темна тема</th><th>Світла тема</th><th>Фото або графіка стану</th></tr></thead>
+    <p class="why">Стиль перенесено на два екрани і їхні стани. Розмітка і тексти екранів не змінилися: змінилася лише шкіра <code>wireframes/_concept.css</code>.</p>
+    <div class="tbl" tabindex="0" role="region" aria-label="Екрани в стилі"><table class="site">
+      <thead><tr><th>Екран</th><th>Сторінка</th><th>Фото або графіка стану</th></tr></thead>
       <tbody>
-        <tr><td>Подати показники</td><td><a href="wireframes/month.html">month.html</a></td><td><a href="wireframes/month.html?theme=light">світла</a></td><td>вікно ввечері — фон головної зони</td></tr>
-        <tr><td>… порожній</td><td><a href="wireframes/month-empty.html">month-empty.html</a></td><td><a href="wireframes/month-empty.html?theme=light">світла</a></td><td>лічильник</td></tr>
-        <tr><td>… помилка</td><td><a href="wireframes/month-error.html">month-error.html</a></td><td><a href="wireframes/month-error.html?theme=light">світла</a></td><td>будинок уночі</td></tr>
-        <tr><td>… завантаження</td><td><a href="wireframes/month-loading.html">month-loading.html</a></td><td><a href="wireframes/month-loading.html?theme=light">світла</a></td><td>лампа, що повільно розгоряється</td></tr>
-        <tr><td>Графік відключень</td><td><a href="wireframes/outages.html">outages.html</a></td><td><a href="wireframes/outages.html?theme=light">світла</a></td><td>свічка — збоку головної зони</td></tr>
-        <tr><td>… порожній</td><td><a href="wireframes/outages-empty.html">outages-empty.html</a></td><td><a href="wireframes/outages-empty.html?theme=light">світла</a></td><td>вікно ввечері: світло є; сповіщення — іконка дзвіночка</td></tr>
-        <tr><td>… помилка</td><td><a href="wireframes/outages-error.html">outages-error.html</a></td><td><a href="wireframes/outages-error.html?theme=light">світла</a></td><td>будинок уночі</td></tr>
-        <tr><td>… завантаження</td><td><a href="wireframes/outages-loading.html">outages-loading.html</a></td><td><a href="wireframes/outages-loading.html?theme=light">світла</a></td><td>лампа, що повільно розгоряється</td></tr>
+        <tr><td>Подати показники</td><td><a href="wireframes/month.html">month.html</a></td><td>вікно ввечері — фон головної зони</td></tr>
+        <tr><td>… порожній</td><td><a href="wireframes/month-empty.html">month-empty.html</a></td><td>лічильник</td></tr>
+        <tr><td>… помилка</td><td><a href="wireframes/month-error.html">month-error.html</a></td><td>будинок уночі</td></tr>
+        <tr><td>… завантаження</td><td><a href="wireframes/month-loading.html">month-loading.html</a></td><td>лампа, що повільно розгоряється</td></tr>
+        <tr><td>Графік відключень</td><td><a href="wireframes/outages.html">outages.html</a></td><td>свічка — збоку головної зони</td></tr>
+        <tr><td>… порожній</td><td><a href="wireframes/outages-empty.html">outages-empty.html</a></td><td>вікно ввечері: світло є; сповіщення — іконка дзвіночка</td></tr>
+        <tr><td>… помилка</td><td><a href="wireframes/outages-error.html">outages-error.html</a></td><td>будинок уночі</td></tr>
+        <tr><td>… завантаження</td><td><a href="wireframes/outages-loading.html">outages-loading.html</a></td><td>лампа, що повільно розгоряється</td></tr>
       </tbody>
     </table></div>
   </section>
@@ -355,55 +344,33 @@
   <section aria-labelledby="contrast">
     <h2 id="contrast">Контраст</h2>
     <p class="why">Таблицю пише скрипт <code>node tools/contrast.mjs</code> з токенів. Пороги WCAG 2.2 AA: текст 4,5:1; великий текст, графіка і межі контролів 3:1. Тінь на фото ми рахуємо для найгіршого випадку: тінь поверх білого пікселя. Копія — <a href="concept/contrast.md">concept/contrast.md</a>.</p>
-    <div class="tbl">
+    <div class="tbl" tabindex="0" role="region" aria-label="Контраст">
 <!-- contrast:start -->
 <table class="contrast">
-<thead><tr><th>Тема</th><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>
+<thead><tr><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>
 <tbody>
-<tr><td>темна</td><td><i class="chip" style="background:#EEF0F4"></i><code>--color-text</code> #EEF0F4</td><td><i class="chip" style="background:#0F1218"></i><code>--color-bg</code> #0F1218</td><td>16,43:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#EEF0F4"></i><code>--color-text</code> #EEF0F4</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>14,81:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#EEF0F4"></i><code>--color-text</code> #EEF0F4</td><td><i class="chip" style="background:#222936"></i><code>--color-surface-2</code> #222936</td><td>12,80:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#A6AEBD"></i><code>--color-text-muted</code> #A6AEBD</td><td><i class="chip" style="background:#0F1218"></i><code>--color-bg</code> #0F1218</td><td>8,40:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#A6AEBD"></i><code>--color-text-muted</code> #A6AEBD</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>7,57:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#A6AEBD"></i><code>--color-text-muted</code> #A6AEBD</td><td><i class="chip" style="background:#222936"></i><code>--color-surface-2</code> #222936</td><td>6,54:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#C9CFDA"></i><code>--color-icon</code> #C9CFDA</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>10,80:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#C9CFDA"></i><code>--color-icon</code> #C9CFDA</td><td><i class="chip" style="background:#222936"></i><code>--color-surface-2</code> #222936</td><td>9,33:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#FFB088"></i><code>--color-accent</code> #FFB088</td><td>9,84:1</td><td>4,50</td><td>проходить</td><td>головна кнопка</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#FFC4A6"></i><code>--color-accent-hover</code> #FFC4A6</td><td>11,40:1</td><td>4,50</td><td>проходить</td><td>головна кнопка, наведення</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#FFB088"></i><code>--color-accent-ink</code> #FFB088</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>9,51:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#FFB088"></i><code>--color-focus</code> #FFB088</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>9,51:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#FFB088"></i><code>--color-focus</code> #FFB088</td><td><i class="chip" style="background:#0F1218"></i><code>--color-bg</code> #0F1218</td><td>10,55:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#6B7488"></i><code>--color-line-strong</code> #6B7488</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>3,60:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#9BE3C4"></i><code>--color-success-text</code> #9BE3C4</td><td><i class="chip" style="background:#20352F"></i><code>--color-success-bg</code> #20352F</td><td>8,80:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#F4B3C2"></i><code>--color-error-text</code> #F4B3C2</td><td><i class="chip" style="background:#3A2230"></i><code>--color-error-bg</code> #3A2230</td><td>8,32:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#F4B3C2"></i><code>--color-error-text</code> #F4B3C2</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>9,72:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#8E9BB8"></i><code>--color-off</code> #8E9BB8</td><td><i class="chip" style="background:#181D26"></i><code>--color-surface</code> #181D26</td><td>6,06:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#8E9BB8"></i><code>--color-off</code> #8E9BB8</td><td><i class="chip" style="background:#2A3140"></i><code>--color-on</code> #2A3140</td><td>4,67:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#EEF0F4"></i><code>--color-on-photo</code> #EEF0F4</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>11,07:1</td><td>4,50</td><td>проходить</td><td>текст на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#C9CFDA"></i><code>--color-on-photo-muted</code> #C9CFDA</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>8,07:1</td><td>4,50</td><td>проходить</td><td>підпис на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td>темна</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#FFB088"></i><code>--color-accent</code> #FFB088</td><td>9,84:1</td><td>4,50</td><td>проходить</td><td>головна кнопка на фото</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>16,45:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>17,95:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>15,45:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>6,26:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,83:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>5,88:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>10,09:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>8,69:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F59B6D"></i><code>--color-accent-hover</code> #F59B6D</td><td>8,15:1</td><td>4,50</td><td>проходить</td><td>головна кнопка, наведення</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>4,26:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#7C8493"></i><code>--color-line-strong</code> #7C8493</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>3,76:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#1C4A37"></i><code>--color-success-text</code> #1C4A37</td><td><i class="chip" style="background:#DDF1E8"></i><code>--color-success-bg</code> #DDF1E8</td><td>8,55:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FBE4EA"></i><code>--color-error-bg</code> #FBE4EA</td><td>7,22:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>8,72:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,11:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#E1E5EC"></i><code>--color-on</code> #E1E5EC</td><td>4,84:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#EEF0F4"></i><code>--color-on-photo</code> #EEF0F4</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>11,07:1</td><td>4,50</td><td>проходить</td><td>текст на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#C9CFDA"></i><code>--color-on-photo-muted</code> #C9CFDA</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>8,07:1</td><td>4,50</td><td>проходить</td><td>підпис на фото (тінь поверх білого пікселя)</td></tr>
-<tr><td>світла</td><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка на фото</td></tr>
+<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>16,45:1</td><td>4,50</td><td>проходить</td><td>заголовок екрана, текст на фоні</td></tr>
+<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>17,95:1</td><td>4,50</td><td>проходить</td><td>текст у зоні</td></tr>
+<tr><td><i class="chip" style="background:#14171D"></i><code>--color-text</code> #14171D</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>15,45:1</td><td>4,50</td><td>проходить</td><td>поточний пункт меню, чип, плитка в зоні</td></tr>
+<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>6,26:1</td><td>4,50</td><td>проходить</td><td>рядок під заголовком екрана, період</td></tr>
+<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,83:1</td><td>4,50</td><td>проходить</td><td>підпис у зоні, мітка плитки, шкала графіка</td></tr>
+<tr><td><i class="chip" style="background:#545B68"></i><code>--color-text-muted</code> #545B68</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>5,88:1</td><td>4,50</td><td>проходить</td><td>підпис у плитці на підкладці</td></tr>
+<tr><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>10,09:1</td><td>3,00</td><td>проходить</td><td>іконка Solar у зоні</td></tr>
+<tr><td><i class="chip" style="background:#3B4250"></i><code>--color-icon</code> #3B4250</td><td><i class="chip" style="background:#ECEEF2"></i><code>--color-surface-2</code> #ECEEF2</td><td>8,69:1</td><td>3,00</td><td>проходить</td><td>іконка в поточному пункті меню</td></tr>
+<tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка</td></tr>
+<tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F59B6D"></i><code>--color-accent-hover</code> #F59B6D</td><td>8,15:1</td><td>4,50</td><td>проходить</td><td>головна кнопка, наведення</td></tr>
+<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-accent-ink</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>знак продукту на шапці</td></tr>
+<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>4,65:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на зоні</td></tr>
+<tr><td><i class="chip" style="background:#C2521C"></i><code>--color-focus</code> #C2521C</td><td><i class="chip" style="background:#F4F5F7"></i><code>--color-bg</code> #F4F5F7</td><td>4,26:1</td><td>3,00</td><td>проходить</td><td>кільце фокуса на фоні</td></tr>
+<tr><td><i class="chip" style="background:#7C8493"></i><code>--color-line-strong</code> #7C8493</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>3,76:1</td><td>3,00</td><td>проходить</td><td>межа поля і вторинної кнопки</td></tr>
+<tr><td><i class="chip" style="background:#1C4A37"></i><code>--color-success-text</code> #1C4A37</td><td><i class="chip" style="background:#DDF1E8"></i><code>--color-success-bg</code> #DDF1E8</td><td>8,55:1</td><td>4,50</td><td>проходить</td><td>статус «прийнято»</td></tr>
+<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FBE4EA"></i><code>--color-error-bg</code> #FBE4EA</td><td>7,22:1</td><td>4,50</td><td>проходить</td><td>підказка під полем з помилкою</td></tr>
+<tr><td><i class="chip" style="background:#8A2440"></i><code>--color-error-text</code> #8A2440</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>8,72:1</td><td>4,50</td><td>проходить</td><td>заголовок зони з помилкою</td></tr>
+<tr><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#FFFFFF"></i><code>--color-surface</code> #FFFFFF</td><td>6,11:1</td><td>3,00</td><td>проходить</td><td>година без світла в графіку</td></tr>
+<tr><td><i class="chip" style="background:#55627E"></i><code>--color-off</code> #55627E</td><td><i class="chip" style="background:#E1E5EC"></i><code>--color-on</code> #E1E5EC</td><td>4,84:1</td><td>3,00</td><td>проходить</td><td>година без світла поруч з годиною зі світлом</td></tr>
+<tr><td><i class="chip" style="background:#EEF0F4"></i><code>--color-on-photo</code> #EEF0F4</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>11,07:1</td><td>4,50</td><td>проходить</td><td>текст на фото (тінь поверх білого пікселя)</td></tr>
+<tr><td><i class="chip" style="background:#C9CFDA"></i><code>--color-on-photo-muted</code> #C9CFDA</td><td><i class="chip" style="background:rgba(15, 18, 24, .86)"></i><code>--photo-shade</code> rgba(15, 18, 24, .86)</td><td>8,07:1</td><td>4,50</td><td>проходить</td><td>підпис на фото (тінь поверх білого пікселя)</td></tr>
+<tr><td><i class="chip" style="background:#2A1406"></i><code>--color-on-accent</code> #2A1406</td><td><i class="chip" style="background:#F28A55"></i><code>--color-accent</code> #F28A55</td><td>7,11:1</td><td>4,50</td><td>проходить</td><td>головна кнопка на фото</td></tr>
 </tbody></table>
 <!-- contrast:end -->
     </div>
@@ -413,7 +380,7 @@
     <h2 id="defects">Дефекти</h2>
     <!-- defects:start -->
 <p class="why">8 перевірок уроку і <code>/impeccable audit</code>. Колонка «#» — номер дефекту і номер перевірки. Список перевірок — у <a href="concept.md">concept.md</a>, «Дефекти».</p>
-<div class="tbl"><table class="site">
+<div class="tbl" tabindex="0" role="region" aria-label="Дефекти"><table class="site">
 <thead><tr><th>#</th><th>Файл</th><th>Елемент</th><th>Що не так</th><th>Як виправити</th><th>Доказ</th></tr></thead><tbody>
 <tr><td>1 · 1</td><td>wireframes/_concept.css</td><td>фото-фон головної зони month</td><td>Фото вікна майже не видно під тінню 0,86. Фірмовий елемент не пояснює атрибут 4.</td><td>Смуга фото <code>--photo-band</code> 144 px з тінню <code>--photo-shade-soft</code>. Повна тінь лише під текстом.</td><td>Знімок month.html: до — темна пляма, після — вікно видно. Текст на тіні 11,07:1 (contrast.md).</td></tr>
 <tr><td>2 · 2</td><td>concept/tokens.css</td><td>колір лампи як графіка, світла тема</td><td><code>--color-accent</code> на <code>--color-surface</code> = 2,46:1 &lt; 3.</td><td>Новий токен <code>--color-accent-ink</code> #C2521C для знака продукту і фокуса.</td><td>contrast.md: 4,65:1, проходить.</td></tr>

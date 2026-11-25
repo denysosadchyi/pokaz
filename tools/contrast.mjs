@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Таблиця контрасту WCAG 2.2 AA для токенів concept/tokens.css.
-// Читає обидві теми (:root — темна, [data-theme="light"] — світла), рахує кожну пару
+// Читає тему :root (світла, єдина), рахує кожну пару
 // і пише concept/contrast.md та таблицю в concept.html між мітками contrast:start / contrast:end.
 // Запуск: node tools/contrast.mjs   (код виходу 1, якщо хоч одна пара не проходить)
 //
@@ -21,8 +21,7 @@ function block(selector) {
   for (const m of body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) vars[m[1]] = m[2].trim();
   return vars;
 }
-const dark = block(":root");
-const light = { ...dark, ...block('[data-theme="light"]') };
+const light = block(":root");
 
 function parse(v) {
   v = v.trim();
@@ -73,7 +72,7 @@ function rows(vars, theme) {
     return { theme, fg, fgv: vars[fg], bg, bgv: vars[bg], r, min, ok: r >= min, kind, where };
   });
 }
-const all = [...rows(dark, "темна"), ...rows(light, "світла")];
+const all = rows(light, "світла");
 const fmt = r => r.toFixed(2).replace(".", ",");
 
 const md = [
@@ -83,9 +82,9 @@ const md = [
   "Пороги WCAG 2.2 AA: текст 4,5:1; великий текст, графіка і межі контролів 3:1.",
   "Тінь на фото напівпрозора. Ми рахуємо найгірший випадок: тінь поверх білого пікселя фото.",
   "",
-  "| Тема | Колір тексту або графіки | Фон | Контраст | Поріг | Результат | Де |",
-  "|---|---|---|---|---|---|---|",
-  ...all.map(x => `| ${x.theme} | \`${x.fg}\` ${x.fgv} | \`${x.bg}\` ${x.bgv} | ${fmt(x.r)}:1 | ${fmt(x.min)} | ${x.ok ? "проходить" : "**не проходить**"} | ${x.where} |`),
+  "| Колір тексту або графіки | Фон | Контраст | Поріг | Результат | Де |",
+  "|---|---|---|---|---|---|",
+  ...all.map(x => `| \`${x.fg}\` ${x.fgv} | \`${x.bg}\` ${x.bgv} | ${fmt(x.r)}:1 | ${fmt(x.min)} | ${x.ok ? "проходить" : "**не проходить**"} | ${x.where} |`),
   "",
 ].join("\n");
 writeFileSync(join(root, "concept/contrast.md"), md);
@@ -93,9 +92,9 @@ writeFileSync(join(root, "concept/contrast.md"), md);
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const html = [
   '<table class="contrast">',
-  "<thead><tr><th>Тема</th><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>",
+  "<thead><tr><th>Текст або графіка</th><th>Фон</th><th>Контраст</th><th>Поріг</th><th>Результат</th><th>Де</th></tr></thead>",
   "<tbody>",
-  ...all.map(x => `<tr><td>${x.theme}</td><td><i class="chip" style="background:${esc(x.fgv)}"></i><code>${x.fg}</code> ${esc(x.fgv)}</td><td><i class="chip" style="background:${esc(x.bgv)}"></i><code>${x.bg}</code> ${esc(x.bgv)}</td><td>${fmt(x.r)}:1</td><td>${fmt(x.min)}</td><td>${x.ok ? "проходить" : "<b>не проходить</b>"}</td><td>${x.where}</td></tr>`),
+  ...all.map(x => `<tr><td><i class="chip" style="background:${esc(x.fgv)}"></i><code>${x.fg}</code> ${esc(x.fgv)}</td><td><i class="chip" style="background:${esc(x.bgv)}"></i><code>${x.bg}</code> ${esc(x.bgv)}</td><td>${fmt(x.r)}:1</td><td>${fmt(x.min)}</td><td>${x.ok ? "проходить" : "<b>не проходить</b>"}</td><td>${x.where}</td></tr>`),
   "</tbody></table>",
 ].join("\n");
 const page = join(root, "concept.html");
@@ -107,5 +106,5 @@ try {
 
 const bad = all.filter(x => !x.ok);
 console.log(`Пар: ${all.length}. Не проходять: ${bad.length}.`);
-for (const x of bad) console.log(`  ${x.theme}: ${x.fg} на ${x.bg} = ${fmt(x.r)} < ${x.min}`);
+for (const x of bad) console.log(`  ${x.fg} на ${x.bg} = ${fmt(x.r)} < ${x.min}`);
 process.exit(bad.length ? 1 : 0);
