@@ -490,3 +490,9 @@
 .wf-sidebar .wf-switcher__text b { font-weight: var(--weight-semibold); font-size: var(--fs-md); color: var(--color-text); }
 .wf-sidebar .wf-switcher__text small { font-weight: var(--weight-regular); font-size: var(--fs-sm); color: var(--color-text-muted); }
 .wf-sidebar .wf-switcher > iconify-icon:last-child { align-self: center; }
+
+/* Шеврон перемикача — у білому колі */
+.wf-sidebar .wf-switcher > iconify-icon:last-child {
+  flex: none; display: grid; place-items: center; width: 28px; height: 28px;
+  border-radius: var(--radius-pill); background: var(--color-panel);
+}
