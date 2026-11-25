@@ -351,3 +351,7 @@
 .wf-mainbox > .wf-page-head { margin: 0; }
 .wf-mainbox > .wf-zone--primary { background: var(--color-panel); -webkit-backdrop-filter: none; backdrop-filter: none; overflow: hidden; }
 .wf-mainbox > .wf-zone--primary::before { display: none; }
+
+/* Ритм: один крок 16 px — від шапки, від країв рамки, між лівою панеллю і змістом, між блоками змісту */
+.wf-sidebar { margin: var(--space-4) 0 var(--space-4) var(--space-4); }
+.wf-main { padding: var(--space-4); gap: var(--space-4); }
