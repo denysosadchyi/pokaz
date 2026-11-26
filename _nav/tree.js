@@ -59,6 +59,7 @@ window.NAV_TREE = [
     { title: "Фото", href: "concept.html#photo" },
     { title: "Іконки", href: "concept.html#icons" },
     { title: "Компоненти", href: "concept.html#components" },
+    { title: "Правки після перенесення", href: "concept.html#after" },
     { title: "Екрани в стилі", href: "concept.html#screens" },
     { title: "Контраст", href: "concept.html#contrast" },
     { title: "Дефекти", href: "concept.html#defects" },

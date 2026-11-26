@@ -11,9 +11,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Концепт · Вечірнє вікно · Показники</title>
-  <link rel="stylesheet" href="_nav/nav.css?v=202611251900">
-  <script src="_nav/tree.js?v=202611251900"></script>
-  <script src="_nav/nav.js?v=202611251900" defer></script>
+  <link rel="stylesheet" href="_nav/nav.css?v=202611260852">
+  <script src="_nav/tree.js?v=202611260852"></script>
+  <script src="_nav/nav.js?v=202611260852" defer></script>
   <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
   <link rel="stylesheet" href="concept/tokens.css">
   <style>
@@ -156,6 +156,39 @@
     .stack { display: grid; gap: var(--space-5); }
     .comps { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: start; }
     .comps > .comp { min-width: 0; }
+
+    /* ── Правки після перенесення: демо нових елементів. Значення — як у wireframes/_concept.css ── */
+    @font-face { font-family: "Fixel Display Strong"; src: url("concept/fonts/FixelDisplay-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    .nx-logo { display: block; height: 32px; width: auto; }
+    .nx-main { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-1);
+      width: 100%; min-height: 88px; padding: 0 var(--space-6); border: 0; border-radius: var(--radius-pill); text-decoration: none; color: #fff;
+      background: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)), linear-gradient(135deg, #F7A274 0%, #F28A55 50%, #EC7640 100%);
+      box-shadow: 0 10px 30px -6px rgba(242, 110, 50, .55); text-shadow: 0 1px 2px rgba(120, 45, 10, .25); }
+    .nx-main:hover { background: linear-gradient(180deg, rgba(255, 214, 102, .50), rgba(255, 214, 102, 0)), linear-gradient(135deg, #F8AE85 0%, #F59B6D 50%, #EF8550 100%); }
+    .nx-main b { font: 600 var(--fs-xl)/1 "Fixel Display Strong", var(--font-display); letter-spacing: -0.01em; }
+    .nx-main small { font-size: var(--fs-xs); line-height: 1; opacity: .9; }
+    .nx-menu { margin: 0; padding: 8px 0 4px; list-style: none; border-radius: var(--radius-lg); background: var(--color-panel); }
+    .nx-menu a { position: relative; isolation: isolate; display: flex; align-items: center; gap: var(--space-3); height: var(--size-touch);
+      padding-inline: var(--space-4); color: var(--color-text); text-decoration: none; font-size: var(--fs-sm); font-weight: var(--weight-medium); }
+    .nx-menu a::before { content: ""; position: absolute; inset: 4px 8px; z-index: -1; border-radius: 16px; background: #F4F2F8; opacity: 0; transition: opacity .15s ease; }
+    .nx-menu a:hover::before, .nx-menu a.is-hover::before { opacity: 1; }
+    .nx-menu a[aria-current="page"], .nx-menu a[aria-current="page"] iconify-icon { color: var(--color-accent-ink); }
+    @media (prefers-reduced-motion: reduce) { .nx-menu a::before { transition: none; } }
+    .nx-widget { margin-top: var(--space-4); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--color-panel); }
+    .nx-widget b { display: block; font-size: var(--fs-sm); font-weight: var(--weight-medium); }
+    .nx-widget small { display: block; font-size: var(--fs-2xs); color: var(--color-text-muted); }
+    .nx-day { position: relative; display: grid; grid-template-columns: repeat(24, 1fr); gap: 1px; height: 20px; margin-top: 30px; border-radius: 6px; }
+    .nx-day i { background: var(--color-surface-2); }
+    .nx-day i:first-of-type { border-radius: 6px 0 0 6px; }
+    .nx-day i:last-of-type { border-radius: 0 6px 6px 0; }
+    .nx-day i.is-off { background: var(--color-off); }
+    .nx-now { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 2px; background: var(--color-accent-ink); }
+    .nx-now::after { content: attr(data-t); position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%); padding: 2px 6px;
+      border-radius: var(--radius-pill); background: var(--color-accent-ink); color: #fff; font-size: var(--fs-2xs); font-weight: var(--weight-medium); line-height: 1.2; white-space: nowrap; }
+    .nx-scale { display: flex; justify-content: space-between; margin-top: var(--space-1); color: var(--color-text-muted); font-size: var(--fs-2xs); }
+    .nx-radii { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--glass-fill); }
+    .nx-radii > div { padding: var(--space-5); border-radius: 12px; background: var(--color-panel); }
+    .nx-radii .nx-main { min-height: var(--control-h-lg); }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="concept/fonts/fixel.css">
   <link rel="stylesheet" href="assets/type.css?v=8">
@@ -323,6 +356,31 @@
     <p class="cap">Попередження про зайву цифру не блокує кнопку (бриф, р. 4). Колір — троянда помилки, текст — дія, а не звинувачення.</p>
   </section>
 
+  <section aria-labelledby="after">
+    <h2 id="after">Правки після перенесення</h2>
+    <p class="why">Ці елементи дизайнер додав на екранах month і outages після перенесення стилю. Тут вони стоять окремо, з тими самими значеннями, що й у <code>wireframes/_concept.css</code>. Повний список і відкриті питання — у <a href="concept.md">concept.md</a>, «Правки після перенесення».</p>
+    <div class="grid1">
+      <div class="cx stack comps" data-ste="off">
+        <div class="comp"><h4>Логотип: знак і назва, висота 32 px</h4>
+          <img class="nx-logo" src="concept/img/logo-pokaz-lockup.svg" alt="Показ" width="125" height="32"></div>
+        <div class="comp"><h4>Головна кнопка з адресою: 88 px, пігулка, жовтий шар над діагональним градієнтом</h4>
+          <a class="nx-main" href="wireframes/reading.html"><b>Подати показники</b><small>вул. Липова, 14, кв. 27</small></a></div>
+        <div class="comp"><h4>Меню: ховер — плашка 4 / 8 px, радіус 16 px. Другий пункт показано в стані ховера</h4>
+          <ul class="nx-menu">
+            <li><a href="#after" aria-current="page"><iconify-icon icon="tabler:calendar-check" aria-hidden="true"></iconify-icon>Цей місяць</a></li>
+            <li><a href="#after" class="is-hover"><iconify-icon icon="tabler:wallet" aria-hidden="true"></iconify-icon>Рахунок</a></li>
+            <li><a href="#after"><iconify-icon icon="tabler:history" aria-hidden="true"></iconify-icon>Історія</a></li>
+          </ul>
+          <div class="nx-widget"><b>Графік відключень</b><small>Черга 3.2 · без світла 18:00–22:00</small>
+            <div class="nx-day" role="img" aria-label="Сьогодні без світла 18:00–22:00. Зараз 09:30."><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-off"></i><i class="is-off"></i><i class="is-off"></i><i class="is-off"></i><i></i><i></i><span class="nx-now" style="left: 39.6%" data-t="09:30"></span></div>
+            <div class="nx-scale" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div></div></div>
+        <div class="comp"><h4>Вкладені радіуси: обгортка 24 px, біла зона 12 px, кнопка — пігулка</h4>
+          <div class="nx-radii"><div><a class="nx-main" href="wireframes/reading.html"><b>Подати показники</b></a></div></div></div>
+      </div>
+    </div>
+    <p class="cap">Біла назва на помаранчевій кнопці має контраст 1,68–2,90:1. Це нижче AA (3:1 для великого тексту). Запис — дефект 12 у розділі «Дефекти».</p>
+  </section>
+
   <section aria-labelledby="screens">
     <h2 id="screens">Екрани в стилі</h2>
     <p class="why">Стиль перенесено на два екрани і їхні стани. Розмітка і тексти екранів не змінилися: змінилася лише шкіра <code>wireframes/_concept.css</code>.</p>
@@ -391,6 +449,8 @@
 <tr><td>9 · 8</td><td>wireframes/_concept.css</td><td>розміри елементів</td><td>23 жорсткі значення: 64, 36, 44, 32, 72, 144, 96, 220, 36, 18, 3, 2, 1, 1.5 px.</td><td>Нові токени в tokens.css: <code>--size-*</code>, <code>--photo-*</code>, <code>--chart-*</code>, <code>--border-*</code>, <code>--focus-ring</code>, <code>--pad-chip</code>.</td><td>grep <code>[0-9]+px</code> у _concept.css: лишилася лише межа <code>@media</code>.</td></tr>
 <tr><td>10 · 8</td><td>concept.html</td><td>палітра «Колір»</td><td>24 кольори hex у <code>style</code> дублювали токени.</td><td>Картка бере <code>var(--token)</code>; підпис — обчислене значення токена (скрипт).</td><td>У розділі «Колір» немає hex у <code>style</code>. Hex лишився лише в квадратиках таблиці контрасту: їх пише скрипт з токенів.</td></tr>
 <tr><td>11 · 8</td><td>concept.html</td><td>сума на постері, відступ іконки підказки</td><td><code>clamp(56px, 9vw, 96px)</code> і <code>margin-top: 2px</code>.</td><td>Токени <code>--fs-hero</code> і <code>--pad-chip</code>.</td><td>CSS <code>.hero .sum</code>, <code>.field--warn .hint iconify-icon</code>.</td></tr>
+<tr><td>12 · 2</td><td>wireframes/_concept.css</td><td>головна кнопка з адресою</td><td>Біла назва на кнопці: 1,68:1 угорі, 2,13:1 у центрі, 2,90:1 унизу. Адреса 13 px має ті самі значення, а треба 4,5:1. Тінь тексту контраст не рахує.</td><td>Не виправлено: білий текст — рішення дизайнера. Варіанти: текст <code>--color-on-accent</code> або темніший градієнт.</td><td>Розрахунок WCAG для #FBBC6D, #F59D59, #EC7640 з білим.</td></tr>
+<tr><td>13 · 8</td><td>wireframes/_concept.css</td><td>правки після перенесення</td><td>Жорсткі значення: кольори #F4F2F8, #FFD666, #F7A274, #EC7640, #F8AE85, #EF8550; радіуси 2, 3, 6, 12, 16 px; висота 88 px. Усього 142 значення px поза токенами.</td><td>Не виправлено. Наступний крок — токени в tokens.css: колір ховера, шари кнопки, радіус вкладеної зони.</td><td>grep <code>#[0-9A-F]{6}</code> і <code>[0-9]+px</code> у _concept.css.</td></tr>
 <tr><td>audit</td><td>wireframes/_frame.css</td><td>рамка <code>.device</code> при 390 px</td><td>Сітка рамки має бічне меню 264 px без медіазапиту. Головна область обрізана.</td><td>Не виправлено: це каркас усіх вайрфреймів, не шкіра стилю. Адаптив рамки — окрема задача.</td><td>ovf.mjs на 390 px: переповнення <code>.wf-main</code>.</td></tr>
 <tr><td>audit</td><td>усі 8 сторінок</td><td>доступність іконок і фото</td><td>Перевірка: декоративні іконки і фото мають <code>aria-hidden</code> або <code>alt=""</code>; пульс лампи вимкнено при <code>prefers-reduced-motion</code>.</td><td>Дефектів немає.</td><td>grep іконок без <code>aria-hidden</code>: лише ті, що всередині <code>aria-hidden</code> обгортки.</td></tr>
 </tbody></table></div>
